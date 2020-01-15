@@ -3,20 +3,28 @@
 Public Class clsAdicionarDAO
     Public Function GravarAtividade(parAtivdade As clsAtividade) As Boolean
 
-        Dim Conn As New System.Data.SQLite.SQLiteConnection("Data Source=C:\Projeto\Controle_Agenda\BancoAgenda.db;")
-        Conn.Open()
+        Try
 
-        Using Comm As New System.Data.SQLite.SQLiteCommand(Conn)
-            Dim lista = New List(Of clsAtividade)
-            lista.Add(parAtivdade)
+            Try
+                Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao())
+                    Dim lista = New List(Of clsAtividade)
+                    lista.Add(parAtivdade)
 
-            Comm.CommandText = funRetornaSQLInsert(lista)
-            Comm.ExecuteNonQuery()
-        End Using
+                    Comm.CommandText = funRetornaSQLInsert(lista)
+                    Comm.ExecuteNonQuery()
+                End Using
+                Return True
+            Finally
+                clsConexao.Close()
+            End Try
 
-        Return True
+        Catch ex As Exception
+                Throw ex
+        End Try
+
 
     End Function
+
 
 
     Private Function funRetornaSQLInsert(parListaAtividade As List(Of clsAtividade)) As String

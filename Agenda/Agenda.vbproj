@@ -91,6 +91,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\clsConexao.vb" />
     <Compile Include="Classes\clsAdicionar.vb" />
     <Compile Include="Classes\clsAdicionarDAO.vb" />
     <Compile Include="Classes\clsAtividade.vb" />
