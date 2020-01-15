@@ -91,10 +91,20 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmPrincipal.vb">
+    <Compile Include="Classes\clsAdicionar.vb" />
+    <Compile Include="Classes\clsAdicionarDAO.vb" />
+    <Compile Include="Classes\clsAtividade.vb" />
+    <Compile Include="Classes\clsPrincipal.vb" />
+    <Compile Include="Formularios\frmAdicionar.Designer.vb">
+      <DependentUpon>frmAdicionar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmAdicionar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPrincipal.Designer.vb">
+    <Compile Include="Formularios\frmPrincipal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmPrincipal.Designer.vb">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -115,7 +125,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmPrincipal.resx">
+    <EmbeddedResource Include="Formularios\frmAdicionar.resx">
+      <DependentUpon>frmAdicionar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmPrincipal.resx">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -138,6 +151,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
