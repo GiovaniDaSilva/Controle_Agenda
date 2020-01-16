@@ -22,7 +22,6 @@ Partial Class frmPrincipal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtTela = New System.Windows.Forms.RichTextBox()
         Me.gridAtividades = New System.Windows.Forms.DataGridView()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -32,32 +31,21 @@ Partial Class frmPrincipal
         Me.btnAplicarApartirDe = New System.Windows.Forms.Button()
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
-        Me.SuspendLayout()
-        '
-        'txtTela
-        '
-        Me.txtTela.BackColor = System.Drawing.SystemColors.MenuText
-        Me.txtTela.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtTela.ForeColor = System.Drawing.SystemColors.Window
-        Me.txtTela.Location = New System.Drawing.Point(0, 296)
-        Me.txtTela.Name = "txtTela"
-        Me.txtTela.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
-        Me.txtTela.Size = New System.Drawing.Size(1014, 422)
-        Me.txtTela.TabIndex = 0
-        Me.txtTela.Text = ""
+        Me.txtDescricao = New System.Windows.Forms.RichTextBox()
+        CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel1.SuspendLayout
+        Me.SuspendLayout
         '
         'gridAtividades
         '
-        Me.gridAtividades.AllowUserToAddRows = False
-        Me.gridAtividades.AllowUserToResizeColumns = False
+        Me.gridAtividades.AllowUserToAddRows = false
+        Me.gridAtividades.AllowUserToResizeColumns = false
         Me.gridAtividades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridAtividades.Dock = System.Windows.Forms.DockStyle.Top
         Me.gridAtividades.Location = New System.Drawing.Point(0, 77)
         Me.gridAtividades.Name = "gridAtividades"
-        Me.gridAtividades.ReadOnly = True
-        Me.gridAtividades.Size = New System.Drawing.Size(1014, 205)
+        Me.gridAtividades.ReadOnly = true
+        Me.gridAtividades.Size = New System.Drawing.Size(823, 205)
         Me.gridAtividades.TabIndex = 1
         '
         'Splitter1
@@ -65,9 +53,9 @@ Partial Class frmPrincipal
         Me.Splitter1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Splitter1.Location = New System.Drawing.Point(0, 282)
         Me.Splitter1.Name = "Splitter1"
-        Me.Splitter1.Size = New System.Drawing.Size(1014, 14)
+        Me.Splitter1.Size = New System.Drawing.Size(823, 14)
         Me.Splitter1.TabIndex = 3
-        Me.Splitter1.TabStop = False
+        Me.Splitter1.TabStop = false
         '
         'Panel1
         '
@@ -80,17 +68,17 @@ Partial Class frmPrincipal
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1014, 77)
+        Me.Panel1.Size = New System.Drawing.Size(823, 77)
         Me.Panel1.TabIndex = 4
         '
         'btnListar
         '
-        Me.btnListar.Location = New System.Drawing.Point(470, 27)
+        Me.btnListar.Location = New System.Drawing.Point(250, 48)
         Me.btnListar.Name = "btnListar"
         Me.btnListar.Size = New System.Drawing.Size(75, 23)
         Me.btnListar.TabIndex = 5
         Me.btnListar.Text = "Listar"
-        Me.btnListar.UseVisualStyleBackColor = True
+        Me.btnListar.UseVisualStyleBackColor = true
         '
         'Button1
         '
@@ -99,16 +87,16 @@ Partial Class frmPrincipal
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 4
         Me.Button1.Text = "Carregar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = true
         '
         'btnAdicinar
         '
-        Me.btnAdicinar.Location = New System.Drawing.Point(945, 23)
+        Me.btnAdicinar.Location = New System.Drawing.Point(501, 22)
         Me.btnAdicinar.Name = "btnAdicinar"
         Me.btnAdicinar.Size = New System.Drawing.Size(57, 43)
         Me.btnAdicinar.TabIndex = 3
         Me.btnAdicinar.Text = "+"
-        Me.btnAdicinar.UseVisualStyleBackColor = True
+        Me.btnAdicinar.UseVisualStyleBackColor = true
         '
         'btnAplicarApartirDe
         '
@@ -117,7 +105,7 @@ Partial Class frmPrincipal
         Me.btnAplicarApartirDe.Size = New System.Drawing.Size(75, 23)
         Me.btnAplicarApartirDe.TabIndex = 2
         Me.btnAplicarApartirDe.Text = "Aplicar"
-        Me.btnAplicarApartirDe.UseVisualStyleBackColor = True
+        Me.btnAplicarApartirDe.UseVisualStyleBackColor = true
         '
         'txtApartirDe
         '
@@ -130,19 +118,31 @@ Partial Class frmPrincipal
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
+        Me.Label1.AutoSize = true
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "A partir de:"
         '
+        'txtDescricao
+        '
+        Me.txtDescricao.BackColor = System.Drawing.SystemColors.ScrollBar
+        Me.txtDescricao.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDescricao.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.txtDescricao.Location = New System.Drawing.Point(0, 296)
+        Me.txtDescricao.Name = "txtDescricao"
+        Me.txtDescricao.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
+        Me.txtDescricao.Size = New System.Drawing.Size(823, 272)
+        Me.txtDescricao.TabIndex = 5
+        Me.txtDescricao.Text = ""
+        '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1014, 718)
-        Me.Controls.Add(Me.txtTela)
+        Me.ClientSize = New System.Drawing.Size(823, 568)
+        Me.Controls.Add(Me.txtDescricao)
         Me.Controls.Add(Me.Splitter1)
         Me.Controls.Add(Me.gridAtividades)
         Me.Controls.Add(Me.Panel1)
@@ -154,8 +154,6 @@ Partial Class frmPrincipal
         Me.ResumeLayout(false)
 
 End Sub
-
-    Friend WithEvents txtTela As RichTextBox
     Friend WithEvents gridAtividades As DataGridView
     Friend WithEvents Splitter1 As Splitter
     Friend WithEvents Panel1 As Panel
@@ -165,4 +163,5 @@ End Sub
     Friend WithEvents btnAdicinar As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents btnListar As Button
+    Friend WithEvents txtDescricao As RichTextBox
 End Class

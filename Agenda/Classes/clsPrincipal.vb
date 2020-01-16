@@ -7,18 +7,18 @@ Public Class clsPrincipal
         locFormAdicionar.ShowDialog()
     End Sub
 
-    Public Function funCarregarAtividades() As List(Of clsAtividade)
+    Public Function funCarregarAtividades() As List(Of clsConsultaAtividades )
         Dim DAO As New clsAdicionarDAO
         Return DAO.carregarAtividades()
     End Function
 
-    Public Sub subListarAtivdades(ByRef txtTela As RichTextBox, ByRef lista As List(Of clsAtividade))
+    Public Sub subListarAtivdades(ByRef txtTela As RichTextBox, ByRef lista As List(Of clsConsultaAtividades))
         For Each item In lista
-            Select Case item.Tipo
+            Select Case item.ID_TIPO_ATIVIDADE
 
-                Case "X"
+                Case 1
 
-                Case "Y"
+                Case 2
 
             End Select
         Next

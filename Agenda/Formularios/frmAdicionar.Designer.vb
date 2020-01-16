@@ -30,15 +30,15 @@ Partial Class frmAdicionar
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.txtHora = New System.Windows.Forms.MaskedTextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtDescricao = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.btnGravar = New System.Windows.Forms.Button()
         Me.btnLimpar = New System.Windows.Forms.Button()
-        Me.SuspendLayout()
+        Me.txtDescrição = New System.Windows.Forms.RichTextBox()
+        Me.SuspendLayout
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
+        Me.Label1.AutoSize = true
         Me.Label1.Location = New System.Drawing.Point(26, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(30, 13)
@@ -56,7 +56,7 @@ Partial Class frmAdicionar
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
+        Me.Label2.AutoSize = true
         Me.Label2.Location = New System.Drawing.Point(136, 19)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(28, 13)
@@ -65,8 +65,8 @@ Partial Class frmAdicionar
         '
         'cbTipo
         '
-        Me.cbTipo.FormattingEnabled = True
-        Me.cbTipo.Items.AddRange(New Object() {"Solicitação", "PBI", "Reunião", "Ausente", "Outros"})
+        Me.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTipo.FormattingEnabled = true
         Me.cbTipo.Location = New System.Drawing.Point(139, 35)
         Me.cbTipo.Name = "cbTipo"
         Me.cbTipo.Size = New System.Drawing.Size(136, 21)
@@ -74,7 +74,7 @@ Partial Class frmAdicionar
         '
         'lblCodigo
         '
-        Me.lblCodigo.AutoSize = True
+        Me.lblCodigo.AutoSize = true
         Me.lblCodigo.Location = New System.Drawing.Point(312, 18)
         Me.lblCodigo.Name = "lblCodigo"
         Me.lblCodigo.Size = New System.Drawing.Size(40, 13)
@@ -101,25 +101,16 @@ Partial Class frmAdicionar
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
+        Me.Label3.AutoSize = true
         Me.Label3.Location = New System.Drawing.Point(416, 18)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(35, 13)
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "Horas"
         '
-        'txtDescricao
-        '
-        Me.txtDescricao.Location = New System.Drawing.Point(29, 110)
-        Me.txtDescricao.Multiline = True
-        Me.txtDescricao.Name = "txtDescricao"
-        Me.txtDescricao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDescricao.Size = New System.Drawing.Size(504, 181)
-        Me.txtDescricao.TabIndex = 8
-        '
         'Label4
         '
-        Me.Label4.AutoSize = True
+        Me.Label4.AutoSize = true
         Me.Label4.Location = New System.Drawing.Point(26, 84)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(55, 13)
@@ -133,7 +124,7 @@ Partial Class frmAdicionar
         Me.btnGravar.Size = New System.Drawing.Size(75, 23)
         Me.btnGravar.TabIndex = 10
         Me.btnGravar.Text = "Gravar"
-        Me.btnGravar.UseVisualStyleBackColor = True
+        Me.btnGravar.UseVisualStyleBackColor = true
         '
         'btnLimpar
         '
@@ -142,17 +133,28 @@ Partial Class frmAdicionar
         Me.btnLimpar.Size = New System.Drawing.Size(75, 23)
         Me.btnLimpar.TabIndex = 11
         Me.btnLimpar.Text = "Limpar"
-        Me.btnLimpar.UseVisualStyleBackColor = True
+        Me.btnLimpar.UseVisualStyleBackColor = true
+        '
+        'txtDescrição
+        '
+        Me.txtDescrição.BackColor = System.Drawing.SystemColors.ScrollBar
+        Me.txtDescrição.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.txtDescrição.Location = New System.Drawing.Point(29, 115)
+        Me.txtDescrição.Name = "txtDescrição"
+        Me.txtDescrição.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
+        Me.txtDescrição.Size = New System.Drawing.Size(501, 181)
+        Me.txtDescrição.TabIndex = 12
+        Me.txtDescrição.Text = ""
         '
         'frmAdicionar
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(563, 361)
+        Me.Controls.Add(Me.txtDescrição)
         Me.Controls.Add(Me.btnLimpar)
         Me.Controls.Add(Me.btnGravar)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.txtDescricao)
         Me.Controls.Add(Me.txtHora)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtCodigo)
@@ -163,21 +165,21 @@ Partial Class frmAdicionar
         Me.Controls.Add(Me.Label1)
         Me.Name = "frmAdicionar"
         Me.Text = "Adicionar Nova Atividade"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
 
     Friend WithEvents Label1 As Label
     Friend WithEvents txtData As MaskedTextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents cbTipo As ComboBox
     Friend WithEvents lblCodigo As Label
     Friend WithEvents txtCodigo As MaskedTextBox
     Friend WithEvents txtHora As MaskedTextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents txtDescricao As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents btnGravar As Button
     Friend WithEvents btnLimpar As Button
+    Friend WithEvents txtDescrição As RichTextBox
+    Friend WithEvents cbTipo As ComboBox
 End Class

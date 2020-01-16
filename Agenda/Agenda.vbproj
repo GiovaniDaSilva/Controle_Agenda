@@ -96,6 +96,7 @@
     <Compile Include="Classes\clsAdicionarDAO.vb" />
     <Compile Include="Classes\clsAtividade.vb" />
     <Compile Include="Classes\clsPrincipal.vb" />
+    <Compile Include="Classes\clsTipo.vb" />
     <Compile Include="Formularios\frmAdicionar.Designer.vb">
       <DependentUpon>frmAdicionar.vb</DependentUpon>
     </Compile>
