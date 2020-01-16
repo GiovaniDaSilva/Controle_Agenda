@@ -1,10 +1,10 @@
 ﻿Imports Agenda
 
 Public Class clsPrincipal
-    Public Sub Adicionar()
+    Public Sub Adicionar(Optional parAtividade As clsAtividade = Nothing)
         Dim locFormAdicionar As New frmAdicionar
 
-        locFormAdicionar.ShowDialog()
+        locFormAdicionar.ChamaFormulario(parAtividade)
     End Sub
 
     Public Function funCarregarAtividades() As List(Of clsConsultaAtividades )

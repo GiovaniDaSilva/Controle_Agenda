@@ -16,4 +16,8 @@
         ptipo.DisplayMember = "DESCRICAO"
         ptipo.ValueMember = "ID"            
     End Sub
+
+    Public Function excluir(iD As Long) As Boolean
+        Return DAO.Excluir(iD)
+    End Function
 End Class

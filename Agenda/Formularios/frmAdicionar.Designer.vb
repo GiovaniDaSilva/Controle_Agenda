@@ -34,11 +34,12 @@ Partial Class frmAdicionar
         Me.btnGravar = New System.Windows.Forms.Button()
         Me.btnLimpar = New System.Windows.Forms.Button()
         Me.txtDescrição = New System.Windows.Forms.RichTextBox()
-        Me.SuspendLayout
+        Me.btnExcluir = New System.Windows.Forms.Button()
+        Me.SuspendLayout()
         '
         'Label1
         '
-        Me.Label1.AutoSize = true
+        Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(26, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(30, 13)
@@ -56,7 +57,7 @@ Partial Class frmAdicionar
         '
         'Label2
         '
-        Me.Label2.AutoSize = true
+        Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(136, 19)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(28, 13)
@@ -66,7 +67,7 @@ Partial Class frmAdicionar
         'cbTipo
         '
         Me.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTipo.FormattingEnabled = true
+        Me.cbTipo.FormattingEnabled = True
         Me.cbTipo.Location = New System.Drawing.Point(139, 35)
         Me.cbTipo.Name = "cbTipo"
         Me.cbTipo.Size = New System.Drawing.Size(136, 21)
@@ -74,7 +75,7 @@ Partial Class frmAdicionar
         '
         'lblCodigo
         '
-        Me.lblCodigo.AutoSize = true
+        Me.lblCodigo.AutoSize = True
         Me.lblCodigo.Location = New System.Drawing.Point(312, 18)
         Me.lblCodigo.Name = "lblCodigo"
         Me.lblCodigo.Size = New System.Drawing.Size(40, 13)
@@ -101,7 +102,7 @@ Partial Class frmAdicionar
         '
         'Label3
         '
-        Me.Label3.AutoSize = true
+        Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(416, 18)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(35, 13)
@@ -110,7 +111,7 @@ Partial Class frmAdicionar
         '
         'Label4
         '
-        Me.Label4.AutoSize = true
+        Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(26, 84)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(55, 13)
@@ -124,7 +125,7 @@ Partial Class frmAdicionar
         Me.btnGravar.Size = New System.Drawing.Size(75, 23)
         Me.btnGravar.TabIndex = 10
         Me.btnGravar.Text = "Gravar"
-        Me.btnGravar.UseVisualStyleBackColor = true
+        Me.btnGravar.UseVisualStyleBackColor = True
         '
         'btnLimpar
         '
@@ -133,7 +134,7 @@ Partial Class frmAdicionar
         Me.btnLimpar.Size = New System.Drawing.Size(75, 23)
         Me.btnLimpar.TabIndex = 11
         Me.btnLimpar.Text = "Limpar"
-        Me.btnLimpar.UseVisualStyleBackColor = true
+        Me.btnLimpar.UseVisualStyleBackColor = True
         '
         'txtDescrição
         '
@@ -146,11 +147,22 @@ Partial Class frmAdicionar
         Me.txtDescrição.TabIndex = 12
         Me.txtDescrição.Text = ""
         '
+        'btnExcluir
+        '
+        Me.btnExcluir.Location = New System.Drawing.Point(455, 326)
+        Me.btnExcluir.Name = "btnExcluir"
+        Me.btnExcluir.Size = New System.Drawing.Size(75, 23)
+        Me.btnExcluir.TabIndex = 13
+        Me.btnExcluir.Text = "Excluir"
+        Me.btnExcluir.UseVisualStyleBackColor = True
+        Me.btnExcluir.Visible = False
+        '
         'frmAdicionar
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(563, 361)
+        Me.Controls.Add(Me.btnExcluir)
         Me.Controls.Add(Me.txtDescrição)
         Me.Controls.Add(Me.btnLimpar)
         Me.Controls.Add(Me.btnGravar)
@@ -182,4 +194,5 @@ End Sub
     Friend WithEvents btnLimpar As Button
     Friend WithEvents txtDescrição As RichTextBox
     Friend WithEvents cbTipo As ComboBox
+    Friend WithEvents btnExcluir As Button
 End Class

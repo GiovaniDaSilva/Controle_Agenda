@@ -1,5 +1,6 @@
 ﻿Public Class frmAdicionar
     Dim controle As New clsAdicionar
+    Dim glfAtividade As New clsAtividade
 
     Private Sub frmAdicionar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtData.Text = Now 
@@ -15,27 +16,53 @@
         cbTipo.SelectedIndex = -1
         txtCodigo.Clear()
         txtHora.Clear()
-        txtDescrição.Clear  
+        txtDescrição.Clear()
+
+        glfAtividade = Nothing
+        btnExcluir.Visible = False
     End Sub
 
-    Private Sub btnGravar_Click(sender As Object, e As EventArgs) Handles btnGravar.Click        
+    Private Sub btnGravar_Click(sender As Object, e As EventArgs) Handles btnGravar.Click
         If controle.Gravar(funRetornaAtividade) Then
             MsgBox("Atividade gravada com sucesso.", MsgBoxStyle.Information)
-            subLimpaTela()
         End If
+        Me.Close()
     End Sub
 
     Private Function funRetornaAtividade() As clsAtividade
-        Dim locAtividade As New clsAtividade
+        If glfAtividade Is Nothing Then glfAtividade = New clsAtividade
+        glfAtividade.Codigo = Val(txtCodigo.Text)
+        glfAtividade.Data = CDate(txtData.Text)
+        glfAtividade.Horas = txtHora.Text
+        glfAtividade.ID_TIPO_ATIVIDADE = cbTipo.SelectedValue()
+        glfAtividade.Descricao = txtDescrição.Text
 
-        locAtividade.Codigo = Val(txtCodigo.Text)
-        locAtividade.Data = CDate(txtData.Text)
-        locAtividade.Horas = txtHora.Text
-        locAtividade.ID_TIPO_ATIVIDADE   = cbTipo.SelectedValue() 
-        locAtividade.Descricao = txtDescrição.Text  
-
-        Return locAtividade
+        Return glfAtividade
     End Function
 
+    Public Sub subCarregaAtividade(parAtividade As clsAtividade)
+        glfAtividade = parAtividade
 
+        If Not glfAtividade Is Nothing Then
+            txtCodigo.Text = glfAtividade.Codigo
+            txtData.Text = glfAtividade.Data
+            txtHora.Text = glfAtividade.Horas
+            'cbTipo.SelectedIndex = cbTipo.va  glfAtividade.ID_TIPO_ATIVIDADE
+            txtDescrição.Text = glfAtividade.Descricao
+
+            btnExcluir.Visible = True
+        End If
+        Me.ShowDialog()
+    End Sub
+
+    Public Sub ChamaFormulario(Optional parAtividade As clsAtividade = Nothing)
+        subCarregaAtividade(parAtividade)
+    End Sub
+
+    Private Sub btnExcluir_Click(sender As Object, e As EventArgs) Handles btnExcluir.Click
+        If controle.excluir(glfAtividade.ID) Then
+            MsgBox("Excluido com sucesso.", MsgBoxStyle.Information)
+        End If
+        Me.Close()
+    End Sub
 End Class

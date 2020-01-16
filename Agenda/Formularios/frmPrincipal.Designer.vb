@@ -23,30 +23,41 @@ Partial Class frmPrincipal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.gridAtividades = New System.Windows.Forms.DataGridView()
+        Me.Editar = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnListar = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnAtualiza = New System.Windows.Forms.Button()
         Me.btnAdicinar = New System.Windows.Forms.Button()
         Me.btnAplicarApartirDe = New System.Windows.Forms.Button()
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtDescricao = New System.Windows.Forms.RichTextBox()
-        CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel1.SuspendLayout
-        Me.SuspendLayout
+        CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
+        Me.SuspendLayout()
         '
         'gridAtividades
         '
-        Me.gridAtividades.AllowUserToAddRows = false
-        Me.gridAtividades.AllowUserToResizeColumns = false
+        Me.gridAtividades.AllowUserToAddRows = False
+        Me.gridAtividades.AllowUserToDeleteRows = False
+        Me.gridAtividades.AllowUserToResizeColumns = False
         Me.gridAtividades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridAtividades.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Editar})
         Me.gridAtividades.Dock = System.Windows.Forms.DockStyle.Top
         Me.gridAtividades.Location = New System.Drawing.Point(0, 77)
         Me.gridAtividades.Name = "gridAtividades"
-        Me.gridAtividades.ReadOnly = true
+        Me.gridAtividades.ReadOnly = True
         Me.gridAtividades.Size = New System.Drawing.Size(823, 205)
         Me.gridAtividades.TabIndex = 1
+        '
+        'Editar
+        '
+        Me.Editar.HeaderText = "Editar"
+        Me.Editar.Name = "Editar"
+        Me.Editar.ReadOnly = True
+        Me.Editar.Text = "Editar"
+        Me.Editar.UseColumnTextForButtonValue = True
         '
         'Splitter1
         '
@@ -55,12 +66,12 @@ Partial Class frmPrincipal
         Me.Splitter1.Name = "Splitter1"
         Me.Splitter1.Size = New System.Drawing.Size(823, 14)
         Me.Splitter1.TabIndex = 3
-        Me.Splitter1.TabStop = false
+        Me.Splitter1.TabStop = False
         '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.btnListar)
-        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.btnAtualiza)
         Me.Panel1.Controls.Add(Me.btnAdicinar)
         Me.Panel1.Controls.Add(Me.btnAplicarApartirDe)
         Me.Panel1.Controls.Add(Me.txtApartirDe)
@@ -73,30 +84,30 @@ Partial Class frmPrincipal
         '
         'btnListar
         '
-        Me.btnListar.Location = New System.Drawing.Point(250, 48)
+        Me.btnListar.Location = New System.Drawing.Point(673, 20)
         Me.btnListar.Name = "btnListar"
         Me.btnListar.Size = New System.Drawing.Size(75, 23)
         Me.btnListar.TabIndex = 5
         Me.btnListar.Text = "Listar"
-        Me.btnListar.UseVisualStyleBackColor = true
+        Me.btnListar.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnAtualiza
         '
-        Me.Button1.Location = New System.Drawing.Point(250, 22)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 4
-        Me.Button1.Text = "Carregar"
-        Me.Button1.UseVisualStyleBackColor = true
+        Me.btnAtualiza.Location = New System.Drawing.Point(673, 42)
+        Me.btnAtualiza.Name = "btnAtualiza"
+        Me.btnAtualiza.Size = New System.Drawing.Size(75, 23)
+        Me.btnAtualiza.TabIndex = 4
+        Me.btnAtualiza.Text = "Atualizar"
+        Me.btnAtualiza.UseVisualStyleBackColor = True
         '
         'btnAdicinar
         '
-        Me.btnAdicinar.Location = New System.Drawing.Point(501, 22)
+        Me.btnAdicinar.Location = New System.Drawing.Point(754, 20)
         Me.btnAdicinar.Name = "btnAdicinar"
-        Me.btnAdicinar.Size = New System.Drawing.Size(57, 43)
+        Me.btnAdicinar.Size = New System.Drawing.Size(57, 45)
         Me.btnAdicinar.TabIndex = 3
         Me.btnAdicinar.Text = "+"
-        Me.btnAdicinar.UseVisualStyleBackColor = true
+        Me.btnAdicinar.UseVisualStyleBackColor = True
         '
         'btnAplicarApartirDe
         '
@@ -105,7 +116,7 @@ Partial Class frmPrincipal
         Me.btnAplicarApartirDe.Size = New System.Drawing.Size(75, 23)
         Me.btnAplicarApartirDe.TabIndex = 2
         Me.btnAplicarApartirDe.Text = "Aplicar"
-        Me.btnAplicarApartirDe.UseVisualStyleBackColor = true
+        Me.btnAplicarApartirDe.UseVisualStyleBackColor = True
         '
         'txtApartirDe
         '
@@ -118,7 +129,7 @@ Partial Class frmPrincipal
         '
         'Label1
         '
-        Me.Label1.AutoSize = true
+        Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 13)
@@ -161,7 +172,8 @@ End Sub
     Friend WithEvents txtApartirDe As MaskedTextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents btnAdicinar As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnAtualiza As Button
     Friend WithEvents btnListar As Button
     Friend WithEvents txtDescricao As RichTextBox
+    Friend WithEvents Editar As DataGridViewButtonColumn
 End Class
