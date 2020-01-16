@@ -1,12 +1,12 @@
 ﻿Public Class frmPrincipal
     Private controle As New clsPrincipal
+    Dim lista As List(Of clsAtividade)
 
     Private Sub btnAdicinar_Click(sender As Object, e As EventArgs) Handles btnAdicinar.Click
         controle.Adicionar()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim lista As List(Of clsAtividade)
         lista = controle.funCarregarAtividades()
 
         gridAtividades.DataSource = lista
@@ -20,6 +20,6 @@
     End Sub
 
     Private Sub btnListar_Click(sender As Object, e As EventArgs) Handles btnListar.Click
-
+        controle.subListarAtivdades(txtTela, lista)
     End Sub
 End Class

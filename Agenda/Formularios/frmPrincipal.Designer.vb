@@ -22,31 +22,31 @@ Partial Class frmPrincipal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.txtTela = New System.Windows.Forms.RichTextBox()
         Me.gridAtividades = New System.Windows.Forms.DataGridView()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnListar = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnAdicinar = New System.Windows.Forms.Button()
         Me.btnAplicarApartirDe = New System.Windows.Forms.Button()
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.btnListar = New System.Windows.Forms.Button()
         CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'RichTextBox1
+        'txtTela
         '
-        Me.RichTextBox1.BackColor = System.Drawing.SystemColors.MenuText
-        Me.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RichTextBox1.ForeColor = System.Drawing.SystemColors.Window
-        Me.RichTextBox1.Location = New System.Drawing.Point(0, 296)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
-        Me.RichTextBox1.Size = New System.Drawing.Size(1014, 422)
-        Me.RichTextBox1.TabIndex = 0
-        Me.RichTextBox1.Text = ""
+        Me.txtTela.BackColor = System.Drawing.SystemColors.MenuText
+        Me.txtTela.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtTela.ForeColor = System.Drawing.SystemColors.Window
+        Me.txtTela.Location = New System.Drawing.Point(0, 296)
+        Me.txtTela.Name = "txtTela"
+        Me.txtTela.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
+        Me.txtTela.Size = New System.Drawing.Size(1014, 422)
+        Me.txtTela.TabIndex = 0
+        Me.txtTela.Text = ""
         '
         'gridAtividades
         '
@@ -82,6 +82,24 @@ Partial Class frmPrincipal
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1014, 77)
         Me.Panel1.TabIndex = 4
+        '
+        'btnListar
+        '
+        Me.btnListar.Location = New System.Drawing.Point(470, 27)
+        Me.btnListar.Name = "btnListar"
+        Me.btnListar.Size = New System.Drawing.Size(75, 23)
+        Me.btnListar.TabIndex = 5
+        Me.btnListar.Text = "Listar"
+        Me.btnListar.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(250, 22)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Carregar"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'btnAdicinar
         '
@@ -119,30 +137,12 @@ Partial Class frmPrincipal
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "A partir de:"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(250, 22)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 4
-        Me.Button1.Text = "Carregar"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'btnListar
-        '
-        Me.btnListar.Location = New System.Drawing.Point(470, 27)
-        Me.btnListar.Name = "btnListar"
-        Me.btnListar.Size = New System.Drawing.Size(75, 23)
-        Me.btnListar.TabIndex = 5
-        Me.btnListar.Text = "Listar"
-        Me.btnListar.UseVisualStyleBackColor = True
-        '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1014, 718)
-        Me.Controls.Add(Me.RichTextBox1)
+        Me.Controls.Add(Me.txtTela)
         Me.Controls.Add(Me.Splitter1)
         Me.Controls.Add(Me.gridAtividades)
         Me.Controls.Add(Me.Panel1)
@@ -155,7 +155,7 @@ Partial Class frmPrincipal
 
 End Sub
 
-    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents txtTela As RichTextBox
     Friend WithEvents gridAtividades As DataGridView
     Friend WithEvents Splitter1 As Splitter
     Friend WithEvents Panel1 As Panel
