@@ -24,18 +24,14 @@ Partial Class frmPrincipal
     Private Sub InitializeComponent()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.gridAtividades = New System.Windows.Forms.DataGridView()
-        Me.clID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clData = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clCodigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clHoras = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clDescricao = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnAdicinar = New System.Windows.Forms.Button()
         Me.btnAplicarApartirDe = New System.Windows.Forms.Button()
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnListar = New System.Windows.Forms.Button()
         CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -57,55 +53,12 @@ Partial Class frmPrincipal
         Me.gridAtividades.AllowUserToAddRows = False
         Me.gridAtividades.AllowUserToResizeColumns = False
         Me.gridAtividades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridAtividades.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clID, Me.clData, Me.clTipo, Me.clCodigo, Me.clHoras, Me.clDescricao})
         Me.gridAtividades.Dock = System.Windows.Forms.DockStyle.Top
         Me.gridAtividades.Location = New System.Drawing.Point(0, 77)
         Me.gridAtividades.Name = "gridAtividades"
         Me.gridAtividades.ReadOnly = True
         Me.gridAtividades.Size = New System.Drawing.Size(1014, 205)
         Me.gridAtividades.TabIndex = 1
-        '
-        'clID
-        '
-        Me.clID.HeaderText = "ID"
-        Me.clID.Name = "clID"
-        Me.clID.ReadOnly = True
-        Me.clID.Visible = False
-        '
-        'clData
-        '
-        Me.clData.HeaderText = "Data"
-        Me.clData.Name = "clData"
-        Me.clData.ReadOnly = True
-        '
-        'clTipo
-        '
-        Me.clTipo.HeaderText = "Tipo"
-        Me.clTipo.Name = "clTipo"
-        Me.clTipo.ReadOnly = True
-        Me.clTipo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.clTipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'clCodigo
-        '
-        Me.clCodigo.HeaderText = "Código"
-        Me.clCodigo.Name = "clCodigo"
-        Me.clCodigo.ReadOnly = True
-        '
-        'clHoras
-        '
-        Me.clHoras.HeaderText = "Horas"
-        Me.clHoras.Name = "clHoras"
-        Me.clHoras.ReadOnly = True
-        '
-        'clDescricao
-        '
-        Me.clDescricao.HeaderText = "Descrição"
-        Me.clDescricao.Name = "clDescricao"
-        Me.clDescricao.ReadOnly = True
-        Me.clDescricao.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.clDescricao.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.clDescricao.Width = 500
         '
         'Splitter1
         '
@@ -118,6 +71,8 @@ Partial Class frmPrincipal
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.btnListar)
+        Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.btnAdicinar)
         Me.Panel1.Controls.Add(Me.btnAplicarApartirDe)
         Me.Panel1.Controls.Add(Me.txtApartirDe)
@@ -139,7 +94,7 @@ Partial Class frmPrincipal
         '
         'btnAplicarApartirDe
         '
-        Me.btnAplicarApartirDe.Location = New System.Drawing.Point(101, 23)
+        Me.btnAplicarApartirDe.Location = New System.Drawing.Point(101, 22)
         Me.btnAplicarApartirDe.Name = "btnAplicarApartirDe"
         Me.btnAplicarApartirDe.Size = New System.Drawing.Size(75, 23)
         Me.btnAplicarApartirDe.TabIndex = 2
@@ -163,6 +118,24 @@ Partial Class frmPrincipal
         Me.Label1.Size = New System.Drawing.Size(58, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "A partir de:"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(250, 22)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Carregar"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'btnListar
+        '
+        Me.btnListar.Location = New System.Drawing.Point(470, 27)
+        Me.btnListar.Name = "btnListar"
+        Me.btnListar.Size = New System.Drawing.Size(75, 23)
+        Me.btnListar.TabIndex = 5
+        Me.btnListar.Text = "Listar"
+        Me.btnListar.UseVisualStyleBackColor = True
         '
         'frmPrincipal
         '
@@ -190,10 +163,6 @@ End Sub
     Friend WithEvents txtApartirDe As MaskedTextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents btnAdicinar As Button
-    Friend WithEvents clID As DataGridViewTextBoxColumn
-    Friend WithEvents clData As DataGridViewTextBoxColumn
-    Friend WithEvents clTipo As DataGridViewTextBoxColumn
-    Friend WithEvents clCodigo As DataGridViewTextBoxColumn
-    Friend WithEvents clHoras As DataGridViewTextBoxColumn
-    Friend WithEvents clDescricao As DataGridViewTextBoxColumn
+    Friend WithEvents Button1 As Button
+    Friend WithEvents btnListar As Button
 End Class

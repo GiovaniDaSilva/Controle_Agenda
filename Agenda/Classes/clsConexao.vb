@@ -7,8 +7,9 @@
     Public Shared Function RetornaConexao() As System.Data.SQLite.SQLiteConnection
         If glfConexao Is Nothing Then
             glfConexao = New System.Data.SQLite.SQLiteConnection("Data Source=C:\Projeto\Controle_Agenda\BancoAgenda.db;")
+            glfConexao.Open()
         End If
-        glfConexao.Open()
+
         Return glfConexao
     End Function
 

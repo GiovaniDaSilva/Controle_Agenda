@@ -1,30 +1,18 @@
 ﻿Imports System.Text
 
 Public Class clsAdicionarDAO
-    Public Function GravarAtividade(parAtivdade As clsAtividade) As Boolean
+    Public Function gravarAtividade(parAtivdade As clsAtividade) As Boolean
 
-        Try
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao())
+            Dim lista = New List(Of clsAtividade)
+            lista.Add(parAtivdade)
 
-            Try
-                Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao())
-                    Dim lista = New List(Of clsAtividade)
-                    lista.Add(parAtivdade)
-
-                    Comm.CommandText = funRetornaSQLInsert(lista)
-                    Comm.ExecuteNonQuery()
-                End Using
-                Return True
-            Finally
-                clsConexao.Close()
-            End Try
-
-        Catch ex As Exception
-                Throw ex
-        End Try
-
+            Comm.CommandText = funRetornaSQLInsert(lista)
+            Comm.ExecuteNonQuery()
+        End Using
+        Return True
 
     End Function
-
 
 
     Private Function funRetornaSQLInsert(parListaAtividade As List(Of clsAtividade)) As String
@@ -37,4 +25,26 @@ Public Class clsAdicionarDAO
 
         Return locSQL.ToString().Substring(0, locSQL.ToString.Length - 1)
     End Function
+
+    Public Function carregarAtividades() As List(Of clsAtividade)
+        Dim lista As New List(Of clsAtividade)
+
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
+            Comm.CommandText = "SELECT * FROM ATIVIDADES"
+
+            Using Reader = Comm.ExecuteReader()
+                While Reader.Read()
+                    lista.Add(New clsAtividade(Reader("ID"),
+                                               Reader("DATA"),
+                                               Reader("TIPO"),
+                                               Reader("CODIGO"),
+                                               Reader("HORA"),
+                                               Reader("DESCRICAO")))
+                End While
+            End Using
+        End Using
+
+        Return lista
+    End Function
+
 End Class
