@@ -15,4 +15,8 @@
         Return locData
     End function
 
+    Public Shared function funAjustaDataSQL(byval parData As date) As string
+        Return Format(parData, "yyyy-MM-dd")
+    End function
+
 End Class

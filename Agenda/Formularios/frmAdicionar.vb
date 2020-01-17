@@ -38,7 +38,7 @@
     Private Function funRetornaAtividade() As clsAtividade
         If glfAtividade Is Nothing Then glfAtividade = New clsAtividade
         glfAtividade.Codigo = Val(txtCodigo.Text)
-        glfAtividade.Data = CDate(txtData.Text)
+        glfAtividade.Data = clsTools.funRetornaData(txtData)
         glfAtividade.Horas = txtHora.Text
         glfAtividade.ID_TIPO_ATIVIDADE = cbTipo.SelectedValue()
         glfAtividade.Descricao = txtDescrição.Text

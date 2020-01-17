@@ -44,11 +44,11 @@ Public Class clsAdicionarDAO
         If Atividade.ID > 0 Then
             locSQL.AppendFormat("UPDATE ATIVIDADES SET DATA = '{0}', CODIGO = {1}, HORA = '{2}', DESCRICAO = '{3}', ID_TIPO_ATIVIDADE = {4}
                                     WHERE ID = {5}",
-                                Atividade.Data, Atividade.Codigo, Atividade.Horas, Atividade.Descricao, Atividade.ID_TIPO_ATIVIDADE, Atividade.ID)
+                                clstools.funAjustaDataSQL(Atividade.Data), Atividade.Codigo, Atividade.Horas, Atividade.Descricao, Atividade.ID_TIPO_ATIVIDADE, Atividade.ID)
 
         Else
             locSQL.Append("INSERT INTO ATIVIDADES (DATA, CODIGO, HORA, DESCRICAO, ID_TIPO_ATIVIDADE) VALUES ")
-            locSQL.AppendFormat("('{0}',{1},'{2}','{3}',{4})", Atividade.Data, Atividade.Codigo, Atividade.Horas, Atividade.Descricao, Atividade.ID_TIPO_ATIVIDADE)
+            locSQL.AppendFormat("('{0}',{1},'{2}','{3}',{4})", clstools.funAjustaDataSQL(Atividade.Data), Atividade.Codigo, Atividade.Horas, Atividade.Descricao, Atividade.ID_TIPO_ATIVIDADE)
         End If
 
         Return locSQL.ToString()
@@ -64,7 +64,7 @@ Public Class clsAdicionarDAO
                                 INNER JOIN TIPO_ATIVIDADE T ON T.ID = A.ID_TIPO_ATIVIDADE "
 
             If not parData = Nothing Then
-                locSQL &= " WHERE DATA >= '" & Format(parData,"MM/dd/yyyy") & "'"
+                locSQL &= " WHERE DATA >= '" & clstools.funAjustaDataSQL(parData) & "'"
             End If
 
             Comm.CommandText = locSQL
