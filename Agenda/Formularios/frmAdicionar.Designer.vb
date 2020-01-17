@@ -22,6 +22,7 @@ Partial Class frmAdicionar
     'Não o modifique usando o editor de códigos.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAdicionar))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtData = New System.Windows.Forms.MaskedTextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -188,6 +189,7 @@ Partial Class frmAdicionar
         Me.Controls.Add(Me.txtData)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.MaximizeBox = false
         Me.Name = "frmAdicionar"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

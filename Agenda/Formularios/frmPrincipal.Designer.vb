@@ -22,6 +22,7 @@ Partial Class frmPrincipal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPrincipal))
         Me.gridAtividades = New System.Windows.Forms.DataGridView()
         Me.Editar = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
@@ -205,6 +206,7 @@ Partial Class frmPrincipal
         Me.Controls.Add(Me.Splitter1)
         Me.Controls.Add(Me.gridAtividades)
         Me.Controls.Add(Me.Panel1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.Name = "frmPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Agenda - Versão 0.1 - BETA"
