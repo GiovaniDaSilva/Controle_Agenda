@@ -67,6 +67,7 @@ Partial Class frmAdicionar
         'cbTipo
         '
         Me.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTipo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbTipo.FormattingEnabled = True
         Me.cbTipo.Location = New System.Drawing.Point(139, 35)
         Me.cbTipo.Name = "cbTipo"
@@ -120,6 +121,7 @@ Partial Class frmAdicionar
         '
         'btnGravar
         '
+        Me.btnGravar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnGravar.Location = New System.Drawing.Point(29, 326)
         Me.btnGravar.Name = "btnGravar"
         Me.btnGravar.Size = New System.Drawing.Size(75, 23)
@@ -129,6 +131,7 @@ Partial Class frmAdicionar
         '
         'btnLimpar
         '
+        Me.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLimpar.Location = New System.Drawing.Point(110, 326)
         Me.btnLimpar.Name = "btnLimpar"
         Me.btnLimpar.Size = New System.Drawing.Size(75, 23)
@@ -138,7 +141,8 @@ Partial Class frmAdicionar
         '
         'txtDescrição
         '
-        Me.txtDescrição.BackColor = System.Drawing.SystemColors.ScrollBar
+        Me.txtDescrição.BackColor = System.Drawing.SystemColors.Control
+        Me.txtDescrição.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtDescrição.ForeColor = System.Drawing.SystemColors.InfoText
         Me.txtDescrição.Location = New System.Drawing.Point(29, 115)
         Me.txtDescrição.Name = "txtDescrição"
@@ -149,6 +153,7 @@ Partial Class frmAdicionar
         '
         'btnExcluir
         '
+        Me.btnExcluir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnExcluir.Location = New System.Drawing.Point(455, 326)
         Me.btnExcluir.Name = "btnExcluir"
         Me.btnExcluir.Size = New System.Drawing.Size(75, 23)
@@ -161,6 +166,7 @@ Partial Class frmAdicionar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.ClientSize = New System.Drawing.Size(563, 361)
         Me.Controls.Add(Me.btnExcluir)
         Me.Controls.Add(Me.txtDescrição)
@@ -175,6 +181,8 @@ Partial Class frmAdicionar
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtData)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "frmAdicionar"
         Me.Text = "Adicionar Nova Atividade"
         Me.ResumeLayout(false)

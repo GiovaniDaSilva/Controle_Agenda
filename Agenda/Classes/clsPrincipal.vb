@@ -23,4 +23,9 @@ Public Class clsPrincipal
             End Select
         Next
     End Sub
+
+    Public Sub GravaDescricao(pAtividade As clsConsultaAtividades)
+        Dim DAO As New clsAdicionarDAO
+        DAO.gravarAtividade(pAtividade)
+    End Sub
 End Class
