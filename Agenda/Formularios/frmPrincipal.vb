@@ -27,7 +27,7 @@ Public Class frmPrincipal
         subRemoveSelecao()
         controle.Adicionar()
 
-        subAtualizaLista
+        subAtualizaLista()
     End Sub
 
     Private Sub subRemoveSelecao()
@@ -80,24 +80,41 @@ Public Class frmPrincipal
 
         If locAlterou Then controle.GravaDescricao(lista(gridAtividades.CurrentCell.RowIndex))
     End Sub
-    
 
-    Private Sub gridAtividades_Click(sender As Object, e As EventArgs) Handles gridAtividades.Click
-        txtDescricao.Text = lista(gridAtividades.CurrentCell.RowIndex).Descricao
+
+    Private Sub gridAtividades_Click(sender As Object, e As EventArgs) Handles gridAtividades.Click        
+        If lista.Count > 0 Then
+            txtDescricao.Text = lista(gridAtividades.CurrentCell.RowIndex).Descricao
+        End If
     End Sub
 
     Private Sub gridAtividades_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridAtividades.CellClick
-        If (e.ColumnIndex = enuIndexColunas.EDITAR) Then            
+        If e.RowIndex < 0 Then Exit sub
+        If (e.ColumnIndex = enuIndexColunas.EDITAR) Then
             subChamaFormularioAdicionarEdicao(e.RowIndex)
         End If
     End Sub
 
     Private Sub subChamaFormularioAdicionarEdicao(i As Integer)
         controle.Adicionar(New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE))
-        subAtualizaLista 
+        subAtualizaLista()
     End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        subAtualizaLista 
+        txtApartirDe.Text = Now
+        subAtualizaLista()
+    End Sub
+
+    Private Sub btnLimpar_Click(sender As Object, e As EventArgs) Handles btnLimpar.Click
+        subLimpaFiltro()
+    End Sub
+
+    Private Sub subLimpaFiltro()
+        txtApartirDe.Clear()
+        subAtualizaLista()
+    End Sub
+
+    Private Sub btnAplicarApartirDe_Click(sender As Object, e As EventArgs) Handles btnAplicarApartirDe.Click
+        subAtualizaLista()
     End Sub
 End Class

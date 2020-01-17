@@ -33,6 +33,7 @@ Partial Class frmPrincipal
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtDescricao = New System.Windows.Forms.RichTextBox()
+        Me.btnLimpar = New System.Windows.Forms.Button()
         CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).BeginInit
         Me.Panel1.SuspendLayout
         Me.SuspendLayout
@@ -73,6 +74,7 @@ Partial Class frmPrincipal
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.btnLimpar)
         Me.Panel1.Controls.Add(Me.btnListar)
         Me.Panel1.Controls.Add(Me.btnAtualiza)
         Me.Panel1.Controls.Add(Me.btnAdicinar)
@@ -142,7 +144,7 @@ Partial Class frmPrincipal
         Me.btnAplicarApartirDe.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnAplicarApartirDe.Location = New System.Drawing.Point(101, 22)
         Me.btnAplicarApartirDe.Name = "btnAplicarApartirDe"
-        Me.btnAplicarApartirDe.Size = New System.Drawing.Size(75, 23)
+        Me.btnAplicarApartirDe.Size = New System.Drawing.Size(50, 23)
         Me.btnAplicarApartirDe.TabIndex = 2
         Me.btnAplicarApartirDe.Text = "Aplicar"
         Me.btnAplicarApartirDe.UseVisualStyleBackColor = false
@@ -179,6 +181,20 @@ Partial Class frmPrincipal
         Me.txtDescricao.TabIndex = 5
         Me.txtDescricao.Text = ""
         '
+        'btnLimpar
+        '
+        Me.btnLimpar.BackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpar.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.btnLimpar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.btnLimpar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnLimpar.Location = New System.Drawing.Point(157, 22)
+        Me.btnLimpar.Name = "btnLimpar"
+        Me.btnLimpar.Size = New System.Drawing.Size(31, 23)
+        Me.btnLimpar.TabIndex = 6
+        Me.btnLimpar.Text = "X"
+        Me.btnLimpar.UseVisualStyleBackColor = false
+        '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -209,4 +225,5 @@ End Sub
     Friend WithEvents btnListar As Button
     Friend WithEvents txtDescricao As RichTextBox
     Friend WithEvents Editar As DataGridViewButtonColumn
+    Friend WithEvents btnLimpar As Button
 End Class
