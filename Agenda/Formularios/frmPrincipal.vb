@@ -26,6 +26,8 @@ Public Class frmPrincipal
     Private Sub btnAdicinar_Click(sender As Object, e As EventArgs) Handles btnAdicinar.Click
         subRemoveSelecao()
         controle.Adicionar()
+
+        subAtualizaLista
     End Sub
 
     Private Sub subRemoveSelecao()
@@ -37,7 +39,11 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub btnAtualiza_Click(sender As Object, e As EventArgs) Handles btnAtualiza.Click
-        lista = controle.funCarregarAtividades()
+        subAtualizaLista()
+    End Sub
+
+    Private Sub subAtualizaLista()
+        lista = controle.funCarregarAtividades(clsTools.funRetornaData(txtApartirDe))
 
         gridAtividades.DataSource = lista
         subConfiguraGridAtividade()
@@ -74,17 +80,24 @@ Public Class frmPrincipal
 
         If locAlterou Then controle.GravaDescricao(lista(gridAtividades.CurrentCell.RowIndex))
     End Sub
-
-
+    
 
     Private Sub gridAtividades_Click(sender As Object, e As EventArgs) Handles gridAtividades.Click
         txtDescricao.Text = lista(gridAtividades.CurrentCell.RowIndex).Descricao
     End Sub
 
     Private Sub gridAtividades_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridAtividades.CellClick
-        If (e.ColumnIndex = enuIndexColunas.EDITAR) Then
-            Dim i As Integer = e.RowIndex
-            controle.Adicionar(New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE))
+        If (e.ColumnIndex = enuIndexColunas.EDITAR) Then            
+            subChamaFormularioAdicionarEdicao(e.RowIndex)
         End If
+    End Sub
+
+    Private Sub subChamaFormularioAdicionarEdicao(i As Integer)
+        controle.Adicionar(New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE))
+        subAtualizaLista 
+    End Sub
+
+    Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        subAtualizaLista 
     End Sub
 End Class

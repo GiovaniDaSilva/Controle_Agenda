@@ -54,13 +54,21 @@ Public Class clsAdicionarDAO
         Return locSQL.ToString()
     End Function
 
-    Public Function carregarAtividades() As List(Of clsConsultaAtividades)
+    Public Function carregarAtividades(byval parData As date) As List(Of clsConsultaAtividades)
         Dim lista As New List(Of clsConsultaAtividades)
-
+        Dim locSQL As string
         Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
-            Comm.CommandText = "SELECT A.ID, A.DATA, A.CODIGO, A.HORA, A.DESCRICAO, A.ID_TIPO_ATIVIDADE, T.DESCRICAO AS TIPO_DESCRICAO  
+
+            locSQL = "SELECT A.ID, A.DATA, A.CODIGO, A.HORA, A.DESCRICAO, A.ID_TIPO_ATIVIDADE, T.DESCRICAO AS TIPO_DESCRICAO  
                                 FROM ATIVIDADES A
                                 INNER JOIN TIPO_ATIVIDADE T ON T.ID = A.ID_TIPO_ATIVIDADE "
+
+            If not parData = Nothing Then
+                locSQL &= " WHERE DATA >= '" & Format(parData,"MM/dd/yyyy") & "'"
+            End If
+
+            Comm.CommandText = locSQL
+        
 
             Using Reader = Comm.ExecuteReader()
                 While Reader.Read()

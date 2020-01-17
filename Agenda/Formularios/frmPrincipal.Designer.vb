@@ -23,6 +23,7 @@ Partial Class frmPrincipal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.gridAtividades = New System.Windows.Forms.DataGridView()
+        Me.Editar = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnListar = New System.Windows.Forms.Button()
@@ -32,16 +33,15 @@ Partial Class frmPrincipal
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtDescricao = New System.Windows.Forms.RichTextBox()
-        Me.Editar = New System.Windows.Forms.DataGridViewButtonColumn()
-        CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
-        Me.SuspendLayout()
+        CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel1.SuspendLayout
+        Me.SuspendLayout
         '
         'gridAtividades
         '
-        Me.gridAtividades.AllowUserToAddRows = False
-        Me.gridAtividades.AllowUserToDeleteRows = False
-        Me.gridAtividades.AllowUserToResizeColumns = False
+        Me.gridAtividades.AllowUserToAddRows = false
+        Me.gridAtividades.AllowUserToDeleteRows = false
+        Me.gridAtividades.AllowUserToResizeColumns = false
         Me.gridAtividades.BackgroundColor = System.Drawing.Color.LightGray
         Me.gridAtividades.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.gridAtividades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -49,9 +49,18 @@ Partial Class frmPrincipal
         Me.gridAtividades.Dock = System.Windows.Forms.DockStyle.Top
         Me.gridAtividades.Location = New System.Drawing.Point(0, 77)
         Me.gridAtividades.Name = "gridAtividades"
-        Me.gridAtividades.ReadOnly = True
+        Me.gridAtividades.ReadOnly = true
         Me.gridAtividades.Size = New System.Drawing.Size(823, 205)
         Me.gridAtividades.TabIndex = 1
+        '
+        'Editar
+        '
+        Me.Editar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Editar.HeaderText = "Editar"
+        Me.Editar.Name = "Editar"
+        Me.Editar.ReadOnly = true
+        Me.Editar.Text = "Editar"
+        Me.Editar.UseColumnTextForButtonValue = true
         '
         'Splitter1
         '
@@ -60,7 +69,7 @@ Partial Class frmPrincipal
         Me.Splitter1.Name = "Splitter1"
         Me.Splitter1.Size = New System.Drawing.Size(823, 14)
         Me.Splitter1.TabIndex = 3
-        Me.Splitter1.TabStop = False
+        Me.Splitter1.TabStop = false
         '
         'Panel1
         '
@@ -78,6 +87,9 @@ Partial Class frmPrincipal
         '
         'btnListar
         '
+        Me.btnListar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnListar.BackColor = System.Drawing.SystemColors.Control
         Me.btnListar.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.btnListar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.btnListar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
@@ -87,10 +99,13 @@ Partial Class frmPrincipal
         Me.btnListar.Size = New System.Drawing.Size(75, 23)
         Me.btnListar.TabIndex = 5
         Me.btnListar.Text = "Listar"
-        Me.btnListar.UseVisualStyleBackColor = True
+        Me.btnListar.UseVisualStyleBackColor = false
         '
         'btnAtualiza
         '
+        Me.btnAtualiza.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnAtualiza.BackColor = System.Drawing.SystemColors.Control
         Me.btnAtualiza.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.btnAtualiza.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.btnAtualiza.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
@@ -100,10 +115,13 @@ Partial Class frmPrincipal
         Me.btnAtualiza.Size = New System.Drawing.Size(75, 23)
         Me.btnAtualiza.TabIndex = 4
         Me.btnAtualiza.Text = "Atualizar"
-        Me.btnAtualiza.UseVisualStyleBackColor = True
+        Me.btnAtualiza.UseVisualStyleBackColor = false
         '
         'btnAdicinar
         '
+        Me.btnAdicinar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnAdicinar.BackColor = System.Drawing.SystemColors.Control
         Me.btnAdicinar.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.btnAdicinar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.btnAdicinar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
@@ -113,10 +131,11 @@ Partial Class frmPrincipal
         Me.btnAdicinar.Size = New System.Drawing.Size(57, 50)
         Me.btnAdicinar.TabIndex = 3
         Me.btnAdicinar.Text = "+"
-        Me.btnAdicinar.UseVisualStyleBackColor = True
+        Me.btnAdicinar.UseVisualStyleBackColor = false
         '
         'btnAplicarApartirDe
         '
+        Me.btnAplicarApartirDe.BackColor = System.Drawing.SystemColors.Control
         Me.btnAplicarApartirDe.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.btnAplicarApartirDe.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.btnAplicarApartirDe.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
@@ -126,7 +145,7 @@ Partial Class frmPrincipal
         Me.btnAplicarApartirDe.Size = New System.Drawing.Size(75, 23)
         Me.btnAplicarApartirDe.TabIndex = 2
         Me.btnAplicarApartirDe.Text = "Aplicar"
-        Me.btnAplicarApartirDe.UseVisualStyleBackColor = True
+        Me.btnAplicarApartirDe.UseVisualStyleBackColor = false
         '
         'txtApartirDe
         '
@@ -135,11 +154,12 @@ Partial Class frmPrincipal
         Me.txtApartirDe.Name = "txtApartirDe"
         Me.txtApartirDe.Size = New System.Drawing.Size(80, 20)
         Me.txtApartirDe.TabIndex = 1
+        Me.txtApartirDe.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.txtApartirDe.ValidatingType = GetType(Date)
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
+        Me.Label1.AutoSize = true
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 13)
@@ -148,7 +168,7 @@ Partial Class frmPrincipal
         '
         'txtDescricao
         '
-        Me.txtDescricao.BackColor = System.Drawing.SystemColors.Control
+        Me.txtDescricao.BackColor = System.Drawing.Color.Linen
         Me.txtDescricao.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtDescricao.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtDescricao.ForeColor = System.Drawing.SystemColors.Desktop
@@ -159,18 +179,9 @@ Partial Class frmPrincipal
         Me.txtDescricao.TabIndex = 5
         Me.txtDescricao.Text = ""
         '
-        'Editar
-        '
-        Me.Editar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Editar.HeaderText = "Editar"
-        Me.Editar.Name = "Editar"
-        Me.Editar.ReadOnly = True
-        Me.Editar.Text = "Editar"
-        Me.Editar.UseColumnTextForButtonValue = True
-        '
         'frmPrincipal
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.ClientSize = New System.Drawing.Size(823, 568)
@@ -179,6 +190,7 @@ Partial Class frmPrincipal
         Me.Controls.Add(Me.gridAtividades)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmPrincipal"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Agenda - Versão 0.1 - BETA"
         CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel1.ResumeLayout(false)

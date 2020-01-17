@@ -3,8 +3,14 @@
     Dim glfAtividade As New clsAtividade
 
     Private Sub frmAdicionar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtData.Text = Now 
-        controle.CarregaComboTipo(cbTipo)
+        txtData.Text = Now
+        subValidaComboTipo()
+    End Sub
+
+    Private Sub subValidaComboTipo()
+        If cbTipo.Items.Count = 0 Then
+            controle.CarregaComboTipo(cbTipo)
+        End If
     End Sub
 
     Private Sub btnLimpar_Click(sender As Object, e As EventArgs) Handles btnLimpar.Click
@@ -41,17 +47,20 @@
     End Function
 
     Public Sub subCarregaAtividade(parAtividade As clsAtividade)
+
         glfAtividade = parAtividade
 
         If Not glfAtividade Is Nothing Then
+            subValidaComboTipo
             txtCodigo.Text = glfAtividade.Codigo
             txtData.Text = glfAtividade.Data
             txtHora.Text = glfAtividade.Horas
-            'cbTipo.SelectedIndex = cbTipo.va  glfAtividade.ID_TIPO_ATIVIDADE
+            cbTipo.SelectedValue = glfAtividade.ID_TIPO_ATIVIDADE
             txtDescrição.Text = glfAtividade.Descricao
 
             btnExcluir.Visible = True
         End If
+
         Me.ShowDialog()
     End Sub
 
@@ -65,4 +74,7 @@
         End If
         Me.Close()
     End Sub
+
+
+
 End Class

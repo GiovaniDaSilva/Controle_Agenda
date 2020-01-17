@@ -18,6 +18,9 @@
     End Sub
 
     Public Function excluir(iD As Long) As Boolean
-        Return DAO.Excluir(iD)
+        If MsgBox("Deseja Excluir a atividade?", MsgBoxStyle.YesNo, "Questão") = Windows.Forms.DialogResult.Yes  Then
+           Return DAO.Excluir(iD)     
+        End If
+        Return false        
     End Function
 End Class
