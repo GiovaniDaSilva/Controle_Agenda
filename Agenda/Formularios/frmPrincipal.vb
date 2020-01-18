@@ -45,7 +45,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub subAtualizaLista()
-        txtDescricao.Tag = MODO_NORMAL
+        subConfiguraDescricao(MODO_NORMAL)
         lista = controle.funCarregarAtividades(funMontaFiltro)
 
         gridAtividades.DataSource = lista
@@ -72,7 +72,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub btnListar_Click(sender As Object, e As EventArgs) Handles btnListar.Click
-        txtDescricao.Tag = MODO_IMPRESSAO
+        subConfiguraDescricao(MODO_IMPRESSAO)
         controle.subListarAtivdades(txtDescricao, lista)
     End Sub
 
@@ -95,7 +95,7 @@ Public Class frmPrincipal
 
     Private Sub subAtualizaDescricao()
         txtDescricao.Clear()
-        txtDescricao.Tag = MODO_NORMAL
+        subConfiguraDescricao(MODO_NORMAL)
         If lista.Count > 0 Then
             txtDescricao.Text = lista(gridAtividades.CurrentCell.RowIndex).Descricao
         End If
@@ -177,4 +177,18 @@ Public Class frmPrincipal
         Return locAividade
     End Function
 
+    Private Sub subConfiguraDescricao(pTipo As String)
+        If pTipo = MODO_IMPRESSAO Then
+            txtDescricao.Tag = MODO_IMPRESSAO
+            txtDescricao.BackColor = Color.LightCyan
+            txtDescricao.ReadOnly = True
+        Else
+            txtDescricao.Tag = MODO_NORMAL
+            txtDescricao.BackColor = Color.Linen
+            txtDescricao.ReadOnly = False
+        End If
+    End Sub
 End Class
+
+
+

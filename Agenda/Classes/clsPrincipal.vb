@@ -23,24 +23,24 @@ Public Class clsPrincipal
     End Function
 
     Public Sub subListarAtivdades(ByRef txtTela As RichTextBox, ByRef lista As List(Of clsConsultaAtividades))
+        Dim objeto As clsIListaAtividades
         txtTela.Clear()
 
         For Each item In lista
             Select Case item.ID_TIPO_ATIVIDADE
 
                 Case enuTipoAtividades.SOLICITACAO
-                    Dim x = New clsListaSolictacao
-                    x.subListaAtividade(txtTela, item)
+                    objeto = New clsListaSolictacao
                 Case enuTipoAtividades.PBI
-                    Dim x = New clsListaPBI
-                    x.subListaAtividade(txtTela, item)
+                    objeto = New clsListaPBI
                 Case enuTipoAtividades.REUNIAO
-
+                    objeto = New clsListaReuniao
                 Case enuTipoAtividades.AUSENTE
-
+                    objeto = New clsListaAusente
                 Case enuTipoAtividades.OUROS
-
+                    objeto = New clsListaOutros
             End Select
+            objeto.subListaAtividade(txtTela, item)
         Next
     End Sub
 
@@ -69,7 +69,7 @@ Public Class clsListaSolictacao
         '       Horas: xx:xx
         '       Tipo de conclusão: xxxx
         '       Descrição: xxxxxxxxxxxx      
-        RichAddLineFmt(parCampo, "<fc:red><b>Solicitação</b></fc>")
+        RichAddLineFmt(parCampo, "<fc:" & Color.Red.Name & "><b>Solicitação</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Código: " & item.Codigo)
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
         RichAddLineFmt(parCampo, clsTools.Tab & "Tipo de Conclusão: -")
@@ -88,7 +88,7 @@ Public Class clsListaPBI
         '       Horas: xx:xx
         '       IPP: xxxx
         '       Descrição: xxxxxxxxxxxx      
-        RichAddLineFmt(parCampo, "<fc:Blue><b>PBI</b></fc>")
+        RichAddLineFmt(parCampo, "<fc:" & Color.Blue.Name & "><b>PBI</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Código: " & item.Codigo)
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
         RichAddLineFmt(parCampo, clsTools.Tab & "IPP: -")
@@ -98,3 +98,44 @@ Public Class clsListaPBI
 End Class
 
 
+Public Class clsListaReuniao
+    Implements clsIListaAtividades
+
+    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades) Implements clsIListaAtividades.subListaAtividade
+        'Reuniao       
+        '       Horas: xx:xx        
+        '       Descrição: xxxxxxxxxxxx      
+        RichAddLineFmt(parCampo, "<fc:" & Color.Green.Name & "><b>Reunião</b></fc>")
+        RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
+        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.Descricao.ToString().Replace(ControlChars.Lf, " "))
+        RichAddLineFmt(parCampo, "")
+    End Sub
+End Class
+
+Public Class clsListaAusente
+    Implements clsIListaAtividades
+
+    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades) Implements clsIListaAtividades.subListaAtividade
+        'Ausente       
+        '       Horas: xx:xx        
+        '       Descrição: xxxxxxxxxxxx      
+        RichAddLineFmt(parCampo, "<fc:" & Color.Orange.Name & "><b>Ausente</b></fc>")
+        RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
+        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.Descricao.ToString().Replace(ControlChars.Lf, " "))
+        RichAddLineFmt(parCampo, "")
+    End Sub
+End Class
+
+Public Class clsListaOutros
+    Implements clsIListaAtividades
+
+    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades) Implements clsIListaAtividades.subListaAtividade
+        'Outros       
+        '       Horas: xx:xx        
+        '       Descrição: xxxxxxxxxxxx      
+        RichAddLineFmt(parCampo, "<fc:" & Color.Maroon.Name & "><b>Outros</b></fc>")
+        RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
+        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.Descricao.ToString().Replace(ControlChars.Lf, " "))
+        RichAddLineFmt(parCampo, "")
+    End Sub
+End Class
