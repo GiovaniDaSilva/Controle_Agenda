@@ -24,7 +24,6 @@ Partial Class frmPrincipal
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPrincipal))
         Me.gridAtividades = New System.Windows.Forms.DataGridView()
-        Me.Editar = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.pMenu = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -33,15 +32,16 @@ Partial Class frmPrincipal
         Me.btnAdicinar = New System.Windows.Forms.Button()
         Me.txtDescricao = New System.Windows.Forms.RichTextBox()
         Me.pFiltro = New System.Windows.Forms.Panel()
+        Me.cbTipo = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
+        Me.lblcodigo = New System.Windows.Forms.Label()
+        Me.btnFiltrar = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnLimpar = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.btnFiltrar = New System.Windows.Forms.Button()
-        Me.lblcodigo = New System.Windows.Forms.Label()
-        Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.cbTipo = New System.Windows.Forms.ComboBox()
+        Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
         CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pMenu.SuspendLayout()
         Me.pFiltro.SuspendLayout()
@@ -62,15 +62,6 @@ Partial Class frmPrincipal
         Me.gridAtividades.ReadOnly = True
         Me.gridAtividades.Size = New System.Drawing.Size(823, 205)
         Me.gridAtividades.TabIndex = 1
-        '
-        'Editar
-        '
-        Me.Editar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Editar.HeaderText = "Editar"
-        Me.Editar.Name = "Editar"
-        Me.Editar.ReadOnly = True
-        Me.Editar.Text = "Editar"
-        Me.Editar.UseColumnTextForButtonValue = True
         '
         'Splitter1
         '
@@ -188,6 +179,85 @@ Partial Class frmPrincipal
         Me.pFiltro.TabIndex = 7
         Me.pFiltro.Visible = False
         '
+        'cbTipo
+        '
+        Me.cbTipo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTipo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.cbTipo.FormattingEnabled = True
+        Me.cbTipo.Location = New System.Drawing.Point(355, 33)
+        Me.cbTipo.Name = "cbTipo"
+        Me.cbTipo.Size = New System.Drawing.Size(136, 21)
+        Me.cbTipo.TabIndex = 16
+        '
+        'Label2
+        '
+        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(352, 17)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(28, 13)
+        Me.Label2.TabIndex = 15
+        Me.Label2.Text = "Tipo"
+        '
+        'txtCodigo
+        '
+        Me.txtCodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtCodigo.Location = New System.Drawing.Point(230, 33)
+        Me.txtCodigo.Mask = "0000000"
+        Me.txtCodigo.Name = "txtCodigo"
+        Me.txtCodigo.Size = New System.Drawing.Size(82, 20)
+        Me.txtCodigo.TabIndex = 13
+        Me.txtCodigo.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
+        Me.txtCodigo.ValidatingType = GetType(Integer)
+        '
+        'lblcodigo
+        '
+        Me.lblcodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblcodigo.AutoSize = True
+        Me.lblcodigo.Location = New System.Drawing.Point(227, 17)
+        Me.lblcodigo.Name = "lblcodigo"
+        Me.lblcodigo.Size = New System.Drawing.Size(40, 13)
+        Me.lblcodigo.TabIndex = 12
+        Me.lblcodigo.Text = "Código"
+        '
+        'btnFiltrar
+        '
+        Me.btnFiltrar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnFiltrar.BackColor = System.Drawing.SystemColors.Control
+        Me.btnFiltrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btnFiltrar.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.btnFiltrar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.btnFiltrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnFiltrar.Image = CType(resources.GetObject("btnFiltrar.Image"), System.Drawing.Image)
+        Me.btnFiltrar.Location = New System.Drawing.Point(691, 17)
+        Me.btnFiltrar.Name = "btnFiltrar"
+        Me.btnFiltrar.Size = New System.Drawing.Size(57, 50)
+        Me.btnFiltrar.TabIndex = 11
+        Me.btnFiltrar.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button2.BackColor = System.Drawing.SystemColors.Control
+        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.Button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
+        Me.Button2.Location = New System.Drawing.Point(12, 17)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(57, 50)
+        Me.Button2.TabIndex = 10
+        Me.Button2.UseVisualStyleBackColor = False
+        '
         'txtApartirDe
         '
         Me.txtApartirDe.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -228,84 +298,13 @@ Partial Class frmPrincipal
         Me.btnLimpar.TabIndex = 7
         Me.btnLimpar.UseVisualStyleBackColor = False
         '
-        'Button2
+        'Editar
         '
-        Me.Button2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button2.BackColor = System.Drawing.SystemColors.Control
-        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
-        Me.Button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
-        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(12, 17)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(57, 50)
-        Me.Button2.TabIndex = 10
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'btnFiltrar
-        '
-        Me.btnFiltrar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnFiltrar.BackColor = System.Drawing.SystemColors.Control
-        Me.btnFiltrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnFiltrar.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
-        Me.btnFiltrar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
-        Me.btnFiltrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
-        Me.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnFiltrar.Image = CType(resources.GetObject("btnFiltrar.Image"), System.Drawing.Image)
-        Me.btnFiltrar.Location = New System.Drawing.Point(691, 17)
-        Me.btnFiltrar.Name = "btnFiltrar"
-        Me.btnFiltrar.Size = New System.Drawing.Size(57, 50)
-        Me.btnFiltrar.TabIndex = 11
-        Me.btnFiltrar.UseVisualStyleBackColor = False
-        '
-        'lblcodigo
-        '
-        Me.lblcodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lblcodigo.AutoSize = True
-        Me.lblcodigo.Location = New System.Drawing.Point(227, 17)
-        Me.lblcodigo.Name = "lblcodigo"
-        Me.lblcodigo.Size = New System.Drawing.Size(40, 13)
-        Me.lblcodigo.TabIndex = 12
-        Me.lblcodigo.Text = "Código"
-        '
-        'txtCodigo
-        '
-        Me.txtCodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtCodigo.Location = New System.Drawing.Point(230, 33)
-        Me.txtCodigo.Mask = "0000000"
-        Me.txtCodigo.Name = "txtCodigo"
-        Me.txtCodigo.Size = New System.Drawing.Size(82, 20)
-        Me.txtCodigo.TabIndex = 13
-        Me.txtCodigo.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
-        Me.txtCodigo.ValidatingType = GetType(Integer)
-        '
-        'Label2
-        '
-        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(352, 17)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(28, 13)
-        Me.Label2.TabIndex = 15
-        Me.Label2.Text = "Tipo"
-        '
-        'cbTipo
-        '
-        Me.cbTipo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTipo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cbTipo.FormattingEnabled = True
-        Me.cbTipo.Location = New System.Drawing.Point(355, 33)
-        Me.cbTipo.Name = "cbTipo"
-        Me.cbTipo.Size = New System.Drawing.Size(136, 21)
-        Me.cbTipo.TabIndex = 16
+        Me.Editar.HeaderText = ""
+        Me.Editar.Image = CType(resources.GetObject("Editar.Image"), System.Drawing.Image)
+        Me.Editar.Name = "Editar"
+        Me.Editar.ReadOnly = True
+        Me.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'frmPrincipal
         '
@@ -336,7 +335,6 @@ Partial Class frmPrincipal
     Friend WithEvents btnAtualiza As Button
     Friend WithEvents btnListar As Button
     Friend WithEvents txtDescricao As RichTextBox
-    Friend WithEvents Editar As DataGridViewButtonColumn
     Friend WithEvents pFiltro As Panel
     Friend WithEvents Button1 As Button
     Friend WithEvents txtApartirDe As MaskedTextBox
@@ -348,4 +346,5 @@ Partial Class frmPrincipal
     Friend WithEvents txtCodigo As MaskedTextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents cbTipo As ComboBox
+    Friend WithEvents Editar As DataGridViewImageColumn
 End Class

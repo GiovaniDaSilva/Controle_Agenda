@@ -126,23 +126,23 @@ Partial Class frmAdicionar
         '
         Me.btnGravar.BackColor = System.Drawing.SystemColors.Control
         Me.btnGravar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnGravar.Location = New System.Drawing.Point(29, 326)
+        Me.btnGravar.Image = CType(resources.GetObject("btnGravar.Image"), System.Drawing.Image)
+        Me.btnGravar.Location = New System.Drawing.Point(29, 302)
         Me.btnGravar.Name = "btnGravar"
-        Me.btnGravar.Size = New System.Drawing.Size(75, 23)
+        Me.btnGravar.Size = New System.Drawing.Size(57, 50)
         Me.btnGravar.TabIndex = 10
-        Me.btnGravar.Text = "Gravar"
-        Me.btnGravar.UseVisualStyleBackColor = false
+        Me.btnGravar.UseVisualStyleBackColor = False
         '
         'btnLimpar
         '
         Me.btnLimpar.BackColor = System.Drawing.SystemColors.Control
         Me.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnLimpar.Location = New System.Drawing.Point(110, 326)
+        Me.btnLimpar.Image = CType(resources.GetObject("btnLimpar.Image"), System.Drawing.Image)
+        Me.btnLimpar.Location = New System.Drawing.Point(92, 302)
         Me.btnLimpar.Name = "btnLimpar"
-        Me.btnLimpar.Size = New System.Drawing.Size(75, 23)
+        Me.btnLimpar.Size = New System.Drawing.Size(57, 50)
         Me.btnLimpar.TabIndex = 11
-        Me.btnLimpar.Text = "Limpar"
-        Me.btnLimpar.UseVisualStyleBackColor = false
+        Me.btnLimpar.UseVisualStyleBackColor = False
         '
         'txtDescrição
         '
@@ -160,12 +160,12 @@ Partial Class frmAdicionar
         '
         Me.btnExcluir.BackColor = System.Drawing.SystemColors.Control
         Me.btnExcluir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnExcluir.Location = New System.Drawing.Point(455, 326)
+        Me.btnExcluir.Image = CType(resources.GetObject("btnExcluir.Image"), System.Drawing.Image)
+        Me.btnExcluir.Location = New System.Drawing.Point(473, 302)
         Me.btnExcluir.Name = "btnExcluir"
-        Me.btnExcluir.Size = New System.Drawing.Size(75, 23)
+        Me.btnExcluir.Size = New System.Drawing.Size(57, 50)
         Me.btnExcluir.TabIndex = 12
-        Me.btnExcluir.Text = "Excluir"
-        Me.btnExcluir.UseVisualStyleBackColor = false
+        Me.btnExcluir.UseVisualStyleBackColor = False
         Me.btnExcluir.Visible = false
         '
         'frmAdicionar
