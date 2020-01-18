@@ -102,7 +102,6 @@ Partial Class frmAdicionar
         Me.txtHora.Name = "txtHora"
         Me.txtHora.Size = New System.Drawing.Size(63, 20)
         Me.txtHora.TabIndex = 7
-        Me.txtHora.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.txtHora.ValidatingType = GetType(Date)
         '
         'Label3

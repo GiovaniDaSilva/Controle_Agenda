@@ -43,7 +43,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub subAtualizaLista()
-        lista = controle.funCarregarAtividades(clsTools.funRetornaData(txtApartirDe))
+        lista = controle.funCarregarAtividades(funMontaFiltro)
 
         gridAtividades.DataSource = lista
         subConfiguraGridAtividade()
@@ -82,14 +82,18 @@ Public Class frmPrincipal
     End Sub
 
 
-    Private Sub gridAtividades_Click(sender As Object, e As EventArgs) Handles gridAtividades.Click        
+    Private Sub gridAtividades_Click(sender As Object, e As EventArgs) Handles gridAtividades.Click
+        subAtualizaDescricao()
+    End Sub
+
+    Private Sub subAtualizaDescricao()
         If lista.Count > 0 Then
             txtDescricao.Text = lista(gridAtividades.CurrentCell.RowIndex).Descricao
         End If
     End Sub
 
     Private Sub gridAtividades_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridAtividades.CellClick
-        If e.RowIndex < 0 Then Exit sub
+        If e.RowIndex < 0 Then Exit Sub
         If (e.ColumnIndex = enuIndexColunas.EDITAR) Then
             subChamaFormularioAdicionarEdicao(e.RowIndex)
         End If
@@ -102,19 +106,66 @@ Public Class frmPrincipal
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtApartirDe.Text = Now
+        subCarregaComboTipo(cbTipo)
         subAtualizaLista()
     End Sub
 
-    Private Sub btnLimpar_Click(sender As Object, e As EventArgs) Handles btnLimpar.Click
+    Private Sub btnLimpar_Click(sender As Object, e As EventArgs)
         subLimpaFiltro()
     End Sub
 
     Private Sub subLimpaFiltro()
         txtApartirDe.Clear()
+        cbTipo.SelectedIndex = -1
+        txtCodigo.Clear()
+    End Sub
+
+
+
+    Private Sub gridAtividades_KeyDown(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyDown
+        subAtualizaDescricao()
+    End Sub
+
+    Private Sub gridAtividades_KeyUp(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyUp
+        subAtualizaDescricao()
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        pFiltro.Visible = False
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        pFiltro.Visible = True
+        pFiltro.Height = pMenu.Height
+        pFiltro.Width = pMenu.Width
+        pFiltro.Top = pMenu.Top
+        pFiltro.Left = pMenu.Left
+    End Sub
+
+    Private Sub subCarregaComboTipo(pTipo As ComboBox)
+        controle.CarregaComboTipo(pTipo)
+        pTipo.SelectedIndex = -1
+    End Sub
+
+    Private Sub btnLimpar_Click_1(sender As Object, e As EventArgs) Handles btnLimpar.Click
+        subLimpaFiltro()
+    End Sub
+
+    Private Sub btnFiltrar_Click(sender As Object, e As EventArgs) Handles btnFiltrar.Click
         subAtualizaLista()
     End Sub
 
-    Private Sub btnAplicarApartirDe_Click(sender As Object, e As EventArgs) Handles btnAplicarApartirDe.Click
-        subAtualizaLista()
-    End Sub
+    Private Function funMontaFiltro() As clsAtividade
+        Dim locAividade As New clsAtividade
+
+        locAividade.Codigo = Val(txtCodigo.Text)
+        locAividade.Data = clsTools.funRetornaData(txtApartirDe)
+        locAividade.ID_TIPO_ATIVIDADE = cbTipo.SelectedValue()
+
+        Return locAividade
+    End Function
+
 End Class
