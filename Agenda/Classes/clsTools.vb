@@ -13,10 +13,15 @@
         locData = New Date(ano, mes, dia)
 
         Return locData
-    End function
+    End Function
 
-    Public Shared function funAjustaDataSQL(byval parData As date) As string
+    Public Shared Function funAjustaDataSQL(ByVal parData As Date) As String
         Return Format(parData, "yyyy-MM-dd")
-    End function
+    End Function
+
+    Public Shared Function Tab() As String
+        Return "       "
+    End Function
+
 
 End Class

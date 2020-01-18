@@ -3,6 +3,8 @@
 Public Class frmPrincipal
     Private controle As New clsPrincipal
     Dim lista As List(Of clsConsultaAtividades)
+    Const MODO_IMPRESSAO = "MODO_IMPRESSAO"
+    Const MODO_NORMAL = ""
 
     Private Enum enuPosicaoColunas
         DATA = 1
@@ -43,6 +45,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub subAtualizaLista()
+        txtDescricao.Tag = MODO_NORMAL
         lista = controle.funCarregarAtividades(funMontaFiltro)
 
         gridAtividades.DataSource = lista
@@ -69,11 +72,15 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub btnListar_Click(sender As Object, e As EventArgs) Handles btnListar.Click
+        txtDescricao.Tag = MODO_IMPRESSAO
         controle.subListarAtivdades(txtDescricao, lista)
     End Sub
 
     Private Sub txtDescricao_Leave(sender As Object, e As EventArgs) Handles txtDescricao.Leave
         Dim locAlterou As Boolean = Not lista(gridAtividades.CurrentCell.RowIndex).Descricao.Equals(txtDescricao.Text)
+        If txtDescricao.Tag = MODO_IMPRESSAO Then
+            Exit Sub
+        End If
 
         lista(gridAtividades.CurrentCell.RowIndex).Descricao = txtDescricao.Text
         gridAtividades.Refresh()
@@ -87,6 +94,8 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub subAtualizaDescricao()
+        txtDescricao.Clear()
+        txtDescricao.Tag = MODO_NORMAL
         If lista.Count > 0 Then
             txtDescricao.Text = lista(gridAtividades.CurrentCell.RowIndex).Descricao
         End If

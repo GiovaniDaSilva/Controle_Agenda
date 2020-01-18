@@ -24,6 +24,7 @@ Partial Class frmPrincipal
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPrincipal))
         Me.gridAtividades = New System.Windows.Forms.DataGridView()
+        Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.pMenu = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -41,7 +42,6 @@ Partial Class frmPrincipal
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnLimpar = New System.Windows.Forms.Button()
-        Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
         CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pMenu.SuspendLayout()
         Me.pFiltro.SuspendLayout()
@@ -62,6 +62,14 @@ Partial Class frmPrincipal
         Me.gridAtividades.ReadOnly = True
         Me.gridAtividades.Size = New System.Drawing.Size(823, 205)
         Me.gridAtividades.TabIndex = 1
+        '
+        'Editar
+        '
+        Me.Editar.HeaderText = ""
+        Me.Editar.Image = CType(resources.GetObject("Editar.Image"), System.Drawing.Image)
+        Me.Editar.Name = "Editar"
+        Me.Editar.ReadOnly = True
+        Me.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'Splitter1
         '
@@ -109,11 +117,11 @@ Partial Class frmPrincipal
         Me.btnListar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.btnListar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnListar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnListar.Location = New System.Drawing.Point(555, 15)
+        Me.btnListar.Image = CType(resources.GetObject("btnListar.Image"), System.Drawing.Image)
+        Me.btnListar.Location = New System.Drawing.Point(573, 15)
         Me.btnListar.Name = "btnListar"
-        Me.btnListar.Size = New System.Drawing.Size(75, 23)
+        Me.btnListar.Size = New System.Drawing.Size(57, 50)
         Me.btnListar.TabIndex = 5
-        Me.btnListar.Text = "Listar"
         Me.btnListar.UseVisualStyleBackColor = False
         '
         'btnAtualiza
@@ -159,6 +167,7 @@ Partial Class frmPrincipal
         Me.txtDescricao.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
         Me.txtDescricao.Size = New System.Drawing.Size(823, 272)
         Me.txtDescricao.TabIndex = 5
+        Me.txtDescricao.Tag = ""
         Me.txtDescricao.Text = ""
         '
         'pFiltro
@@ -297,14 +306,6 @@ Partial Class frmPrincipal
         Me.btnLimpar.Size = New System.Drawing.Size(57, 50)
         Me.btnLimpar.TabIndex = 7
         Me.btnLimpar.UseVisualStyleBackColor = False
-        '
-        'Editar
-        '
-        Me.Editar.HeaderText = ""
-        Me.Editar.Image = CType(resources.GetObject("Editar.Image"), System.Drawing.Image)
-        Me.Editar.Name = "Editar"
-        Me.Editar.ReadOnly = True
-        Me.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'frmPrincipal
         '
