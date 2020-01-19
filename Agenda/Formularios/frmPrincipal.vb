@@ -1,4 +1,6 @@
-﻿Imports Agenda
+﻿Imports System.Text.RegularExpressions
+Imports Agenda
+Imports HtmlAgilityPack
 
 Public Class frmPrincipal
     Private controle As New clsPrincipal
@@ -73,7 +75,10 @@ Public Class frmPrincipal
 
     Private Sub btnListar_Click(sender As Object, e As EventArgs) Handles btnListar.Click
         subConfiguraDescricao(MODO_IMPRESSAO)
-        controle.subListarAtivdades(txtDescricao, lista)
+
+        Dim locHTML = frmHTML.RetornarHTML
+
+        controle.subListarAtivdades(txtDescricao, lista, locHTML)
     End Sub
 
     Private Sub txtDescricao_Leave(sender As Object, e As EventArgs) Handles txtDescricao.Leave
@@ -188,6 +193,22 @@ Public Class frmPrincipal
             txtDescricao.ReadOnly = False
         End If
     End Sub
+
+    Public Function limpaHTML_Recursiva(ByVal sTexto As String, ByVal j As Integer) As String
+        If j = 0 Then
+            Return sTexto
+        End If
+        Dim i As Integer = 0
+        i = InStr(sTexto, "<")
+        j = InStr(sTexto, ">")
+        If i > 0 Then
+            i -= 1
+        End If
+        sTexto = Strings.Left(sTexto, i) & Strings.Right(sTexto, sTexto.Length - j)
+        Return (limpaHTML_Recursiva(sTexto, j))
+    End Function
+
+
 End Class
 
 

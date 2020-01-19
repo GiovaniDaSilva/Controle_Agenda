@@ -22,15 +22,25 @@ Public Class clsPrincipal
         Return DAO.carregarAtividades(parFiltro)
     End Function
 
-    Public Sub subListarAtivdades(ByRef txtTela As RichTextBox, ByRef lista As List(Of clsConsultaAtividades))
+    Public Sub subListarAtivdades(ByRef txtTela As RichTextBox, ByRef lista As List(Of clsConsultaAtividades), Optional ByVal pHTML As String = vbNullString)
         Dim objeto As clsIListaAtividades
+        Dim locExisteSolicitacao As Boolean
+        Dim listaSolicitacao As New List(Of clsSolicitacao)
+
+        Dim i = lista.FindIndex(Function(X) X.ID_TIPO_ATIVIDADE = enuTipoAtividades.SOLICITACAO)
+        locExisteSolicitacao = (i >= 0)
+
         txtTela.Clear()
+        If locExisteSolicitacao Then
+            listaSolicitacao = clsSolicitacao.funCarregaDetalhesSolicitacoes(pHTML)
+        End If
+
 
         For Each item In lista
             Select Case item.ID_TIPO_ATIVIDADE
 
                 Case enuTipoAtividades.SOLICITACAO
-                    objeto = New clsListaSolictacao
+                    objeto = New clsListaSolictacao(listaSolicitacao)
                 Case enuTipoAtividades.PBI
                     objeto = New clsListaPBI
                 Case enuTipoAtividades.REUNIAO
@@ -63,16 +73,42 @@ End Interface
 Public Class clsListaSolictacao
     Implements clsIListaAtividades
 
+    Public Sub New(listaSolicitacoes As List(Of clsSolicitacao))
+        Me.ListaSolicitacoes = listaSolicitacoes
+    End Sub
+
+    Public Property ListaSolicitacoes As New List(Of clsSolicitacao)
+
+
     Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades) Implements clsIListaAtividades.subListaAtividade
         'Solicitacao
         '       Código: xxxx           
+        '       Titulo: xxxx           
         '       Horas: xx:xx
-        '       Tipo de conclusão: xxxx
+        '       SubTipo: xxxx
+        '       Objeto: xxxx
+        '       Situação: xxxx
         '       Descrição: xxxxxxxxxxxx      
+
+        Dim locDetalhes As clsSolicitacao
+        locDetalhes = ListaSolicitacoes.Find(Function(X) X.Codigo = item.Codigo)
+
         RichAddLineFmt(parCampo, "<fc:" & Color.Red.Name & "><b>Solicitação</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Código: " & item.Codigo)
+
+        If Not locDetalhes Is Nothing Then
+            RichAddLineFmt(parCampo, clsTools.Tab & "Titulo: " & locDetalhes.Resumo)
+        End If
+
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
-        RichAddLineFmt(parCampo, clsTools.Tab & "Tipo de Conclusão: -")
+
+
+        If Not locDetalhes Is Nothing Then
+            RichAddLineFmt(parCampo, clsTools.Tab & "SubTipo: " & locDetalhes.SubTipo)
+            RichAddLineFmt(parCampo, clsTools.Tab & "Objeto: " & locDetalhes.Objeto)
+            RichAddLineFmt(parCampo, clsTools.Tab & "Situação: " & locDetalhes.Situacao)
+        End If
+
         RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.Descricao.ToString().Replace(ControlChars.Lf, " "))
         RichAddLineFmt(parCampo, "")
     End Sub
