@@ -22,11 +22,13 @@ Partial Class frmPrincipal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPrincipal))
         Me.gridAtividades = New System.Windows.Forms.DataGridView()
         Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.pMenu = New System.Windows.Forms.Panel()
+        Me.btnConfiguracao = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnListar = New System.Windows.Forms.Button()
         Me.btnAtualiza = New System.Windows.Forms.Button()
@@ -42,7 +44,7 @@ Partial Class frmPrincipal
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnLimpar = New System.Windows.Forms.Button()
-        Me.btnConfiguracao = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pMenu.SuspendLayout()
         Me.pFiltro.SuspendLayout()
@@ -61,7 +63,7 @@ Partial Class frmPrincipal
         Me.gridAtividades.Location = New System.Drawing.Point(0, 77)
         Me.gridAtividades.Name = "gridAtividades"
         Me.gridAtividades.ReadOnly = True
-        Me.gridAtividades.Size = New System.Drawing.Size(823, 205)
+        Me.gridAtividades.Size = New System.Drawing.Size(823, 355)
         Me.gridAtividades.TabIndex = 1
         '
         'Editar
@@ -75,7 +77,7 @@ Partial Class frmPrincipal
         'Splitter1
         '
         Me.Splitter1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Splitter1.Location = New System.Drawing.Point(0, 282)
+        Me.Splitter1.Location = New System.Drawing.Point(0, 432)
         Me.Splitter1.Name = "Splitter1"
         Me.Splitter1.Size = New System.Drawing.Size(823, 14)
         Me.Splitter1.TabIndex = 3
@@ -93,6 +95,22 @@ Partial Class frmPrincipal
         Me.pMenu.Name = "pMenu"
         Me.pMenu.Size = New System.Drawing.Size(823, 77)
         Me.pMenu.TabIndex = 4
+        '
+        'btnConfiguracao
+        '
+        Me.btnConfiguracao.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnConfiguracao.BackColor = System.Drawing.SystemColors.Control
+        Me.btnConfiguracao.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.btnConfiguracao.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.btnConfiguracao.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnConfiguracao.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnConfiguracao.Image = CType(resources.GetObject("btnConfiguracao.Image"), System.Drawing.Image)
+        Me.btnConfiguracao.Location = New System.Drawing.Point(546, 15)
+        Me.btnConfiguracao.Name = "btnConfiguracao"
+        Me.btnConfiguracao.Size = New System.Drawing.Size(57, 50)
+        Me.btnConfiguracao.TabIndex = 7
+        Me.btnConfiguracao.UseVisualStyleBackColor = False
         '
         'Button1
         '
@@ -164,10 +182,10 @@ Partial Class frmPrincipal
         Me.txtDescricao.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtDescricao.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtDescricao.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.txtDescricao.Location = New System.Drawing.Point(0, 296)
+        Me.txtDescricao.Location = New System.Drawing.Point(0, 446)
         Me.txtDescricao.Name = "txtDescricao"
         Me.txtDescricao.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
-        Me.txtDescricao.Size = New System.Drawing.Size(823, 272)
+        Me.txtDescricao.Size = New System.Drawing.Size(823, 122)
         Me.txtDescricao.TabIndex = 5
         Me.txtDescricao.Tag = ""
         Me.txtDescricao.Text = ""
@@ -309,21 +327,8 @@ Partial Class frmPrincipal
         Me.btnLimpar.TabIndex = 7
         Me.btnLimpar.UseVisualStyleBackColor = False
         '
-        'btnConfiguracao
+        'Timer1
         '
-        Me.btnConfiguracao.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnConfiguracao.BackColor = System.Drawing.SystemColors.Control
-        Me.btnConfiguracao.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
-        Me.btnConfiguracao.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
-        Me.btnConfiguracao.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
-        Me.btnConfiguracao.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnConfiguracao.Image = CType(resources.GetObject("btnConfiguracao.Image"), System.Drawing.Image)
-        Me.btnConfiguracao.Location = New System.Drawing.Point(546, 15)
-        Me.btnConfiguracao.Name = "btnConfiguracao"
-        Me.btnConfiguracao.Size = New System.Drawing.Size(57, 50)
-        Me.btnConfiguracao.TabIndex = 7
-        Me.btnConfiguracao.UseVisualStyleBackColor = False
         '
         'frmPrincipal
         '
@@ -367,4 +372,5 @@ Partial Class frmPrincipal
     Friend WithEvents cbTipo As ComboBox
     Friend WithEvents Editar As DataGridViewImageColumn
     Friend WithEvents btnConfiguracao As Button
+    Friend WithEvents Timer1 As Timer
 End Class

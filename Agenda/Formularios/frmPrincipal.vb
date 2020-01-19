@@ -165,15 +165,25 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub subOcultaFiltro()
-        pFiltro.Visible = False
+        locSobeDesce = False
+        subMovimentaMenuFiltro()
+
+        If pFiltro.Top <= locTopMin Then
+            pFiltro.Visible = False
+        End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        pFiltro.Visible = True
+        'pFiltro.Visible = True
         pFiltro.Height = pMenu.Height
         pFiltro.Width = pMenu.Width
         pFiltro.Top = pMenu.Top
         pFiltro.Left = pMenu.Left
+
+
+        pFiltro.Visible = True
+        locSobeDesce = True
+        subMovimentaMenuFiltro()
     End Sub
 
     Private Sub subCarregaComboTipo(pTipo As ComboBox)
@@ -231,6 +241,68 @@ Public Class frmPrincipal
         controle.Configurar(ParametrosIni)
         subCarregaIni()
     End Sub
+
+    'Variaveis de Controle da Animação
+    Dim locTopMax As Integer
+    Dim locTopMin As Integer
+    Dim locTop As Integer
+
+    Dim locSobeDesce As Boolean 'True Sobe / False Desce
+
+    Private Sub subMovimentaMenuFiltro()
+
+        locTopMax = pMenu.Top
+        locTopMin = pMenu.Top - pFiltro.Height
+        pFiltro.Left = pMenu.Left
+
+        If locSobeDesce Then
+            pFiltro.Top = locTopMin
+            locTop = locTopMin
+        Else
+            pFiltro.Top = locTopMax
+            locTop = locTopMax
+        End If
+
+        Timer1.Interval = 1
+        Timer1.Start()
+    End Sub
+
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        If locSobeDesce Then
+            subDesceMenu()
+        Else
+            subSobeMenu()
+        End If
+
+
+    End Sub
+
+    Private Sub subDesceMenu()
+        If pFiltro.Top < locTopMax Then
+            locTop = locTop + 6
+            If locTop > locTopMax Then
+                locTop = locTopMax
+            End If
+            pFiltro.Top = CInt(locTop)
+        Else
+            Timer1.Stop()
+        End If
+    End Sub
+
+    Private Sub subSobeMenu()
+        If pFiltro.Top > locTopMin Then
+            locTop = locTop - 6
+            If locTop < locTopMin Then
+                locTop = locTopMin
+            End If
+            pFiltro.Top = CInt(locTop)
+        Else
+            Timer1.Stop()
+        End If
+    End Sub
+
 End Class
 
 
