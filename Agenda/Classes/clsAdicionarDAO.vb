@@ -76,6 +76,7 @@ Public Class clsAdicionarDAO
                 locSQL &= " AND A.ID_TIPO_ATIVIDADE = " & parFiltro.ID_TIPO_ATIVIDADE
             End If
 
+            locSQL &= " ORDER BY A.DATA DESC, A.ID DESC"
             Comm.CommandText = locSQL
 
 
