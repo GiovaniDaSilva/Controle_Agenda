@@ -120,6 +120,7 @@
     <Compile Include="Classes\clsPrincipal.vb" />
     <Compile Include="Classes\clsRegistro.vb" />
     <Compile Include="Classes\clsSolicitacao.vb" />
+    <Compile Include="Classes\clsSolicitacaoDAO.vb" />
     <Compile Include="Classes\clsTipo.vb" />
     <Compile Include="Classes\clsTools.vb" />
     <Compile Include="Formularios\frmAdicionar.Designer.vb">

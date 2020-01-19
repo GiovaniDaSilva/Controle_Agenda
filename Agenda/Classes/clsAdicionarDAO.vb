@@ -4,10 +4,16 @@ Imports Agenda
 Public Class clsAdicionarDAO
     Public Function gravarAtividade(parAtivdade As clsAtividade) As Boolean
 
-        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao())
-            Comm.CommandText = funRetornaSQLInsertUpdate(parAtivdade)
-            Comm.ExecuteNonQuery()
-        End Using
+        Try
+            Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao())
+                Comm.CommandText = funRetornaSQLInsertUpdate(parAtivdade)
+                Comm.ExecuteNonQuery()
+            End Using
+
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+        End Try
+
         Return True
 
     End Function

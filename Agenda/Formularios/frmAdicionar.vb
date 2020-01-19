@@ -3,7 +3,7 @@
     Dim glfAtividade As New clsAtividade
 
     Private Sub frmAdicionar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtData.Text = Now
+        If txtData.Text = vbNullString Then txtData.Text = Now
         subValidaComboTipo()
     End Sub
 

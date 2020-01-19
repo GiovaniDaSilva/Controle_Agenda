@@ -11,12 +11,14 @@
 
     End Sub
 
+    Public Property ID As Integer
     Public Property Codigo As Integer
     Public Property UF As String
     Public Property Resumo As String
     Public Property Objeto As String
     Public Property SubTipo As String
     Public Property Situacao As String
+    Public Property ID_ATIVIDADE As Integer
 
 
     Public Shared Function funCarregaDetalhesSolicitacoes(pHTML As String) As List(Of clsSolicitacao)

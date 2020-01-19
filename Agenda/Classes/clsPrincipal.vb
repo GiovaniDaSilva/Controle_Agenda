@@ -101,9 +101,27 @@ Public Class clsListaSolictacao
         '       Descrição: xxxxxxxxxxxx      
 
         Dim locDetalhes As clsSolicitacao
-        locDetalhes = ListaSolicitacoes.Find(Function(X) X.Codigo = item.Codigo)
+        Dim locDetalhesBase As clsSolicitacao
+        Dim locDAO As New clsSolicitacaoDAO
 
-        RichAddLineFmt(parCampo, "<fc:" & Color.Red.Name & "><b>Solicitação</b></fc>")
+        locDetalhes = ListaSolicitacoes.Find(Function(X) X.Codigo = item.Codigo)
+        locDetalhesBase = locDAO.consultaSolicitacao(item.ID)
+
+        If Not locDetalhes Is Nothing Then
+            locDetalhes.ID_ATIVIDADE = item.ID
+
+            If Not locDetalhesBase Is Nothing Then
+                locDetalhes.ID = locDetalhesBase.ID
+            End If
+
+            locDAO.gravarSolicitacao(locDetalhes)
+        Else
+            If Not locDetalhesBase Is Nothing Then
+                locDetalhes = locDetalhesBase
+            End If
+        End If
+
+            RichAddLineFmt(parCampo, "<fc:" & Color.Red.Name & "><b>Solicitação</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Código: " & item.Codigo)
 
         If Not locDetalhes Is Nothing Then
