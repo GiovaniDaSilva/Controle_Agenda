@@ -23,7 +23,7 @@ Public Class clsRegistro
 
     Public Shared function subExisteRegistroAplicacao() As Boolean
         Using key As RegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True)
-	        dim registro = key.GetValue(Application.ExecutablePath)  
+            Dim registro = key.GetValue("Controle Agenda")
             Return not registro Is Nothing 
        End Using
 

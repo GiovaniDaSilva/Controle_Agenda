@@ -20,11 +20,10 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
             MsgBox("Será carregado os valores padrão do sistema.")
         End If
 
-        'locParametros.AlertaSonoro = LeArquivoINI(nome_arquivo_ini, "Geral", "AlertaSonoro", "true")
-        'locParametros.Timer = LeArquivoINI(nome_arquivo_ini, "Geral", "Timer", 15)
-        'locParametros.Animacao = LeArquivoINI(nome_arquivo_ini, "Geral", "Animacao", "true")
-        'locParametros.Estilo = LeArquivoINI(nome_arquivo_ini, "Geral", "Estilo", "P")
-        'locParametros.Opacidade = LeArquivoINI(nome_arquivo_ini, "Geral", "Opacidade", 100)
+        locParametros.InicializarCampoApartirDe = LeArquivoINI(nome_arquivo_ini, "Geral", "CampoAPartirDe", "Atual")
+        locParametros.OrdenacaoDasAtividades = LeArquivoINI(nome_arquivo_ini, "Dados", "Ordenacao", "Dec")
+        locParametros.SolicitarHTML = LeArquivoINI(nome_arquivo_ini, "Dados", "SolicitarHTML", "true")
+
         Return locParametros
     End Function
 
@@ -41,11 +40,10 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
 
     public Sub gravaArquivoini(parParametros As clsParametrosIni ) 
         Dim nome_arquivo_ini As String = nomeArquivoINI()
-        'WritePrivateProfileString("Geral", "AlertaSonoro", parParametros.AlertaSonoro , nome_arquivo_ini)
-        'WritePrivateProfileString("Geral", "Timer", parParametros.Timer, nome_arquivo_ini)
-        ' WritePrivateProfileString("Geral", "Animacao", parParametros.Animacao, nome_arquivo_ini)
-        'WritePrivateProfileString("Geral", "Estilo", parParametros.Estilo, nome_arquivo_ini)
-        'WritePrivateProfileString("Geral", "Opacidade", parParametros.Opacidade, nome_arquivo_ini)
+
+        WritePrivateProfileString("Geral", "CampoAPartirDe", parParametros.InicializarCampoApartirDe, nome_arquivo_ini)
+        WritePrivateProfileString("Dados", "Ordenacao", parParametros.OrdenacaoDasAtividades, nome_arquivo_ini)
+        WritePrivateProfileString("Dados", "SolicitarHTML", parParametros.SolicitarHTML, nome_arquivo_ini)
     End Sub
 
     ' Retorna o nome do arquivo INI

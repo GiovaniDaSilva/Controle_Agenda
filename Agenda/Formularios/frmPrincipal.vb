@@ -5,6 +5,7 @@ Imports HtmlAgilityPack
 Public Class frmPrincipal
     Private controle As New clsPrincipal
     Dim lista As List(Of clsConsultaAtividades)
+    Dim ParametrosIni As clsParametrosIni
     Const MODO_IMPRESSAO = "MODO_IMPRESSAO"
     Const MODO_NORMAL = ""
 
@@ -48,7 +49,7 @@ Public Class frmPrincipal
 
     Private Sub subAtualizaLista()
         subConfiguraDescricao(MODO_NORMAL)
-        lista = controle.funCarregarAtividades(funMontaFiltro)
+        lista = controle.funCarregarAtividades(funMontaFiltro, ParametrosIni)
 
         gridAtividades.DataSource = lista
         subConfiguraGridAtividade()
@@ -75,8 +76,11 @@ Public Class frmPrincipal
 
     Private Sub btnListar_Click(sender As Object, e As EventArgs) Handles btnListar.Click
         subConfiguraDescricao(MODO_IMPRESSAO)
+        Dim locHTML As String = vbNullString
 
-        Dim locHTML = frmHTML.RetornarHTML
+        If ParametrosIni.SolicitarHTML Then
+            locHTML = frmHTML.RetornarHTML
+        End If
 
         controle.subListarAtivdades(txtDescricao, lista, locHTML)
     End Sub
@@ -119,9 +123,18 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtApartirDe.Text = Now
+        subCarregaIni()
         subCarregaComboTipo(cbTipo)
+
+        If ParametrosIni.InicializarCampoApartirDe = "Atual" Then
+            txtApartirDe.Text = Now
+        End If
+
         subAtualizaLista()
+    End Sub
+
+    Private Sub subCarregaIni()
+        ParametrosIni = controle.funCarregaArquivoIni()
     End Sub
 
     Private Sub btnLimpar_Click(sender As Object, e As EventArgs)
@@ -213,7 +226,11 @@ Public Class frmPrincipal
         Return (limpaHTML_Recursiva(sTexto, j))
     End Function
 
-
+    Private Sub btnConfiguracao_Click(sender As Object, e As EventArgs) Handles btnConfiguracao.Click
+        subRemoveSelecao()
+        controle.Configurar(ParametrosIni)
+        subCarregaIni()
+    End Sub
 End Class
 
 

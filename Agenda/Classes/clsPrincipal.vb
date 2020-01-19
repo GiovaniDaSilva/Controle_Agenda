@@ -17,9 +17,9 @@ Public Class clsPrincipal
         locFormAdicionar.ChamaFormulario(parAtividade)
     End Sub
 
-    Public Function funCarregarAtividades(ByVal parFiltro As clsAtividade) As List(Of clsConsultaAtividades)
+    Public Function funCarregarAtividades(ByVal parFiltro As clsAtividade, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
         Dim DAO As New clsAdicionarDAO
-        Return DAO.carregarAtividades(parFiltro)
+        Return DAO.carregarAtividades(parFiltro, parParametrosIni)
     End Function
 
     Public Sub subListarAtivdades(ByRef txtTela As RichTextBox, ByRef lista As List(Of clsConsultaAtividades), Optional ByVal pHTML As String = vbNullString)
@@ -63,6 +63,16 @@ Public Class clsPrincipal
         Dim locAdicionar As New clsAdicionar
         locAdicionar.CarregaComboTipo(pTipo)
     End Sub
+
+    Friend Sub Configurar(ByVal pParametros As clsParametrosIni)
+        Dim locForm As New frmConfiguracoes
+        locForm.funChamaConfiguracao(pParametros)
+    End Sub
+
+    Friend Function funCarregaArquivoIni() As clsParametrosIni
+        Dim locIni As New clsIni
+        Return locIni.funCarregaIni
+    End Function
 End Class
 
 

@@ -67,7 +67,7 @@ Public Class clsAdicionarDAO
         Return locSQL.ToString()
     End Function
 
-    Public Function carregarAtividades(ByVal parFiltro As clsAtividade) As List(Of clsConsultaAtividades)
+    Public Function carregarAtividades(ByVal parFiltro As clsAtividade, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
         Dim lista As New List(Of clsConsultaAtividades)
         Dim locSQL As String
 
@@ -91,7 +91,14 @@ Public Class clsAdicionarDAO
                     locSQL &= " AND A.ID_TIPO_ATIVIDADE = " & parFiltro.ID_TIPO_ATIVIDADE
                 End If
 
-                locSQL &= " ORDER BY A.DATA DESC, A.ID DESC"
+                If parParametrosIni.OrdenacaoDasAtividades = "Dec" Then
+                    locSQL &= " ORDER BY A.DATA DESC, A.ID DESC"
+                Else
+                    locSQL &= " ORDER BY A.DATA ASC , A.ID ASC"
+                End If
+
+
+
                 Comm.CommandText = locSQL
 
 
