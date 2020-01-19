@@ -148,6 +148,10 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        subOcultaFiltro()
+    End Sub
+
+    Private Sub subOcultaFiltro()
         pFiltro.Visible = False
     End Sub
 
@@ -169,6 +173,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub btnFiltrar_Click(sender As Object, e As EventArgs) Handles btnFiltrar.Click
+        subOcultaFiltro()
         subAtualizaLista()
     End Sub
 

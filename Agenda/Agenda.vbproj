@@ -115,7 +115,10 @@
     <Compile Include="Classes\clsAdicionarDAO.vb" />
     <Compile Include="Classes\clsAtividade.vb" />
     <Compile Include="Classes\clsHTML.vb" />
+    <Compile Include="Classes\clsIni.vb" />
+    <Compile Include="Classes\clsParametrosIni.vb" />
     <Compile Include="Classes\clsPrincipal.vb" />
+    <Compile Include="Classes\clsRegistro.vb" />
     <Compile Include="Classes\clsSolicitacao.vb" />
     <Compile Include="Classes\clsTipo.vb" />
     <Compile Include="Classes\clsTools.vb" />
