@@ -47,7 +47,7 @@ Public Class clsPrincipal
                     objeto = New clsListaReuniao
                 Case enuTipoAtividades.AUSENTE
                     objeto = New clsListaAusente
-                Case enuTipoAtividades.OUROS
+                Case Else
                     objeto = New clsListaOutros
             End Select
             objeto.subListaAtividade(txtTela, item)

@@ -6,7 +6,7 @@ Public Class clsRegistro
        ' dim caminho As String = "C:\_vbn\Consulta_Cep\Consulta_Cep\bin\Debug\Consulta_Cep.exe"
 
         Using key As RegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True)
-            key.SetValue(Application.ExecutablePath, """" + Application.ExecutablePath + """")
+            key.SetValue("Controle Agenda", """" + Application.ExecutablePath + """")
         End Using
 
     End Sub

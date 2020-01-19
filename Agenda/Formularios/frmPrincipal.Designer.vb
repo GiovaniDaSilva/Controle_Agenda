@@ -42,6 +42,7 @@ Partial Class frmPrincipal
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnLimpar = New System.Windows.Forms.Button()
+        Me.btnConfiguracao = New System.Windows.Forms.Button()
         CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pMenu.SuspendLayout()
         Me.pFiltro.SuspendLayout()
@@ -82,6 +83,7 @@ Partial Class frmPrincipal
         '
         'pMenu
         '
+        Me.pMenu.Controls.Add(Me.btnConfiguracao)
         Me.pMenu.Controls.Add(Me.Button1)
         Me.pMenu.Controls.Add(Me.btnListar)
         Me.pMenu.Controls.Add(Me.btnAtualiza)
@@ -118,7 +120,7 @@ Partial Class frmPrincipal
         Me.btnListar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnListar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnListar.Image = CType(resources.GetObject("btnListar.Image"), System.Drawing.Image)
-        Me.btnListar.Location = New System.Drawing.Point(573, 15)
+        Me.btnListar.Location = New System.Drawing.Point(672, 15)
         Me.btnListar.Name = "btnListar"
         Me.btnListar.Size = New System.Drawing.Size(57, 50)
         Me.btnListar.TabIndex = 5
@@ -134,7 +136,7 @@ Partial Class frmPrincipal
         Me.btnAtualiza.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnAtualiza.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnAtualiza.Image = CType(resources.GetObject("btnAtualiza.Image"), System.Drawing.Image)
-        Me.btnAtualiza.Location = New System.Drawing.Point(636, 15)
+        Me.btnAtualiza.Location = New System.Drawing.Point(609, 15)
         Me.btnAtualiza.Name = "btnAtualiza"
         Me.btnAtualiza.Size = New System.Drawing.Size(57, 50)
         Me.btnAtualiza.TabIndex = 4
@@ -245,7 +247,7 @@ Partial Class frmPrincipal
         Me.btnFiltrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnFiltrar.Image = CType(resources.GetObject("btnFiltrar.Image"), System.Drawing.Image)
-        Me.btnFiltrar.Location = New System.Drawing.Point(691, 17)
+        Me.btnFiltrar.Location = New System.Drawing.Point(754, 17)
         Me.btnFiltrar.Name = "btnFiltrar"
         Me.btnFiltrar.Size = New System.Drawing.Size(57, 50)
         Me.btnFiltrar.TabIndex = 11
@@ -301,11 +303,27 @@ Partial Class frmPrincipal
         Me.btnLimpar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLimpar.Image = CType(resources.GetObject("btnLimpar.Image"), System.Drawing.Image)
-        Me.btnLimpar.Location = New System.Drawing.Point(754, 17)
+        Me.btnLimpar.Location = New System.Drawing.Point(681, 17)
         Me.btnLimpar.Name = "btnLimpar"
         Me.btnLimpar.Size = New System.Drawing.Size(57, 50)
         Me.btnLimpar.TabIndex = 7
         Me.btnLimpar.UseVisualStyleBackColor = False
+        '
+        'btnConfiguracao
+        '
+        Me.btnConfiguracao.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnConfiguracao.BackColor = System.Drawing.SystemColors.Control
+        Me.btnConfiguracao.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.btnConfiguracao.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.btnConfiguracao.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnConfiguracao.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnConfiguracao.Image = CType(resources.GetObject("btnConfiguracao.Image"), System.Drawing.Image)
+        Me.btnConfiguracao.Location = New System.Drawing.Point(546, 15)
+        Me.btnConfiguracao.Name = "btnConfiguracao"
+        Me.btnConfiguracao.Size = New System.Drawing.Size(57, 50)
+        Me.btnConfiguracao.TabIndex = 7
+        Me.btnConfiguracao.UseVisualStyleBackColor = False
         '
         'frmPrincipal
         '
@@ -348,4 +366,5 @@ Partial Class frmPrincipal
     Friend WithEvents Label2 As Label
     Friend WithEvents cbTipo As ComboBox
     Friend WithEvents Editar As DataGridViewImageColumn
+    Friend WithEvents btnConfiguracao As Button
 End Class
