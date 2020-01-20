@@ -45,7 +45,7 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
         WritePrivateProfileString("Geral", "CampoAPartirDe", parParametros.InicializarCampoApartirDe, nome_arquivo_ini)
         WritePrivateProfileString("Dados", "Ordenacao", parParametros.OrdenacaoDasAtividades, nome_arquivo_ini)
         WritePrivateProfileString("Dados", "SolicitarHTML", parParametros.SolicitarHTML, nome_arquivo_ini)
-        WritePrivateProfileString("Dados", "CaminhoINI", parParametros.CaminhoBase, nome_arquivo_ini)
+        WritePrivateProfileString("Dados", "CaminhoBase", parParametros.CaminhoBase, nome_arquivo_ini)
     End Sub
 
     ' Retorna o nome do arquivo INI
