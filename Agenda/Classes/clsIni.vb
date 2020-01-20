@@ -20,7 +20,7 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
             MsgBox("Será carregado os valores padrão do sistema.")
         End If
 
-        locParametros.InicializarCampoApartirDe = LeArquivoINI(nome_arquivo_ini, "Geral", "CampoAPartirDe", "Atual")
+        locParametros.InicializarCampoApartirDe = LeArquivoINI(nome_arquivo_ini, "Geral", "CampoAPartirDe", "7Dias")
         locParametros.OrdenacaoDasAtividades = LeArquivoINI(nome_arquivo_ini, "Dados", "Ordenacao", "Dec")
         locParametros.SolicitarHTML = LeArquivoINI(nome_arquivo_ini, "Dados", "SolicitarHTML", "true")
         locParametros.CaminhoBase = LeArquivoINI(nome_arquivo_ini, "Dados", "CaminhoBase", Application.StartupPath & "\BancoAgenda.db")

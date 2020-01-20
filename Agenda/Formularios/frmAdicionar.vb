@@ -75,6 +75,16 @@
         Me.Close()
     End Sub
 
+    Private Sub txtData_Leave(sender As Object, e As EventArgs) Handles txtData.Leave
+        Try
+            If Not IsDate(clsTools.funRetornaData(txtData)) Then
+                MsgBox("Data informada não é válida.")
+                txtData.Focus()
+            End If
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+            txtData.Focus()
+        End Try
 
-
+    End Sub
 End Class

@@ -29,6 +29,8 @@ Partial Class frmConfiguracoes
         Me.rbEmbranco = New System.Windows.Forms.RadioButton()
         Me.cbInicializarWindows = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtCaminhoBase = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.rbNaoHTML = New System.Windows.Forms.RadioButton()
         Me.rbSimHTML = New System.Windows.Forms.RadioButton()
@@ -36,8 +38,7 @@ Partial Class frmConfiguracoes
         Me.rbDecrescente = New System.Windows.Forms.RadioButton()
         Me.rbCrescente = New System.Windows.Forms.RadioButton()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtCaminhoBase = New System.Windows.Forms.TextBox()
+        Me.rbSeteDias = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -60,12 +61,13 @@ Partial Class frmConfiguracoes
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.rbSeteDias)
         Me.GroupBox4.Controls.Add(Me.rbDataAtual)
         Me.GroupBox4.Controls.Add(Me.rbEmbranco)
         Me.GroupBox4.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.GroupBox4.Location = New System.Drawing.Point(290, 30)
+        Me.GroupBox4.Location = New System.Drawing.Point(32, 53)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(251, 71)
+        Me.GroupBox4.Size = New System.Drawing.Size(407, 71)
         Me.GroupBox4.TabIndex = 2
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Inicializar com campo A partir de"
@@ -73,13 +75,11 @@ Partial Class frmConfiguracoes
         'rbDataAtual
         '
         Me.rbDataAtual.AutoSize = True
-        Me.rbDataAtual.Checked = True
         Me.rbDataAtual.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.rbDataAtual.Location = New System.Drawing.Point(130, 33)
         Me.rbDataAtual.Name = "rbDataAtual"
         Me.rbDataAtual.Size = New System.Drawing.Size(104, 17)
         Me.rbDataAtual.TabIndex = 1
-        Me.rbDataAtual.TabStop = True
         Me.rbDataAtual.Text = "Com a data atual"
         Me.rbDataAtual.UseVisualStyleBackColor = True
         '
@@ -118,6 +118,22 @@ Partial Class frmConfiguracoes
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Dados"
+        '
+        'txtCaminhoBase
+        '
+        Me.txtCaminhoBase.Location = New System.Drawing.Point(32, 149)
+        Me.txtCaminhoBase.Name = "txtCaminhoBase"
+        Me.txtCaminhoBase.Size = New System.Drawing.Size(662, 20)
+        Me.txtCaminhoBase.TabIndex = 5
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(29, 133)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(92, 13)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "Caminho da base:"
         '
         'GroupBox5
         '
@@ -200,21 +216,17 @@ Partial Class frmConfiguracoes
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = False
         '
-        'Label1
+        'rbSeteDias
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(29, 133)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(92, 13)
-        Me.Label1.TabIndex = 4
-        Me.Label1.Text = "Caminho da base:"
-        '
-        'txtCaminhoBase
-        '
-        Me.txtCaminhoBase.Location = New System.Drawing.Point(32, 149)
-        Me.txtCaminhoBase.Name = "txtCaminhoBase"
-        Me.txtCaminhoBase.Size = New System.Drawing.Size(662, 20)
-        Me.txtCaminhoBase.TabIndex = 5
+        Me.rbSeteDias.AutoSize = True
+        Me.rbSeteDias.Checked = True
+        Me.rbSeteDias.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.rbSeteDias.Location = New System.Drawing.Point(254, 33)
+        Me.rbSeteDias.Name = "rbSeteDias"
+        Me.rbSeteDias.Size = New System.Drawing.Size(89, 17)
+        Me.rbSeteDias.TabIndex = 2
+        Me.rbSeteDias.Text = "Ultimos 7 dias"
+        Me.rbSeteDias.UseVisualStyleBackColor = True
         '
         'frmConfiguracoes
         '
@@ -261,4 +273,5 @@ Partial Class frmConfiguracoes
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents txtCaminhoBase As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents rbSeteDias As RadioButton
 End Class

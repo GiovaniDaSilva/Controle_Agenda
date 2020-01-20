@@ -10,7 +10,11 @@
         Dim mes = mid(pCampo.Text,3,2)
         Dim dia = mid(pCampo.Text,1,2)
 
-        locData = New Date(ano, mes, dia)
+        Try
+            locData = New Date(ano, mes, dia)
+        Catch ex As Exception
+            Throw New Exception("Data inválida.")
+        End Try
 
         Return locData
     End Function

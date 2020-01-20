@@ -21,6 +21,7 @@
 
         rbEmbranco.Checked = IIf(glfParametros.InicializarCampoApartirDe = "Branco", True, False)
         rbDataAtual.Checked = IIf(glfParametros.InicializarCampoApartirDe = "Atual", True, False)
+        rbSeteDias.Checked = IIf(glfParametros.InicializarCampoApartirDe = "7Dias", True, False)
 
         rbDecrescente.Checked = IIf(glfParametros.OrdenacaoDasAtividades = "Dec", True, False)
         rbCrescente.Checked = IIf(glfParametros.OrdenacaoDasAtividades = "Cre", True, False)
@@ -32,7 +33,14 @@
     End Sub
 
     Private Sub subPreenheParametros()
-        glfParametros.InicializarCampoApartirDe = IIf(rbEmbranco.Checked, "Branco", "Atual")
+        If rbEmbranco.Checked Then
+            glfParametros.InicializarCampoApartirDe = "Branco"
+        ElseIf rbDataAtual.Checked Then
+            glfParametros.InicializarCampoApartirDe = "Atual"
+        Else
+            glfParametros.InicializarCampoApartirDe = "7Dias"
+        End If
+
         glfParametros.OrdenacaoDasAtividades = IIf(rbCrescente.Checked, "Cre", "Dec")
         glfParametros.SolicitarHTML = IIf(rbSimHTML.Checked, True, False)
         glfParametros.CaminhoBase = txtCaminhoBase.Text

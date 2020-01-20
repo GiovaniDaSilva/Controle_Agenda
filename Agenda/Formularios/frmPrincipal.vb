@@ -133,6 +133,8 @@ Public Class frmPrincipal
 
         If ParametrosIni.InicializarCampoApartirDe = "Atual" Then
             txtApartirDe.Text = Now
+        ElseIf ParametrosIni.InicializarCampoApartirDe = "7Dias" Then
+            txtApartirDe.Text = Now.AddDays(-7)
         End If
 
         subAtualizaLista()

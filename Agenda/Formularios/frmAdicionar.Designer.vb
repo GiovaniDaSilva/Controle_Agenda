@@ -97,25 +97,25 @@ Partial Class frmAdicionar
         '
         'txtHora
         '
-        Me.txtHora.Location = New System.Drawing.Point(419, 35)
+        Me.txtHora.Location = New System.Drawing.Point(419, 36)
         Me.txtHora.Mask = "00:00"
         Me.txtHora.Name = "txtHora"
-        Me.txtHora.Size = New System.Drawing.Size(63, 20)
+        Me.txtHora.Size = New System.Drawing.Size(55, 20)
         Me.txtHora.TabIndex = 7
         Me.txtHora.ValidatingType = GetType(Date)
         '
         'Label3
         '
-        Me.Label3.AutoSize = true
+        Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(416, 18)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(35, 13)
+        Me.Label3.Size = New System.Drawing.Size(96, 13)
         Me.Label3.TabIndex = 6
-        Me.Label3.Text = "Horas"
+        Me.Label3.Text = "Horas trabalhadas:"
         '
         'Label4
         '
-        Me.Label4.AutoSize = true
+        Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(26, 84)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(55, 13)
