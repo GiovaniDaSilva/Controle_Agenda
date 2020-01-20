@@ -30,7 +30,7 @@ Public Class frmPrincipal
 
     Private Sub btnAdicinar_Click(sender As Object, e As EventArgs) Handles btnAdicinar.Click
         subRemoveSelecao()
-        controle.Adicionar()
+        controle.Adicionar(ParametrosIni )
 
         subAtualizaLista()
     End Sub
@@ -118,7 +118,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub subChamaFormularioAdicionarEdicao(i As Integer)
-        controle.Adicionar(New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE))
+        controle.Adicionar(ParametrosIni ,New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE))
         subAtualizaLista()
     End Sub
 

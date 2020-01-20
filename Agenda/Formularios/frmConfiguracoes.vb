@@ -29,7 +29,10 @@
         rbSimHTML.Checked = glfParametros.SolicitarHTML
         rbNaoHTML.Checked = Not rbSimHTML.Checked
 
-        txtCaminhoBase.Text = glfParametros.CaminhoBase
+        txtCaminhoBase.Text = glfParametros.CaminhoBase 
+
+        rbHorasTrabalhadas.Checked  = IIf(glfParametros.Horastrabalhadas  = "Total", True, False)
+        rbPeriodo.Checked  = IIf(glfParametros.Horastrabalhadas  = "Periodo", True, False)        
     End Sub
 
     Private Sub subPreenheParametros()
@@ -44,6 +47,7 @@
         glfParametros.OrdenacaoDasAtividades = IIf(rbCrescente.Checked, "Cre", "Dec")
         glfParametros.SolicitarHTML = IIf(rbSimHTML.Checked, True, False)
         glfParametros.CaminhoBase = txtCaminhoBase.Text
+        glfParametros.Horastrabalhadas =  IIf(rbHorasTrabalhadas.Checked, "Total", "Periodo")
     End Sub
 
     Private Sub cbInicializarWindows_CheckedChanged(sender As Object, e As EventArgs) Handles cbInicializarWindows.CheckedChanged

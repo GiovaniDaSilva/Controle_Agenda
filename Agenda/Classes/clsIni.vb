@@ -21,6 +21,8 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
         End If
 
         locParametros.InicializarCampoApartirDe = LeArquivoINI(nome_arquivo_ini, "Geral", "CampoAPartirDe", "7Dias")
+        locParametros.Horastrabalhadas  = LeArquivoINI(nome_arquivo_ini, "Geral", "HorasTrabalhadas", "Total")
+
         locParametros.OrdenacaoDasAtividades = LeArquivoINI(nome_arquivo_ini, "Dados", "Ordenacao", "Dec")
         locParametros.SolicitarHTML = LeArquivoINI(nome_arquivo_ini, "Dados", "SolicitarHTML", "true")
         locParametros.CaminhoBase = LeArquivoINI(nome_arquivo_ini, "Dados", "CaminhoBase", Application.StartupPath & "\BancoAgenda.db")
@@ -42,7 +44,9 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
     public Sub gravaArquivoini(parParametros As clsParametrosIni ) 
         Dim nome_arquivo_ini As String = nomeArquivoINI()
 
-        WritePrivateProfileString("Geral", "CampoAPartirDe", parParametros.InicializarCampoApartirDe, nome_arquivo_ini)
+        WritePrivateProfileString("Geral", "CampoAPartirDe", parParametros.InicializarCampoApartirDe, nome_arquivo_ini)        
+        WritePrivateProfileString("Geral", "HorasTrabalhadas", parParametros.Horastrabalhadas , nome_arquivo_ini)
+
         WritePrivateProfileString("Dados", "Ordenacao", parParametros.OrdenacaoDasAtividades, nome_arquivo_ini)
         WritePrivateProfileString("Dados", "SolicitarHTML", parParametros.SolicitarHTML, nome_arquivo_ini)
         WritePrivateProfileString("Dados", "CaminhoBase", parParametros.CaminhoBase, nome_arquivo_ini)

@@ -11,10 +11,10 @@ Public Class clsPrincipal
     End Enum
 
 
-    Public Sub Adicionar(Optional parAtividade As clsAtividade = Nothing)
+    Public Sub Adicionar(byval parIni As clsParametrosIni ,  Optional parAtividade As clsAtividade = Nothing)
         Dim locFormAdicionar As New frmAdicionar
 
-        locFormAdicionar.ChamaFormulario(parAtividade)
+        locFormAdicionar.ChamaFormulario(parIni,parAtividade)
     End Sub
 
     Public Function funCarregarAtividades(ByVal parFiltro As clsAtividade, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
