@@ -23,6 +23,7 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
         locParametros.InicializarCampoApartirDe = LeArquivoINI(nome_arquivo_ini, "Geral", "CampoAPartirDe", "Atual")
         locParametros.OrdenacaoDasAtividades = LeArquivoINI(nome_arquivo_ini, "Dados", "Ordenacao", "Dec")
         locParametros.SolicitarHTML = LeArquivoINI(nome_arquivo_ini, "Dados", "SolicitarHTML", "true")
+        locParametros.CaminhoBase = LeArquivoINI(nome_arquivo_ini, "Dados", "CaminhoBase", Application.StartupPath & "\BancoAgenda.db")
 
         Return locParametros
     End Function
@@ -44,6 +45,7 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
         WritePrivateProfileString("Geral", "CampoAPartirDe", parParametros.InicializarCampoApartirDe, nome_arquivo_ini)
         WritePrivateProfileString("Dados", "Ordenacao", parParametros.OrdenacaoDasAtividades, nome_arquivo_ini)
         WritePrivateProfileString("Dados", "SolicitarHTML", parParametros.SolicitarHTML, nome_arquivo_ini)
+        WritePrivateProfileString("Dados", "CaminhoINI", parParametros.CaminhoBase, nome_arquivo_ini)
     End Sub
 
     ' Retorna o nome do arquivo INI

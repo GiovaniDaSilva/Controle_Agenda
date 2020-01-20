@@ -36,6 +36,8 @@ Partial Class frmConfiguracoes
         Me.rbDecrescente = New System.Windows.Forms.RadioButton()
         Me.rbCrescente = New System.Windows.Forms.RadioButton()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtCaminhoBase = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -105,6 +107,8 @@ Partial Class frmConfiguracoes
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.txtCaminhoBase)
+        Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Controls.Add(Me.GroupBox5)
         Me.GroupBox2.Controls.Add(Me.GroupBox3)
         Me.GroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
@@ -196,6 +200,22 @@ Partial Class frmConfiguracoes
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = False
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(29, 133)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(92, 13)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "Caminho da base:"
+        '
+        'txtCaminhoBase
+        '
+        Me.txtCaminhoBase.Location = New System.Drawing.Point(32, 149)
+        Me.txtCaminhoBase.Name = "txtCaminhoBase"
+        Me.txtCaminhoBase.Size = New System.Drawing.Size(662, 20)
+        Me.txtCaminhoBase.TabIndex = 5
+        '
         'frmConfiguracoes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -216,6 +236,7 @@ Partial Class frmConfiguracoes
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -238,4 +259,6 @@ Partial Class frmConfiguracoes
     Friend WithEvents rbNaoHTML As RadioButton
     Friend WithEvents rbSimHTML As RadioButton
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents txtCaminhoBase As TextBox
+    Friend WithEvents Label1 As Label
 End Class

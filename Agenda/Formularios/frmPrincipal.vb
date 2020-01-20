@@ -124,6 +124,11 @@ Public Class frmPrincipal
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         subCarregaIni()
+        clsConexao.CaminhoBase = ParametrosIni.CaminhoBase
+        If Not clsConexao.ExisteBase Then
+            subChamaConfiguracoes()
+        End If
+
         subCarregaComboTipo(cbTipo)
 
         If ParametrosIni.InicializarCampoApartirDe = "Atual" Then
@@ -237,6 +242,10 @@ Public Class frmPrincipal
     End Function
 
     Private Sub btnConfiguracao_Click(sender As Object, e As EventArgs) Handles btnConfiguracao.Click
+        subChamaConfiguracoes()
+    End Sub
+
+    Private Sub subChamaConfiguracoes()
         subRemoveSelecao()
         controle.Configurar(ParametrosIni)
         subCarregaIni()
