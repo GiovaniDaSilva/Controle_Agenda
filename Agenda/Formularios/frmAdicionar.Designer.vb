@@ -32,21 +32,22 @@ Partial Class frmAdicionar
         Me.txtHora = New System.Windows.Forms.MaskedTextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.gbPeriodo = New System.Windows.Forms.GroupBox()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.MaskedTextBox1 = New System.Windows.Forms.MaskedTextBox()
-        Me.MaskedTextBox2 = New System.Windows.Forms.MaskedTextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtFinal = New System.Windows.Forms.MaskedTextBox()
+        Me.txtInicio = New System.Windows.Forms.MaskedTextBox()
         Me.pCamposMoveis = New System.Windows.Forms.Panel()
         Me.btnExcluir = New System.Windows.Forms.Button()
         Me.txtDescrição = New System.Windows.Forms.RichTextBox()
         Me.btnLimpar = New System.Windows.Forms.Button()
         Me.btnGravar = New System.Windows.Forms.Button()
         Me.lblDescricao = New System.Windows.Forms.Label()
+        Me.gridPeriodo = New System.Windows.Forms.DataGridView()
+        Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
         Me.gbPeriodo.SuspendLayout
-        CType(Me.DataGridView1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.pCamposMoveis.SuspendLayout
+        CType(Me.gridPeriodo,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'Label1
@@ -129,59 +130,14 @@ Partial Class frmAdicionar
         Me.gbPeriodo.Controls.Add(Me.Button1)
         Me.gbPeriodo.Controls.Add(Me.Label5)
         Me.gbPeriodo.Controls.Add(Me.Label4)
-        Me.gbPeriodo.Controls.Add(Me.MaskedTextBox2)
-        Me.gbPeriodo.Controls.Add(Me.MaskedTextBox1)
-        Me.gbPeriodo.Controls.Add(Me.DataGridView1)
+        Me.gbPeriodo.Controls.Add(Me.txtFinal)
+        Me.gbPeriodo.Controls.Add(Me.txtInicio)
         Me.gbPeriodo.Location = New System.Drawing.Point(29, 76)
         Me.gbPeriodo.Name = "gbPeriodo"
         Me.gbPeriodo.Size = New System.Drawing.Size(501, 149)
         Me.gbPeriodo.TabIndex = 8
         Me.gbPeriodo.TabStop = false
         Me.gbPeriodo.Text = "Período"
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(183, 19)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(300, 119)
-        Me.DataGridView1.TabIndex = 5
-        '
-        'MaskedTextBox1
-        '
-        Me.MaskedTextBox1.Location = New System.Drawing.Point(38, 39)
-        Me.MaskedTextBox1.Mask = "00:00"
-        Me.MaskedTextBox1.Name = "MaskedTextBox1"
-        Me.MaskedTextBox1.Size = New System.Drawing.Size(55, 20)
-        Me.MaskedTextBox1.TabIndex = 1
-        Me.MaskedTextBox1.ValidatingType = GetType(Date)
-        '
-        'MaskedTextBox2
-        '
-        Me.MaskedTextBox2.Location = New System.Drawing.Point(108, 39)
-        Me.MaskedTextBox2.Mask = "00:00"
-        Me.MaskedTextBox2.Name = "MaskedTextBox2"
-        Me.MaskedTextBox2.Size = New System.Drawing.Size(57, 20)
-        Me.MaskedTextBox2.TabIndex = 3
-        Me.MaskedTextBox2.ValidatingType = GetType(Date)
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = true
-        Me.Label4.Location = New System.Drawing.Point(38, 23)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(24, 13)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "De:"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = true
-        Me.Label5.Location = New System.Drawing.Point(105, 23)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(26, 13)
-        Me.Label5.TabIndex = 2
-        Me.Label5.Text = "Até:"
         '
         'Button1
         '
@@ -193,6 +149,42 @@ Partial Class frmAdicionar
         Me.Button1.Size = New System.Drawing.Size(57, 50)
         Me.Button1.TabIndex = 4
         Me.Button1.UseVisualStyleBackColor = false
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = true
+        Me.Label5.Location = New System.Drawing.Point(105, 23)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(26, 13)
+        Me.Label5.TabIndex = 2
+        Me.Label5.Text = "Até:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = true
+        Me.Label4.Location = New System.Drawing.Point(38, 23)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(24, 13)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "De:"
+        '
+        'txtFinal
+        '
+        Me.txtFinal.Location = New System.Drawing.Point(108, 39)
+        Me.txtFinal.Mask = "00:00"
+        Me.txtFinal.Name = "txtFinal"
+        Me.txtFinal.Size = New System.Drawing.Size(57, 20)
+        Me.txtFinal.TabIndex = 3
+        Me.txtFinal.ValidatingType = GetType(Date)
+        '
+        'txtInicio
+        '
+        Me.txtInicio.Location = New System.Drawing.Point(38, 39)
+        Me.txtInicio.Mask = "00:00"
+        Me.txtInicio.Name = "txtInicio"
+        Me.txtInicio.Size = New System.Drawing.Size(55, 20)
+        Me.txtInicio.TabIndex = 1
+        Me.txtInicio.ValidatingType = GetType(Date)
         '
         'pCamposMoveis
         '
@@ -261,12 +253,36 @@ Partial Class frmAdicionar
         Me.lblDescricao.TabIndex = 0
         Me.lblDescricao.Text = "Descrição"
         '
+        'gridPeriodo
+        '
+        Me.gridPeriodo.AllowUserToAddRows = false
+        Me.gridPeriodo.AllowUserToDeleteRows = false
+        Me.gridPeriodo.AllowUserToResizeColumns = false
+        Me.gridPeriodo.BackgroundColor = System.Drawing.Color.LightGray
+        Me.gridPeriodo.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.gridPeriodo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridPeriodo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Editar})
+        Me.gridPeriodo.Location = New System.Drawing.Point(214, 99)
+        Me.gridPeriodo.Name = "gridPeriodo"
+        Me.gridPeriodo.ReadOnly = true
+        Me.gridPeriodo.Size = New System.Drawing.Size(298, 120)
+        Me.gridPeriodo.TabIndex = 5
+        '
+        'Editar
+        '
+        Me.Editar.HeaderText = ""
+        Me.Editar.Image = CType(resources.GetObject("Editar.Image"),System.Drawing.Image)
+        Me.Editar.Name = "Editar"
+        Me.Editar.ReadOnly = true
+        Me.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
         'frmAdicionar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.ClientSize = New System.Drawing.Size(563, 493)
+        Me.Controls.Add(Me.gridPeriodo)
         Me.Controls.Add(Me.pCamposMoveis)
         Me.Controls.Add(Me.gbPeriodo)
         Me.Controls.Add(Me.txtHora)
@@ -285,9 +301,9 @@ Partial Class frmAdicionar
         Me.Text = "Adicionar Nova Atividade"
         Me.gbPeriodo.ResumeLayout(false)
         Me.gbPeriodo.PerformLayout
-        CType(Me.DataGridView1,System.ComponentModel.ISupportInitialize).EndInit
         Me.pCamposMoveis.ResumeLayout(false)
         Me.pCamposMoveis.PerformLayout
+        CType(Me.gridPeriodo,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -304,9 +320,8 @@ End Sub
     Friend WithEvents gbPeriodo As GroupBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents MaskedTextBox2 As MaskedTextBox
-    Friend WithEvents MaskedTextBox1 As MaskedTextBox
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents txtFinal As MaskedTextBox
+    Friend WithEvents txtInicio As MaskedTextBox
     Friend WithEvents Button1 As Button
     Friend WithEvents pCamposMoveis As Panel
     Friend WithEvents btnExcluir As Button
@@ -314,4 +329,6 @@ End Sub
     Friend WithEvents btnLimpar As Button
     Friend WithEvents btnGravar As Button
     Friend WithEvents lblDescricao As Label
+    Friend WithEvents gridPeriodo As DataGridView
+    Friend WithEvents Editar As DataGridViewImageColumn
 End Class

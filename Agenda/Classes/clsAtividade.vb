@@ -16,6 +16,7 @@
     Public Property Horas As String
     Public Property Descricao As String
     Public Property ID_TIPO_ATIVIDADE As Integer 
+    Public Property Periodos As List(Of clsPeriodo)
 End Class
 
 

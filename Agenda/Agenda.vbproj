@@ -105,6 +105,7 @@
     <Compile Include="Classes\clsHTML.vb" />
     <Compile Include="Classes\clsIni.vb" />
     <Compile Include="Classes\clsParametrosIni.vb" />
+    <Compile Include="Classes\clsPeriodo.vb" />
     <Compile Include="Classes\clsPrincipal.vb" />
     <Compile Include="Classes\clsRegistro.vb" />
     <Compile Include="Classes\clsSolicitacao.vb" />

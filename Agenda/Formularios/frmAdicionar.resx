@@ -167,6 +167,21 @@
         CMo36GxrLRMR9KQTQfkGnW2tZSKCnvwdwd+E1pJkpii+ALwZZiRK/1IHAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="Editar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Editar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAWxJREFUOE9j
+        oBQ4t50Udu86buTQsJ8FKkQ+CJt0rrx01d37kw+9/Zo09+oBigwNn3omq33zvT/1Gx/833L77/9JB998
+        9Ww/ZgiVJg0E9F/IrVt7+/v9D//+n3z47X/9hgf/i1ffu+ved0wIqoR4EDjpQlDBqkePStc++Lf96oc/
+        IEPbN9//A/I+VAnxIGjSxZDC1Y+fzDjz9z8Il6x58K92ze3vUTMvZkKVEA+CplwIBLkMZhgIgwz3n3C2
+        EKqEeIDLsOBJFyOhSogHQRNHrmFrKDAsfyWVDAufeqEzb/n9X1QxLGzyaevEOVd+Tjv1G25YETDMwqed
+        D4UqIQ3kLbyy+fj9r/8r1tz9DzK0YNXDP0H95xOg0qQB944j2r07Hz4B5csTD77+T5p75WfE9At9UGnS
+        QXD/6dMJMy7879n+4Fn+4qvboyacs4NKkQ5CG67yeHWe+A4y1KXjmC5UmHwQCizDQIZCuRQCBgYAUFRN
+        65WRfrUAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAQAEBAAAAEAIABoBAAARgAAACAgAAABACAAqBAAAK4EAAAwMAAAAQAgAKglAABWFQAAQEAAAAEA

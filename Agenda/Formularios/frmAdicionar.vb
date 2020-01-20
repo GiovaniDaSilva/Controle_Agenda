@@ -51,6 +51,8 @@
 
         glfAtividade = parAtividade
 
+         gridPeriodo.DataSource = New List(Of clsPeriodo)  
+
         If Not glfAtividade Is Nothing Then
             subValidaComboTipo
             txtCodigo.Text = glfAtividade.Codigo
@@ -58,6 +60,8 @@
             txtHora.Text = glfAtividade.Horas
             cbTipo.SelectedValue = glfAtividade.ID_TIPO_ATIVIDADE
             txtDescrição.Text = glfAtividade.Descricao
+
+            gridPeriodo.DataSource = New List(Of clsPeriodo) 
 
             btnExcluir.Visible = True
         End If
@@ -99,9 +103,40 @@
         Else
             pCamposMoveis.Top = 231
             Me.Height = 532
+            txtHora.Enabled = false 
+            subConfiguraGrid()
         End If 
 
     End Sub
 
+    Private sub subConfiguraGrid()
+        gridPeriodo.Columns("ID").Visible = False
+        gridPeriodo.Columns("ID_ATIVIDADE").Visible = False
+        
+        gridPeriodo.Columns("HORA_INICIAL").HeaderText = "Hora Inicial"
+        gridPeriodo.Columns("HORA_FINAL").HeaderText = "Hora Final"
+        gridPeriodo.Columns("Total").HeaderText = "Total"
 
+        gridPeriodo.Columns("HORA_INICIAL").Width = 90
+        gridPeriodo.Columns("HORA_FINAL").Width = 90
+        gridPeriodo.Columns("Total"). Width = 70
+
+      '  gridPeriodo.SelectionMode = DataGridViewSelectionMode.FullRowSelect         
+    End sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        subAdicionaPeriodo()
+    End Sub
+
+    Private Sub subAdicionaPeriodo()
+        If glfAtividade Is Nothing
+            glfAtividade = New clsAtividade 
+            glfAtividade.Periodos  = New List(Of clsPeriodo) 
+        End If
+        
+        glfAtividade.Periodos.Add(New clsPeriodo(glfAtividade.ID, txtInicio.Text, txtFinal.text, 0))        
+        gridPeriodo.DataSource  = glfAtividade.Periodos
+        subConfiguraGrid  
+
+    End Sub
 End Class
