@@ -44,6 +44,7 @@ Partial Class frmAdicionar
         Me.btnGravar = New System.Windows.Forms.Button()
         Me.lblDescricao = New System.Windows.Forms.Label()
         Me.gridPeriodo = New System.Windows.Forms.DataGridView()
+        Me.Excluir = New System.Windows.Forms.DataGridViewImageColumn()
         Me.gbPeriodo.SuspendLayout()
         Me.pCamposMoveis.SuspendLayout()
         CType(Me.gridPeriodo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -143,7 +144,7 @@ Partial Class frmAdicionar
         Me.Button1.BackColor = System.Drawing.SystemColors.Control
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(108, 76)
+        Me.Button1.Location = New System.Drawing.Point(88, 76)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(57, 50)
         Me.Button1.TabIndex = 4
@@ -152,7 +153,7 @@ Partial Class frmAdicionar
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(105, 23)
+        Me.Label5.Location = New System.Drawing.Point(85, 23)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(26, 13)
         Me.Label5.TabIndex = 2
@@ -161,7 +162,7 @@ Partial Class frmAdicionar
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(38, 23)
+        Me.Label4.Location = New System.Drawing.Point(18, 23)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(24, 13)
         Me.Label4.TabIndex = 0
@@ -169,7 +170,7 @@ Partial Class frmAdicionar
         '
         'txtFinal
         '
-        Me.txtFinal.Location = New System.Drawing.Point(108, 39)
+        Me.txtFinal.Location = New System.Drawing.Point(88, 39)
         Me.txtFinal.Mask = "00:00"
         Me.txtFinal.Name = "txtFinal"
         Me.txtFinal.Size = New System.Drawing.Size(57, 20)
@@ -178,7 +179,7 @@ Partial Class frmAdicionar
         '
         'txtInicio
         '
-        Me.txtInicio.Location = New System.Drawing.Point(38, 39)
+        Me.txtInicio.Location = New System.Drawing.Point(18, 39)
         Me.txtInicio.Mask = "00:00"
         Me.txtInicio.Name = "txtInicio"
         Me.txtInicio.Size = New System.Drawing.Size(55, 20)
@@ -255,16 +256,25 @@ Partial Class frmAdicionar
         'gridPeriodo
         '
         Me.gridPeriodo.AllowUserToAddRows = False
-        Me.gridPeriodo.AllowUserToDeleteRows = False
         Me.gridPeriodo.AllowUserToResizeColumns = False
         Me.gridPeriodo.BackgroundColor = System.Drawing.Color.LightGray
         Me.gridPeriodo.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.gridPeriodo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridPeriodo.Location = New System.Drawing.Point(214, 99)
+        Me.gridPeriodo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Excluir})
+        Me.gridPeriodo.Location = New System.Drawing.Point(180, 99)
         Me.gridPeriodo.Name = "gridPeriodo"
         Me.gridPeriodo.ReadOnly = True
-        Me.gridPeriodo.Size = New System.Drawing.Size(298, 120)
+        Me.gridPeriodo.RowHeadersVisible = False
+        Me.gridPeriodo.Size = New System.Drawing.Size(332, 120)
         Me.gridPeriodo.TabIndex = 5
+        '
+        'Excluir
+        '
+        Me.Excluir.HeaderText = ""
+        Me.Excluir.Image = CType(resources.GetObject("Excluir.Image"), System.Drawing.Image)
+        Me.Excluir.Name = "Excluir"
+        Me.Excluir.ReadOnly = True
+        Me.Excluir.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'frmAdicionar
         '
@@ -320,4 +330,5 @@ Partial Class frmAdicionar
     Friend WithEvents btnGravar As Button
     Friend WithEvents lblDescricao As Label
     Friend WithEvents gridPeriodo As DataGridView
+    Friend WithEvents Excluir As DataGridViewImageColumn
 End Class

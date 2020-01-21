@@ -120,9 +120,6 @@
   <metadata name="Editar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Editar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Editar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -233,7 +230,7 @@
   <data name="btnFiltrar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAGYktHRAD/AP8A/6C9p5MAAAJ2SURBVFhH7Zjfa1JhGMf7
+        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAAGYktHRAD/AP8A/6C9p5MAAAJ2SURBVFhH7Zjfa1JhGMf7
         77rottqioggq6iKoLoIFdRFRsKDW1i9aNGqF/WSDSa0IvVjKnNOc5szpsWUOFd1xpc7U47f3eUnS9sx5
         nK4D8+Jzdd7v9/lw3sPhPWdHJpOBkZGCO6/aDUmdYCRTMRRdwc2yRtC9VGAX/g/IpU7QZI/h4G0XHIt5
         NrCVOKOrOHTHDZMt9leQMLvj6B2cxZSSZYNbgS2Sw/5bLky4E9KpTpCw+FPYe9OJD4EVtqCTWBd+omfQ

@@ -2,6 +2,15 @@
     Dim controle As New clsAdicionar
     Dim glfAtividade As New clsAtividade
     Dim glfIni As clsParametrosIni
+    Dim locPeriodos As New List(Of clsPeriodo)
+
+    Private Enum enuIndexColunas
+        Remover = 0
+        Inicio = 1
+        Final = 2
+        Total = 3
+    End Enum
+
 
     Private Sub frmAdicionar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If txtData.Text = vbNullString Then txtData.Text = Now
@@ -14,7 +23,7 @@
         End If
     End Sub
 
-    Private Sub btnLimpar_Click(sender As Object, e As EventArgs)
+    Private Sub btnLimpar_Click(sender As Object, e As EventArgs) Handles btnLimpar.Click
         subLimpaTela()
     End Sub
 
@@ -29,7 +38,7 @@
         btnExcluir.Visible = False
     End Sub
 
-    Private Sub btnGravar_Click(sender As Object, e As EventArgs)
+    Private Sub btnGravar_Click(sender As Object, e As EventArgs) Handles btnGravar.Click
         If controle.Gravar(funRetornaAtividade) Then
             MsgBox("Atividade gravada com sucesso.", MsgBoxStyle.Information)
         End If
@@ -43,14 +52,13 @@
         glfAtividade.Horas = txtHora.Text
         glfAtividade.ID_TIPO_ATIVIDADE = cbTipo.SelectedValue()
         glfAtividade.Descricao = txtDescrição.Text
-
+        glfAtividade.Periodos = locPeriodos
         Return glfAtividade
     End Function
 
     Public Sub subCarregaAtividade(parAtividade As clsAtividade)
 
         glfAtividade = parAtividade
-
         gridPeriodo.DataSource = New List(Of clsPeriodo)
 
         If Not glfAtividade Is Nothing Then
@@ -60,9 +68,9 @@
             txtHora.Text = glfAtividade.Horas
             cbTipo.SelectedValue = glfAtividade.ID_TIPO_ATIVIDADE
             txtDescrição.Text = glfAtividade.Descricao
-
-            gridPeriodo.DataSource = New List(Of clsPeriodo)
-
+            gridPeriodo.DataSource = Nothing
+            gridPeriodo.DataSource = glfAtividade.Periodos
+            gridPeriodo.Refresh()
             btnExcluir.Visible = True
         End If
 
@@ -76,7 +84,7 @@
         subCarregaAtividade(parAtividade)
     End Sub
 
-    Private Sub btnExcluir_Click(sender As Object, e As EventArgs)
+    Private Sub btnExcluir_Click(sender As Object, e As EventArgs) Handles btnExcluir.Click
         If controle.excluir(glfAtividade.ID) Then
             MsgBox("Excluido com sucesso.", MsgBoxStyle.Information)
         End If
@@ -120,6 +128,7 @@
         gridPeriodo.Columns("HORA_INICIAL").Width = 90
         gridPeriodo.Columns("HORA_FINAL").Width = 90
         gridPeriodo.Columns("Total").Width = 70
+        gridPeriodo.Columns("EXCLUIR").Width = 60
 
         gridPeriodo.SelectionMode = DataGridViewSelectionMode.FullRowSelect
     End Sub
@@ -129,15 +138,63 @@
     End Sub
 
     Private Sub subAdicionaPeriodo()
-        If glfAtividade Is Nothing Then
-            glfAtividade = New clsAtividade
-            glfAtividade.Periodos = New List(Of clsPeriodo)
-        End If
+        If Not subValidaHoraInicio() Then Exit Sub
+        If Not subValidaHoraFinal() Then Exit Sub
 
-        glfAtividade.Periodos.Add(New clsPeriodo(glfAtividade.ID, txtInicio.Text, txtFinal.Text, 0))
-        gridPeriodo.DataSource = Nothing
-        gridPeriodo.DataSource = glfAtividade.Periodos
-        subConfiguraGrid()
-
+        locPeriodos.Add(New clsPeriodo(0, txtInicio.Text, txtFinal.Text, 0))
+        subAtualizaGrid()
     End Sub
+
+    Private Sub subAtualizaGrid()
+        gridPeriodo.DataSource = Nothing
+        gridPeriodo.DataSource = locPeriodos
+        txtInicio.Clear()
+        txtFinal.Clear()
+        subConfiguraGrid()
+    End Sub
+
+    Private Sub gridPeriodo_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridPeriodo.CellClick
+        If e.RowIndex < 0 Then Exit Sub
+        If (e.ColumnIndex = enuIndexColunas.Remover) Then
+            locPeriodos.RemoveAt(e.RowIndex)
+            subAtualizaGrid()
+        End If
+    End Sub
+
+
+    Private Function subValidaHoraInicio() As Boolean
+        Try
+            If Not clsTools.funValidaHora(txtInicio.Text) Then
+                txtInicio.Focus()
+            End If
+            Return True
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+            txtInicio.Focus()
+            Return False
+        End Try
+    End Function
+
+    Private Function subValidaHoraFinal() As Boolean
+        Try
+            If Not clsTools.funValidaHora(txtFinal.Text) Then
+                txtFinal.Focus()
+            End If
+
+            If Not clsTools.funValidaHora(txtInicio.Text) Then
+                txtInicio.Focus()
+            End If
+
+            If TimeSpan.Parse(txtFinal.Text) < TimeSpan.Parse(txtInicio.Text) Then
+                MsgBox("Hora final deve ser maior que hora inícial.", vbExclamation)
+            End If
+            Return True
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+            txtFinal.Focus()
+            Return False
+        End Try
+    End Function
+
+
 End Class

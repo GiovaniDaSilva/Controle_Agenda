@@ -34,5 +34,28 @@
     Public Shared Sub subTrataExcessao(e As Exception)
         MsgBox("Ocorreu o seguinte erro: " & e.Message)
     End Sub
+    Public Shared Function funValidaHora(ByVal parHoras As String) As Boolean
+
+        Dim locHora = Trim(parHoras.Replace(":", ""))
+
+        'TimeSpan.Parse("12:10")
+        If locHora = vbNullString Then ' Then
+            Throw New Exception("Hora não informada.")
+        End If
+
+        If locHora.Length < 4 Then
+            Throw New Exception("Hora Inválida.")
+        End If
+
+        If Val(Mid(locHora, 1, 2)) > 23 Then
+            Throw New Exception("Hora Inválida.")
+        End If
+
+        If Val(Mid(locHora, 3, 4)) > 59 Then
+            Throw New Exception("Hora Inválida.")
+        End If
+
+        Return True
+    End Function
 
 End Class
