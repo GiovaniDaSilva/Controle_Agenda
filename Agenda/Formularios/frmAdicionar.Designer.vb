@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmAdicionar
     Inherits System.Windows.Forms.Form
 
     'Descartar substituições de formulário para limpar a lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmAdicionar
     'OBSERVAÇÃO: o procedimento a seguir é exigido pelo Windows Form Designer
     'Pode ser modificado usando o Windows Form Designer.  
     'Não o modifique usando o editor de códigos.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAdicionar))
         Me.Label1 = New System.Windows.Forms.Label()
@@ -44,15 +44,14 @@ Partial Class frmAdicionar
         Me.btnGravar = New System.Windows.Forms.Button()
         Me.lblDescricao = New System.Windows.Forms.Label()
         Me.gridPeriodo = New System.Windows.Forms.DataGridView()
-        Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.gbPeriodo.SuspendLayout
-        Me.pCamposMoveis.SuspendLayout
-        CType(Me.gridPeriodo,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        Me.gbPeriodo.SuspendLayout()
+        Me.pCamposMoveis.SuspendLayout()
+        CType(Me.gridPeriodo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
         '
         'Label1
         '
-        Me.Label1.AutoSize = true
+        Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(26, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(30, 13)
@@ -71,7 +70,7 @@ Partial Class frmAdicionar
         '
         'Label2
         '
-        Me.Label2.AutoSize = true
+        Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(136, 19)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(28, 13)
@@ -82,7 +81,7 @@ Partial Class frmAdicionar
         '
         Me.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTipo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cbTipo.FormattingEnabled = true
+        Me.cbTipo.FormattingEnabled = True
         Me.cbTipo.Location = New System.Drawing.Point(139, 35)
         Me.cbTipo.Name = "cbTipo"
         Me.cbTipo.Size = New System.Drawing.Size(136, 21)
@@ -90,7 +89,7 @@ Partial Class frmAdicionar
         '
         'lblCodigo
         '
-        Me.lblCodigo.AutoSize = true
+        Me.lblCodigo.AutoSize = True
         Me.lblCodigo.Location = New System.Drawing.Point(312, 18)
         Me.lblCodigo.Name = "lblCodigo"
         Me.lblCodigo.Size = New System.Drawing.Size(40, 13)
@@ -118,7 +117,7 @@ Partial Class frmAdicionar
         '
         'Label3
         '
-        Me.Label3.AutoSize = true
+        Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(416, 18)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(96, 13)
@@ -136,23 +135,23 @@ Partial Class frmAdicionar
         Me.gbPeriodo.Name = "gbPeriodo"
         Me.gbPeriodo.Size = New System.Drawing.Size(501, 149)
         Me.gbPeriodo.TabIndex = 8
-        Me.gbPeriodo.TabStop = false
+        Me.gbPeriodo.TabStop = False
         Me.gbPeriodo.Text = "Período"
         '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.Control
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"),System.Drawing.Image)
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(108, 76)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(57, 50)
         Me.Button1.TabIndex = 4
-        Me.Button1.UseVisualStyleBackColor = false
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Label5
         '
-        Me.Label5.AutoSize = true
+        Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(105, 23)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(26, 13)
@@ -161,7 +160,7 @@ Partial Class frmAdicionar
         '
         'Label4
         '
-        Me.Label4.AutoSize = true
+        Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(38, 23)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(24, 13)
@@ -202,13 +201,13 @@ Partial Class frmAdicionar
         '
         Me.btnExcluir.BackColor = System.Drawing.SystemColors.Control
         Me.btnExcluir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnExcluir.Image = CType(resources.GetObject("btnExcluir.Image"),System.Drawing.Image)
+        Me.btnExcluir.Image = CType(resources.GetObject("btnExcluir.Image"), System.Drawing.Image)
         Me.btnExcluir.Location = New System.Drawing.Point(464, 185)
         Me.btnExcluir.Name = "btnExcluir"
         Me.btnExcluir.Size = New System.Drawing.Size(57, 50)
         Me.btnExcluir.TabIndex = 4
-        Me.btnExcluir.UseVisualStyleBackColor = false
-        Me.btnExcluir.Visible = false
+        Me.btnExcluir.UseVisualStyleBackColor = False
+        Me.btnExcluir.Visible = False
         '
         'txtDescrição
         '
@@ -226,27 +225,27 @@ Partial Class frmAdicionar
         '
         Me.btnLimpar.BackColor = System.Drawing.SystemColors.Control
         Me.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnLimpar.Image = CType(resources.GetObject("btnLimpar.Image"),System.Drawing.Image)
+        Me.btnLimpar.Image = CType(resources.GetObject("btnLimpar.Image"), System.Drawing.Image)
         Me.btnLimpar.Location = New System.Drawing.Point(83, 185)
         Me.btnLimpar.Name = "btnLimpar"
         Me.btnLimpar.Size = New System.Drawing.Size(57, 50)
         Me.btnLimpar.TabIndex = 3
-        Me.btnLimpar.UseVisualStyleBackColor = false
+        Me.btnLimpar.UseVisualStyleBackColor = False
         '
         'btnGravar
         '
         Me.btnGravar.BackColor = System.Drawing.SystemColors.Control
         Me.btnGravar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnGravar.Image = CType(resources.GetObject("btnGravar.Image"),System.Drawing.Image)
+        Me.btnGravar.Image = CType(resources.GetObject("btnGravar.Image"), System.Drawing.Image)
         Me.btnGravar.Location = New System.Drawing.Point(17, 185)
         Me.btnGravar.Name = "btnGravar"
         Me.btnGravar.Size = New System.Drawing.Size(57, 50)
         Me.btnGravar.TabIndex = 2
-        Me.btnGravar.UseVisualStyleBackColor = false
+        Me.btnGravar.UseVisualStyleBackColor = False
         '
         'lblDescricao
         '
-        Me.lblDescricao.AutoSize = true
+        Me.lblDescricao.AutoSize = True
         Me.lblDescricao.Location = New System.Drawing.Point(14, 10)
         Me.lblDescricao.Name = "lblDescricao"
         Me.lblDescricao.Size = New System.Drawing.Size(55, 13)
@@ -255,30 +254,21 @@ Partial Class frmAdicionar
         '
         'gridPeriodo
         '
-        Me.gridPeriodo.AllowUserToAddRows = false
-        Me.gridPeriodo.AllowUserToDeleteRows = false
-        Me.gridPeriodo.AllowUserToResizeColumns = false
+        Me.gridPeriodo.AllowUserToAddRows = False
+        Me.gridPeriodo.AllowUserToDeleteRows = False
+        Me.gridPeriodo.AllowUserToResizeColumns = False
         Me.gridPeriodo.BackgroundColor = System.Drawing.Color.LightGray
         Me.gridPeriodo.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.gridPeriodo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridPeriodo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Editar})
         Me.gridPeriodo.Location = New System.Drawing.Point(214, 99)
         Me.gridPeriodo.Name = "gridPeriodo"
-        Me.gridPeriodo.ReadOnly = true
+        Me.gridPeriodo.ReadOnly = True
         Me.gridPeriodo.Size = New System.Drawing.Size(298, 120)
         Me.gridPeriodo.TabIndex = 5
         '
-        'Editar
-        '
-        Me.Editar.HeaderText = ""
-        Me.Editar.Image = CType(resources.GetObject("Editar.Image"),System.Drawing.Image)
-        Me.Editar.Name = "Editar"
-        Me.Editar.ReadOnly = true
-        Me.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
         'frmAdicionar
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.ClientSize = New System.Drawing.Size(563, 493)
@@ -294,20 +284,20 @@ Partial Class frmAdicionar
         Me.Controls.Add(Me.txtData)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
-        Me.MaximizeBox = false
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
         Me.Name = "frmAdicionar"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Adicionar Nova Atividade"
-        Me.gbPeriodo.ResumeLayout(false)
-        Me.gbPeriodo.PerformLayout
-        Me.pCamposMoveis.ResumeLayout(false)
-        Me.pCamposMoveis.PerformLayout
-        CType(Me.gridPeriodo,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+        Me.gbPeriodo.ResumeLayout(False)
+        Me.gbPeriodo.PerformLayout()
+        Me.pCamposMoveis.ResumeLayout(False)
+        Me.pCamposMoveis.PerformLayout()
+        CType(Me.gridPeriodo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
 
-End Sub
+    End Sub
 
     Friend WithEvents Label1 As Label
     Friend WithEvents txtData As MaskedTextBox
@@ -330,5 +320,4 @@ End Sub
     Friend WithEvents btnGravar As Button
     Friend WithEvents lblDescricao As Label
     Friend WithEvents gridPeriodo As DataGridView
-    Friend WithEvents Editar As DataGridViewImageColumn
 End Class

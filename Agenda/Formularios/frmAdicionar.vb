@@ -1,7 +1,7 @@
 ﻿Public Class frmAdicionar
     Dim controle As New clsAdicionar
     Dim glfAtividade As New clsAtividade
-    Dim glfIni As clsParametrosIni 
+    Dim glfIni As clsParametrosIni
 
     Private Sub frmAdicionar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If txtData.Text = vbNullString Then txtData.Text = Now
@@ -14,7 +14,7 @@
         End If
     End Sub
 
-    Private Sub btnLimpar_Click(sender As Object, e As EventArgs) 
+    Private Sub btnLimpar_Click(sender As Object, e As EventArgs)
         subLimpaTela()
     End Sub
 
@@ -29,7 +29,7 @@
         btnExcluir.Visible = False
     End Sub
 
-    Private Sub btnGravar_Click(sender As Object, e As EventArgs) 
+    Private Sub btnGravar_Click(sender As Object, e As EventArgs)
         If controle.Gravar(funRetornaAtividade) Then
             MsgBox("Atividade gravada com sucesso.", MsgBoxStyle.Information)
         End If
@@ -51,32 +51,32 @@
 
         glfAtividade = parAtividade
 
-         gridPeriodo.DataSource = New List(Of clsPeriodo)  
+        gridPeriodo.DataSource = New List(Of clsPeriodo)
 
         If Not glfAtividade Is Nothing Then
-            subValidaComboTipo
+            subValidaComboTipo()
             txtCodigo.Text = glfAtividade.Codigo
             txtData.Text = glfAtividade.Data
             txtHora.Text = glfAtividade.Horas
             cbTipo.SelectedValue = glfAtividade.ID_TIPO_ATIVIDADE
             txtDescrição.Text = glfAtividade.Descricao
 
-            gridPeriodo.DataSource = New List(Of clsPeriodo) 
+            gridPeriodo.DataSource = New List(Of clsPeriodo)
 
             btnExcluir.Visible = True
         End If
 
-        subConfiguraForm() 
+        subConfiguraForm()
 
         Me.ShowDialog()
     End Sub
 
-    Public Sub ChamaFormulario(byval parIni As clsParametrosIni, Optional parAtividade As clsAtividade = Nothing)
-        glfIni = parIni 
+    Public Sub ChamaFormulario(ByVal parIni As clsParametrosIni, Optional parAtividade As clsAtividade = Nothing)
+        glfIni = parIni
         subCarregaAtividade(parAtividade)
     End Sub
 
-    Private Sub btnExcluir_Click(sender As Object, e As EventArgs) 
+    Private Sub btnExcluir_Click(sender As Object, e As EventArgs)
         If controle.excluir(glfAtividade.ID) Then
             MsgBox("Excluido com sucesso.", MsgBoxStyle.Information)
         End If
@@ -95,48 +95,49 @@
         End Try
     End Sub
 
-    Private Sub  subConfiguraForm()        
+    Private Sub subConfiguraForm()
         If glfIni.Horastrabalhadas = "Total" Then
-            pCamposMoveis.Top = 76     
+            pCamposMoveis.Top = 76
             Me.Height = 371
-            gbPeriodo.Visible = false
+            gbPeriodo.Visible = False
         Else
             pCamposMoveis.Top = 231
             Me.Height = 532
-            txtHora.Enabled = false 
+            txtHora.Enabled = False
             subConfiguraGrid()
-        End If 
+        End If
 
     End Sub
 
-    Private sub subConfiguraGrid()
+    Private Sub subConfiguraGrid()
         gridPeriodo.Columns("ID").Visible = False
         gridPeriodo.Columns("ID_ATIVIDADE").Visible = False
-        
+
         gridPeriodo.Columns("HORA_INICIAL").HeaderText = "Hora Inicial"
         gridPeriodo.Columns("HORA_FINAL").HeaderText = "Hora Final"
         gridPeriodo.Columns("Total").HeaderText = "Total"
 
         gridPeriodo.Columns("HORA_INICIAL").Width = 90
         gridPeriodo.Columns("HORA_FINAL").Width = 90
-        gridPeriodo.Columns("Total"). Width = 70
+        gridPeriodo.Columns("Total").Width = 70
 
-      '  gridPeriodo.SelectionMode = DataGridViewSelectionMode.FullRowSelect         
-    End sub
+        gridPeriodo.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+    End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         subAdicionaPeriodo()
     End Sub
 
     Private Sub subAdicionaPeriodo()
-        If glfAtividade Is Nothing
-            glfAtividade = New clsAtividade 
-            glfAtividade.Periodos  = New List(Of clsPeriodo) 
+        If glfAtividade Is Nothing Then
+            glfAtividade = New clsAtividade
+            glfAtividade.Periodos = New List(Of clsPeriodo)
         End If
-        
-        glfAtividade.Periodos.Add(New clsPeriodo(glfAtividade.ID, txtInicio.Text, txtFinal.text, 0))        
-        gridPeriodo.DataSource  = glfAtividade.Periodos
-        subConfiguraGrid  
+
+        glfAtividade.Periodos.Add(New clsPeriodo(glfAtividade.ID, txtInicio.Text, txtFinal.Text, 0))
+        gridPeriodo.DataSource = Nothing
+        gridPeriodo.DataSource = glfAtividade.Periodos
+        subConfiguraGrid()
 
     End Sub
 End Class
