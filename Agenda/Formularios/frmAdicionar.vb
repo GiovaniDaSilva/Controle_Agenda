@@ -68,8 +68,12 @@
             txtHora.Text = glfAtividade.Horas
             cbTipo.SelectedValue = glfAtividade.ID_TIPO_ATIVIDADE
             txtDescrição.Text = glfAtividade.Descricao
-            gridPeriodo.DataSource = Nothing
-            gridPeriodo.DataSource = glfAtividade.Periodos
+            If Not glfAtividade.Periodos Is Nothing  then
+                gridPeriodo.DataSource = Nothing
+                gridPeriodo.DataSource = glfAtividade.Periodos
+                locPeriodos = glfAtividade.Periodos
+            End If
+
             gridPeriodo.Refresh()
             btnExcluir.Visible = True
         End If
@@ -141,8 +145,19 @@
         If Not subValidaHoraInicio() Then Exit Sub
         If Not subValidaHoraFinal() Then Exit Sub
 
-        locPeriodos.Add(New clsPeriodo(0, txtInicio.Text, txtFinal.Text, 0))
+        Dim Total = controle.RetornaTotalHoras(txtInicio.Text, txtFinal.Text)        
+        locPeriodos.Add(New clsPeriodo(0, txtInicio.Text, txtFinal.Text, Total))
         subAtualizaGrid()
+        SubAtualizaHorasTotais()
+    End Sub
+
+    Private Sub SubAtualizaHorasTotais()
+        Dim locTotal As TimeSpan 
+
+        For Each periodo In locPeriodos 
+            locTotal  = locTotal.Add(TimeSpan.Parse(periodo.Total))
+        Next         
+       txtHora.Text = locTotal.ToString          
     End Sub
 
     Private Sub subAtualizaGrid()
@@ -158,6 +173,7 @@
         If (e.ColumnIndex = enuIndexColunas.Remover) Then
             locPeriodos.RemoveAt(e.RowIndex)
             subAtualizaGrid()
+            SubAtualizaHorasTotais
         End If
     End Sub
 
@@ -196,5 +212,13 @@
         End Try
     End Function
 
-
+    Private Sub txtHora_Leave(sender As Object, e As EventArgs) Handles txtHora.Leave
+        Try
+             If Not clsTools.funValidaHora(txtHora.Text, true) Then
+                txthora.Focus()
+            End If
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+        End Try
+    End Sub
 End Class

@@ -5,10 +5,26 @@ Public Class clsAdicionarDAO
     Public Function gravarAtividade(parAtivdade As clsAtividade) As Boolean
 
         Try
+            
             Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao())
-                Comm.CommandText = funRetornaSQLInsertUpdate(parAtivdade)
+
+                 If parAtivdade.ID > 0 Then
+                    Comm.CommandText = "DELETE FROM PERIODO WHERE ID_ATIVIDADE = " & parAtivdade.ID
+                    Comm.ExecuteNonQuery()
+                End If
+
+                'Grava Atividade
+                Comm.CommandText = funRetornaSQLInsertUpdateAtividade(parAtivdade)
                 Comm.ExecuteNonQuery()
+
+                'Grava Atividade
+                if Not parAtivdade.Periodos Is nothing AndAlso parAtivdade.Periodos.Count > 0 then
+                    Comm.CommandText = funRetornaSQLInsertUpdatePeriodos(parAtivdade)
+                    Comm.ExecuteNonQuery()
+                End if
+
             End Using
+            
 
         Catch ex As Exception
             clsTools.subTrataExcessao(ex)
@@ -16,6 +32,23 @@ Public Class clsAdicionarDAO
 
         Return True
 
+    End Function
+
+    Private Function funRetornaSQLInsertUpdatePeriodos(parAtivdade As clsAtividade) As String
+        Dim locSQL As new StringBuilder(string.Empty) 
+        Dim locIdAtividade As Integer = clsTools.funRetornaUltimoIDBanco()
+        
+        If parAtivdade.ID > 0 then
+            locIdAtividade = parAtivdade.id
+        End If
+
+        locSQL.Append("INSERT INTO PERIODO (ID_ATIVIDADE, HORA_INICIAL, HORA_FINAL, TOTAL) VALUES ") 
+
+        For Each periodo In parAtivdade.Periodos 
+            locSQL.AppendFormat("( {0}, '{1}', '{2}', '{3}'),",locIdAtividade, periodo.Hora_Inicial, periodo.Hora_Final, periodo.Total)
+        Next
+
+        Return locSQL.ToString.Substring(0, locSQL.Length - 1)
     End Function
 
     Friend Function CarregaTipos() As List(Of clsTipo)
@@ -57,7 +90,7 @@ Public Class clsAdicionarDAO
         Return True
     End Function
 
-    Private Function funRetornaSQLInsertUpdate(Atividade As clsAtividade) As String
+    Private Function funRetornaSQLInsertUpdateAtividade(Atividade As clsAtividade) As String
         Dim locSQL As New StringBuilder(String.Empty)
 
         If Atividade.ID > 0 Then

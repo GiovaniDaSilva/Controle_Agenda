@@ -118,7 +118,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub subChamaFormularioAdicionarEdicao(i As Integer)
-        controle.Adicionar(ParametrosIni ,New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE))
+        controle.Adicionar(ParametrosIni ,New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE,lista(i).Periodos) )
         subAtualizaLista()
     End Sub
 
