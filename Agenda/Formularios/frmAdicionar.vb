@@ -74,7 +74,7 @@
         
         If Not glfAtividade Is Nothing Then
             subValidaComboTipo()
-            txtCodigo.Text = glfAtividade.Codigo
+            txtCodigo.Text = iif(glfAtividade.Codigo > 0 ,glfAtividade.Codigo,"")
             txtData.Text = glfAtividade.Data
             txtHora.Text = glfAtividade.Horas
             cbTipo.SelectedValue = glfAtividade.ID_TIPO_ATIVIDADE
