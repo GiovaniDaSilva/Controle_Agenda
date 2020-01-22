@@ -55,6 +55,7 @@ Partial Class frmPrincipal
         Me.gridAtividades.AllowUserToAddRows = False
         Me.gridAtividades.AllowUserToDeleteRows = False
         Me.gridAtividades.AllowUserToResizeColumns = False
+        Me.gridAtividades.AllowUserToResizeRows = False
         Me.gridAtividades.BackgroundColor = System.Drawing.Color.LightGray
         Me.gridAtividades.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.gridAtividades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize

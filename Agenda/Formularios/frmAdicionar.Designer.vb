@@ -255,8 +255,10 @@ Partial Class frmAdicionar
         '
         'gridPeriodo
         '
-        Me.gridPeriodo.AllowUserToAddRows = false
-        Me.gridPeriodo.AllowUserToResizeColumns = false
+        Me.gridPeriodo.AllowUserToAddRows = False
+        Me.gridPeriodo.AllowUserToDeleteRows = False
+        Me.gridPeriodo.AllowUserToResizeColumns = False
+        Me.gridPeriodo.AllowUserToResizeRows = False
         Me.gridPeriodo.BackgroundColor = System.Drawing.Color.LightGray
         Me.gridPeriodo.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.gridPeriodo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize

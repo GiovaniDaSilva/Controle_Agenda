@@ -35,7 +35,18 @@
         txtDescrição.Clear()
 
         glfAtividade = Nothing
+        locPeriodos = New List(Of clsPeriodo)
+
+        gridPeriodo.DataSource = Nothing
+
+        gridPeriodo.DataSource = New List(Of clsPeriodo)
+        gridPeriodo.Refresh()
+
+        subConfiguraGrid()
+
         btnExcluir.Visible = False
+
+
     End Sub
 
     Private Sub btnGravar_Click(sender As Object, e As EventArgs) Handles btnGravar.Click
@@ -68,7 +79,7 @@
             txtHora.Text = glfAtividade.Horas
             cbTipo.SelectedValue = glfAtividade.ID_TIPO_ATIVIDADE
             txtDescrição.Text = glfAtividade.Descricao
-            If Not glfAtividade.Periodos Is Nothing  then
+            If Not glfAtividade.Periodos Is Nothing Then
                 gridPeriodo.DataSource = Nothing
                 gridPeriodo.DataSource = glfAtividade.Periodos
                 locPeriodos = glfAtividade.Periodos
@@ -112,10 +123,13 @@
             pCamposMoveis.Top = 76
             Me.Height = 371
             gbPeriodo.Visible = False
+            gridPeriodo.Visible = False
         Else
             pCamposMoveis.Top = 231
             Me.Height = 532
             txtHora.Enabled = False
+            gbPeriodo.Visible = True
+            gridPeriodo.Visible = True
             subConfiguraGrid()
         End If
 
@@ -145,19 +159,19 @@
         If Not subValidaHoraInicio() Then Exit Sub
         If Not subValidaHoraFinal() Then Exit Sub
 
-        Dim Total = controle.RetornaTotalHoras(txtInicio.Text, txtFinal.Text)        
+        Dim Total = controle.RetornaTotalHoras(txtInicio.Text, txtFinal.Text)
         locPeriodos.Add(New clsPeriodo(0, txtInicio.Text, txtFinal.Text, Total))
         subAtualizaGrid()
         SubAtualizaHorasTotais()
     End Sub
 
     Private Sub SubAtualizaHorasTotais()
-        Dim locTotal As TimeSpan 
+        Dim locTotal As TimeSpan
 
-        For Each periodo In locPeriodos 
-            locTotal  = locTotal.Add(TimeSpan.Parse(periodo.Total))
-        Next         
-       txtHora.Text = locTotal.ToString          
+        For Each periodo In locPeriodos
+            locTotal = locTotal.Add(TimeSpan.Parse(periodo.Total))
+        Next
+        txtHora.Text = locTotal.ToString
     End Sub
 
     Private Sub subAtualizaGrid()
@@ -173,7 +187,7 @@
         If (e.ColumnIndex = enuIndexColunas.Remover) Then
             locPeriodos.RemoveAt(e.RowIndex)
             subAtualizaGrid()
-            SubAtualizaHorasTotais
+            SubAtualizaHorasTotais()
         End If
     End Sub
 
@@ -202,7 +216,7 @@
             End If
 
             If TimeSpan.Parse(txtFinal.Text) < TimeSpan.Parse(txtInicio.Text) Then
-                MsgBox("Hora final deve ser maior que hora inícial.", vbExclamation)
+                Throw New Exception("Hora final deve ser maior que hora inícial.")
             End If
             Return True
         Catch ex As Exception
@@ -214,8 +228,8 @@
 
     Private Sub txtHora_Leave(sender As Object, e As EventArgs) Handles txtHora.Leave
         Try
-             If Not clsTools.funValidaHora(txtHora.Text, true) Then
-                txthora.Focus()
+            If Not clsTools.funValidaHora(txtHora.Text, True) Then
+                txtHora.Focus()
             End If
         Catch ex As Exception
             clsTools.subTrataExcessao(ex)
