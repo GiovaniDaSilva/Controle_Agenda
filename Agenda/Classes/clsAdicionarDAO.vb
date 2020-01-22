@@ -5,10 +5,26 @@ Public Class clsAdicionarDAO
     Public Function gravarAtividade(parAtivdade As clsAtividade) As Boolean
 
         Try
+            
             Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao())
-                Comm.CommandText = funRetornaSQLInsertUpdate(parAtivdade)
+
+                 If parAtivdade.ID > 0 Then
+                    Comm.CommandText = "DELETE FROM PERIODO WHERE ID_ATIVIDADE = " & parAtivdade.ID
+                    Comm.ExecuteNonQuery()
+                End If
+
+                'Grava Atividade
+                Comm.CommandText = funRetornaSQLInsertUpdateAtividade(parAtivdade)
                 Comm.ExecuteNonQuery()
+
+                'Grava Atividade
+                if Not parAtivdade.Periodos Is nothing AndAlso parAtivdade.Periodos.Count > 0 then
+                    Comm.CommandText = funRetornaSQLInsertUpdatePeriodos(parAtivdade)
+                    Comm.ExecuteNonQuery()
+                End if
+
             End Using
+            
 
         Catch ex As Exception
             clsTools.subTrataExcessao(ex)
@@ -16,6 +32,23 @@ Public Class clsAdicionarDAO
 
         Return True
 
+    End Function
+
+    Private Function funRetornaSQLInsertUpdatePeriodos(parAtivdade As clsAtividade) As String
+        Dim locSQL As new StringBuilder(string.Empty) 
+        Dim locIdAtividade As Integer = clsTools.funRetornaUltimoIDBanco()
+        
+        If parAtivdade.ID > 0 then
+            locIdAtividade = parAtivdade.id
+        End If
+
+        locSQL.Append("INSERT INTO PERIODO (ID_ATIVIDADE, HORA_INICIAL, HORA_FINAL, TOTAL) VALUES ") 
+
+        For Each periodo In parAtivdade.Periodos 
+            locSQL.AppendFormat("( {0}, '{1}', '{2}', '{3}'),",locIdAtividade, periodo.Hora_Inicial, periodo.Hora_Final, periodo.Total)
+        Next
+
+        Return locSQL.ToString.Substring(0, locSQL.Length - 1)
     End Function
 
     Friend Function CarregaTipos() As List(Of clsTipo)
@@ -57,7 +90,7 @@ Public Class clsAdicionarDAO
         Return True
     End Function
 
-    Private Function funRetornaSQLInsertUpdate(Atividade As clsAtividade) As String
+    Private Function funRetornaSQLInsertUpdateAtividade(Atividade As clsAtividade) As String
         Dim locSQL As New StringBuilder(String.Empty)
 
         If Atividade.ID > 0 Then
@@ -102,9 +135,7 @@ Public Class clsAdicionarDAO
                 Else
                     locSQL &= " ORDER BY A.DATA ASC , A.ID ASC"
                 End If
-
-
-
+                
                 Comm.CommandText = locSQL
 
 
@@ -118,7 +149,8 @@ Public Class clsAdicionarDAO
                         atividade.Descricao = Reader("DESCRICAO")
                         atividade.ID_TIPO_ATIVIDADE = Reader("ID_TIPO_ATIVIDADE")
                         atividade.TIPO_DESCRICAO = Reader("TIPO_DESCRICAO")
-
+                        atividade.Periodos = funRetornaPeriodoAtividade(atividade.ID)
+                        
                         lista.Add(atividade)
                     End While
                 End Using
@@ -131,6 +163,34 @@ Public Class clsAdicionarDAO
         Return lista
     End Function
 
+    Private Function funRetornaPeriodoAtividade(iD As Long) As List(Of clsPeriodo)
+        Dim lista As New List(Of clsPeriodo )
+        Dim locSQL As String
 
+        Try
+            Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
+                locSQL = "SELECT * FROM PERIODO  WHERE ID_ATIVIDADE = " & id                
+                Comm.CommandText = locSQL
+                
+                Using Reader = Comm.ExecuteReader()
+                    While Reader.Read()
+                        Dim periodo As New clsPeriodo 
+                        periodo.ID = Reader("ID")
+                        periodo.ID_Atividade  = Reader("ID_ATIVIDADE")
+                        periodo.Hora_Inicial  = Reader("HORA_INICIAL")
+                        periodo.Hora_Final = Reader("HORA_FINAL")
+                        periodo .Total = Reader("TOTAL")
+                                                
+                        lista.Add(periodo)
+                    End While
+                End Using
+            End Using
+
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+        End Try
+
+        Return lista
+    End Function
 End Class
 

@@ -11,10 +11,10 @@ Public Class clsPrincipal
     End Enum
 
 
-    Public Sub Adicionar(Optional parAtividade As clsAtividade = Nothing)
+    Public Sub Adicionar(byval parIni As clsParametrosIni ,  Optional parAtividade As clsAtividade = Nothing)
         Dim locFormAdicionar As New frmAdicionar
 
-        locFormAdicionar.ChamaFormulario(parAtividade)
+        locFormAdicionar.ChamaFormulario(parIni,parAtividade)
     End Sub
 
     Public Function funCarregarAtividades(ByVal parFiltro As clsAtividade, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
@@ -64,9 +64,16 @@ Public Class clsPrincipal
         locAdicionar.CarregaComboTipo(pTipo)
     End Sub
 
-    Friend Sub Configurar(ByVal pParametros As clsParametrosIni)
+    Friend Sub Configurar(pParametros As clsParametrosIni)
         Dim locForm As New frmConfiguracoes
-        locForm.funChamaConfiguracao(pParametros)
+        Dim locParametros = pParametros
+
+        pParametros = locForm.funChamaConfiguracao(pParametros)
+
+        If pParametros Is Nothing Then
+            pParametros = locParametros
+        End If
+
     End Sub
 
     Friend Function funCarregaArquivoIni() As clsParametrosIni

@@ -1,7 +1,8 @@
 ﻿Public Class frmConfiguracoes
     Private glfParametros As New clsParametrosIni
 
-    Public Function funChamaConfiguracao(parParametros As clsParametrosIni) As clsParametrosIni
+    Public Function funChamaConfiguracao(ByVal parParametros As clsParametrosIni) As clsParametrosIni
+
         glfParametros = parParametros
         subCarregaCampos()
         Me.ShowDialog()
@@ -10,9 +11,13 @@
             End
         End If
 
-        subPreenheParametros()
-        Dim ini As New clsIni
-        ini.gravaArquivoini(glfParametros)
+
+        If Not glfParametros Is Nothing Then
+            subPreenheParametros()
+            Dim ini As New clsIni
+            ini.gravaArquivoini(glfParametros)
+        End If
+
         Return glfParametros
     End Function
 
@@ -29,7 +34,10 @@
         rbSimHTML.Checked = glfParametros.SolicitarHTML
         rbNaoHTML.Checked = Not rbSimHTML.Checked
 
-        txtCaminhoBase.Text = glfParametros.CaminhoBase
+        txtCaminhoBase.Text = glfParametros.CaminhoBase 
+
+        rbHorasTrabalhadas.Checked  = IIf(glfParametros.Horastrabalhadas  = "Total", True, False)
+        rbPeriodo.Checked  = IIf(glfParametros.Horastrabalhadas  = "Periodo", True, False)        
     End Sub
 
     Private Sub subPreenheParametros()
@@ -44,6 +52,7 @@
         glfParametros.OrdenacaoDasAtividades = IIf(rbCrescente.Checked, "Cre", "Dec")
         glfParametros.SolicitarHTML = IIf(rbSimHTML.Checked, True, False)
         glfParametros.CaminhoBase = txtCaminhoBase.Text
+        glfParametros.Horastrabalhadas =  IIf(rbHorasTrabalhadas.Checked, "Total", "Periodo")
     End Sub
 
     Private Sub cbInicializarWindows_CheckedChanged(sender As Object, e As EventArgs) Handles cbInicializarWindows.CheckedChanged
@@ -77,4 +86,13 @@
         Return True
 
     End Function
+
+    Private Sub frmConfiguracoes_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        If MsgBox("Deseja gravar as alterações?", MsgBoxStyle.YesNo, "Questão") = Windows.Forms.DialogResult.No Then
+            glfParametros = Nothing
+        End If
+
+    End Sub
+
+
 End Class

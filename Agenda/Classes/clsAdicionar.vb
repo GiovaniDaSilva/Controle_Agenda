@@ -23,4 +23,14 @@
         End If
         Return false        
     End Function
+
+    Friend Function RetornaTotalHoras(pInicial As String, pFinal As String) As String
+        Dim Inicial As TimeSpan 
+        Dim Final As TimeSpan 
+
+        Inicial = TimeSpan.Parse(pInicial)
+        Final = TimeSpan.Parse(pFinal)
+
+        Return mid(Final.Subtract(Inicial).ToString(), 1,5)
+    End Function
 End Class
