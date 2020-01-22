@@ -71,7 +71,7 @@
 
         glfAtividade = parAtividade
         gridPeriodo.DataSource = New List(Of clsPeriodo)
-
+        
         If Not glfAtividade Is Nothing Then
             subValidaComboTipo()
             txtCodigo.Text = glfAtividade.Codigo
@@ -79,10 +79,10 @@
             txtHora.Text = glfAtividade.Horas
             cbTipo.SelectedValue = glfAtividade.ID_TIPO_ATIVIDADE
             txtDescrição.Text = glfAtividade.Descricao
-            If Not glfAtividade.Periodos Is Nothing Then
+            If Not glfAtividade.Periodos Is Nothing  AndAlso  glfAtividade.Periodos.Count > 0 Then
                 gridPeriodo.DataSource = Nothing
                 gridPeriodo.DataSource = glfAtividade.Periodos
-                locPeriodos = glfAtividade.Periodos
+                locPeriodos = glfAtividade.Periodos        
             End If
 
             gridPeriodo.Refresh()
