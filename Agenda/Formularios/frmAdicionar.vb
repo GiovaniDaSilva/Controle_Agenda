@@ -29,7 +29,7 @@
 
     Private Sub subLimpaTela()
         txtData.Text = Now
-        cbTipo.SelectedIndex = -1
+        cbTipo.SelectedIndex = 0
         txtCodigo.Clear()
         txtHora.Clear()
         txtDescrição.Clear()
