@@ -45,17 +45,18 @@ Partial Class frmPrincipal
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnLimpar = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pMenu.SuspendLayout()
-        Me.pFiltro.SuspendLayout()
-        Me.SuspendLayout()
+        Me.Button3 = New System.Windows.Forms.Button()
+        CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.pMenu.SuspendLayout
+        Me.pFiltro.SuspendLayout
+        Me.SuspendLayout
         '
         'gridAtividades
         '
-        Me.gridAtividades.AllowUserToAddRows = False
-        Me.gridAtividades.AllowUserToDeleteRows = False
-        Me.gridAtividades.AllowUserToResizeColumns = False
-        Me.gridAtividades.AllowUserToResizeRows = False
+        Me.gridAtividades.AllowUserToAddRows = false
+        Me.gridAtividades.AllowUserToDeleteRows = false
+        Me.gridAtividades.AllowUserToResizeColumns = false
+        Me.gridAtividades.AllowUserToResizeRows = false
         Me.gridAtividades.BackgroundColor = System.Drawing.Color.LightGray
         Me.gridAtividades.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.gridAtividades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -63,16 +64,16 @@ Partial Class frmPrincipal
         Me.gridAtividades.Dock = System.Windows.Forms.DockStyle.Top
         Me.gridAtividades.Location = New System.Drawing.Point(0, 77)
         Me.gridAtividades.Name = "gridAtividades"
-        Me.gridAtividades.ReadOnly = True
+        Me.gridAtividades.ReadOnly = true
         Me.gridAtividades.Size = New System.Drawing.Size(823, 355)
         Me.gridAtividades.TabIndex = 1
         '
         'Editar
         '
         Me.Editar.HeaderText = ""
-        Me.Editar.Image = CType(resources.GetObject("Editar.Image"), System.Drawing.Image)
+        Me.Editar.Image = CType(resources.GetObject("Editar.Image"),System.Drawing.Image)
         Me.Editar.Name = "Editar"
-        Me.Editar.ReadOnly = True
+        Me.Editar.ReadOnly = true
         Me.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'Splitter1
@@ -82,10 +83,11 @@ Partial Class frmPrincipal
         Me.Splitter1.Name = "Splitter1"
         Me.Splitter1.Size = New System.Drawing.Size(823, 14)
         Me.Splitter1.TabIndex = 3
-        Me.Splitter1.TabStop = False
+        Me.Splitter1.TabStop = false
         '
         'pMenu
         '
+        Me.pMenu.Controls.Add(Me.Button3)
         Me.pMenu.Controls.Add(Me.btnConfiguracao)
         Me.pMenu.Controls.Add(Me.Button1)
         Me.pMenu.Controls.Add(Me.btnListar)
@@ -99,83 +101,83 @@ Partial Class frmPrincipal
         '
         'btnConfiguracao
         '
-        Me.btnConfiguracao.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnConfiguracao.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnConfiguracao.BackColor = System.Drawing.SystemColors.Control
         Me.btnConfiguracao.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.btnConfiguracao.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.btnConfiguracao.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnConfiguracao.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnConfiguracao.Image = CType(resources.GetObject("btnConfiguracao.Image"), System.Drawing.Image)
-        Me.btnConfiguracao.Location = New System.Drawing.Point(546, 15)
+        Me.btnConfiguracao.Image = CType(resources.GetObject("btnConfiguracao.Image"),System.Drawing.Image)
+        Me.btnConfiguracao.Location = New System.Drawing.Point(75, 15)
         Me.btnConfiguracao.Name = "btnConfiguracao"
         Me.btnConfiguracao.Size = New System.Drawing.Size(57, 50)
         Me.btnConfiguracao.TabIndex = 7
-        Me.btnConfiguracao.UseVisualStyleBackColor = False
+        Me.btnConfiguracao.UseVisualStyleBackColor = false
         '
         'Button1
         '
-        Me.Button1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.Button1.BackColor = System.Drawing.SystemColors.Control
         Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.Button1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"),System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(12, 15)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(57, 50)
         Me.Button1.TabIndex = 6
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.Button1.UseVisualStyleBackColor = false
         '
         'btnListar
         '
-        Me.btnListar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnListar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnListar.BackColor = System.Drawing.SystemColors.Control
         Me.btnListar.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.btnListar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.btnListar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnListar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnListar.Image = CType(resources.GetObject("btnListar.Image"), System.Drawing.Image)
+        Me.btnListar.Image = CType(resources.GetObject("btnListar.Image"),System.Drawing.Image)
         Me.btnListar.Location = New System.Drawing.Point(672, 15)
         Me.btnListar.Name = "btnListar"
         Me.btnListar.Size = New System.Drawing.Size(57, 50)
         Me.btnListar.TabIndex = 5
-        Me.btnListar.UseVisualStyleBackColor = False
+        Me.btnListar.UseVisualStyleBackColor = false
         '
         'btnAtualiza
         '
-        Me.btnAtualiza.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAtualiza.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnAtualiza.BackColor = System.Drawing.SystemColors.Control
         Me.btnAtualiza.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.btnAtualiza.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.btnAtualiza.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnAtualiza.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnAtualiza.Image = CType(resources.GetObject("btnAtualiza.Image"), System.Drawing.Image)
-        Me.btnAtualiza.Location = New System.Drawing.Point(609, 15)
+        Me.btnAtualiza.Image = CType(resources.GetObject("btnAtualiza.Image"),System.Drawing.Image)
+        Me.btnAtualiza.Location = New System.Drawing.Point(546, 15)
         Me.btnAtualiza.Name = "btnAtualiza"
         Me.btnAtualiza.Size = New System.Drawing.Size(57, 50)
         Me.btnAtualiza.TabIndex = 4
-        Me.btnAtualiza.UseVisualStyleBackColor = False
+        Me.btnAtualiza.UseVisualStyleBackColor = false
         '
         'btnAdicinar
         '
-        Me.btnAdicinar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdicinar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnAdicinar.BackColor = System.Drawing.SystemColors.Control
         Me.btnAdicinar.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.btnAdicinar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.btnAdicinar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnAdicinar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnAdicinar.Image = CType(resources.GetObject("btnAdicinar.Image"), System.Drawing.Image)
+        Me.btnAdicinar.Image = CType(resources.GetObject("btnAdicinar.Image"),System.Drawing.Image)
         Me.btnAdicinar.Location = New System.Drawing.Point(754, 15)
         Me.btnAdicinar.Name = "btnAdicinar"
         Me.btnAdicinar.Size = New System.Drawing.Size(57, 50)
         Me.btnAdicinar.TabIndex = 3
-        Me.btnAdicinar.UseVisualStyleBackColor = False
+        Me.btnAdicinar.UseVisualStyleBackColor = false
         '
         'txtDescricao
         '
@@ -207,15 +209,15 @@ Partial Class frmPrincipal
         Me.pFiltro.Name = "pFiltro"
         Me.pFiltro.Size = New System.Drawing.Size(823, 77)
         Me.pFiltro.TabIndex = 7
-        Me.pFiltro.Visible = False
+        Me.pFiltro.Visible = false
         '
         'cbTipo
         '
-        Me.cbTipo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cbTipo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTipo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cbTipo.FormattingEnabled = True
+        Me.cbTipo.FormattingEnabled = true
         Me.cbTipo.Location = New System.Drawing.Point(355, 33)
         Me.cbTipo.Name = "cbTipo"
         Me.cbTipo.Size = New System.Drawing.Size(136, 21)
@@ -223,9 +225,9 @@ Partial Class frmPrincipal
         '
         'Label2
         '
-        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
+        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = true
         Me.Label2.Location = New System.Drawing.Point(352, 17)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(28, 13)
@@ -234,8 +236,8 @@ Partial Class frmPrincipal
         '
         'txtCodigo
         '
-        Me.txtCodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtCodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.txtCodigo.Location = New System.Drawing.Point(230, 33)
         Me.txtCodigo.Mask = "0000000"
         Me.txtCodigo.Name = "txtCodigo"
@@ -246,9 +248,9 @@ Partial Class frmPrincipal
         '
         'lblcodigo
         '
-        Me.lblcodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lblcodigo.AutoSize = True
+        Me.lblcodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.lblcodigo.AutoSize = true
         Me.lblcodigo.Location = New System.Drawing.Point(227, 17)
         Me.lblcodigo.Name = "lblcodigo"
         Me.lblcodigo.Size = New System.Drawing.Size(40, 13)
@@ -257,41 +259,41 @@ Partial Class frmPrincipal
         '
         'btnFiltrar
         '
-        Me.btnFiltrar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnFiltrar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnFiltrar.BackColor = System.Drawing.SystemColors.Control
         Me.btnFiltrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnFiltrar.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.btnFiltrar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.btnFiltrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnFiltrar.Image = CType(resources.GetObject("btnFiltrar.Image"), System.Drawing.Image)
+        Me.btnFiltrar.Image = CType(resources.GetObject("btnFiltrar.Image"),System.Drawing.Image)
         Me.btnFiltrar.Location = New System.Drawing.Point(754, 17)
         Me.btnFiltrar.Name = "btnFiltrar"
         Me.btnFiltrar.Size = New System.Drawing.Size(57, 50)
         Me.btnFiltrar.TabIndex = 11
-        Me.btnFiltrar.UseVisualStyleBackColor = False
+        Me.btnFiltrar.UseVisualStyleBackColor = false
         '
         'Button2
         '
-        Me.Button2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.Button2.BackColor = System.Drawing.SystemColors.Control
         Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.Button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"),System.Drawing.Image)
         Me.Button2.Location = New System.Drawing.Point(12, 17)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(57, 50)
         Me.Button2.TabIndex = 10
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.Button2.UseVisualStyleBackColor = false
         '
         'txtApartirDe
         '
-        Me.txtApartirDe.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtApartirDe.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.txtApartirDe.Location = New System.Drawing.Point(101, 33)
         Me.txtApartirDe.Mask = "00/00/0000"
         Me.txtApartirDe.Name = "txtApartirDe"
@@ -302,9 +304,9 @@ Partial Class frmPrincipal
         '
         'Label1
         '
-        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
+        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = true
         Me.Label1.Location = New System.Drawing.Point(98, 17)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 13)
@@ -313,27 +315,43 @@ Partial Class frmPrincipal
         '
         'btnLimpar
         '
-        Me.btnLimpar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnLimpar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnLimpar.BackColor = System.Drawing.SystemColors.Control
         Me.btnLimpar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnLimpar.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
         Me.btnLimpar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
         Me.btnLimpar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnLimpar.Image = CType(resources.GetObject("btnLimpar.Image"), System.Drawing.Image)
+        Me.btnLimpar.Image = CType(resources.GetObject("btnLimpar.Image"),System.Drawing.Image)
         Me.btnLimpar.Location = New System.Drawing.Point(681, 17)
         Me.btnLimpar.Name = "btnLimpar"
         Me.btnLimpar.Size = New System.Drawing.Size(57, 50)
         Me.btnLimpar.TabIndex = 7
-        Me.btnLimpar.UseVisualStyleBackColor = False
+        Me.btnLimpar.UseVisualStyleBackColor = false
         '
         'Timer1
         '
         '
+        'Button3
+        '
+        Me.Button3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.Button3.BackColor = System.Drawing.SystemColors.Control
+        Me.Button3.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.Button3.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"),System.Drawing.Image)
+        Me.Button3.Location = New System.Drawing.Point(609, 15)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(57, 50)
+        Me.Button3.TabIndex = 8
+        Me.Button3.UseVisualStyleBackColor = false
+        '
         'frmPrincipal
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.ClientSize = New System.Drawing.Size(823, 568)
@@ -342,17 +360,17 @@ Partial Class frmPrincipal
         Me.Controls.Add(Me.Splitter1)
         Me.Controls.Add(Me.gridAtividades)
         Me.Controls.Add(Me.pMenu)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.Name = "frmPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Agenda - Versão 0.1 - BETA"
-        CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pMenu.ResumeLayout(False)
-        Me.pFiltro.ResumeLayout(False)
-        Me.pFiltro.PerformLayout()
-        Me.ResumeLayout(False)
+        Me.Text = "Agenda - Versão 0.3"
+        CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).EndInit
+        Me.pMenu.ResumeLayout(false)
+        Me.pFiltro.ResumeLayout(false)
+        Me.pFiltro.PerformLayout
+        Me.ResumeLayout(false)
 
-    End Sub
+End Sub
     Friend WithEvents gridAtividades As DataGridView
     Friend WithEvents Splitter1 As Splitter
     Friend WithEvents pMenu As Panel
@@ -374,4 +392,5 @@ Partial Class frmPrincipal
     Friend WithEvents Editar As DataGridViewImageColumn
     Friend WithEvents btnConfiguracao As Button
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents Button3 As Button
 End Class

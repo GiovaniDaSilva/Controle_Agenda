@@ -13,7 +13,7 @@
 
     Public Property ID As Long
     Public Property Data As Date    
-    Public Property Codigo As Integer
+    Public Property Codigo As string
     Public Property Horas As String
     Public Property Descricao As String
     Public Property ID_TIPO_ATIVIDADE As Integer 

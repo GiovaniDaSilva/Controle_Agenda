@@ -30,7 +30,7 @@ Public Class frmPrincipal
 
     Private Sub btnAdicinar_Click(sender As Object, e As EventArgs) Handles btnAdicinar.Click
         subRemoveSelecao()
-        controle.Adicionar(ParametrosIni )
+        controle.Adicionar(ParametrosIni)
 
         subAtualizaLista()
     End Sub
@@ -72,6 +72,9 @@ Public Class frmPrincipal
         gridAtividades.Columns("HORAS").DisplayIndex = enuPosicaoColunas.HORA
         gridAtividades.Columns("DESCRICAO").DisplayIndex = enuPosicaoColunas.DESCRICAO
         gridAtividades.Columns("EDITAR").DisplayIndex = enuPosicaoColunas.EDITAR
+
+
+        gridAtividades.Columns("CODIGO").DefaultCellStyle.ForeColor = Color.blue                         
     End Sub
 
     Private Sub btnListar_Click(sender As Object, e As EventArgs) Handles btnListar.Click
@@ -114,11 +117,20 @@ Public Class frmPrincipal
         If e.RowIndex < 0 Then Exit Sub
         If (e.ColumnIndex = enuIndexColunas.EDITAR) Then
             subChamaFormularioAdicionarEdicao(e.RowIndex)
+        ElseIf (e.ColumnIndex = enuIndexColunas.CODIGO) Then
+            If My.Computer.Keyboard.CtrlKeyDown Then
+                If lista(e.RowIndex).ID_TIPO_ATIVIDADE = 1 Then
+                    Process.Start("http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?" & lista(e.RowIndex).Codigo)
+                ElseIf lista(e.RowIndex).ID_TIPO_ATIVIDADE = 2 Then
+                    Process.Start("http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=" & lista(e.RowIndex).Codigo)
+                End If
+            End If
+
         End If
     End Sub
 
     Private Sub subChamaFormularioAdicionarEdicao(i As Integer)
-        controle.Adicionar(ParametrosIni ,New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE,lista(i).Periodos) )
+        controle.Adicionar(ParametrosIni, New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE, lista(i).Periodos))
         subAtualizaLista()
     End Sub
 
@@ -314,6 +326,9 @@ Public Class frmPrincipal
         End If
     End Sub
 
+    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
+        Process.Start("http://sah.govbr.com.br/default.asp?dtsem=")
+    End Sub
 
 End Class
 
