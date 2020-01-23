@@ -28,6 +28,7 @@ Partial Class frmPrincipal
         Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.pMenu = New System.Windows.Forms.Panel()
+        Me.btnVersao = New System.Windows.Forms.Button()
         Me.btnApontarHoras = New System.Windows.Forms.Button()
         Me.btnConfiguracao = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -90,6 +91,7 @@ Partial Class frmPrincipal
         '
         'pMenu
         '
+        Me.pMenu.Controls.Add(Me.btnVersao)
         Me.pMenu.Controls.Add(Me.btnApontarHoras)
         Me.pMenu.Controls.Add(Me.btnConfiguracao)
         Me.pMenu.Controls.Add(Me.Button1)
@@ -101,6 +103,23 @@ Partial Class frmPrincipal
         Me.pMenu.Name = "pMenu"
         Me.pMenu.Size = New System.Drawing.Size(823, 77)
         Me.pMenu.TabIndex = 4
+        '
+        'btnVersao
+        '
+        Me.btnVersao.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnVersao.BackColor = System.Drawing.SystemColors.Control
+        Me.btnVersao.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.btnVersao.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.btnVersao.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnVersao.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnVersao.Image = CType(resources.GetObject("btnVersao.Image"), System.Drawing.Image)
+        Me.btnVersao.Location = New System.Drawing.Point(138, 15)
+        Me.btnVersao.Name = "btnVersao"
+        Me.btnVersao.Size = New System.Drawing.Size(57, 50)
+        Me.btnVersao.TabIndex = 9
+        Me.ToolTip1.SetToolTip(Me.btnVersao, "Histórico de Versões")
+        Me.btnVersao.UseVisualStyleBackColor = False
         '
         'btnApontarHoras
         '
@@ -363,7 +382,7 @@ Partial Class frmPrincipal
         '
         'frmPrincipal
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.ClientSize = New System.Drawing.Size(823, 568)
@@ -372,17 +391,17 @@ Partial Class frmPrincipal
         Me.Controls.Add(Me.Splitter1)
         Me.Controls.Add(Me.gridAtividades)
         Me.Controls.Add(Me.pMenu)
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Agenda - Versão 0.3"
-        CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).EndInit
-        Me.pMenu.ResumeLayout(false)
-        Me.pFiltro.ResumeLayout(false)
-        Me.pFiltro.PerformLayout
-        Me.ResumeLayout(false)
+        CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pMenu.ResumeLayout(False)
+        Me.pFiltro.ResumeLayout(False)
+        Me.pFiltro.PerformLayout()
+        Me.ResumeLayout(False)
 
-End Sub
+    End Sub
     Friend WithEvents gridAtividades As DataGridView
     Friend WithEvents Splitter1 As Splitter
     Friend WithEvents pMenu As Panel
@@ -406,4 +425,5 @@ End Sub
     Friend WithEvents Timer1 As Timer
     Friend WithEvents btnApontarHoras As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents btnVersao As Button
 End Class

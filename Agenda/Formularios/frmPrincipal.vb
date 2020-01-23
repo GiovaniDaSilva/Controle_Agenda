@@ -330,7 +330,9 @@ Public Class frmPrincipal
         Process.Start("http://sah.govbr.com.br/default.asp?dtsem=")
     End Sub
 
-
+    Private Sub Button3_Click_2(sender As Object, e As EventArgs) Handles btnVersao.Click
+        frmBrowser.ShowDialog()
+    End Sub
 End Class
 
 
