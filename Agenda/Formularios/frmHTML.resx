@@ -137,6 +137,23 @@
         y7+GmdUgAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="btAbriSistemaSol.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAGYktHRAD/AP8A/6C9p5MAAAHrSURBVFhH7ZbPS8JgGMc99U9E/04/aJ3KW3iMggi7RZeMPJTm
+        oYiULhEdwsJDnSKMCqJyLTuk0SrKKKyLWmZpmnvyme9ilTP13WjSPvDF+f54/PC8js1UF7SM74MeQ/SK
+        gh4ur6vUr+DmdR4uE4L4WW5MK6T6ioIocv0owGVcKDumFVL9Xzvovyp+VxrTCqm+oqBeUn+CesMQpMUQ
+        pMUQpEUzQR8bFUOLJoK7fAy6po7E4DUNqgvy0WfonOJgYisJju3idfguSWarR1XBaCID5mkObOuxz0fV
+        6Hq80EkO7mJpsqo6VBN8es2BxXMMQ6v3X56lmOG1B+ieDULiJUtWV44qgm+5PPQvhMC6fPNDTorVewO9
+        8yeQzlb3ikYtKAgAIz4eehZ4cJcQk4JzfYsXMOw9gzxuqhBqQY8/Ihb5Hkms5FxhT6XgeqJHf5NIiBIy
+        QRoMQUOwFv63YK2xuIOkpLIgrpHvqTRETz2wqFyQDOsHXQs229kmxnWYQrmZQBZaHYEMmfp7UK59kt3p
+        X4pkUHBs4xEYV+CUTNODx0ET7BzKzbLv4vF2z4VSrc79AVKeHvwR6b9Dm8GV2xzjZM/NtnADKU8PreDM
+        QVY8VuwcyjH2vUZSWh3kx1VL2go3RIeLC+Oxqto5/WMyfQDiW3yrzfrg8QAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAQAEBAAAAEAIABoBAAARgAAACAgAAABACAAqBAAAK4EAAAwMAAAAQAgAKglAABWFQAAQEAAAAEA

@@ -151,6 +151,9 @@
         VJIqMOBQe1aONh1dCBFYhw/iie8o/JT0P8441f+SOJIE0tL+AadfPQqOwZudAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="btnExcluir.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAdJJREFUWEft
@@ -167,7 +170,7 @@
   <data name="btnLimpar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vQAADr0BR/uQrQAAAeJJREFUWEe91k1PwkAQxnG+rp/Ki3eucutJ1EQTtfKSIBq4YDSyVRNfEqk+S6ah
+        vAAADrwBlbxySQAAAeJJREFUWEe91k1PwkAQxnG+rp/Ki3eucutJ1EQTtfKSIBq4YDSyVRNfEqk+S6ah
         dLed2Z318L80m+6PaYHtGWNKTkVROK+nrpdy49nqvTw4vK46Gq6c69piT1Aa4c7yZXl+uw1AXHOt98We
         oGTShDseTv5giwqIBicj0SSrCXIAnDWE62c35b3ZWMw+UjJJ1Ue8j6NikDVgzBfGh4tFiibo+wBdOCoE
         yQbG4igpMuodlOIoCTIYOJ4tgnAUFxkEjMVRHKQYOLlbquAoi8ybSIT9RMCnl8LikGuz0FxImiIbSDjz

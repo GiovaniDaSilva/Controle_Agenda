@@ -22,6 +22,7 @@ Partial Class frmAdicionar
     'Não o modifique usando o editor de códigos.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAdicionar))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtData = New System.Windows.Forms.MaskedTextBox()
@@ -45,14 +46,15 @@ Partial Class frmAdicionar
         Me.lblDescricao = New System.Windows.Forms.Label()
         Me.gridPeriodo = New System.Windows.Forms.DataGridView()
         Me.Excluir = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.gbPeriodo.SuspendLayout
-        Me.pCamposMoveis.SuspendLayout
-        CType(Me.gridPeriodo,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.gbPeriodo.SuspendLayout()
+        Me.pCamposMoveis.SuspendLayout()
+        CType(Me.gridPeriodo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
         '
         'Label1
         '
-        Me.Label1.AutoSize = true
+        Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(26, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(30, 13)
@@ -71,7 +73,7 @@ Partial Class frmAdicionar
         '
         'Label2
         '
-        Me.Label2.AutoSize = true
+        Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(136, 19)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(28, 13)
@@ -82,7 +84,7 @@ Partial Class frmAdicionar
         '
         Me.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTipo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cbTipo.FormattingEnabled = true
+        Me.cbTipo.FormattingEnabled = True
         Me.cbTipo.Location = New System.Drawing.Point(139, 35)
         Me.cbTipo.Name = "cbTipo"
         Me.cbTipo.Size = New System.Drawing.Size(136, 21)
@@ -90,7 +92,7 @@ Partial Class frmAdicionar
         '
         'lblCodigo
         '
-        Me.lblCodigo.AutoSize = true
+        Me.lblCodigo.AutoSize = True
         Me.lblCodigo.Location = New System.Drawing.Point(312, 18)
         Me.lblCodigo.Name = "lblCodigo"
         Me.lblCodigo.Size = New System.Drawing.Size(40, 13)
@@ -118,7 +120,7 @@ Partial Class frmAdicionar
         '
         'Label3
         '
-        Me.Label3.AutoSize = true
+        Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(416, 18)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(96, 13)
@@ -136,23 +138,24 @@ Partial Class frmAdicionar
         Me.gbPeriodo.Name = "gbPeriodo"
         Me.gbPeriodo.Size = New System.Drawing.Size(501, 149)
         Me.gbPeriodo.TabIndex = 8
-        Me.gbPeriodo.TabStop = false
+        Me.gbPeriodo.TabStop = False
         Me.gbPeriodo.Text = "Período"
         '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.Control
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"),System.Drawing.Image)
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(88, 76)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(57, 50)
         Me.Button1.TabIndex = 4
-        Me.Button1.UseVisualStyleBackColor = false
+        Me.ToolTip1.SetToolTip(Me.Button1, "Inserir Período")
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Label5
         '
-        Me.Label5.AutoSize = true
+        Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(85, 23)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(26, 13)
@@ -161,7 +164,7 @@ Partial Class frmAdicionar
         '
         'Label4
         '
-        Me.Label4.AutoSize = true
+        Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(18, 23)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(24, 13)
@@ -202,13 +205,14 @@ Partial Class frmAdicionar
         '
         Me.btnExcluir.BackColor = System.Drawing.SystemColors.Control
         Me.btnExcluir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnExcluir.Image = CType(resources.GetObject("btnExcluir.Image"),System.Drawing.Image)
+        Me.btnExcluir.Image = CType(resources.GetObject("btnExcluir.Image"), System.Drawing.Image)
         Me.btnExcluir.Location = New System.Drawing.Point(464, 185)
         Me.btnExcluir.Name = "btnExcluir"
         Me.btnExcluir.Size = New System.Drawing.Size(57, 50)
         Me.btnExcluir.TabIndex = 4
-        Me.btnExcluir.UseVisualStyleBackColor = false
-        Me.btnExcluir.Visible = false
+        Me.ToolTip1.SetToolTip(Me.btnExcluir, "Exclui Atividade")
+        Me.btnExcluir.UseVisualStyleBackColor = False
+        Me.btnExcluir.Visible = False
         '
         'txtDescrição
         '
@@ -226,27 +230,29 @@ Partial Class frmAdicionar
         '
         Me.btnLimpar.BackColor = System.Drawing.SystemColors.Control
         Me.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnLimpar.Image = CType(resources.GetObject("btnLimpar.Image"),System.Drawing.Image)
+        Me.btnLimpar.Image = CType(resources.GetObject("btnLimpar.Image"), System.Drawing.Image)
         Me.btnLimpar.Location = New System.Drawing.Point(83, 185)
         Me.btnLimpar.Name = "btnLimpar"
         Me.btnLimpar.Size = New System.Drawing.Size(57, 50)
         Me.btnLimpar.TabIndex = 3
-        Me.btnLimpar.UseVisualStyleBackColor = false
+        Me.ToolTip1.SetToolTip(Me.btnLimpar, "Limpar Tela")
+        Me.btnLimpar.UseVisualStyleBackColor = False
         '
         'btnGravar
         '
         Me.btnGravar.BackColor = System.Drawing.SystemColors.Control
         Me.btnGravar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnGravar.Image = CType(resources.GetObject("btnGravar.Image"),System.Drawing.Image)
+        Me.btnGravar.Image = CType(resources.GetObject("btnGravar.Image"), System.Drawing.Image)
         Me.btnGravar.Location = New System.Drawing.Point(17, 185)
         Me.btnGravar.Name = "btnGravar"
         Me.btnGravar.Size = New System.Drawing.Size(57, 50)
         Me.btnGravar.TabIndex = 2
-        Me.btnGravar.UseVisualStyleBackColor = false
+        Me.ToolTip1.SetToolTip(Me.btnGravar, "Salvar Atividade")
+        Me.btnGravar.UseVisualStyleBackColor = False
         '
         'lblDescricao
         '
-        Me.lblDescricao.AutoSize = true
+        Me.lblDescricao.AutoSize = True
         Me.lblDescricao.Location = New System.Drawing.Point(14, 10)
         Me.lblDescricao.Name = "lblDescricao"
         Me.lblDescricao.Size = New System.Drawing.Size(55, 13)
@@ -334,4 +340,5 @@ End Sub
     Friend WithEvents lblDescricao As Label
     Friend WithEvents gridPeriodo As DataGridView
     Friend WithEvents Excluir As DataGridViewImageColumn
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

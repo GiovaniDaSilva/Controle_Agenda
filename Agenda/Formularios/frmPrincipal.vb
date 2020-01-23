@@ -326,9 +326,10 @@ Public Class frmPrincipal
         End If
     End Sub
 
-    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles btnApontarHoras.Click
         Process.Start("http://sah.govbr.com.br/default.asp?dtsem=")
     End Sub
+
 
 End Class
 

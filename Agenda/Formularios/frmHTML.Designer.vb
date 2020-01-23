@@ -22,10 +22,13 @@ Partial Class frmHTML
     'Não o modifique usando o editor de códigos.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmHTML))
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.btAbriSistemaSol = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'RichTextBox1
@@ -50,6 +53,7 @@ Partial Class frmHTML
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 58)
         Me.btnOK.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.btnOK, "Prosseguir para Impressão")
         Me.btnOK.UseVisualStyleBackColor = False
         '
         'TextBox1
@@ -65,12 +69,26 @@ Partial Class frmHTML
         Me.TextBox1.Text = "- Com a consulta de Solicitações carregada, clique com o botão direito e vá para " &
     "Exibir Código Fonte. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "- Copie todo o conteudo e cole abaixo."
         '
+        'btAbriSistemaSol
+        '
+        Me.btAbriSistemaSol.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btAbriSistemaSol.BackColor = System.Drawing.SystemColors.Control
+        Me.btAbriSistemaSol.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btAbriSistemaSol.Image = CType(resources.GetObject("btAbriSistemaSol.Image"), System.Drawing.Image)
+        Me.btAbriSistemaSol.Location = New System.Drawing.Point(12, 424)
+        Me.btAbriSistemaSol.Name = "btAbriSistemaSol"
+        Me.btAbriSistemaSol.Size = New System.Drawing.Size(75, 58)
+        Me.btAbriSistemaSol.TabIndex = 3
+        Me.ToolTip1.SetToolTip(Me.btAbriSistemaSol, "Abrir Consulta de Solicitações")
+        Me.btAbriSistemaSol.UseVisualStyleBackColor = False
+        '
         'frmHTML
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.ClientSize = New System.Drawing.Size(661, 494)
+        Me.Controls.Add(Me.btAbriSistemaSol)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.RichTextBox1)
@@ -87,4 +105,6 @@ Partial Class frmHTML
     Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents btnOK As Button
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents btAbriSistemaSol As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

@@ -15,4 +15,8 @@
         HTML = RichTextBox1.Text
         Me.Close()
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btAbriSistemaSol.Click
+        Process.Start("http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsolistagem?0")
+    End Sub
 End Class
