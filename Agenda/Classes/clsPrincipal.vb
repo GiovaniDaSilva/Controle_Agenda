@@ -145,7 +145,7 @@ Public Class clsListaSolictacao
             End If
         End If
 
-        RichAddLineFmt(parCampo, "<fc:" & Color.Red.Name & "><b>Solicitação</b></fc>")
+        RichAddLineFmt(parCampo, "<fc:" & Color.Red.Name & "><b>Solicitação</b></fc>" & "<fc:" & Color.Indigo.Name & "><b> " & item.Data & "</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Código: " & item.Codigo)
 
         If Not locDetalhes Is Nothing Then
@@ -177,7 +177,7 @@ Public Class clsListaPBI
         '       Horas: xx:xx
         '       IPP: xxxx
         '       Descrição: xxxxxxxxxxxx      
-        RichAddLineFmt(parCampo, "<fc:" & Color.Blue.Name & "><b>PBI</b></fc>")
+        RichAddLineFmt(parCampo, "<fc:" & Color.Blue.Name & "><b>PBI</b></fc>" & "<fc:" & Color.Indigo.Name & "><b> " & item.Data & "</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Código: " & item.Codigo)
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
         RichAddLineFmt(parCampo, clsTools.Tab & "IPP: -")
@@ -194,7 +194,7 @@ Public Class clsListaReuniao
         'Reuniao       
         '       Horas: xx:xx        
         '       Descrição: xxxxxxxxxxxx      
-        RichAddLineFmt(parCampo, "<fc:" & Color.Green.Name & "><b>Reunião</b></fc>")
+        RichAddLineFmt(parCampo, "<fc:" & Color.Green.Name & "><b>Reunião</b></fc>" & "<fc:" & Color.Indigo.Name & "><b> " & item.Data & "</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
         RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
@@ -208,7 +208,7 @@ Public Class clsListaAusente
         'Ausente       
         '       Horas: xx:xx        
         '       Descrição: xxxxxxxxxxxx      
-        RichAddLineFmt(parCampo, "<fc:" & Color.Orange.Name & "><b>Ausente</b></fc>")
+        RichAddLineFmt(parCampo, "<fc:" & Color.Orange.Name & "><b>Ausente</b></fc>" & "<fc:" & Color.Indigo.Name & "><b> " & item.Data & "</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
         RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
@@ -222,7 +222,7 @@ Public Class clsListaOutros
         'Outros       
         '       Horas: xx:xx        
         '       Descrição: xxxxxxxxxxxx      
-        RichAddLineFmt(parCampo, "<fc:" & Color.Maroon.Name & "><b>Outros</b></fc>")
+        RichAddLineFmt(parCampo, "<fc:" & Color.Maroon.Name & "><b>Outros</b></fc>" & "<fc:" & Color.Indigo.Name & "><b> " & item.Data & "</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
         RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
