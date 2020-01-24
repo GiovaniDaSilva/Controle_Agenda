@@ -10,21 +10,16 @@
         'Dim locCaminho As String = "C:\Projeto\Controle_Agenda\BancoAgenda.db"
         'Dim locCaminho As String = "Data Source=C:\Giovani\Diversos\Giovani\Agenda\BancoAgenda.db;"
 
+        If glfConexao Is Nothing Then
 
-        Try
-            If glfConexao Is Nothing Then
-
-                If Not IO.File.Exists(CaminhoBase) Then
-                    Throw New Exception("Arquivo de banco não localizado.")
-                End If
-
-                glfConexao = New System.Data.SQLite.SQLiteConnection("Data Source=" & CaminhoBase & ";")
-                glfConexao.Open()
+            If Not IO.File.Exists(CaminhoBase) Then
+                Throw New Exception("Arquivo de banco não localizado.")
             End If
 
-        Catch ex As Exception
-            clsTools.subTrataExcessao(ex)
-        End Try
+            glfConexao = New System.Data.SQLite.SQLiteConnection("Data Source=" & CaminhoBase & ";")
+            glfConexao.Open()
+        End If
+
 
         Return glfConexao
     End Function

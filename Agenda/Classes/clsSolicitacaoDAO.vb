@@ -43,30 +43,27 @@ Public Class clsSolicitacaoDAO
         Dim solicitacao As clsSolicitacao = Nothing
         Dim locSQL As String
 
-        Try
-            Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
-                locSQL = "SELECT  * FROM SOLICITACOES WHERE ID_ATIVIDADE = " & iD
-                locSQL &= " ORDER BY ID DESC"
-                Comm.CommandText = locSQL
 
-                Using Reader = Comm.ExecuteReader()
-                    If Reader.Read() Then
-                        solicitacao = New clsSolicitacao
-                        solicitacao.ID = Reader("ID")
-                        solicitacao.Codigo = Reader("CODIGO")
-                        solicitacao.UF = Reader("UF")
-                        solicitacao.Resumo = Reader("RESUMO")
-                        solicitacao.Objeto = Reader("OBJETO")
-                        solicitacao.Situacao = Reader("SITUACAO")
-                        solicitacao.SubTipo = Reader("SUBTIPO")
-                        solicitacao.ID_ATIVIDADE = Reader("ID_ATIVIDADE")
-                    End If
-                End Using
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
+            locSQL = "SELECT  * FROM SOLICITACOES WHERE ID_ATIVIDADE = " & iD
+            locSQL &= " ORDER BY ID DESC"
+            Comm.CommandText = locSQL
+
+            Using Reader = Comm.ExecuteReader()
+                If Reader.Read() Then
+                    solicitacao = New clsSolicitacao
+                    solicitacao.ID = Reader("ID")
+                    solicitacao.Codigo = Reader("CODIGO")
+                    solicitacao.UF = Reader("UF")
+                    solicitacao.Resumo = Reader("RESUMO")
+                    solicitacao.Objeto = Reader("OBJETO")
+                    solicitacao.Situacao = Reader("SITUACAO")
+                    solicitacao.SubTipo = Reader("SUBTIPO")
+                    solicitacao.ID_ATIVIDADE = Reader("ID_ATIVIDADE")
+                End If
             End Using
+        End Using
 
-        Catch ex As Exception
-            clsTools.subTrataExcessao(ex)
-        End Try
 
         Return solicitacao
     End Function

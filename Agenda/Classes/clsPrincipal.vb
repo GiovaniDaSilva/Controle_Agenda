@@ -11,10 +11,10 @@ Public Class clsPrincipal
     End Enum
 
 
-    Public Sub Adicionar(byval parIni As clsParametrosIni ,  Optional parAtividade As clsAtividade = Nothing)
+    Public Sub Adicionar(ByVal parIni As clsParametrosIni, Optional parAtividade As clsAtividade = Nothing)
         Dim locFormAdicionar As New frmAdicionar
 
-        locFormAdicionar.ChamaFormulario(parIni,parAtividade)
+        locFormAdicionar.ChamaFormulario(parIni, parAtividade)
     End Sub
 
     Public Function funCarregarAtividades(ByVal parFiltro As clsAtividade, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
@@ -80,6 +80,7 @@ Public Class clsPrincipal
         Dim locIni As New clsIni
         Return locIni.funCarregaIni
     End Function
+
 End Class
 
 
@@ -128,7 +129,7 @@ Public Class clsListaSolictacao
             End If
         End If
 
-            RichAddLineFmt(parCampo, "<fc:" & Color.Red.Name & "><b>Solicitação</b></fc>")
+        RichAddLineFmt(parCampo, "<fc:" & Color.Red.Name & "><b>Solicitação</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Código: " & item.Codigo)
 
         If Not locDetalhes Is Nothing Then
@@ -144,9 +145,10 @@ Public Class clsListaSolictacao
             RichAddLineFmt(parCampo, clsTools.Tab & "Situação: " & locDetalhes.Situacao)
         End If
 
-        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.Descricao.ToString().Replace(ControlChars.Lf, " "))
+        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
     End Sub
+
 End Class
 
 
@@ -163,7 +165,7 @@ Public Class clsListaPBI
         RichAddLineFmt(parCampo, clsTools.Tab & "Código: " & item.Codigo)
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
         RichAddLineFmt(parCampo, clsTools.Tab & "IPP: -")
-        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.Descricao.ToString().Replace(ControlChars.Lf, " "))
+        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
     End Sub
 End Class
@@ -178,7 +180,7 @@ Public Class clsListaReuniao
         '       Descrição: xxxxxxxxxxxx      
         RichAddLineFmt(parCampo, "<fc:" & Color.Green.Name & "><b>Reunião</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
-        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.Descricao.ToString().Replace(ControlChars.Lf, " "))
+        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
     End Sub
 End Class
@@ -192,7 +194,7 @@ Public Class clsListaAusente
         '       Descrição: xxxxxxxxxxxx      
         RichAddLineFmt(parCampo, "<fc:" & Color.Orange.Name & "><b>Ausente</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
-        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.Descricao.ToString().Replace(ControlChars.Lf, " "))
+        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
     End Sub
 End Class
@@ -206,7 +208,7 @@ Public Class clsListaOutros
         '       Descrição: xxxxxxxxxxxx      
         RichAddLineFmt(parCampo, "<fc:" & Color.Maroon.Name & "><b>Outros</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
-        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.Descricao.ToString().Replace(ControlChars.Lf, " "))
+        RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
     End Sub
 End Class

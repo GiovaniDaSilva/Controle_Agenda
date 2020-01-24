@@ -200,9 +200,7 @@
     <Content Include="Agenda.ico" />
     <None Include="Resources\Versoes.html" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Help\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
