@@ -41,6 +41,7 @@ Public Class frmPrincipal
         End If
 
         txtDescricao.Clear()
+        pHorasDia.Visible = false
     End Sub
 
     Private Sub btnAtualiza_Click(sender As Object, e As EventArgs) Handles btnAtualiza.Click
@@ -127,6 +128,10 @@ Public Class frmPrincipal
             End If
 
         End If
+
+        pHorasDia.Visible = true
+        lblHorasDia.Text = controle.funRetornaTotalHorasDia(lista,lista(e.RowIndex).Data)
+        
     End Sub
 
     Private Sub subChamaFormularioAdicionarEdicao(i As Integer)

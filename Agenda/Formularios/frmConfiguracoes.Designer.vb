@@ -24,6 +24,9 @@ Partial Class frmConfiguracoes
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmConfiguracoes))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.rbPeriodo = New System.Windows.Forms.RadioButton()
+        Me.rbHorasTrabalhadas = New System.Windows.Forms.RadioButton()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rbSeteDias = New System.Windows.Forms.RadioButton()
         Me.rbDataAtual = New System.Windows.Forms.RadioButton()
@@ -39,16 +42,13 @@ Partial Class frmConfiguracoes
         Me.rbDecrescente = New System.Windows.Forms.RadioButton()
         Me.rbCrescente = New System.Windows.Forms.RadioButton()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.rbHorasTrabalhadas = New System.Windows.Forms.RadioButton()
-        Me.rbPeriodo = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout
+        Me.GroupBox6.SuspendLayout
         Me.GroupBox4.SuspendLayout
         Me.GroupBox2.SuspendLayout
         Me.GroupBox5.SuspendLayout
         Me.GroupBox3.SuspendLayout
         CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox6.SuspendLayout
         Me.SuspendLayout
         '
         'GroupBox1
@@ -63,6 +63,42 @@ Partial Class frmConfiguracoes
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = false
         Me.GroupBox1.Text = "Geral"
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.rbPeriodo)
+        Me.GroupBox6.Controls.Add(Me.rbHorasTrabalhadas)
+        Me.GroupBox6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.GroupBox6.Location = New System.Drawing.Point(256, 19)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(295, 43)
+        Me.GroupBox6.TabIndex = 3
+        Me.GroupBox6.TabStop = false
+        Me.GroupBox6.Text = "Atividades por"
+        '
+        'rbPeriodo
+        '
+        Me.rbPeriodo.AutoSize = true
+        Me.rbPeriodo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.rbPeriodo.Location = New System.Drawing.Point(187, 19)
+        Me.rbPeriodo.Name = "rbPeriodo"
+        Me.rbPeriodo.Size = New System.Drawing.Size(62, 17)
+        Me.rbPeriodo.TabIndex = 2
+        Me.rbPeriodo.Text = "Período"
+        Me.rbPeriodo.UseVisualStyleBackColor = true
+        '
+        'rbHorasTrabalhadas
+        '
+        Me.rbHorasTrabalhadas.AutoSize = true
+        Me.rbHorasTrabalhadas.Checked = true
+        Me.rbHorasTrabalhadas.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.rbHorasTrabalhadas.Location = New System.Drawing.Point(60, 19)
+        Me.rbHorasTrabalhadas.Name = "rbHorasTrabalhadas"
+        Me.rbHorasTrabalhadas.Size = New System.Drawing.Size(110, 17)
+        Me.rbHorasTrabalhadas.TabIndex = 1
+        Me.rbHorasTrabalhadas.TabStop = true
+        Me.rbHorasTrabalhadas.Text = "Horas trabalhadas"
+        Me.rbHorasTrabalhadas.UseVisualStyleBackColor = true
         '
         'GroupBox4
         '
@@ -132,7 +168,7 @@ Partial Class frmConfiguracoes
         Me.GroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.GroupBox2.Location = New System.Drawing.Point(12, 180)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(715, 210)
+        Me.GroupBox2.Size = New System.Drawing.Size(715, 197)
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = false
         Me.GroupBox2.Text = "Dados"
@@ -234,42 +270,6 @@ Partial Class frmConfiguracoes
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = false
         '
-        'GroupBox6
-        '
-        Me.GroupBox6.Controls.Add(Me.rbPeriodo)
-        Me.GroupBox6.Controls.Add(Me.rbHorasTrabalhadas)
-        Me.GroupBox6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.GroupBox6.Location = New System.Drawing.Point(256, 19)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(295, 43)
-        Me.GroupBox6.TabIndex = 3
-        Me.GroupBox6.TabStop = false
-        Me.GroupBox6.Text = "Atividades por"
-        '
-        'rbHorasTrabalhadas
-        '
-        Me.rbHorasTrabalhadas.AutoSize = true
-        Me.rbHorasTrabalhadas.Checked = true
-        Me.rbHorasTrabalhadas.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbHorasTrabalhadas.Location = New System.Drawing.Point(60, 19)
-        Me.rbHorasTrabalhadas.Name = "rbHorasTrabalhadas"
-        Me.rbHorasTrabalhadas.Size = New System.Drawing.Size(110, 17)
-        Me.rbHorasTrabalhadas.TabIndex = 1
-        Me.rbHorasTrabalhadas.TabStop = true
-        Me.rbHorasTrabalhadas.Text = "Horas trabalhadas"
-        Me.rbHorasTrabalhadas.UseVisualStyleBackColor = true
-        '
-        'rbPeriodo
-        '
-        Me.rbPeriodo.AutoSize = true
-        Me.rbPeriodo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbPeriodo.Location = New System.Drawing.Point(187, 19)
-        Me.rbPeriodo.Name = "rbPeriodo"
-        Me.rbPeriodo.Size = New System.Drawing.Size(62, 17)
-        Me.rbPeriodo.TabIndex = 2
-        Me.rbPeriodo.Text = "Período"
-        Me.rbPeriodo.UseVisualStyleBackColor = true
-        '
         'frmConfiguracoes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -287,6 +287,8 @@ Partial Class frmConfiguracoes
         Me.Text = "Configurações"
         Me.GroupBox1.ResumeLayout(false)
         Me.GroupBox1.PerformLayout
+        Me.GroupBox6.ResumeLayout(false)
+        Me.GroupBox6.PerformLayout
         Me.GroupBox4.ResumeLayout(false)
         Me.GroupBox4.PerformLayout
         Me.GroupBox2.ResumeLayout(false)
@@ -296,8 +298,6 @@ Partial Class frmConfiguracoes
         Me.GroupBox3.ResumeLayout(false)
         Me.GroupBox3.PerformLayout
         CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox6.ResumeLayout(false)
-        Me.GroupBox6.PerformLayout
         Me.ResumeLayout(false)
 
 End Sub

@@ -81,6 +81,22 @@ Public Class clsPrincipal
         Return locIni.funCarregaIni
     End Function
 
+
+    Public Function funRetornaTotalHorasDia(atividades As List(Of clsConsultaAtividades), pData As Date) As String
+        Dim locDia As New List(Of clsConsultaAtividades)
+        Dim locTime As TimeSpan
+
+        locDia = atividades.FindAll(Function(X) X.Data = pData)
+
+        For Each item In locDia
+            If Trim(item.Horas) <> ":" Then
+                locTime = locTime.Add(TimeSpan.Parse(item.Horas))
+            End If
+        Next
+        Return Mid(locTime.ToString(), 1, 5)
+
+    End Function
+
 End Class
 
 
