@@ -67,17 +67,15 @@ Namespace My.Resources
         '''			.Titulo{                                            
         '''                color: darkblue;
         '''                font-family: &apos;Segoe UI&apos;, Tahoma, Geneva, Verdana, sans-serif;
+        '''                
         '''			}
         '''
-        '''            .Atualizacao{                
+        '''            .TituloPrincipal{     
+        '''                color: darkblue;
+        '''                font-family: &apos;Segoe UI&apos;, Tahoma, Geneva, Verdana, sans-serif;                                                       
+        '''                text-align: center;
         '''                border-radius: 4px;
-        '''                
-        '''                color: black;  
-        '''                font-family: &apos;Segoe UI&apos;, Tahoma, Geneva, Verdana, sans-serif;
-        '''            }
-        '''
-        '''            .Fundo{                
-        '''                background-color:   [rest of string was truncated]&quot;;.
+        '''			 [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Versoes() As String
             Get
