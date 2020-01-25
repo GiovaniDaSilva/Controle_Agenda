@@ -20,12 +20,11 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
             MsgBox("Será carregado os valores padrão do sistema.")
         End If
 
-        locParametros.InicializarCampoApartirDe = LeArquivoINI(nome_arquivo_ini, "Geral", "CampoAPartirDe", "7Dias")
-        locParametros.Horastrabalhadas  = LeArquivoINI(nome_arquivo_ini, "Geral", "HorasTrabalhadas", "Total")
-
-        locParametros.OrdenacaoDasAtividades = LeArquivoINI(nome_arquivo_ini, "Dados", "Ordenacao", "Dec")
-        locParametros.SolicitarHTML = LeArquivoINI(nome_arquivo_ini, "Dados", "SolicitarHTML", "true")
-        locParametros.CaminhoBase = LeArquivoINI(nome_arquivo_ini, "Dados", "CaminhoBase", Application.StartupPath & "\BancoAgenda.db")
+        locParametros.InicializarCampoApartirDe = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.CampoAPartirDe, enuApartirDe.Dias7)
+        locParametros.Horastrabalhadas = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.HorasTrabalhadas, enuHorasTrabalhadas.Total)
+        locParametros.OrdenacaoDasAtividades = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Dados, enuParametrosIni.Ordenacao, enuOrdenacaoDasAtividades.Dec)
+        locParametros.SolicitarHTML = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Dados, enuParametrosIni.SolicitarHTML, "true")
+        locParametros.CaminhoBase = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Dados, enuParametrosIni.CaminhoBase, Application.StartupPath & "\BancoAgenda.db")
 
         Return locParametros
     End Function
@@ -44,12 +43,12 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
     public Sub gravaArquivoini(parParametros As clsParametrosIni ) 
         Dim nome_arquivo_ini As String = nomeArquivoINI()
 
-        WritePrivateProfileString("Geral", "CampoAPartirDe", parParametros.InicializarCampoApartirDe, nome_arquivo_ini)        
-        WritePrivateProfileString("Geral", "HorasTrabalhadas", parParametros.Horastrabalhadas , nome_arquivo_ini)
+        WritePrivateProfileString(enuGrupoIni.Geral, enuParametrosIni.CampoAPartirDe, parParametros.InicializarCampoApartirDe, nome_arquivo_ini)
+        WritePrivateProfileString(enuGrupoIni.Geral, enuParametrosIni.HorasTrabalhadas, parParametros.Horastrabalhadas, nome_arquivo_ini)
 
-        WritePrivateProfileString("Dados", "Ordenacao", parParametros.OrdenacaoDasAtividades, nome_arquivo_ini)
-        WritePrivateProfileString("Dados", "SolicitarHTML", parParametros.SolicitarHTML, nome_arquivo_ini)
-        WritePrivateProfileString("Dados", "CaminhoBase", parParametros.CaminhoBase, nome_arquivo_ini)
+        WritePrivateProfileString(enuGrupoIni.Dados, enuParametrosIni.Ordenacao, parParametros.OrdenacaoDasAtividades, nome_arquivo_ini)
+        WritePrivateProfileString(enuGrupoIni.Dados, enuParametrosIni.SolicitarHTML, parParametros.SolicitarHTML, nome_arquivo_ini)
+        WritePrivateProfileString(enuGrupoIni.Dados, enuParametrosIni.CaminhoBase, parParametros.CaminhoBase, nome_arquivo_ini)
     End Sub
 
     ' Retorna o nome do arquivo INI

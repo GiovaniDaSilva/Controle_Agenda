@@ -24,35 +24,35 @@
     Private Sub subCarregaCampos()
         cbInicializarWindows.Checked = clsRegistro.subExisteRegistroAplicacao()
 
-        rbEmbranco.Checked = IIf(glfParametros.InicializarCampoApartirDe = "Branco", True, False)
-        rbDataAtual.Checked = IIf(glfParametros.InicializarCampoApartirDe = "Atual", True, False)
-        rbSeteDias.Checked = IIf(glfParametros.InicializarCampoApartirDe = "7Dias", True, False)
+        rbEmbranco.Checked = IIf(glfParametros.InicializarCampoApartirDe = enuApartirDe.Branco, True, False)
+        rbDataAtual.Checked = IIf(glfParametros.InicializarCampoApartirDe = enuApartirDe.Atual, True, False)
+        rbSeteDias.Checked = IIf(glfParametros.InicializarCampoApartirDe = enuApartirDe.Dias7, True, False)
 
-        rbDecrescente.Checked = IIf(glfParametros.OrdenacaoDasAtividades = "Dec", True, False)
-        rbCrescente.Checked = IIf(glfParametros.OrdenacaoDasAtividades = "Cre", True, False)
+        rbDecrescente.Checked = IIf(glfParametros.OrdenacaoDasAtividades = enuOrdenacaoDasAtividades.Dec, True, False)
+        rbCrescente.Checked = IIf(glfParametros.OrdenacaoDasAtividades = enuOrdenacaoDasAtividades.Cre, True, False)
 
         rbSimHTML.Checked = glfParametros.SolicitarHTML
         rbNaoHTML.Checked = Not rbSimHTML.Checked
 
-        txtCaminhoBase.Text = glfParametros.CaminhoBase 
+        txtCaminhoBase.Text = glfParametros.CaminhoBase
 
-        rbHorasTrabalhadas.Checked  = IIf(glfParametros.Horastrabalhadas  = "Total", True, False)
-        rbPeriodo.Checked  = IIf(glfParametros.Horastrabalhadas  = "Periodo", True, False)        
+        rbHorasTrabalhadas.Checked = IIf(glfParametros.Horastrabalhadas = enuHorasTrabalhadas.Total, True, False)
+        rbPeriodo.Checked = IIf(glfParametros.Horastrabalhadas = enuHorasTrabalhadas.Periodo, True, False)
     End Sub
 
     Private Sub subPreenheParametros()
         If rbEmbranco.Checked Then
-            glfParametros.InicializarCampoApartirDe = "Branco"
+            glfParametros.InicializarCampoApartirDe = enuApartirDe.Branco
         ElseIf rbDataAtual.Checked Then
-            glfParametros.InicializarCampoApartirDe = "Atual"
+            glfParametros.InicializarCampoApartirDe = enuApartirDe.Atual
         Else
-            glfParametros.InicializarCampoApartirDe = "7Dias"
+            glfParametros.InicializarCampoApartirDe = enuApartirDe.Dias7
         End If
 
-        glfParametros.OrdenacaoDasAtividades = IIf(rbCrescente.Checked, "Cre", "Dec")
+        glfParametros.OrdenacaoDasAtividades = IIf(rbCrescente.Checked, enuOrdenacaoDasAtividades.Cre, enuOrdenacaoDasAtividades.Dec)
         glfParametros.SolicitarHTML = IIf(rbSimHTML.Checked, True, False)
         glfParametros.CaminhoBase = txtCaminhoBase.Text
-        glfParametros.Horastrabalhadas =  IIf(rbHorasTrabalhadas.Checked, "Total", "Periodo")
+        glfParametros.Horastrabalhadas = IIf(rbHorasTrabalhadas.Checked, enuHorasTrabalhadas.Total, enuHorasTrabalhadas.Periodo)
     End Sub
 
     Private Sub cbInicializarWindows_CheckedChanged(sender As Object, e As EventArgs) Handles cbInicializarWindows.CheckedChanged

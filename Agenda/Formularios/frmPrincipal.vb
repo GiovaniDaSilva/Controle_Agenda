@@ -147,9 +147,9 @@ Public Class frmPrincipal
 
         subCarregaComboTipo(cbTipo)
 
-        If ParametrosIni.InicializarCampoApartirDe = "Atual" Then
+        If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
             txtApartirDe.Text = Now
-        ElseIf ParametrosIni.InicializarCampoApartirDe = "7Dias" Then
+        ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
             txtApartirDe.Text = Now.AddDays(-7)
         End If
 
@@ -344,7 +344,7 @@ Public Class frmPrincipal
 
         If (e.ColumnIndex = enuIndexColunas.HORA) Then
             If Trim(e.Value) = ":" Then Exit Sub
-            If ParametrosIni.Horastrabalhadas = "Periodo" Then
+            If ParametrosIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo Then
                 gridAtividades.Rows(e.RowIndex).Cells(enuIndexColunas.HORA).ToolTipText = controle.funRetornaToolTipoPeriodo(lista(e.RowIndex).Periodos)
             End If
         ElseIf (e.ColumnIndex = enuIndexColunas.CODIGO) Then
