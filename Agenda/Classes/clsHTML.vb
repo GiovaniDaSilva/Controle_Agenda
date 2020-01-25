@@ -15,48 +15,68 @@ Public Class clsHTML
         Dim locstring = clsTools.funLimpaHTMLTableSolicitacoes(pHTML)
         Dim doc As New HtmlDocument()
 
-        Try
-            If locstring = vbNullString Then
-                Throw New Exception("HTML incorreto.")
-            End If
 
-            doc.LoadHtml(locstring)
-            Dim nodes = doc.DocumentNode.SelectNodes("//table")
-            Dim table = nodes(5)
+        If locstring = vbNullString Then
+            Throw New Exception("HTML incorreto.")
+        End If
 
-            'For Each table As HtmlNode In nodes(5)
+        doc.LoadHtml(locstring)
+        Dim nodes = doc.DocumentNode.SelectNodes("//table")
+        Dim table = nodes(5)
 
-            For Each row As HtmlNode In table.SelectNodes("tr")
-                iLinha += 1
-                If iLinha = 1 Then Continue For
+        'For Each table As HtmlNode In nodes(5)
+        Dim camposHTML As New CamposHTML
+        For Each row As HtmlNode In table.SelectNodes("tr")
+            iLinha += 1
 
-                locSolicitaco = New clsSolicitacao
+            If iLinha = 1 Then
                 iColuna = 0
                 For Each cell As HtmlNode In row.SelectNodes("th|td")
                     iColuna += 1
 
-                    Select Case iColuna
-                        Case 1 : locSolicitaco.UF = cell.InnerText
-                        Case 2 : locSolicitaco.Codigo = Val(cell.InnerText)
-                        Case 3 : locSolicitaco.Resumo = Trim(cell.InnerText)
-                        Case 4 : locSolicitaco.Objeto = Trim(cell.InnerText)
-                        Case 5 : locSolicitaco.SubTipo = Trim(cell.InnerText)
-                        Case 6 : locSolicitaco.Situacao = Trim(cell.InnerText)
+                    Select Case Trim(cell.InnerText)
+                        Case "UF" : camposHTML.UF = iColuna
+                        Case "Código" : camposHTML.Codigo = iColuna
+                        Case "Resumo" : camposHTML.Resumo = iColuna
+                        Case "Objeto" : camposHTML.Objeto = iColuna
+                        Case "Subtipo" : camposHTML.SubTipo = iColuna
+                        Case "Situação" : camposHTML.Situacao = iColuna
                     End Select
-
                 Next cell
-                locLista.Add(locSolicitaco)
-            Next row
-            'next table
+                Continue For
+            End If
 
-        Catch ex As Exception
-            clsTools.subTrataExcessao(ex)
-        End Try
+            locSolicitaco = New clsSolicitacao
+            iColuna = 0
+            For Each cell As HtmlNode In row.SelectNodes("th|td")
+                iColuna += 1
 
+                Select Case iColuna
+                    Case camposHTML.UF : locSolicitaco.UF = cell.InnerText
+                    Case camposHTML.Codigo : locSolicitaco.Codigo = Val(cell.InnerText)
+                    Case camposHTML.Resumo : locSolicitaco.Resumo = Trim(cell.InnerText)
+                    Case camposHTML.Objeto : locSolicitaco.Objeto = Trim(cell.InnerText)
+                    Case camposHTML.SubTipo : locSolicitaco.SubTipo = Trim(cell.InnerText)
+                    Case camposHTML.Situacao : locSolicitaco.Situacao = Trim(cell.InnerText)
+                End Select
+
+            Next cell
+            locLista.Add(locSolicitaco)
+        Next row
+        'next table
 
 
         Return locLista
     End Function
+
+    Public Class CamposHTML
+        Public Property UF As Integer
+        Public Property Codigo As Integer
+        Public Property Resumo As Integer
+        Public Property Objeto As Integer
+        Public Property SubTipo As Integer
+        Public Property Situacao As Integer
+    End Class
 End Class
 
 
