@@ -119,7 +119,7 @@
     End Sub
 
     Private Sub subConfiguraForm()
-        If glfIni.Horastrabalhadas = "Total" Then
+        If glfIni.Horastrabalhadas = enuHorasTrabalhadas.Total Then
             pCamposMoveis.Top = 76
             Me.Height = 371
             gbPeriodo.Visible = False
