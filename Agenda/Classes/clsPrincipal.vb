@@ -1,4 +1,5 @@
-﻿Imports Agenda
+﻿Imports System.Text
+Imports Agenda
 
 Public Class clsPrincipal
 
@@ -97,6 +98,18 @@ Public Class clsPrincipal
 
     End Function
 
+    Friend Function funRetornaToolTipoPeriodo(periodos As List(Of clsPeriodo)) As String
+        Dim locResult As New StringBuilder(String.Empty)
+        If periodos.Count = 0 Then Return vbNullString
+
+        locResult.Append("Períodos:" & vbNewLine)
+
+        For Each item In periodos
+            locResult.Append(item.Hora_Inicial & " - " & item.Hora_Final & vbNewLine)
+        Next
+
+        Return locResult.ToString
+    End Function
 End Class
 
 

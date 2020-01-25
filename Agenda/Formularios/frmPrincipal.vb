@@ -74,8 +74,7 @@ Public Class frmPrincipal
         gridAtividades.Columns("DESCRICAO").DisplayIndex = enuPosicaoColunas.DESCRICAO
         gridAtividades.Columns("EDITAR").DisplayIndex = enuPosicaoColunas.EDITAR
 
-
-        gridAtividades.Columns("CODIGO").DefaultCellStyle.ForeColor = Color.blue                         
+        gridAtividades.Columns("CODIGO").DefaultCellStyle.ForeColor = Color.Blue
     End Sub
 
     Private Sub btnListar_Click(sender As Object, e As EventArgs) Handles btnListar.Click
@@ -337,6 +336,22 @@ Public Class frmPrincipal
 
     Private Sub Button3_Click_2(sender As Object, e As EventArgs) Handles btnVersao.Click
         frmBrowser.ShowDialog()
+    End Sub
+
+    Private Sub gridAtividades_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles gridAtividades.CellFormatting
+
+        If gridAtividades.Rows.Count = 0 Then Exit Sub
+
+        If (e.ColumnIndex = enuIndexColunas.HORA) Then
+            If Trim(e.Value) = ":" Then Exit Sub
+            If ParametrosIni.Horastrabalhadas = "Periodo" Then
+                gridAtividades.Rows(e.RowIndex).Cells(enuIndexColunas.HORA).ToolTipText = controle.funRetornaToolTipoPeriodo(lista(e.RowIndex).Periodos)
+            End If
+        ElseIf (e.ColumnIndex = enuIndexColunas.CODIGO) Then
+            If e.Value = 0 Then
+                e.Value = ""
+            End If
+        End If
     End Sub
 End Class
 
