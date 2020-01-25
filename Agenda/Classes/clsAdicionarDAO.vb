@@ -112,7 +112,7 @@ Public Class clsAdicionarDAO
                 locSQL &= " AND A.ID_TIPO_ATIVIDADE = " & parFiltro.ID_TIPO_ATIVIDADE
             End If
 
-            If parParametrosIni.OrdenacaoDasAtividades = "Dec" Then
+            If parParametrosIni.OrdenacaoDasAtividades = enuOrdenacaoDasAtividades.Dec Then
                 locSQL &= " ORDER BY A.DATA DESC, A.ID DESC"
             Else
                 locSQL &= " ORDER BY A.DATA ASC , A.ID ASC"

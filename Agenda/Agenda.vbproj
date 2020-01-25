@@ -102,6 +102,7 @@
     <Compile Include="Classes\clsAdicionar.vb" />
     <Compile Include="Classes\clsAdicionarDAO.vb" />
     <Compile Include="Classes\clsAtividade.vb" />
+    <Compile Include="Classes\clsEnumString.vb" />
     <Compile Include="Classes\clsHTML.vb" />
     <Compile Include="Classes\clsIni.vb" />
     <Compile Include="Classes\clsParametrosIni.vb" />
