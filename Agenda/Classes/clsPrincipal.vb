@@ -23,7 +23,7 @@ Public Class clsPrincipal
         Return DAO.carregarAtividades(parFiltro, parParametrosIni)
     End Function
 
-    Public Sub subListarAtivdades(ByRef txtTela As RichTextBox, ByRef lista As List(Of clsConsultaAtividades), Optional ByVal pHTML As String = vbNullString)
+    Public Sub subListarAtivdades(ByRef txtTela As RichTextBox, ByRef lista As List(Of clsConsultaAtividades), parIni As clsParametrosIni, Optional ByVal pHTML As String = vbNullString)
         Dim objeto As clsIListaAtividades
         Dim locExisteSolicitacao As Boolean
         Dim listaSolicitacao As New List(Of clsSolicitacao)
@@ -51,7 +51,7 @@ Public Class clsPrincipal
                 Case Else
                     objeto = New clsListaOutros
             End Select
-            objeto.subListaAtividade(txtTela, item)
+            objeto.subListaAtividade(txtTela, item, parIni)
         Next
     End Sub
 
@@ -98,14 +98,14 @@ Public Class clsPrincipal
 
     End Function
 
-    Friend Function funRetornaToolTipoPeriodo(periodos As List(Of clsPeriodo)) As String
+    Public Shared Function funRetornaToolTipoPeriodo(periodos As List(Of clsPeriodo), Optional parTab As Integer = 0) As String
         Dim locResult As New StringBuilder(String.Empty)
         If periodos.Count = 0 Then Return vbNullString
 
-        locResult.Append("Períodos:" & vbNewLine)
+        locResult.Append(Space(parTab) & "Períodos:" & vbNewLine)
 
         For Each item In periodos
-            locResult.Append(item.Hora_Inicial & " - " & item.Hora_Final & vbNewLine)
+            locResult.Append(Space(parTab) & item.Hora_Inicial & " - " & item.Hora_Final & vbNewLine)
         Next
 
         Return locResult.ToString
@@ -114,7 +114,7 @@ End Class
 
 
 Public Interface clsIListaAtividades
-    Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades)
+    Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades, parIni As clsParametrosIni)
 End Interface
 
 Public Class clsListaSolictacao
@@ -127,7 +127,7 @@ Public Class clsListaSolictacao
     Public Property ListaSolicitacoes As New List(Of clsSolicitacao)
 
 
-    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades) Implements clsIListaAtividades.subListaAtividade
+    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades, parIni As clsParametrosIni) Implements clsIListaAtividades.subListaAtividade
         'Solicitacao
         '       Código: xxxx           
         '       Titulo: xxxx           
@@ -167,6 +167,10 @@ Public Class clsListaSolictacao
 
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
 
+        If parIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And item.Periodos.Count > 0 Then
+            RichAddLineFmt(parCampo, clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 18))
+        End If
+
 
         If Not locDetalhes Is Nothing Then
             RichAddLineFmt(parCampo, clsTools.Tab & "SubTipo: " & locDetalhes.SubTipo)
@@ -184,7 +188,7 @@ End Class
 Public Class clsListaPBI
     Implements clsIListaAtividades
 
-    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades) Implements clsIListaAtividades.subListaAtividade
+    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades, parIni As clsParametrosIni) Implements clsIListaAtividades.subListaAtividade
         'PBI
         '       Código: xxxx           
         '       Horas: xx:xx
@@ -193,7 +197,11 @@ Public Class clsListaPBI
         RichAddLineFmt(parCampo, "<fc:" & Color.Blue.Name & "><b>PBI</b></fc>" & "<fc:" & Color.Indigo.Name & "><b> " & item.Data & "</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Código: " & item.Codigo)
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
-        RichAddLineFmt(parCampo, clsTools.Tab & "IPP: -")
+
+        If parIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And item.Periodos.Count > 0 Then
+            RichAddLineFmt(parCampo, clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 18))
+        End If
+
         RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
     End Sub
@@ -203,12 +211,15 @@ End Class
 Public Class clsListaReuniao
     Implements clsIListaAtividades
 
-    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades) Implements clsIListaAtividades.subListaAtividade
+    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades, parIni As clsParametrosIni) Implements clsIListaAtividades.subListaAtividade
         'Reuniao       
         '       Horas: xx:xx        
         '       Descrição: xxxxxxxxxxxx      
         RichAddLineFmt(parCampo, "<fc:" & Color.Green.Name & "><b>Reunião</b></fc>" & "<fc:" & Color.Indigo.Name & "><b> " & item.Data & "</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
+        If parIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And item.Periodos.Count > 0 Then
+            RichAddLineFmt(parCampo, clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 18))
+        End If
         RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
     End Sub
@@ -217,12 +228,15 @@ End Class
 Public Class clsListaAusente
     Implements clsIListaAtividades
 
-    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades) Implements clsIListaAtividades.subListaAtividade
+    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades, parIni As clsParametrosIni) Implements clsIListaAtividades.subListaAtividade
         'Ausente       
         '       Horas: xx:xx        
         '       Descrição: xxxxxxxxxxxx      
         RichAddLineFmt(parCampo, "<fc:" & Color.Orange.Name & "><b>Ausente</b></fc>" & "<fc:" & Color.Indigo.Name & "><b> " & item.Data & "</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
+        If parIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And item.Periodos.Count > 0 Then
+            RichAddLineFmt(parCampo, clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 18))
+        End If
         RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
     End Sub
@@ -231,12 +245,15 @@ End Class
 Public Class clsListaOutros
     Implements clsIListaAtividades
 
-    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades) Implements clsIListaAtividades.subListaAtividade
+    Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades, parIni As clsParametrosIni) Implements clsIListaAtividades.subListaAtividade
         'Outros       
         '       Horas: xx:xx        
         '       Descrição: xxxxxxxxxxxx      
         RichAddLineFmt(parCampo, "<fc:" & Color.Maroon.Name & "><b>Outros</b></fc>" & "<fc:" & Color.Indigo.Name & "><b> " & item.Data & "</b></fc>")
         RichAddLineFmt(parCampo, clsTools.Tab & "Horas: " & item.Horas)
+        If parIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And item.Periodos.Count > 0 Then
+            RichAddLineFmt(parCampo, clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 18))
+        End If
         RichAddLineFmt(parCampo, clsTools.Tab & "Descrição: " & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
     End Sub

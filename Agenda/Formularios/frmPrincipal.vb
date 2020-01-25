@@ -85,7 +85,7 @@ Public Class frmPrincipal
             locHTML = frmHTML.RetornarHTML
         End If
 
-        controle.subListarAtivdades(txtDescricao, lista, locHTML)
+        controle.subListarAtivdades(txtDescricao, lista, ParametrosIni, locHTML)
     End Sub
 
     Private Sub txtDescricao_Leave(sender As Object, e As EventArgs) Handles txtDescricao.Leave
