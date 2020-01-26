@@ -164,7 +164,9 @@ Public Class frmPrincipal
         End If
 
         subAtualizaLista()
+        controle.subConfiguraTimer(Timer2, ParametrosIni)
         Timer2.Start()
+
     End Sub
 
     Private Sub subCarregaIni()
@@ -278,6 +280,8 @@ Public Class frmPrincipal
         subRemoveSelecao()
         controle.Configurar(ParametrosIni)
         subCarregaIni()
+
+        controle.subConfiguraTimer(Timer2, ParametrosIni)
     End Sub
 
     'Variaveis de Controle da Animação
@@ -397,7 +401,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
-        NotifyIcon1.ShowBalloonTip(500, "Agenda", "Lembre-se de atualizar o apontamento de horas.", ToolTipIcon.Info)
+        controle.subExibeNotificacao(NotifyIcon1)
     End Sub
 End Class
 
