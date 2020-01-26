@@ -345,7 +345,7 @@ Public Class frmPrincipal
         If (e.ColumnIndex = enuIndexColunas.HORA) Then
             If Trim(e.Value) = ":" Then Exit Sub
             If ParametrosIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo Then
-                gridAtividades.Rows(e.RowIndex).Cells(enuIndexColunas.HORA).ToolTipText = controle.funRetornaToolTipoPeriodo(lista(e.RowIndex).Periodos)
+                gridAtividades.Rows(e.RowIndex).Cells(enuIndexColunas.HORA).ToolTipText = "Períodos:" & vbNewLine & controle.funRetornaToolTipoPeriodo(lista(e.RowIndex).Periodos)
             End If
         ElseIf (e.ColumnIndex = enuIndexColunas.CODIGO) Then
             If e.Value = 0 Then
