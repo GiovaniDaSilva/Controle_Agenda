@@ -432,7 +432,7 @@ Partial Class frmPrincipal
         'AbrirToolStripMenuItem
         '
         Me.AbrirToolStripMenuItem.Name = "AbrirToolStripMenuItem"
-        Me.AbrirToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AbrirToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.AbrirToolStripMenuItem.Text = "Abrir"
         '
         'ToolStripMenuItem1
@@ -443,7 +443,7 @@ Partial Class frmPrincipal
         'SairToolStripMenuItem
         '
         Me.SairToolStripMenuItem.Name = "SairToolStripMenuItem"
-        Me.SairToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SairToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.SairToolStripMenuItem.Text = "Sair"
         '
         'Timer2
@@ -464,7 +464,7 @@ Partial Class frmPrincipal
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Agenda - Versão 0.4"
+        Me.Text = "Agenda - Versão 0.5"
         CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pMenu.ResumeLayout(False)
         Me.pHorasDia.ResumeLayout(False)
