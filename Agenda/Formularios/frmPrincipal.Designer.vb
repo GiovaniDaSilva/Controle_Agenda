@@ -50,11 +50,17 @@ Partial Class frmPrincipal
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnLimpar = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AbrirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SairToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.gridAtividades, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pMenu.SuspendLayout()
         Me.pHorasDia.SuspendLayout()
         Me.pFiltro.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'gridAtividades
@@ -73,7 +79,7 @@ Partial Class frmPrincipal
         Me.gridAtividades.Name = "gridAtividades"
         Me.gridAtividades.ReadOnly = True
         Me.gridAtividades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridAtividades.Size = New System.Drawing.Size(823, 355)
+        Me.gridAtividades.Size = New System.Drawing.Size(823, 280)
         Me.gridAtividades.TabIndex = 1
         '
         'Editar
@@ -87,7 +93,7 @@ Partial Class frmPrincipal
         'Splitter1
         '
         Me.Splitter1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Splitter1.Location = New System.Drawing.Point(0, 432)
+        Me.Splitter1.Location = New System.Drawing.Point(0, 357)
         Me.Splitter1.Name = "Splitter1"
         Me.Splitter1.Size = New System.Drawing.Size(823, 14)
         Me.Splitter1.TabIndex = 2
@@ -156,7 +162,6 @@ Partial Class frmPrincipal
         Me.btnVersao.Name = "btnVersao"
         Me.btnVersao.Size = New System.Drawing.Size(57, 50)
         Me.btnVersao.TabIndex = 2
-        Me.ToolTip1.SetToolTip(Me.btnVersao, "Histórico de Versões")
         Me.btnVersao.UseVisualStyleBackColor = False
         '
         'btnApontarHoras
@@ -173,7 +178,6 @@ Partial Class frmPrincipal
         Me.btnApontarHoras.Name = "btnApontarHoras"
         Me.btnApontarHoras.Size = New System.Drawing.Size(57, 50)
         Me.btnApontarHoras.TabIndex = 5
-        Me.ToolTip1.SetToolTip(Me.btnApontarHoras, "Abrir Apontamento de Horas")
         Me.btnApontarHoras.UseVisualStyleBackColor = False
         '
         'btnConfiguracao
@@ -190,7 +194,6 @@ Partial Class frmPrincipal
         Me.btnConfiguracao.Name = "btnConfiguracao"
         Me.btnConfiguracao.Size = New System.Drawing.Size(57, 50)
         Me.btnConfiguracao.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.btnConfiguracao, "Configurações")
         Me.btnConfiguracao.UseVisualStyleBackColor = False
         '
         'Button1
@@ -207,7 +210,6 @@ Partial Class frmPrincipal
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(57, 50)
         Me.Button1.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.Button1, "Abrir Filtro")
         Me.Button1.UseVisualStyleBackColor = False
         '
         'btnListar
@@ -224,7 +226,6 @@ Partial Class frmPrincipal
         Me.btnListar.Name = "btnListar"
         Me.btnListar.Size = New System.Drawing.Size(57, 50)
         Me.btnListar.TabIndex = 6
-        Me.ToolTip1.SetToolTip(Me.btnListar, "Listar Atividades Detalhadas")
         Me.btnListar.UseVisualStyleBackColor = False
         '
         'btnAtualiza
@@ -241,7 +242,6 @@ Partial Class frmPrincipal
         Me.btnAtualiza.Name = "btnAtualiza"
         Me.btnAtualiza.Size = New System.Drawing.Size(57, 50)
         Me.btnAtualiza.TabIndex = 4
-        Me.ToolTip1.SetToolTip(Me.btnAtualiza, "Atualizar")
         Me.btnAtualiza.UseVisualStyleBackColor = False
         '
         'btnAdicinar
@@ -258,7 +258,6 @@ Partial Class frmPrincipal
         Me.btnAdicinar.Name = "btnAdicinar"
         Me.btnAdicinar.Size = New System.Drawing.Size(57, 50)
         Me.btnAdicinar.TabIndex = 7
-        Me.ToolTip1.SetToolTip(Me.btnAdicinar, "Cadastrar Atividade")
         Me.btnAdicinar.UseVisualStyleBackColor = False
         '
         'txtDescricao
@@ -268,10 +267,10 @@ Partial Class frmPrincipal
         Me.txtDescricao.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtDescricao.ForeColor = System.Drawing.SystemColors.Desktop
         Me.txtDescricao.HideSelection = False
-        Me.txtDescricao.Location = New System.Drawing.Point(0, 446)
+        Me.txtDescricao.Location = New System.Drawing.Point(0, 371)
         Me.txtDescricao.Name = "txtDescricao"
         Me.txtDescricao.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
-        Me.txtDescricao.Size = New System.Drawing.Size(823, 122)
+        Me.txtDescricao.Size = New System.Drawing.Size(823, 197)
         Me.txtDescricao.TabIndex = 3
         Me.txtDescricao.Tag = ""
         Me.txtDescricao.Text = ""
@@ -355,7 +354,6 @@ Partial Class frmPrincipal
         Me.btnFiltrar.Name = "btnFiltrar"
         Me.btnFiltrar.Size = New System.Drawing.Size(57, 50)
         Me.btnFiltrar.TabIndex = 8
-        Me.ToolTip1.SetToolTip(Me.btnFiltrar, "Aplicar Filtro")
         Me.btnFiltrar.UseVisualStyleBackColor = False
         '
         'Button2
@@ -372,7 +370,6 @@ Partial Class frmPrincipal
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(57, 50)
         Me.Button2.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.Button2, "Fechar Filtro")
         Me.Button2.UseVisualStyleBackColor = False
         '
         'txtApartirDe
@@ -413,11 +410,45 @@ Partial Class frmPrincipal
         Me.btnLimpar.Name = "btnLimpar"
         Me.btnLimpar.Size = New System.Drawing.Size(57, 50)
         Me.btnLimpar.TabIndex = 7
-        Me.ToolTip1.SetToolTip(Me.btnLimpar, "Limpar Filtro")
         Me.btnLimpar.UseVisualStyleBackColor = False
         '
         'Timer1
         '
+        '
+        'NotifyIcon1
+        '
+        Me.NotifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.NotifyIcon1.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
+        Me.NotifyIcon1.Text = "Agenda"
+        Me.NotifyIcon1.Visible = True
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AbrirToolStripMenuItem, Me.ToolStripMenuItem1, Me.SairToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(101, 54)
+        '
+        'AbrirToolStripMenuItem
+        '
+        Me.AbrirToolStripMenuItem.Name = "AbrirToolStripMenuItem"
+        Me.AbrirToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AbrirToolStripMenuItem.Text = "Abrir"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(97, 6)
+        '
+        'SairToolStripMenuItem
+        '
+        Me.SairToolStripMenuItem.Name = "SairToolStripMenuItem"
+        Me.SairToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SairToolStripMenuItem.Text = "Sair"
+        '
+        'Timer2
+        '
+        Me.Timer2.Interval = 10800000
         '
         'frmPrincipal
         '
@@ -440,6 +471,7 @@ Partial Class frmPrincipal
         Me.pHorasDia.PerformLayout()
         Me.pFiltro.ResumeLayout(False)
         Me.pFiltro.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -465,9 +497,14 @@ Partial Class frmPrincipal
     Friend WithEvents btnConfiguracao As Button
     Friend WithEvents Timer1 As Timer
     Friend WithEvents btnApontarHoras As Button
-    Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents btnVersao As Button
     Friend WithEvents pHorasDia As Panel
     Friend WithEvents lblHorasDia As Label
     Friend WithEvents Label3 As Label
+    Friend WithEvents NotifyIcon1 As NotifyIcon
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents AbrirToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem1 As ToolStripSeparator
+    Friend WithEvents SairToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Timer2 As Timer
 End Class
