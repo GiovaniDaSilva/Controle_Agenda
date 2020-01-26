@@ -24,6 +24,14 @@ Public MustInherit Class enuParametrosIni
     Public Shared Property Ordenacao As String = "Ordenacao"
     Public Shared Property SolicitarHTML As String = "SolicitarHTML"
     Public Shared Property CaminhoBase As String = "CaminhoBase"
+    Public Shared Property TempoNotificacao As String = "TempoNotificacao"
+End Class
+
+Public MustInherit Class enuTempoNotificacao
+    Public Shared Property Hora1 As String = "Hora1"
+    Public Shared Property Hora2 As String = "Hora2"
+    Public Shared Property Hora3 As String = "Hora3"
+    Public Shared Property Hora4 As String = "Hora4"
 End Class
 
 Public MustInherit Class enuGrupoIni

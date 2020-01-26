@@ -164,6 +164,9 @@ Public Class frmPrincipal
         End If
 
         subAtualizaLista()
+        controle.subConfiguraTimer(Timer2, ParametrosIni)
+        Timer2.Start()
+
     End Sub
 
     Private Sub subCarregaIni()
@@ -277,6 +280,8 @@ Public Class frmPrincipal
         subRemoveSelecao()
         controle.Configurar(ParametrosIni)
         subCarregaIni()
+
+        controle.subConfiguraTimer(Timer2, ParametrosIni)
     End Sub
 
     'Variaveis de Controle da Animação
@@ -346,13 +351,7 @@ Public Class frmPrincipal
 
     Private Sub Button3_Click_2(sender As Object, e As EventArgs) Handles btnVersao.Click
         'frmBrowser.ShowDialog()
-        Dim locVersao As String
-        locVersao = IO.Path.ChangeExtension(IO.Path.GetTempFileName(), ".html")
-
-        IO.File.WriteAllText(locVersao, My.Resources.Versoes)
-
-        Process.Start(locVersao)
-
+        controle.funChamaHTMLVersao()
     End Sub
 
     Private Sub gridAtividades_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles gridAtividades.CellFormatting
@@ -371,6 +370,39 @@ Public Class frmPrincipal
         End If
     End Sub
 
+
+    Private Sub subExibiFormulario(ByVal parValor As Boolean)
+
+        If parValor Then
+            Me.ShowIcon = True
+            Me.ShowInTaskbar = True
+            Me.Show()
+            Me.WindowState = FormWindowState.Normal
+        Else
+            Me.ShowIcon = False
+            Me.ShowInTaskbar = False
+            Me.WindowState = FormWindowState.Minimized
+            Me.Hide()
+        End If
+
+    End Sub
+
+    Private Sub frmPrincipal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        e.Cancel = True
+        subExibiFormulario(False)
+    End Sub
+
+    Private Sub AbrirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirToolStripMenuItem.Click
+        subExibiFormulario(True)
+    End Sub
+
+    Private Sub SairToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SairToolStripMenuItem.Click
+        End
+    End Sub
+
+    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+        controle.subExibeNotificacao(NotifyIcon1)
+    End Sub
 End Class
 
 

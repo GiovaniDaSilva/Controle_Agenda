@@ -134,6 +134,28 @@ Public Class clsPrincipal
         Return "<fc:Red>" & pValor & "</fc>"
     End Function
 
+    Public Sub funChamaHTMLVersao()
+        Dim locArquivo As String
+        locArquivo = IO.Path.ChangeExtension(IO.Path.GetTempFileName(), ".html")
+        IO.File.WriteAllText(locArquivo, My.Resources.Versoes)
+        Process.Start(locArquivo)
+    End Sub
+
+    Friend Sub subExibeNotificacao(notifyIcon1 As NotifyIcon)
+        notifyIcon1.ShowBalloonTip(500, "Agenda", "Lembre-se de atualizar o apontamento de horas.", ToolTipIcon.Info)
+    End Sub
+
+    Public Sub subConfiguraTimer(pTimer As Timer, parametrosini As clsParametrosIni)
+        Const minutoTimer = 60000
+        pTimer.Stop()
+        Select Case parametrosini.TempoNotificacao
+            Case enuTempoNotificacao.Hora1 : pTimer.Interval = (60 * minutoTimer)
+            Case enuTempoNotificacao.Hora2 : pTimer.Interval = (120 * minutoTimer)
+            Case enuTempoNotificacao.Hora3 : pTimer.Interval = (180 * minutoTimer)
+            Case enuTempoNotificacao.Hora4 : pTimer.Interval = (240 * minutoTimer)
+        End Select
+        pTimer.Start()
+    End Sub
 End Class
 
 

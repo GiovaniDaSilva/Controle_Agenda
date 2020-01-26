@@ -38,6 +38,15 @@
 
         rbHorasTrabalhadas.Checked = IIf(glfParametros.Horastrabalhadas = enuHorasTrabalhadas.Total, True, False)
         rbPeriodo.Checked = IIf(glfParametros.Horastrabalhadas = enuHorasTrabalhadas.Periodo, True, False)
+
+        Select Case glfParametros.TempoNotificacao
+            Case enuTempoNotificacao.Hora1 : cbTempoNotificacao.SelectedIndex = 0
+            Case enuTempoNotificacao.Hora2 : cbTempoNotificacao.SelectedIndex = 1
+            Case enuTempoNotificacao.Hora3 : cbTempoNotificacao.SelectedIndex = 2
+            Case enuTempoNotificacao.Hora4 : cbTempoNotificacao.SelectedIndex = 3
+            Case Else : cbTempoNotificacao.SelectedIndex = 1
+        End Select
+
     End Sub
 
     Private Sub subPreenheParametros()
@@ -53,6 +62,14 @@
         glfParametros.SolicitarHTML = IIf(rbSimHTML.Checked, True, False)
         glfParametros.CaminhoBase = txtCaminhoBase.Text
         glfParametros.Horastrabalhadas = IIf(rbHorasTrabalhadas.Checked, enuHorasTrabalhadas.Total, enuHorasTrabalhadas.Periodo)
+
+        Select Case cbTempoNotificacao.SelectedIndex
+            Case 0 : glfParametros.TempoNotificacao = enuTempoNotificacao.Hora1
+            Case 1 : glfParametros.TempoNotificacao = enuTempoNotificacao.Hora2
+            Case 2 : glfParametros.TempoNotificacao = enuTempoNotificacao.Hora3
+            Case 3 : glfParametros.TempoNotificacao = enuTempoNotificacao.Hora4
+        End Select
+
     End Sub
 
     Private Sub cbInicializarWindows_CheckedChanged(sender As Object, e As EventArgs) Handles cbInicializarWindows.CheckedChanged
@@ -94,5 +111,7 @@
 
     End Sub
 
+    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles GroupBox2.Enter
 
+    End Sub
 End Class
