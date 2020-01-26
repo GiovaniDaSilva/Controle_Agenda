@@ -111,6 +111,12 @@ Public Class clsPrincipal
 
     End Function
 
+    Public Sub subListarAtivdades(ByRef txtTela As RichTextBox, ByRef item As clsConsultaAtividades, parIni As clsParametrosIni)
+        Dim lista As New List(Of clsConsultaAtividades)
+        lista.Add(item)
+        subListarAtivdades(txtTela, lista, parIni)
+    End Sub
+
     Public Shared Function funRetornaToolTipoPeriodo(periodos As List(Of clsPeriodo), Optional parTab As Integer = 0) As String
         Dim locResult As New StringBuilder(String.Empty)
         Dim i As Integer = 0

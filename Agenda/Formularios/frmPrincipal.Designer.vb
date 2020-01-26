@@ -90,7 +90,7 @@ Partial Class frmPrincipal
         Me.Splitter1.Location = New System.Drawing.Point(0, 432)
         Me.Splitter1.Name = "Splitter1"
         Me.Splitter1.Size = New System.Drawing.Size(823, 14)
-        Me.Splitter1.TabIndex = 3
+        Me.Splitter1.TabIndex = 2
         Me.Splitter1.TabStop = False
         '
         'pMenu
@@ -107,7 +107,7 @@ Partial Class frmPrincipal
         Me.pMenu.Location = New System.Drawing.Point(0, 0)
         Me.pMenu.Name = "pMenu"
         Me.pMenu.Size = New System.Drawing.Size(823, 77)
-        Me.pMenu.TabIndex = 4
+        Me.pMenu.TabIndex = 0
         '
         'pHorasDia
         '
@@ -118,7 +118,7 @@ Partial Class frmPrincipal
         Me.pHorasDia.Location = New System.Drawing.Point(201, 12)
         Me.pHorasDia.Name = "pHorasDia"
         Me.pHorasDia.Size = New System.Drawing.Size(92, 58)
-        Me.pHorasDia.TabIndex = 13
+        Me.pHorasDia.TabIndex = 3
         '
         'lblHorasDia
         '
@@ -128,7 +128,7 @@ Partial Class frmPrincipal
         Me.lblHorasDia.Location = New System.Drawing.Point(25, 35)
         Me.lblHorasDia.Name = "lblHorasDia"
         Me.lblHorasDia.Size = New System.Drawing.Size(39, 13)
-        Me.lblHorasDia.TabIndex = 13
+        Me.lblHorasDia.TabIndex = 1
         Me.lblHorasDia.Text = "00:00"
         '
         'Label3
@@ -139,7 +139,7 @@ Partial Class frmPrincipal
         Me.Label3.Location = New System.Drawing.Point(8, 16)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(77, 13)
-        Me.Label3.TabIndex = 12
+        Me.Label3.TabIndex = 0
         Me.Label3.Text = "Total do Dia"
         '
         'btnVersao
@@ -155,7 +155,7 @@ Partial Class frmPrincipal
         Me.btnVersao.Location = New System.Drawing.Point(138, 15)
         Me.btnVersao.Name = "btnVersao"
         Me.btnVersao.Size = New System.Drawing.Size(57, 50)
-        Me.btnVersao.TabIndex = 9
+        Me.btnVersao.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.btnVersao, "Histórico de Versões")
         Me.btnVersao.UseVisualStyleBackColor = False
         '
@@ -172,7 +172,7 @@ Partial Class frmPrincipal
         Me.btnApontarHoras.Location = New System.Drawing.Point(609, 15)
         Me.btnApontarHoras.Name = "btnApontarHoras"
         Me.btnApontarHoras.Size = New System.Drawing.Size(57, 50)
-        Me.btnApontarHoras.TabIndex = 8
+        Me.btnApontarHoras.TabIndex = 5
         Me.ToolTip1.SetToolTip(Me.btnApontarHoras, "Abrir Apontamento de Horas")
         Me.btnApontarHoras.UseVisualStyleBackColor = False
         '
@@ -189,7 +189,7 @@ Partial Class frmPrincipal
         Me.btnConfiguracao.Location = New System.Drawing.Point(75, 15)
         Me.btnConfiguracao.Name = "btnConfiguracao"
         Me.btnConfiguracao.Size = New System.Drawing.Size(57, 50)
-        Me.btnConfiguracao.TabIndex = 7
+        Me.btnConfiguracao.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.btnConfiguracao, "Configurações")
         Me.btnConfiguracao.UseVisualStyleBackColor = False
         '
@@ -206,7 +206,7 @@ Partial Class frmPrincipal
         Me.Button1.Location = New System.Drawing.Point(12, 15)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(57, 50)
-        Me.Button1.TabIndex = 6
+        Me.Button1.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.Button1, "Abrir Filtro")
         Me.Button1.UseVisualStyleBackColor = False
         '
@@ -223,7 +223,7 @@ Partial Class frmPrincipal
         Me.btnListar.Location = New System.Drawing.Point(672, 15)
         Me.btnListar.Name = "btnListar"
         Me.btnListar.Size = New System.Drawing.Size(57, 50)
-        Me.btnListar.TabIndex = 5
+        Me.btnListar.TabIndex = 6
         Me.ToolTip1.SetToolTip(Me.btnListar, "Listar Atividades Detalhadas")
         Me.btnListar.UseVisualStyleBackColor = False
         '
@@ -257,7 +257,7 @@ Partial Class frmPrincipal
         Me.btnAdicinar.Location = New System.Drawing.Point(754, 15)
         Me.btnAdicinar.Name = "btnAdicinar"
         Me.btnAdicinar.Size = New System.Drawing.Size(57, 50)
-        Me.btnAdicinar.TabIndex = 3
+        Me.btnAdicinar.TabIndex = 7
         Me.ToolTip1.SetToolTip(Me.btnAdicinar, "Cadastrar Atividade")
         Me.btnAdicinar.UseVisualStyleBackColor = False
         '
@@ -272,7 +272,7 @@ Partial Class frmPrincipal
         Me.txtDescricao.Name = "txtDescricao"
         Me.txtDescricao.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
         Me.txtDescricao.Size = New System.Drawing.Size(823, 122)
-        Me.txtDescricao.TabIndex = 5
+        Me.txtDescricao.TabIndex = 3
         Me.txtDescricao.Tag = ""
         Me.txtDescricao.Text = ""
         '
@@ -291,7 +291,7 @@ Partial Class frmPrincipal
         Me.pFiltro.Location = New System.Drawing.Point(0, 151)
         Me.pFiltro.Name = "pFiltro"
         Me.pFiltro.Size = New System.Drawing.Size(823, 77)
-        Me.pFiltro.TabIndex = 7
+        Me.pFiltro.TabIndex = 4
         Me.pFiltro.Visible = False
         '
         'cbTipo
@@ -304,7 +304,7 @@ Partial Class frmPrincipal
         Me.cbTipo.Location = New System.Drawing.Point(355, 33)
         Me.cbTipo.Name = "cbTipo"
         Me.cbTipo.Size = New System.Drawing.Size(136, 21)
-        Me.cbTipo.TabIndex = 16
+        Me.cbTipo.TabIndex = 6
         '
         'Label2
         '
@@ -314,7 +314,7 @@ Partial Class frmPrincipal
         Me.Label2.Location = New System.Drawing.Point(352, 17)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(28, 13)
-        Me.Label2.TabIndex = 15
+        Me.Label2.TabIndex = 5
         Me.Label2.Text = "Tipo"
         '
         'txtCodigo
@@ -325,7 +325,7 @@ Partial Class frmPrincipal
         Me.txtCodigo.Mask = "0000000"
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(82, 20)
-        Me.txtCodigo.TabIndex = 13
+        Me.txtCodigo.TabIndex = 4
         Me.txtCodigo.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.txtCodigo.ValidatingType = GetType(Integer)
         '
@@ -337,7 +337,7 @@ Partial Class frmPrincipal
         Me.lblcodigo.Location = New System.Drawing.Point(227, 17)
         Me.lblcodigo.Name = "lblcodigo"
         Me.lblcodigo.Size = New System.Drawing.Size(40, 13)
-        Me.lblcodigo.TabIndex = 12
+        Me.lblcodigo.TabIndex = 3
         Me.lblcodigo.Text = "Código"
         '
         'btnFiltrar
@@ -354,7 +354,7 @@ Partial Class frmPrincipal
         Me.btnFiltrar.Location = New System.Drawing.Point(754, 17)
         Me.btnFiltrar.Name = "btnFiltrar"
         Me.btnFiltrar.Size = New System.Drawing.Size(57, 50)
-        Me.btnFiltrar.TabIndex = 11
+        Me.btnFiltrar.TabIndex = 8
         Me.ToolTip1.SetToolTip(Me.btnFiltrar, "Aplicar Filtro")
         Me.btnFiltrar.UseVisualStyleBackColor = False
         '
@@ -371,7 +371,7 @@ Partial Class frmPrincipal
         Me.Button2.Location = New System.Drawing.Point(12, 17)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(57, 50)
-        Me.Button2.TabIndex = 10
+        Me.Button2.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.Button2, "Fechar Filtro")
         Me.Button2.UseVisualStyleBackColor = False
         '
@@ -383,7 +383,7 @@ Partial Class frmPrincipal
         Me.txtApartirDe.Mask = "00/00/0000"
         Me.txtApartirDe.Name = "txtApartirDe"
         Me.txtApartirDe.Size = New System.Drawing.Size(80, 20)
-        Me.txtApartirDe.TabIndex = 9
+        Me.txtApartirDe.TabIndex = 2
         Me.txtApartirDe.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.txtApartirDe.ValidatingType = GetType(Date)
         '
@@ -395,7 +395,7 @@ Partial Class frmPrincipal
         Me.Label1.Location = New System.Drawing.Point(98, 17)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 13)
-        Me.Label1.TabIndex = 8
+        Me.Label1.TabIndex = 1
         Me.Label1.Text = "A partir de:"
         '
         'btnLimpar

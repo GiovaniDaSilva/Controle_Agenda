@@ -41,7 +41,7 @@ Public Class frmPrincipal
         End If
 
         txtDescricao.Clear()
-        pHorasDia.Visible = false
+        pHorasDia.Visible = False
     End Sub
 
     Private Sub btnAtualiza_Click(sender As Object, e As EventArgs) Handles btnAtualiza.Click
@@ -102,10 +102,20 @@ Public Class frmPrincipal
 
 
     Private Sub gridAtividades_Click(sender As Object, e As EventArgs) Handles gridAtividades.Click
-        subAtualizaDescricao()
+
+        If My.Computer.Keyboard.AltKeyDown Then
+            subConfiguraDescricao(MODO_IMPRESSAO)
+            controle.subListarAtivdades(txtDescricao, lista(gridAtividades.CurrentCell.RowIndex), ParametrosIni)
+        Else
+            subAtualizaDescricao()
+        End If
+
+
     End Sub
 
     Private Sub subAtualizaDescricao()
+        If txtDescricao.Tag = MODO_IMPRESSAO Then Exit Sub
+
         txtDescricao.Clear()
         subConfiguraDescricao(MODO_NORMAL)
         If lista.Count > 0 Then
@@ -128,9 +138,9 @@ Public Class frmPrincipal
 
         End If
 
-        pHorasDia.Visible = true
-        lblHorasDia.Text = controle.funRetornaTotalHorasDia(lista,lista(e.RowIndex).Data)
-        
+        pHorasDia.Visible = True
+        lblHorasDia.Text = controle.funRetornaTotalHorasDia(lista, lista(e.RowIndex).Data)
+
     End Sub
 
     Private Sub subChamaFormularioAdicionarEdicao(i As Integer)
@@ -353,6 +363,7 @@ Public Class frmPrincipal
             End If
         End If
     End Sub
+
 End Class
 
 
