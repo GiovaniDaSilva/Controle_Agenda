@@ -134,12 +134,6 @@
     <Compile Include="Formularios\frmAdicionar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formularios\frmBrowser.Designer.vb">
-      <DependentUpon>frmBrowser.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\frmBrowser.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Formularios\frmConfiguracoes.Designer.vb">
       <DependentUpon>frmConfiguracoes.vb</DependentUpon>
     </Compile>
@@ -179,9 +173,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Formularios\frmAdicionar.resx">
       <DependentUpon>frmAdicionar.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\frmBrowser.resx">
-      <DependentUpon>frmBrowser.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmConfiguracoes.resx">
       <DependentUpon>frmConfiguracoes.vb</DependentUpon>

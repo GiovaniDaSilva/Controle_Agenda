@@ -345,7 +345,14 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub Button3_Click_2(sender As Object, e As EventArgs) Handles btnVersao.Click
-        frmBrowser.ShowDialog()
+        'frmBrowser.ShowDialog()
+        Dim locVersao As String
+        locVersao = IO.Path.ChangeExtension(IO.Path.GetTempFileName(), ".html")
+
+        IO.File.WriteAllText(locVersao, My.Resources.Versoes)
+
+        Process.Start(locVersao)
+
     End Sub
 
     Private Sub gridAtividades_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles gridAtividades.CellFormatting
@@ -364,6 +371,61 @@ Public Class frmPrincipal
         End If
     End Sub
 
+
+    Private Function GetResourceFile(ByVal fileName As String) As String
+
+        Try
+
+            ' Cria um nome/localização temporária para o ficheiro. Por defeito é criado um
+            ' ficheiro com o a extensão *.tmp e por isso é necessário alterar o para *.exe
+            Dim tempPath As String = IO.Path.ChangeExtension(IO.Path.GetTempFileName(), ".html")
+
+            ' Verifica o nome da aplicação (Assembly)
+            Dim currentAssembly As Reflection.Assembly = Reflection.Assembly.GetExecutingAssembly()
+
+            ' Verifica todos os objectos disponíveis nos resources
+            Dim arrResources As String() = currentAssembly.GetManifestResourceNames()
+            For Each resource As String In arrResources
+
+                ' Verifica se o resource tem o nome do ficheiro a extrair
+                If resource.Contains(fileName) Then
+
+                    ' Lê o executável dos resources para uma Stream
+                    Using resourceStream As IO.Stream = currentAssembly.GetManifestResourceStream(resource)
+
+                        ' Cria um novo FileStream que irá escrever o ficheiro final
+                        Using writer As New IO.FileStream(tempPath, IO.FileMode.Create, IO.FileAccess.Write)
+
+                            Const size As Int16 = 4096
+                            Dim bytes(size) As Byte
+                            Dim numBytes As Int32 = 0
+
+                            ' Escreve todos os bytes da Stream criada, usando
+                            ' o FileStream e o método Write() num ciclo Do
+                            Do
+                                numBytes = resourceStream.Read(bytes, 0, size)
+                                writer.Write(bytes, 0, numBytes)
+
+                            Loop While (numBytes > 0)
+
+                        End Using ' writer
+
+                    End Using ' resourceStream
+
+                    ' Retorna a localização do ficheiro
+                    Return tempPath
+
+                End If
+            Next
+
+            ' Caso não tenha encontrado o ficheiro pretendido
+            Return String.Empty
+
+        Catch ex As Exception
+            Return String.Empty
+        End Try
+
+    End Function
 End Class
 
 
