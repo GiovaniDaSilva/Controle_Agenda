@@ -5,4 +5,6 @@
     Public Property OrdenacaoDasAtividades As String
     Public Property SolicitarHTML As Boolean
     Public Property CaminhoBase As String
+    Public Property TempoNotificacao As String
+
 End Class
