@@ -378,6 +378,7 @@ Public Class frmPrincipal
             Me.ShowInTaskbar = True
             Me.Show()
             Me.WindowState = FormWindowState.Normal
+            subAtualizaLista 
         Else
             Me.ShowIcon = False
             Me.ShowInTaskbar = False
