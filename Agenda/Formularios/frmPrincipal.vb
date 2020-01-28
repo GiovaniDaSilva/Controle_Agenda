@@ -94,10 +94,21 @@ Public Class frmPrincipal
             Exit Sub
         End If
 
+        'Não permite excluir toda a descrição na tela inicial.
+        'Contornar o problema de perder toda a descrição do primeiro registros da grid
+        If txtDescricao.Text = vbNullString And lista(gridAtividades.CurrentCell.RowIndex).Descricao <> vbNullString  then
+            MsgBox("Não é permitido apagar a descrição através da tela inicial."& _ 
+                    vbnewline & "Utilize o botão alterar atividade neste caso.")
+            txtDescricao.Text = lista(gridAtividades.CurrentCell.RowIndex).Descricao
+            Exit sub
+        End If
+
         lista(gridAtividades.CurrentCell.RowIndex).Descricao = txtDescricao.Text
         gridAtividades.Refresh()
 
-        If locAlterou Then controle.GravaDescricao(lista(gridAtividades.CurrentCell.RowIndex))
+        If locAlterou Then
+            controle.GravaDescricao(lista(gridAtividades.CurrentCell.RowIndex))
+        End If
     End Sub
 
 
