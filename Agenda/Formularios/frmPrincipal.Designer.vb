@@ -56,6 +56,7 @@ Partial Class frmPrincipal
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.SairToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).BeginInit
         Me.pMenu.SuspendLayout
         Me.pHorasDia.SuspendLayout
@@ -162,6 +163,7 @@ Partial Class frmPrincipal
         Me.btnVersao.Name = "btnVersao"
         Me.btnVersao.Size = New System.Drawing.Size(57, 50)
         Me.btnVersao.TabIndex = 2
+        Me.ToolTip1.SetToolTip(Me.btnVersao, "Novidades")
         Me.btnVersao.UseVisualStyleBackColor = false
         '
         'btnApontarHoras
@@ -178,6 +180,7 @@ Partial Class frmPrincipal
         Me.btnApontarHoras.Name = "btnApontarHoras"
         Me.btnApontarHoras.Size = New System.Drawing.Size(57, 50)
         Me.btnApontarHoras.TabIndex = 5
+        Me.ToolTip1.SetToolTip(Me.btnApontarHoras, "Abrir Apontamento de Horas")
         Me.btnApontarHoras.UseVisualStyleBackColor = false
         '
         'btnConfiguracao
@@ -194,6 +197,7 @@ Partial Class frmPrincipal
         Me.btnConfiguracao.Name = "btnConfiguracao"
         Me.btnConfiguracao.Size = New System.Drawing.Size(57, 50)
         Me.btnConfiguracao.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.btnConfiguracao, "Configurações")
         Me.btnConfiguracao.UseVisualStyleBackColor = false
         '
         'Button1
@@ -210,6 +214,7 @@ Partial Class frmPrincipal
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(57, 50)
         Me.Button1.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.Button1, "Abrir Filtro")
         Me.Button1.UseVisualStyleBackColor = false
         '
         'btnListar
@@ -226,6 +231,7 @@ Partial Class frmPrincipal
         Me.btnListar.Name = "btnListar"
         Me.btnListar.Size = New System.Drawing.Size(57, 50)
         Me.btnListar.TabIndex = 6
+        Me.ToolTip1.SetToolTip(Me.btnListar, "Listar Atividades")
         Me.btnListar.UseVisualStyleBackColor = false
         '
         'btnAtualiza
@@ -242,6 +248,7 @@ Partial Class frmPrincipal
         Me.btnAtualiza.Name = "btnAtualiza"
         Me.btnAtualiza.Size = New System.Drawing.Size(57, 50)
         Me.btnAtualiza.TabIndex = 4
+        Me.ToolTip1.SetToolTip(Me.btnAtualiza, "Atualizar")
         Me.btnAtualiza.UseVisualStyleBackColor = false
         '
         'btnAdicinar
@@ -258,6 +265,7 @@ Partial Class frmPrincipal
         Me.btnAdicinar.Name = "btnAdicinar"
         Me.btnAdicinar.Size = New System.Drawing.Size(57, 50)
         Me.btnAdicinar.TabIndex = 7
+        Me.ToolTip1.SetToolTip(Me.btnAdicinar, "Cadastrar Atividade")
         Me.btnAdicinar.UseVisualStyleBackColor = false
         '
         'txtDescricao
@@ -354,6 +362,7 @@ Partial Class frmPrincipal
         Me.btnFiltrar.Name = "btnFiltrar"
         Me.btnFiltrar.Size = New System.Drawing.Size(57, 50)
         Me.btnFiltrar.TabIndex = 8
+        Me.ToolTip1.SetToolTip(Me.btnFiltrar, "Aplicar Filtro")
         Me.btnFiltrar.UseVisualStyleBackColor = false
         '
         'Button2
@@ -370,6 +379,7 @@ Partial Class frmPrincipal
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(57, 50)
         Me.Button2.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.Button2, "Fechar Filtro")
         Me.Button2.UseVisualStyleBackColor = false
         '
         'txtApartirDe
@@ -410,6 +420,7 @@ Partial Class frmPrincipal
         Me.btnLimpar.Name = "btnLimpar"
         Me.btnLimpar.Size = New System.Drawing.Size(57, 50)
         Me.btnLimpar.TabIndex = 7
+        Me.ToolTip1.SetToolTip(Me.btnLimpar, "Limpar Filtro")
         Me.btnLimpar.UseVisualStyleBackColor = false
         '
         'Timer1
@@ -507,4 +518,5 @@ End Sub
     Friend WithEvents ToolStripMenuItem1 As ToolStripSeparator
     Friend WithEvents SairToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Timer2 As Timer
+    Friend WithEvents ToolTip1 As ToolTip
 End Class
