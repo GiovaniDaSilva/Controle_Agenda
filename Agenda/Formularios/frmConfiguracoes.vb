@@ -111,7 +111,31 @@
 
     End Sub
 
-    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles GroupBox2.Enter
+    Private Sub BtnExecutarBackup_Click(sender As Object, e As EventArgs) Handles BtnExecutarBackup.Click
+        Dim nomeBackup As String
+        Dim caminhoBackup As String
+
+        caminhoBackup = Application.StartupPath & "\backups"
+        nomeBackup = caminhoBackup & "\BancoAgenda_" & Now.ToString.Replace("/", "-").Replace(":", "-").Replace(" ", "-") & ".db"
+
+        clsConexao.CaminhoBase = txtCaminhoBase.Text
+        If clsConexao.ExisteBase Then
+            If Not IO.Directory.Exists(caminhoBackup) Then
+                IO.Directory.CreateDirectory(caminhoBackup)
+            End If
+            
+            Dim locNovo = New System.Data.SQLite.SQLiteConnection("Data Source=" & nomeBackup & ";")
+            locNovo.Open()
+            Try
+                clsConexao.glfConexao.BackupDatabase(locNovo, "main", "main", -1, Nothing, 0)
+            Finally
+                locNovo.Close()
+            End Try
+
+            If IO.File.Exists(nomeBackup) Then
+                MsgBox("Backup realizado com sucesso. Disponivel em: " & nomeBackup)
+            End If
+        End If
 
     End Sub
 End Class

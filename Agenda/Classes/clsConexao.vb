@@ -4,7 +4,7 @@
 
     Private Sub New()
     End Sub
-
+    
     Public Shared Function RetornaConexao() As System.Data.SQLite.SQLiteConnection
 
         'Dim locCaminho As String = "C:\Projeto\Controle_Agenda\BancoAgenda.db"
