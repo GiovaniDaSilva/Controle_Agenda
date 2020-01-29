@@ -33,10 +33,9 @@
             If IO.File.Exists(Application.StartupPath & "\BancoZerada.db" )        
                 IO.File.Copy(Application.StartupPath & "\BancoZerada.db",CaminhoBase)
             End If
+            locRetorno = IO.File.Exists(CaminhoBase)
         End If
-
-        locRetorno = IO.File.Exists(CaminhoBase)
-
+               
         Return locRetorno 
     End Function
 

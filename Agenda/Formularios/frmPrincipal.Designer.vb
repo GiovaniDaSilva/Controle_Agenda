@@ -475,7 +475,7 @@ Partial Class frmPrincipal
         Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.Name = "frmPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Agenda - Versão 0.6"
+        Me.Text = "Agenda - Versão "
         CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).EndInit
         Me.pMenu.ResumeLayout(false)
         Me.pHorasDia.ResumeLayout(false)

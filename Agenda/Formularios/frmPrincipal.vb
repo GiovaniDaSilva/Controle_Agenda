@@ -9,6 +9,8 @@ Public Class frmPrincipal
     Const MODO_IMPRESSAO = "MODO_IMPRESSAO"
     Const MODO_NORMAL = ""
 
+    Public CONST VERSAO_SISTEMA = "0.5"
+
     Private Enum enuPosicaoColunas
         DATA = 1
         TIPO = 2
@@ -160,6 +162,9 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        
+        Me.Text = Me.Text & VERSAO_SISTEMA
+
         subCarregaIni()
         clsConexao.CaminhoBase = ParametrosIni.CaminhoBase
         If Not clsConexao.ExisteBase Then
