@@ -9,7 +9,7 @@ Public Class frmPrincipal
     Const MODO_IMPRESSAO = "MODO_IMPRESSAO"
     Const MODO_NORMAL = ""
 
-    Public CONST VERSAO_SISTEMA = "0.5"
+    Public CONST VERSAO_SISTEMA = "0.6"
 
     Private Enum enuPosicaoColunas
         DATA = 1
