@@ -25,7 +25,19 @@
     End Function
 
     Public Shared Function ExisteBase() As Boolean
-        Return IO.File.Exists(CaminhoBase)
+        Dim locRetorno As Boolean
+
+        locRetorno = IO.File.Exists(CaminhoBase)
+
+        If Not locRetorno then
+            If IO.File.Exists(Application.StartupPath & "\BancoZerada.db" )        
+                IO.File.Copy(Application.StartupPath & "\BancoZerada.db",CaminhoBase)
+            End If
+        End If
+
+        locRetorno = IO.File.Exists(CaminhoBase)
+
+        Return locRetorno 
     End Function
 
 End Class
