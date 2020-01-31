@@ -32,6 +32,7 @@ Public MustInherit Class enuTempoNotificacao
     Public Shared Property Hora2 As String = "Hora2"
     Public Shared Property Hora3 As String = "Hora3"
     Public Shared Property Hora4 As String = "Hora4"
+    Public Shared Property NaoUsar As String = "NaoUsa"
 End Class
 
 Public MustInherit Class enuGrupoIni

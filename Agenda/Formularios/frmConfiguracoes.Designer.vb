@@ -76,7 +76,7 @@ Partial Class frmConfiguracoes
         Me.cbTempoNotificacao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTempoNotificacao.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbTempoNotificacao.FormattingEnabled = true
-        Me.cbTempoNotificacao.Items.AddRange(New Object() {"1 Hora", "2 Horas", "3 Horas", "4 Horas"})
+        Me.cbTempoNotificacao.Items.AddRange(New Object() {"1 Hora", "2 Horas", "3 Horas", "4 Horas", "Não Usar"})
         Me.cbTempoNotificacao.Location = New System.Drawing.Point(16, 65)
         Me.cbTempoNotificacao.Name = "cbTempoNotificacao"
         Me.cbTempoNotificacao.Size = New System.Drawing.Size(136, 21)

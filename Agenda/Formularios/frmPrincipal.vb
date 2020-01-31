@@ -405,8 +405,10 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub frmPrincipal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        e.Cancel = True
-        subExibiFormulario(False)
+        If ParametrosIni.TempoNotificacao <> enuTempoNotificacao.NaoUsar then
+            e.Cancel = True
+            subExibiFormulario(False)
+        End If
     End Sub
 
     Private Sub AbrirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirToolStripMenuItem.Click

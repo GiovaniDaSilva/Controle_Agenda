@@ -44,6 +44,7 @@
             Case enuTempoNotificacao.Hora2 : cbTempoNotificacao.SelectedIndex = 1
             Case enuTempoNotificacao.Hora3 : cbTempoNotificacao.SelectedIndex = 2
             Case enuTempoNotificacao.Hora4 : cbTempoNotificacao.SelectedIndex = 3
+            Case enuTempoNotificacao.NaoUsar  : cbTempoNotificacao.SelectedIndex = 4
             Case Else : cbTempoNotificacao.SelectedIndex = 1
         End Select
 
@@ -68,6 +69,7 @@
             Case 1 : glfParametros.TempoNotificacao = enuTempoNotificacao.Hora2
             Case 2 : glfParametros.TempoNotificacao = enuTempoNotificacao.Hora3
             Case 3 : glfParametros.TempoNotificacao = enuTempoNotificacao.Hora4
+            Case 4 : glfParametros.TempoNotificacao = enuTempoNotificacao.NaoUsar
         End Select
 
     End Sub
