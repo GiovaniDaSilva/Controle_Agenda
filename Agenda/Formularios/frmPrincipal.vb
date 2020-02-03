@@ -154,7 +154,21 @@ Public Class frmPrincipal
         pHorasDia.Visible = True
         lblHorasDia.Text = controle.funRetornaTotalHorasDia(lista, lista(e.RowIndex).Data)
 
+        subAtualizaHorasAtividade(e)
+
     End Sub
+
+    Private Sub subAtualizaHorasAtividade(e As DataGridViewCellEventArgs)
+        if val(lista(e.RowIndex).Codigo) <= 0 Then
+            pHorasAtividade.Visible = false
+            Exit sub
+        End If
+
+        pHorasAtividade.Visible = True
+        lblHorasAtividade.Text = controle.funRetornaTotalHorasAtividade(lista(e.RowIndex).Codigo )
+    End Sub
+
+
 
     Private Sub subChamaFormularioAdicionarEdicao(i As Integer)
         controle.Adicionar(ParametrosIni, New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE, lista(i).Periodos))
@@ -209,10 +223,8 @@ Public Class frmPrincipal
         subAtualizaDescricao()
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs)
-    End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub btnSubirFiltro_Click(sender As Object, e As EventArgs) Handles btnSubirFiltro.Click
         subOcultaFiltro()
     End Sub
 
@@ -225,7 +237,7 @@ Public Class frmPrincipal
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnAbaixarFiltro.Click
         'pFiltro.Visible = True
         pFiltro.Height = pMenu.Height
         pFiltro.Width = pMenu.Width

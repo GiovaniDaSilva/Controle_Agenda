@@ -156,6 +156,26 @@ Public Class clsPrincipal
         End Select
         pTimer.Start()
     End Sub
+
+    Friend Function funRetornaTotalHorasAtividade(codigo As String) As String
+        Dim DAO As New clsAdicionarDAO
+        Dim locTime As New TimeSpan 
+        dim locAtividades = DAO.carregarAtividades(codigo)
+       
+        For Each item In locAtividades
+            If Trim(item.Horas) <> ":" Then
+                locTime = locTime.Add(TimeSpan.Parse(item.Horas))
+            End If
+        Next
+
+        Dim x As String
+        Dim horas As double = 0
+        horas = locTime.Days * 24
+        x = (locTime.Hours + horas).ToString("00")
+        x &= ":" & format(locTime.Minutes, "00") 
+        Return x
+        
+    End Function
 End Class
 
 

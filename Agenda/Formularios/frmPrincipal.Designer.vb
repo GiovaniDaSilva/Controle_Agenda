@@ -28,13 +28,16 @@ Partial Class frmPrincipal
         Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.pMenu = New System.Windows.Forms.Panel()
+        Me.pHorasAtividade = New System.Windows.Forms.Panel()
+        Me.lblHorasAtividade = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.pHorasDia = New System.Windows.Forms.Panel()
         Me.lblHorasDia = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnVersao = New System.Windows.Forms.Button()
         Me.btnApontarHoras = New System.Windows.Forms.Button()
         Me.btnConfiguracao = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnAbaixarFiltro = New System.Windows.Forms.Button()
         Me.btnListar = New System.Windows.Forms.Button()
         Me.btnAtualiza = New System.Windows.Forms.Button()
         Me.btnAdicinar = New System.Windows.Forms.Button()
@@ -45,7 +48,7 @@ Partial Class frmPrincipal
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.lblcodigo = New System.Windows.Forms.Label()
         Me.btnFiltrar = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnSubirFiltro = New System.Windows.Forms.Button()
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnLimpar = New System.Windows.Forms.Button()
@@ -59,6 +62,7 @@ Partial Class frmPrincipal
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).BeginInit
         Me.pMenu.SuspendLayout
+        Me.pHorasAtividade.SuspendLayout
         Me.pHorasDia.SuspendLayout
         Me.pFiltro.SuspendLayout
         Me.ContextMenuStrip1.SuspendLayout
@@ -102,11 +106,12 @@ Partial Class frmPrincipal
         '
         'pMenu
         '
+        Me.pMenu.Controls.Add(Me.pHorasAtividade)
         Me.pMenu.Controls.Add(Me.pHorasDia)
         Me.pMenu.Controls.Add(Me.btnVersao)
         Me.pMenu.Controls.Add(Me.btnApontarHoras)
         Me.pMenu.Controls.Add(Me.btnConfiguracao)
-        Me.pMenu.Controls.Add(Me.Button1)
+        Me.pMenu.Controls.Add(Me.btnAbaixarFiltro)
         Me.pMenu.Controls.Add(Me.btnListar)
         Me.pMenu.Controls.Add(Me.btnAtualiza)
         Me.pMenu.Controls.Add(Me.btnAdicinar)
@@ -115,6 +120,40 @@ Partial Class frmPrincipal
         Me.pMenu.Name = "pMenu"
         Me.pMenu.Size = New System.Drawing.Size(823, 77)
         Me.pMenu.TabIndex = 0
+        '
+        'pHorasAtividade
+        '
+        Me.pHorasAtividade.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.pHorasAtividade.Controls.Add(Me.lblHorasAtividade)
+        Me.pHorasAtividade.Controls.Add(Me.Label5)
+        Me.pHorasAtividade.Location = New System.Drawing.Point(299, 12)
+        Me.pHorasAtividade.Name = "pHorasAtividade"
+        Me.pHorasAtividade.Size = New System.Drawing.Size(123, 58)
+        Me.pHorasAtividade.TabIndex = 8
+        Me.pHorasAtividade.Visible = false
+        '
+        'lblHorasAtividade
+        '
+        Me.lblHorasAtividade.AutoSize = true
+        Me.lblHorasAtividade.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblHorasAtividade.ForeColor = System.Drawing.Color.Navy
+        Me.lblHorasAtividade.Location = New System.Drawing.Point(42, 35)
+        Me.lblHorasAtividade.Name = "lblHorasAtividade"
+        Me.lblHorasAtividade.Size = New System.Drawing.Size(39, 13)
+        Me.lblHorasAtividade.TabIndex = 1
+        Me.lblHorasAtividade.Text = "00:00"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = true
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.Label5.Location = New System.Drawing.Point(6, 16)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(111, 13)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Total da Atividade"
         '
         'pHorasDia
         '
@@ -200,22 +239,22 @@ Partial Class frmPrincipal
         Me.ToolTip1.SetToolTip(Me.btnConfiguracao, "Configurações")
         Me.btnConfiguracao.UseVisualStyleBackColor = false
         '
-        'Button1
+        'btnAbaixarFiltro
         '
-        Me.Button1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+        Me.btnAbaixarFiltro.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
             Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
-        Me.Button1.BackColor = System.Drawing.SystemColors.Control
-        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
-        Me.Button1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"),System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(12, 15)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(57, 50)
-        Me.Button1.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.Button1, "Abrir Filtro")
-        Me.Button1.UseVisualStyleBackColor = false
+        Me.btnAbaixarFiltro.BackColor = System.Drawing.SystemColors.Control
+        Me.btnAbaixarFiltro.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.btnAbaixarFiltro.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.btnAbaixarFiltro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnAbaixarFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnAbaixarFiltro.Image = CType(resources.GetObject("btnAbaixarFiltro.Image"),System.Drawing.Image)
+        Me.btnAbaixarFiltro.Location = New System.Drawing.Point(12, 15)
+        Me.btnAbaixarFiltro.Name = "btnAbaixarFiltro"
+        Me.btnAbaixarFiltro.Size = New System.Drawing.Size(57, 50)
+        Me.btnAbaixarFiltro.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.btnAbaixarFiltro, "Abrir Filtro")
+        Me.btnAbaixarFiltro.UseVisualStyleBackColor = false
         '
         'btnListar
         '
@@ -291,7 +330,7 @@ Partial Class frmPrincipal
         Me.pFiltro.Controls.Add(Me.txtCodigo)
         Me.pFiltro.Controls.Add(Me.lblcodigo)
         Me.pFiltro.Controls.Add(Me.btnFiltrar)
-        Me.pFiltro.Controls.Add(Me.Button2)
+        Me.pFiltro.Controls.Add(Me.btnSubirFiltro)
         Me.pFiltro.Controls.Add(Me.txtApartirDe)
         Me.pFiltro.Controls.Add(Me.Label1)
         Me.pFiltro.Controls.Add(Me.btnLimpar)
@@ -365,22 +404,22 @@ Partial Class frmPrincipal
         Me.ToolTip1.SetToolTip(Me.btnFiltrar, "Aplicar Filtro")
         Me.btnFiltrar.UseVisualStyleBackColor = false
         '
-        'Button2
+        'btnSubirFiltro
         '
-        Me.Button2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+        Me.btnSubirFiltro.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
             Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
-        Me.Button2.BackColor = System.Drawing.SystemColors.Control
-        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
-        Me.Button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
-        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"),System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(12, 17)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(57, 50)
-        Me.Button2.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.Button2, "Fechar Filtro")
-        Me.Button2.UseVisualStyleBackColor = false
+        Me.btnSubirFiltro.BackColor = System.Drawing.SystemColors.Control
+        Me.btnSubirFiltro.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.btnSubirFiltro.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.btnSubirFiltro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnSubirFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnSubirFiltro.Image = CType(resources.GetObject("btnSubirFiltro.Image"),System.Drawing.Image)
+        Me.btnSubirFiltro.Location = New System.Drawing.Point(12, 17)
+        Me.btnSubirFiltro.Name = "btnSubirFiltro"
+        Me.btnSubirFiltro.Size = New System.Drawing.Size(57, 50)
+        Me.btnSubirFiltro.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.btnSubirFiltro, "Fechar Filtro")
+        Me.btnSubirFiltro.UseVisualStyleBackColor = false
         '
         'txtApartirDe
         '
@@ -478,6 +517,8 @@ Partial Class frmPrincipal
         Me.Text = "Agenda - Versão "
         CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).EndInit
         Me.pMenu.ResumeLayout(false)
+        Me.pHorasAtividade.ResumeLayout(false)
+        Me.pHorasAtividade.PerformLayout
         Me.pHorasDia.ResumeLayout(false)
         Me.pHorasDia.PerformLayout
         Me.pFiltro.ResumeLayout(false)
@@ -494,11 +535,11 @@ End Sub
     Friend WithEvents btnListar As Button
     Friend WithEvents txtDescricao As RichTextBox
     Friend WithEvents pFiltro As Panel
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnAbaixarFiltro As Button
     Friend WithEvents txtApartirDe As MaskedTextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents btnLimpar As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnSubirFiltro As Button
     Friend WithEvents btnFiltrar As Button
     Friend WithEvents lblcodigo As Label
     Friend WithEvents txtCodigo As MaskedTextBox
@@ -519,4 +560,7 @@ End Sub
     Friend WithEvents SairToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Timer2 As Timer
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents pHorasAtividade As Panel
+    Friend WithEvents lblHorasAtividade As Label
+    Friend WithEvents Label5 As Label
 End Class

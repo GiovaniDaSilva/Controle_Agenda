@@ -88,17 +88,28 @@ Public Class clsAdicionarDAO
         Return locSQL.ToString()
     End Function
 
+    Public Function carregarAtividades(codigo As String) As List(Of clsConsultaAtividades)
+        Dim lista As New List(Of clsConsultaAtividades)
+        Dim locSQL As String
+
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
+            locSQL = funRetornaSQLConsultaComum()
+            locSQL &= " AND A.CODIGO = " & codigo
+
+
+            Comm.CommandText = locSQL
+            subCarregaListaAtividades(lista, Comm)
+        End Using
+
+        Return lista
+    End Function
     Public Function carregarAtividades(ByVal parFiltro As clsAtividade, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
         Dim lista As New List(Of clsConsultaAtividades)
         Dim locSQL As String
 
 
         Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
-            locSQL = "SELECT A.ID, A.DATA, A.CODIGO, A.HORA, A.DESCRICAO, A.ID_TIPO_ATIVIDADE, T.DESCRICAO AS TIPO_DESCRICAO  
-            
-                                FROM ATIVIDADES A
-                                INNER JOIN TIPO_ATIVIDADE T ON T.ID = A.ID_TIPO_ATIVIDADE 
-                     WHERE (1=1)"
+            locSQL = funRetornaSQLConsultaComum()
 
             If Not parFiltro.Data = Nothing Then
                 locSQL &= " AND A.DATA >= '" & clsTools.funAjustaDataSQL(parFiltro.Data) & "'"
@@ -120,25 +131,37 @@ Public Class clsAdicionarDAO
 
             Comm.CommandText = locSQL
 
-
-            Using Reader = Comm.ExecuteReader()
-                While Reader.Read()
-                    Dim atividade As New clsConsultaAtividades
-                    atividade.ID = Reader("ID")
-                    atividade.Data = Reader("DATA")
-                    atividade.Horas = Reader("HORA")
-                    atividade.Codigo = Reader("CODIGO")
-                    atividade.Descricao = Reader("DESCRICAO")
-                    atividade.ID_TIPO_ATIVIDADE = Reader("ID_TIPO_ATIVIDADE")
-                    atividade.TIPO_DESCRICAO = Reader("TIPO_DESCRICAO")
-                    atividade.Periodos = funRetornaPeriodoAtividade(atividade.ID)
-
-                    lista.Add(atividade)
-                End While
-            End Using
+            subCarregaListaAtividades(lista, Comm)
+        
         End Using
 
         Return lista
+    End Function
+
+    Private Sub subCarregaListaAtividades(lista As List(Of clsConsultaAtividades), Comm As SQLite.SQLiteCommand)
+        Using Reader = Comm.ExecuteReader()
+            While Reader.Read()
+                Dim atividade As New clsConsultaAtividades
+                atividade.ID = Reader("ID")
+                atividade.Data = Reader("DATA")
+                atividade.Horas = Reader("HORA")
+                atividade.Codigo = Reader("CODIGO")
+                atividade.Descricao = Reader("DESCRICAO")
+                atividade.ID_TIPO_ATIVIDADE = Reader("ID_TIPO_ATIVIDADE")
+                atividade.TIPO_DESCRICAO = Reader("TIPO_DESCRICAO")
+                atividade.Periodos = funRetornaPeriodoAtividade(atividade.ID)
+
+                lista.Add(atividade)
+            End While
+        End Using
+    End Sub
+
+    Private Shared Function funRetornaSQLConsultaComum() As String
+        Return "SELECT A.ID, A.DATA, A.CODIGO, A.HORA, A.DESCRICAO, A.ID_TIPO_ATIVIDADE, T.DESCRICAO AS TIPO_DESCRICAO  
+            
+                                FROM ATIVIDADES A
+                                INNER JOIN TIPO_ATIVIDADE T ON T.ID = A.ID_TIPO_ATIVIDADE 
+                     WHERE (1=1)"
     End Function
 
     Private Function funRetornaPeriodoAtividade(iD As Long) As List(Of clsPeriodo)
