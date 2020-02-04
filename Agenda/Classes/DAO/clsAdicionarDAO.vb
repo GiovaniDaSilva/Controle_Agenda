@@ -43,6 +43,33 @@ Public Class clsAdicionarDAO
         Return locSQL.ToString.Substring(0, locSQL.Length - 1)
     End Function
 
+    Public Function retornaPeriodoAtividades(pData As Date) As List(Of clsPeriodosAtividades)
+        Dim lista As New List(Of clsPeriodosAtividades)
+        Dim locSQL As New StringBuilder(String.Empty)
+
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
+
+            locSQL.AppendFormat ("SELECT T.DESCRICAO, A.CODIGO, P.HORA_INICIAL, P.HORA_FINAL, P.TOTAL FROM ATIVIDADES A
+                            INNER JOIN PERIODO P ON P.ID_ATIVIDADE = A.ID
+                            INNER JOIN TIPO_ATIVIDADE T ON T.ID = A.ID_TIPO_ATIVIDADE
+                            WHERE A.DATA = '{0}'
+                            ORDER BY HORA_INICIAL, HORA_FINAL", clsTools.funAjustaDataSQL(pData))
+            Comm.CommandText = locSQL.ToString
+
+            Using Reader = Comm.ExecuteReader()
+                While Reader.Read()
+                    lista.Add(New clsPeriodosAtividades(Reader("DESCRICAO"),
+                                                        val(Reader("CODIGO")),
+                                                        Reader("HORA_INICIAL"),
+                                                        Reader("HORA_FINAL"),
+                                                        Reader("TOTAL")))
+                End While
+            End Using
+        End Using
+        
+        Return lista
+    End Function
+
     Friend Function CarregaTipos() As List(Of clsTipo)
         Dim lista As New List(Of clsTipo)
 
@@ -132,7 +159,7 @@ Public Class clsAdicionarDAO
             Comm.CommandText = locSQL
 
             subCarregaListaAtividades(lista, Comm)
-        
+
         End Using
 
         Return lista

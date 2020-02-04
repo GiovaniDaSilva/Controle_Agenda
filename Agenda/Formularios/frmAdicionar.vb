@@ -15,6 +15,7 @@
     Private Sub frmAdicionar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If txtData.Text = vbNullString Then txtData.Text = Now
         subValidaComboTipo()
+        ToolTip2.SetToolTip(imgHistorico, controle.RetornaToolTipPeriodosDia(clsTools.funRetornaData(txtData)))        
     End Sub
 
     Private Sub subValidaComboTipo()
@@ -112,6 +113,8 @@
                 MsgBox("Data informada não é válida.")
                 txtData.Focus()
             End If
+
+            ToolTip2.SetToolTip(imgHistorico, controle.RetornaToolTipPeriodosDia(clsTools.funRetornaData(txtData)))        
         Catch ex As Exception
             clsTools.subTrataExcessao(ex)
             txtData.Focus()
@@ -124,8 +127,10 @@
             Me.Height = 371
             gbPeriodo.Visible = False
             gridPeriodo.Visible = False
+            imgHistorico.Visible = false
         Else
             pCamposMoveis.Top = 231
+            imgHistorico.Visible = true
             Me.Height = 532
             txtHora.Enabled = False
             gbPeriodo.Visible = True
@@ -235,4 +240,6 @@
             clsTools.subTrataExcessao(ex)
         End Try
     End Sub
+
+    
 End Class
