@@ -89,6 +89,7 @@ Public Class frmPrincipal
         End If
 
         controle.subListarAtivdades(txtDescricao, lista, ParametrosIni, locHTML)
+        txtDescricao.SelectionStart = 0
     End Sub
 
     Private Sub txtDescricao_Leave(sender As Object, e As EventArgs) Handles txtDescricao.Leave
