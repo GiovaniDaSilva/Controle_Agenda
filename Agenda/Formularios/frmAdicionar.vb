@@ -114,7 +114,9 @@
                 txtData.Focus()
             End If
 
-            ToolTip2.SetToolTip(imgHistorico, controle.RetornaToolTipPeriodosDia(clsTools.funRetornaData(txtData)))        
+
+            ToolTip2.SetToolTip(imgHistorico, controle.RetornaToolTipPeriodosDia(clsTools.funRetornaData(txtData)))
+
         Catch ex As Exception
             clsTools.subTrataExcessao(ex)
             txtData.Focus()

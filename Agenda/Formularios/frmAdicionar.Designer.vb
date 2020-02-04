@@ -302,7 +302,7 @@ Partial Class frmAdicionar
         '
         'ToolTip2
         '
-        Me.ToolTip2.AutoPopDelay = 10000
+        Me.ToolTip2.AutoPopDelay = 15000
         Me.ToolTip2.InitialDelay = 500
         Me.ToolTip2.IsBalloon = true
         Me.ToolTip2.ReshowDelay = 100
