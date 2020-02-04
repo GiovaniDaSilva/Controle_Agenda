@@ -40,7 +40,7 @@ Public Class clsAdicionar
         Dim listaAtividadesPeriodos As List(Of clsPeriodosAtividades)
         Dim locResultado As new StringBuilder()
         Dim locAtividade As String
-
+        
         locResultado.Append("Sem período cadastrado!")
         
         listaAtividadesPeriodos = DAO.retornaPeriodoAtividades(pData)
@@ -50,13 +50,14 @@ Public Class clsAdicionar
             locResultado.Clear()        
             locAtividade = vbNullString
             For Each atividade In listaAtividadesPeriodos
-                If locAtividade <> (atividade.descricao_tipo & atividade.codigo_atividade)
-                    locAtividade = (atividade.descricao_tipo & atividade.codigo_atividade)
+                If locAtividade <> (atividade.descricao_tipo & " " &  atividade.codigo_atividade)
+                    locAtividade = (atividade.descricao_tipo & " " & atividade.codigo_atividade)
+                    locResultado.AppendLine(locAtividade & clsTools.Tab & atividade.hora_inicial & " - " & atividade.hora_final)            
                 Else
-                    locAtividade = StrDup(locAtividade.Length," ") 
+                    locResultado.AppendLine(StrDup(locAtividade.Length," ") &clsTools.Tab & clsTools.Tab & atividade.hora_inicial & " - " & atividade.hora_final)                                 
                 End If
                 
-                locResultado.AppendLine(locAtividade & clsTools.Tab & atividade.hora_inicial & " - " & atividade.hora_final)            
+                
             Next
         End If
 
