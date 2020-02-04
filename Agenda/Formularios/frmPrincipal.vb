@@ -44,6 +44,7 @@ Public Class frmPrincipal
 
         txtDescricao.Clear()
         pHorasDia.Visible = False
+        pHorasAtividade.Visible = false
     End Sub
 
     Private Sub btnAtualiza_Click(sender As Object, e As EventArgs) Handles btnAtualiza.Click

@@ -33,4 +33,9 @@
 
         Return mid(Final.Subtract(Inicial).ToString(), 1,5)
     End Function
+
+    Public Function RetornaToolTipPeriodosDia(ByVal pData As date) As string
+        'DAO.retornaPeriodoAtividades(pData)
+    End Function
+
 End Class

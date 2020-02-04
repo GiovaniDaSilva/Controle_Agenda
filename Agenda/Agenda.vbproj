@@ -113,20 +113,20 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\clsConexao.vb" />
-    <Compile Include="Classes\clsAdicionar.vb" />
-    <Compile Include="Classes\clsAdicionarDAO.vb" />
-    <Compile Include="Classes\clsAtividade.vb" />
+    <Compile Include="Classes\Serviços\clsConexao.vb" />
+    <Compile Include="Classes\Serviços\clsAdicionar.vb" />
+    <Compile Include="Classes\DAO\clsAdicionarDAO.vb" />
+    <Compile Include="Classes\Modelos\clsAtividade.vb" />
     <Compile Include="Classes\clsEnumString.vb" />
     <Compile Include="Classes\clsHTML.vb" />
-    <Compile Include="Classes\clsIni.vb" />
-    <Compile Include="Classes\clsParametrosIni.vb" />
-    <Compile Include="Classes\clsPeriodo.vb" />
-    <Compile Include="Classes\clsPrincipal.vb" />
-    <Compile Include="Classes\clsRegistro.vb" />
-    <Compile Include="Classes\clsSolicitacao.vb" />
-    <Compile Include="Classes\clsSolicitacaoDAO.vb" />
-    <Compile Include="Classes\clsTipo.vb" />
+    <Compile Include="Classes\Serviços\clsIni.vb" />
+    <Compile Include="Classes\Modelos\clsParametrosIni.vb" />
+    <Compile Include="Classes\Modelos\clsPeriodo.vb" />
+    <Compile Include="Classes\Serviços\clsPrincipal.vb" />
+    <Compile Include="Classes\Serviços\clsRegistro.vb" />
+    <Compile Include="Classes\Modelos\clsSolicitacao.vb" />
+    <Compile Include="Classes\DAO\clsSolicitacaoDAO.vb" />
+    <Compile Include="Classes\Modelos\clsTipo.vb" />
     <Compile Include="Classes\clsTools.vb" />
     <Compile Include="Formularios\frmAdicionar.Designer.vb">
       <DependentUpon>frmAdicionar.vb</DependentUpon>
