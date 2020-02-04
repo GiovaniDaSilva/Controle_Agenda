@@ -56,7 +56,7 @@ Public Class clsAdicionar
                     locAtividade = StrDup(locAtividade.Length," ") 
                 End If
                 
-                locResultado.Append(locAtividade & clsTools.Tab & atividade.hora_inicial & " - " & atividade.hora_final)            
+                locResultado.AppendLine(locAtividade & clsTools.Tab & atividade.hora_inicial & " - " & atividade.hora_final)            
             Next
         End If
 
