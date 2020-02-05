@@ -24,10 +24,8 @@ Partial Class frmPrincipal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPrincipal))
-        Me.gridAtividades = New System.Windows.Forms.DataGridView()
-        Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.pMenu = New System.Windows.Forms.Panel()
+        Me.btnAbreCausaErros = New System.Windows.Forms.Button()
         Me.pHorasAtividade = New System.Windows.Forms.Panel()
         Me.lblHorasAtividade = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -41,7 +39,6 @@ Partial Class frmPrincipal
         Me.btnListar = New System.Windows.Forms.Button()
         Me.btnAtualiza = New System.Windows.Forms.Button()
         Me.btnAdicinar = New System.Windows.Forms.Button()
-        Me.txtDescricao = New System.Windows.Forms.RichTextBox()
         Me.pFiltro = New System.Windows.Forms.Panel()
         Me.cbTipo = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -60,51 +57,19 @@ Partial Class frmPrincipal
         Me.SairToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnAbreCausaErros = New System.Windows.Forms.Button()
-        CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtDescricao = New System.Windows.Forms.RichTextBox()
+        Me.Splitter1 = New System.Windows.Forms.Splitter()
+        Me.gridAtividades = New System.Windows.Forms.DataGridView()
+        Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
         Me.pMenu.SuspendLayout
         Me.pHorasAtividade.SuspendLayout
         Me.pHorasDia.SuspendLayout
         Me.pFiltro.SuspendLayout
         Me.ContextMenuStrip1.SuspendLayout
+        Me.Panel1.SuspendLayout
+        CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
-        '
-        'gridAtividades
-        '
-        Me.gridAtividades.AllowUserToAddRows = false
-        Me.gridAtividades.AllowUserToDeleteRows = false
-        Me.gridAtividades.AllowUserToResizeColumns = false
-        Me.gridAtividades.AllowUserToResizeRows = false
-        Me.gridAtividades.BackgroundColor = System.Drawing.Color.LightGray
-        Me.gridAtividades.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.gridAtividades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridAtividades.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Editar})
-        Me.gridAtividades.Dock = System.Windows.Forms.DockStyle.Top
-        Me.gridAtividades.Location = New System.Drawing.Point(0, 77)
-        Me.gridAtividades.MultiSelect = false
-        Me.gridAtividades.Name = "gridAtividades"
-        Me.gridAtividades.ReadOnly = true
-        Me.gridAtividades.RowHeadersVisible = false
-        Me.gridAtividades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridAtividades.Size = New System.Drawing.Size(998, 328)
-        Me.gridAtividades.TabIndex = 1
-        '
-        'Editar
-        '
-        Me.Editar.HeaderText = ""
-        Me.Editar.Image = CType(resources.GetObject("Editar.Image"),System.Drawing.Image)
-        Me.Editar.Name = "Editar"
-        Me.Editar.ReadOnly = true
-        Me.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'Splitter1
-        '
-        Me.Splitter1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Splitter1.Location = New System.Drawing.Point(0, 405)
-        Me.Splitter1.Name = "Splitter1"
-        Me.Splitter1.Size = New System.Drawing.Size(998, 10)
-        Me.Splitter1.TabIndex = 2
-        Me.Splitter1.TabStop = false
         '
         'pMenu
         '
@@ -123,6 +88,23 @@ Partial Class frmPrincipal
         Me.pMenu.Name = "pMenu"
         Me.pMenu.Size = New System.Drawing.Size(998, 77)
         Me.pMenu.TabIndex = 0
+        '
+        'btnAbreCausaErros
+        '
+        Me.btnAbreCausaErros.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnAbreCausaErros.BackColor = System.Drawing.SystemColors.Control
+        Me.btnAbreCausaErros.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.btnAbreCausaErros.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.btnAbreCausaErros.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnAbreCausaErros.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnAbreCausaErros.Image = CType(resources.GetObject("btnAbreCausaErros.Image"),System.Drawing.Image)
+        Me.btnAbreCausaErros.Location = New System.Drawing.Point(721, 15)
+        Me.btnAbreCausaErros.Name = "btnAbreCausaErros"
+        Me.btnAbreCausaErros.Size = New System.Drawing.Size(57, 50)
+        Me.btnAbreCausaErros.TabIndex = 9
+        Me.ToolTip1.SetToolTip(Me.btnAbreCausaErros, "Abrir sistema GOVBR Sol Control")
+        Me.btnAbreCausaErros.UseVisualStyleBackColor = false
         '
         'pHorasAtividade
         '
@@ -310,21 +292,6 @@ Partial Class frmPrincipal
         Me.ToolTip1.SetToolTip(Me.btnAdicinar, "Cadastrar Atividade")
         Me.btnAdicinar.UseVisualStyleBackColor = false
         '
-        'txtDescricao
-        '
-        Me.txtDescricao.BackColor = System.Drawing.Color.Linen
-        Me.txtDescricao.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtDescricao.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtDescricao.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.txtDescricao.HideSelection = false
-        Me.txtDescricao.Location = New System.Drawing.Point(0, 415)
-        Me.txtDescricao.Name = "txtDescricao"
-        Me.txtDescricao.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
-        Me.txtDescricao.Size = New System.Drawing.Size(998, 239)
-        Me.txtDescricao.TabIndex = 3
-        Me.txtDescricao.Tag = ""
-        Me.txtDescricao.Text = ""
-        '
         'pFiltro
         '
         Me.pFiltro.BackColor = System.Drawing.SystemColors.GradientActiveCaption
@@ -337,7 +304,7 @@ Partial Class frmPrincipal
         Me.pFiltro.Controls.Add(Me.txtApartirDe)
         Me.pFiltro.Controls.Add(Me.Label1)
         Me.pFiltro.Controls.Add(Me.btnLimpar)
-        Me.pFiltro.Location = New System.Drawing.Point(0, 151)
+        Me.pFiltro.Location = New System.Drawing.Point(112, 83)
         Me.pFiltro.Name = "pFiltro"
         Me.pFiltro.Size = New System.Drawing.Size(823, 77)
         Me.pFiltro.TabIndex = 4
@@ -503,22 +470,70 @@ Partial Class frmPrincipal
         '
         Me.Timer2.Interval = 10800000
         '
-        'btnAbreCausaErros
+        'Panel1
         '
-        Me.btnAbreCausaErros.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnAbreCausaErros.BackColor = System.Drawing.SystemColors.Control
-        Me.btnAbreCausaErros.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
-        Me.btnAbreCausaErros.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
-        Me.btnAbreCausaErros.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
-        Me.btnAbreCausaErros.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnAbreCausaErros.Image = CType(resources.GetObject("btnAbreCausaErros.Image"),System.Drawing.Image)
-        Me.btnAbreCausaErros.Location = New System.Drawing.Point(721, 15)
-        Me.btnAbreCausaErros.Name = "btnAbreCausaErros"
-        Me.btnAbreCausaErros.Size = New System.Drawing.Size(57, 50)
-        Me.btnAbreCausaErros.TabIndex = 9
-        Me.ToolTip1.SetToolTip(Me.btnAbreCausaErros, "Abre o sistema GOVBR Sol Control")
-        Me.btnAbreCausaErros.UseVisualStyleBackColor = false
+        Me.Panel1.Controls.Add(Me.txtDescricao)
+        Me.Panel1.Controls.Add(Me.Splitter1)
+        Me.Panel1.Controls.Add(Me.gridAtividades)
+        Me.Panel1.Location = New System.Drawing.Point(10, 85)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(977, 556)
+        Me.Panel1.TabIndex = 5
+        '
+        'txtDescricao
+        '
+        Me.txtDescricao.BackColor = System.Drawing.Color.Linen
+        Me.txtDescricao.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtDescricao.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDescricao.ForeColor = System.Drawing.SystemColors.Desktop
+        Me.txtDescricao.HideSelection = false
+        Me.txtDescricao.Location = New System.Drawing.Point(0, 338)
+        Me.txtDescricao.Name = "txtDescricao"
+        Me.txtDescricao.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
+        Me.txtDescricao.Size = New System.Drawing.Size(977, 218)
+        Me.txtDescricao.TabIndex = 6
+        Me.txtDescricao.Tag = ""
+        Me.txtDescricao.Text = ""
+        '
+        'Splitter1
+        '
+        Me.Splitter1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Splitter1.Location = New System.Drawing.Point(0, 328)
+        Me.Splitter1.Name = "Splitter1"
+        Me.Splitter1.Size = New System.Drawing.Size(977, 10)
+        Me.Splitter1.TabIndex = 5
+        Me.Splitter1.TabStop = false
+        '
+        'gridAtividades
+        '
+        Me.gridAtividades.AllowUserToAddRows = false
+        Me.gridAtividades.AllowUserToDeleteRows = false
+        Me.gridAtividades.AllowUserToResizeColumns = false
+        Me.gridAtividades.AllowUserToResizeRows = false
+        Me.gridAtividades.BackgroundColor = System.Drawing.Color.LightGray
+        Me.gridAtividades.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.gridAtividades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridAtividades.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Editar})
+        Me.gridAtividades.Dock = System.Windows.Forms.DockStyle.Top
+        Me.gridAtividades.Location = New System.Drawing.Point(0, 0)
+        Me.gridAtividades.MultiSelect = false
+        Me.gridAtividades.Name = "gridAtividades"
+        Me.gridAtividades.ReadOnly = true
+        Me.gridAtividades.RowHeadersVisible = false
+        Me.gridAtividades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.gridAtividades.Size = New System.Drawing.Size(977, 328)
+        Me.gridAtividades.TabIndex = 4
+        '
+        'Editar
+        '
+        Me.Editar.HeaderText = ""
+        Me.Editar.Image = CType(resources.GetObject("Editar.Image"),System.Drawing.Image)
+        Me.Editar.Name = "Editar"
+        Me.Editar.ReadOnly = true
+        Me.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'frmPrincipal
         '
@@ -527,15 +542,12 @@ Partial Class frmPrincipal
         Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.ClientSize = New System.Drawing.Size(998, 654)
         Me.Controls.Add(Me.pFiltro)
-        Me.Controls.Add(Me.txtDescricao)
-        Me.Controls.Add(Me.Splitter1)
-        Me.Controls.Add(Me.gridAtividades)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.pMenu)
         Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.Name = "frmPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Agenda - Versão "
-        CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).EndInit
         Me.pMenu.ResumeLayout(false)
         Me.pHorasAtividade.ResumeLayout(false)
         Me.pHorasAtividade.PerformLayout
@@ -544,16 +556,15 @@ Partial Class frmPrincipal
         Me.pFiltro.ResumeLayout(false)
         Me.pFiltro.PerformLayout
         Me.ContextMenuStrip1.ResumeLayout(false)
+        Me.Panel1.ResumeLayout(false)
+        CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
 
 End Sub
-    Friend WithEvents gridAtividades As DataGridView
-    Friend WithEvents Splitter1 As Splitter
     Friend WithEvents pMenu As Panel
     Friend WithEvents btnAdicinar As Button
     Friend WithEvents btnAtualiza As Button
     Friend WithEvents btnListar As Button
-    Friend WithEvents txtDescricao As RichTextBox
     Friend WithEvents pFiltro As Panel
     Friend WithEvents btnAbaixarFiltro As Button
     Friend WithEvents txtApartirDe As MaskedTextBox
@@ -565,7 +576,6 @@ End Sub
     Friend WithEvents txtCodigo As MaskedTextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents cbTipo As ComboBox
-    Friend WithEvents Editar As DataGridViewImageColumn
     Friend WithEvents btnConfiguracao As Button
     Friend WithEvents Timer1 As Timer
     Friend WithEvents btnApontarHoras As Button
@@ -584,4 +594,9 @@ End Sub
     Friend WithEvents lblHorasAtividade As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents btnAbreCausaErros As Button
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents txtDescricao As RichTextBox
+    Friend WithEvents Splitter1 As Splitter
+    Friend WithEvents gridAtividades As DataGridView
+    Friend WithEvents Editar As DataGridViewImageColumn
 End Class

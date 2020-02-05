@@ -117,22 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="Editar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Editar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnAbreCausaErros.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAWxJREFUOE9j
-        oBQ4t50Udu86buTQsJ8FKkQ+CJt0rrx01d37kw+9/Zo09+oBigwNn3omq33zvT/1Gx/833L77/9JB998
-        9Ww/ZgiVJg0E9F/IrVt7+/v9D//+n3z47X/9hgf/i1ffu+ved0wIqoR4EDjpQlDBqkePStc++Lf96oc/
-        IEPbN9//A/I+VAnxIGjSxZDC1Y+fzDjz9z8Il6x58K92ze3vUTMvZkKVEA+CplwIBLkMZhgIgwz3n3C2
-        EKqEeIDLsOBJFyOhSogHQRNHrmFrKDAsfyWVDAufeqEzb/n9X1QxLGzyaevEOVd+Tjv1G25YETDMwqed
-        D4UqIQ3kLbyy+fj9r/8r1tz9DzK0YNXDP0H95xOg0qQB944j2r07Hz4B5csTD77+T5p75WfE9At9UGnS
-        QXD/6dMJMy7879n+4Fn+4qvboyacs4NKkQ5CG67yeHWe+A4y1KXjmC5UmHwQCizDQIZCuRQCBgYAUFRN
-        65WRfrUAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAHpJREFUWEft
+        0EEKgEAIQNG5XVfrCN2oTVeKQlACw9UUKP4HQkwIHwe+sqz7lWk06yGPke049evtj38EGgINgU4YKEsZ
+        pu4FIwQ6BJp+gbKUYepeMEKgQ6DpFyhLGabuBSMEOgSafoGylGHqXjBCoEOg6ReYaTQLk8a4AUMrzHt6
+        ie8eAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>106, 17</value>
+  </metadata>
   <data name="btnVersao.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAdVJREFUWEft
@@ -879,18 +875,19 @@
   <metadata name="Timer2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>477, 17</value>
   </metadata>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>106, 17</value>
+  <metadata name="Editar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>106, 17</value>
-  </metadata>
-  <data name="btnAbreCausaErros.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Editar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAB6SURBVFhH7dBBCoBACEDRuV1X6wjdqE1XikJQAsPVFCj+B0JMCB8HvrKs+5VpNOshj5HtOPXr
-        7Y9/BBoCDYFOGChLGabuBSMEOgSafoGylGHqXjBCoEOg6RcoSxmm7gUjBDoEmn6BspRh6l4wQqBDoOkX
-        mGk0C5PGuAFDK8x7eonvHgAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAWxJREFUOE9j
+        oBQ4t50Udu86buTQsJ8FKkQ+CJt0rrx01d37kw+9/Zo09+oBigwNn3omq33zvT/1Gx/833L77/9JB998
+        9Ww/ZgiVJg0E9F/IrVt7+/v9D//+n3z47X/9hgf/i1ffu+ved0wIqoR4EDjpQlDBqkePStc++Lf96oc/
+        IEPbN9//A/I+VAnxIGjSxZDC1Y+fzDjz9z8Il6x58K92ze3vUTMvZkKVEA+CplwIBLkMZhgIgwz3n3C2
+        EKqEeIDLsOBJFyOhSogHQRNHrmFrKDAsfyWVDAufeqEzb/n9X1QxLGzyaevEOVd+Tjv1G25YETDMwqed
+        D4UqIQ3kLbyy+fj9r/8r1tz9DzK0YNXDP0H95xOg0qQB944j2r07Hz4B5csTD77+T5p75WfE9At9UGnS
+        QXD/6dMJMy7879n+4Fn+4qvboyacs4NKkQ5CG67yeHWe+A4y1KXjmC5UmHwQCizDQIZCuRQCBgYAUFRN
+        65WRfrUAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

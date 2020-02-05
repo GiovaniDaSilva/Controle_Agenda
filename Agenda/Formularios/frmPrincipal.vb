@@ -92,7 +92,7 @@ Public Class frmPrincipal
         txtDescricao.SelectionStart = 0
     End Sub
 
-    Private Sub txtDescricao_Leave(sender As Object, e As EventArgs) Handles txtDescricao.Leave
+    Private Sub txtDescricao_Leave(sender As Object, e As EventArgs) Handles txtDescricao.Leave 
         Dim locAlterou As Boolean = Not lista(gridAtividades.CurrentCell.RowIndex).Descricao.Equals(txtDescricao.Text)
         If txtDescricao.Tag = MODO_IMPRESSAO Then
             Exit Sub
@@ -116,7 +116,7 @@ Public Class frmPrincipal
     End Sub
 
 
-    Private Sub gridAtividades_Click(sender As Object, e As EventArgs) Handles gridAtividades.Click
+    Private Sub gridAtividades_Click(sender As Object, e As EventArgs) Handles gridAtividades.Click 
 
         If My.Computer.Keyboard.AltKeyDown Then
             subConfiguraDescricao(MODO_IMPRESSAO)
@@ -138,7 +138,7 @@ Public Class frmPrincipal
         End If
     End Sub
 
-    Private Sub gridAtividades_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridAtividades.CellClick
+    Private Sub gridAtividades_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles  gridAtividades.CellClick 
         If e.RowIndex < 0 Then Exit Sub
         If (e.ColumnIndex = enuIndexColunas.EDITAR) Then
             subChamaFormularioAdicionarEdicao(e.RowIndex)
@@ -217,11 +217,11 @@ Public Class frmPrincipal
 
 
 
-    Private Sub gridAtividades_KeyDown(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyDown
+    Private Sub gridAtividades_KeyDown(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyDown 
         subAtualizaDescricao()
     End Sub
 
-    Private Sub gridAtividades_KeyUp(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyUp
+    Private Sub gridAtividades_KeyUp(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyUp 
         subAtualizaDescricao()
     End Sub
 
@@ -384,7 +384,7 @@ Public Class frmPrincipal
         controle.funChamaHTMLVersao()
     End Sub
 
-    Private Sub gridAtividades_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles gridAtividades.CellFormatting
+    Private Sub gridAtividades_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles gridAtividades.CellFormatting 
 
         If gridAtividades.Rows.Count = 0 Then Exit Sub
 
@@ -451,6 +451,7 @@ Public Class frmPrincipal
             End If            
         End If            
     End Sub
+
 End Class
 
 
