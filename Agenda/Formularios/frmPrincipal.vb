@@ -9,7 +9,7 @@ Public Class frmPrincipal
     Const MODO_IMPRESSAO = "MODO_IMPRESSAO"
     Const MODO_NORMAL = ""
 
-    Public CONST VERSAO_SISTEMA = "0.7"
+    Public CONST VERSAO_SISTEMA = "0.8"
 
     Private Enum enuPosicaoColunas
         DATA = 1
@@ -435,6 +435,21 @@ Public Class frmPrincipal
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
         controle.subExibeNotificacao(NotifyIcon1)
+    End Sub
+
+    Private Sub btnAbreCausaErros_Click(sender As Object, e As EventArgs) Handles btnAbreCausaErros.Click
+        Dim i As Integer
+
+        i = gridAtividades.CurrentCell.RowIndex         
+        If lista Is Nothing  or not gridAtividades.CurrentRow.Selected then
+            Process.Start("http://govbr6322:8077/home")
+        Else
+            If lista(i).ID_TIPO_ATIVIDADE = 1 then
+                Process.Start("http://govbr6322:8077/set_causa?id=" & lista(i).Codigo )
+             Else
+                Process.Start("http://govbr6322:8077/home")
+            End If            
+        End If            
     End Sub
 End Class
 

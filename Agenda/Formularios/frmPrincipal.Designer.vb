@@ -60,6 +60,7 @@ Partial Class frmPrincipal
         Me.SairToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnAbreCausaErros = New System.Windows.Forms.Button()
         CType(Me.gridAtividades,System.ComponentModel.ISupportInitialize).BeginInit
         Me.pMenu.SuspendLayout
         Me.pHorasAtividade.SuspendLayout
@@ -83,8 +84,9 @@ Partial Class frmPrincipal
         Me.gridAtividades.MultiSelect = false
         Me.gridAtividades.Name = "gridAtividades"
         Me.gridAtividades.ReadOnly = true
+        Me.gridAtividades.RowHeadersVisible = false
         Me.gridAtividades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridAtividades.Size = New System.Drawing.Size(823, 280)
+        Me.gridAtividades.Size = New System.Drawing.Size(998, 328)
         Me.gridAtividades.TabIndex = 1
         '
         'Editar
@@ -98,14 +100,15 @@ Partial Class frmPrincipal
         'Splitter1
         '
         Me.Splitter1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Splitter1.Location = New System.Drawing.Point(0, 357)
+        Me.Splitter1.Location = New System.Drawing.Point(0, 405)
         Me.Splitter1.Name = "Splitter1"
-        Me.Splitter1.Size = New System.Drawing.Size(823, 14)
+        Me.Splitter1.Size = New System.Drawing.Size(998, 10)
         Me.Splitter1.TabIndex = 2
         Me.Splitter1.TabStop = false
         '
         'pMenu
         '
+        Me.pMenu.Controls.Add(Me.btnAbreCausaErros)
         Me.pMenu.Controls.Add(Me.pHorasAtividade)
         Me.pMenu.Controls.Add(Me.pHorasDia)
         Me.pMenu.Controls.Add(Me.btnVersao)
@@ -118,7 +121,7 @@ Partial Class frmPrincipal
         Me.pMenu.Dock = System.Windows.Forms.DockStyle.Top
         Me.pMenu.Location = New System.Drawing.Point(0, 0)
         Me.pMenu.Name = "pMenu"
-        Me.pMenu.Size = New System.Drawing.Size(823, 77)
+        Me.pMenu.Size = New System.Drawing.Size(998, 77)
         Me.pMenu.TabIndex = 0
         '
         'pHorasAtividade
@@ -215,7 +218,7 @@ Partial Class frmPrincipal
         Me.btnApontarHoras.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnApontarHoras.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnApontarHoras.Image = CType(resources.GetObject("btnApontarHoras.Image"),System.Drawing.Image)
-        Me.btnApontarHoras.Location = New System.Drawing.Point(609, 15)
+        Me.btnApontarHoras.Location = New System.Drawing.Point(784, 15)
         Me.btnApontarHoras.Name = "btnApontarHoras"
         Me.btnApontarHoras.Size = New System.Drawing.Size(57, 50)
         Me.btnApontarHoras.TabIndex = 5
@@ -266,7 +269,7 @@ Partial Class frmPrincipal
         Me.btnListar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnListar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnListar.Image = CType(resources.GetObject("btnListar.Image"),System.Drawing.Image)
-        Me.btnListar.Location = New System.Drawing.Point(672, 15)
+        Me.btnListar.Location = New System.Drawing.Point(847, 15)
         Me.btnListar.Name = "btnListar"
         Me.btnListar.Size = New System.Drawing.Size(57, 50)
         Me.btnListar.TabIndex = 6
@@ -283,7 +286,7 @@ Partial Class frmPrincipal
         Me.btnAtualiza.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnAtualiza.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnAtualiza.Image = CType(resources.GetObject("btnAtualiza.Image"),System.Drawing.Image)
-        Me.btnAtualiza.Location = New System.Drawing.Point(546, 15)
+        Me.btnAtualiza.Location = New System.Drawing.Point(658, 15)
         Me.btnAtualiza.Name = "btnAtualiza"
         Me.btnAtualiza.Size = New System.Drawing.Size(57, 50)
         Me.btnAtualiza.TabIndex = 4
@@ -300,7 +303,7 @@ Partial Class frmPrincipal
         Me.btnAdicinar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnAdicinar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnAdicinar.Image = CType(resources.GetObject("btnAdicinar.Image"),System.Drawing.Image)
-        Me.btnAdicinar.Location = New System.Drawing.Point(754, 15)
+        Me.btnAdicinar.Location = New System.Drawing.Point(929, 15)
         Me.btnAdicinar.Name = "btnAdicinar"
         Me.btnAdicinar.Size = New System.Drawing.Size(57, 50)
         Me.btnAdicinar.TabIndex = 7
@@ -314,10 +317,10 @@ Partial Class frmPrincipal
         Me.txtDescricao.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtDescricao.ForeColor = System.Drawing.SystemColors.Desktop
         Me.txtDescricao.HideSelection = false
-        Me.txtDescricao.Location = New System.Drawing.Point(0, 371)
+        Me.txtDescricao.Location = New System.Drawing.Point(0, 415)
         Me.txtDescricao.Name = "txtDescricao"
         Me.txtDescricao.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
-        Me.txtDescricao.Size = New System.Drawing.Size(823, 197)
+        Me.txtDescricao.Size = New System.Drawing.Size(998, 239)
         Me.txtDescricao.TabIndex = 3
         Me.txtDescricao.Tag = ""
         Me.txtDescricao.Text = ""
@@ -500,12 +503,29 @@ Partial Class frmPrincipal
         '
         Me.Timer2.Interval = 10800000
         '
+        'btnAbreCausaErros
+        '
+        Me.btnAbreCausaErros.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnAbreCausaErros.BackColor = System.Drawing.SystemColors.Control
+        Me.btnAbreCausaErros.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.btnAbreCausaErros.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.btnAbreCausaErros.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnAbreCausaErros.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnAbreCausaErros.Image = CType(resources.GetObject("btnAbreCausaErros.Image"),System.Drawing.Image)
+        Me.btnAbreCausaErros.Location = New System.Drawing.Point(721, 15)
+        Me.btnAbreCausaErros.Name = "btnAbreCausaErros"
+        Me.btnAbreCausaErros.Size = New System.Drawing.Size(57, 50)
+        Me.btnAbreCausaErros.TabIndex = 9
+        Me.ToolTip1.SetToolTip(Me.btnAbreCausaErros, "Abre o sistema GOVBR Sol Control")
+        Me.btnAbreCausaErros.UseVisualStyleBackColor = false
+        '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.ClientSize = New System.Drawing.Size(823, 568)
+        Me.ClientSize = New System.Drawing.Size(998, 654)
         Me.Controls.Add(Me.pFiltro)
         Me.Controls.Add(Me.txtDescricao)
         Me.Controls.Add(Me.Splitter1)
@@ -563,4 +583,5 @@ End Sub
     Friend WithEvents pHorasAtividade As Panel
     Friend WithEvents lblHorasAtividade As Label
     Friend WithEvents Label5 As Label
+    Friend WithEvents btnAbreCausaErros As Button
 End Class
