@@ -243,5 +243,18 @@
         End Try
     End Sub
 
-    
+    Private Sub ToolTip2_Draw(sender As Object, e As DrawToolTipEventArgs) Handles ToolTip2.Draw        
+        dim tooltipFont As Font = new Font("consolas", 10.0f)
+        Dim temptooltiptext As string
+        e.DrawBackground()
+        e.DrawBorder()
+        temptooltiptext = e.ToolTipText
+        e.Graphics.DrawString(e.ToolTipText, tooltipFont, Brushes.Black, new PointF(2, 2))
+
+
+    End Sub
+
+    Private Sub ToolTip2_Popup(sender As Object, e As PopupEventArgs) Handles ToolTip2.Popup
+         e.ToolTipSize = TextRenderer.MeasureText(toolTip2.GetToolTip(e.AssociatedControl), new Font("consolas", 10.0f))
+    End Sub
 End Class

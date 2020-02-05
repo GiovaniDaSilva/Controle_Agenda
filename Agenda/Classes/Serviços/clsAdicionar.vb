@@ -51,25 +51,17 @@ Public Class clsAdicionar
             locAtividade = vbNullString
 
             For Each atividade In listaAtividadesPeriodos
-                linha = Space(26)
-
+                'linha = Space(26)
+                linha = StrDup(26,".")
                 If locAtividade <> (atividade.descricao_tipo & " " & atividade.codigo_atividade) Then
                     locAtividade = (atividade.descricao_tipo & " " & atividade.codigo_atividade)
 
-                    linha = locAtividade & Space(Mid(linha, locAtividade.Length, linha.Length).Length)
+                    linha = locAtividade & strdup(Mid(linha, locAtividade.Length, linha.Length).Length,".")
 
-                    If atividade.descricao_tipo = "Outros" Then
-                        linha &= Space(7)
-                    ElseIf atividade.descricao_tipo = "PBI" Then
-                        linha &= Space(4)
-                    ElseIf atividade.codigo_atividade = vbNullString Then
-                        linha &= Space(6)
-                    End If
-
-
+     
                     linha = linha & atividade.hora_inicial & " - " & atividade.hora_final
                 Else
-                    linha = Space(locAtividade.Length + 13) & Space(Mid(linha, locAtividade.Length, linha.Length).Length)
+                    linha = Space(locAtividade.Length) & strDup(Mid(linha, locAtividade.Length, linha.Length).Length,".")
                     linha = linha & atividade.hora_inicial & " - " & atividade.hora_final
                 End If
 
