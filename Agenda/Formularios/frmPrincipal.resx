@@ -118,6 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnGraficoMensal.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAIZSURBVFhH7ZjNSsNAEICL76B40hcRT9Jq/Gl78BF8Bq+eNCY2vVjx5FuIJxXENsnWkyKKFw/1
+        4C+IWGm1TZxJJ7DRNnYTiyvkg7CbTDb7MZ3Nhqb+BRnVvKKunICgS105SQTjkgjGJRGMiwyCykZ5PG9U
+        bUWzmrli1ZpSj8coJIcgym0d3LQvH1sutK28wUwKSZJB3X6/fPhwr58dF1tFsxsU6ghunzi72P+Ldlq1
+        JrLFqlPar3lyJZkyiHIw/ws65Ax2P6vbjXyRVWLXYGhR9wkvB8fOyoo7RKEgUQQ7RV3rXtR9kFbLkzDv
+        649ySBTBWc1ufinqJoV+pO/M+YgKpvXyCBR13S/qTWizBdaG5yzRLT0RypyPiODM6tFwWjVPcUyuwN6g
+        qJtQ3Lc0oZtZN/cUjY3S7QGEM+eDA6gbCi8HxwUvMr1WWYRrTxS7S2uVOQp5RJZDcBB1exIm54MrGWKH
+        3j3rpgOZvfNWucHOYazYz8qDA6nbFaw5mPCMJj7Dcwp9AyfPrJnLCwXmwCp3cZVjrUKNRpNDwgT7yVw3
+        FN0Kbl261Yokh/QSFMncV/Dlje9HlCsd1BzR92QAXpDfIbIGq4tmzqfzHGZ23bpE4QX5HcKrHZAUydxA
+        QEH/62J+g7X52pmDc7we9jUyyNaDz2CwdsT32IHAC/5q7fwWvKCUJIJxSQTjkgjGJRGMCwpKeMj9x36H
+        VOoTxKPyrjZQXGcAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>106, 17</value>
+  </metadata>
   <data name="btnAbreCausaErros.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAHpJREFUWEft
@@ -126,9 +144,6 @@
         ie8eAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>106, 17</value>
-  </metadata>
   <data name="btnVersao.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAdVJREFUWEft

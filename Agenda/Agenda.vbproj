@@ -120,6 +120,7 @@
     <Compile Include="Classes\Modelos\clsAtividade.vb" />
     <Compile Include="Classes\clsEnumString.vb" />
     <Compile Include="Classes\clsHTML.vb" />
+    <Compile Include="Classes\Serviços\clsGraficoMensal.vb" />
     <Compile Include="Classes\Serviços\clsIni.vb" />
     <Compile Include="Classes\Modelos\clsParametrosIni.vb" />
     <Compile Include="Classes\Modelos\clsPeriodo.vb" />
@@ -139,6 +140,12 @@
       <DependentUpon>frmConfiguracoes.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\frmConfiguracoes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmGraficoMensal.Designer.vb">
+      <DependentUpon>frmGraficoMensal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmGraficoMensal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\frmHTML.Designer.vb">
@@ -177,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmConfiguracoes.resx">
       <DependentUpon>frmConfiguracoes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmGraficoMensal.resx">
+      <DependentUpon>frmGraficoMensal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmHTML.resx">
       <DependentUpon>frmHTML.vb</DependentUpon>

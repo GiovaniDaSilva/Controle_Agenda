@@ -452,6 +452,9 @@ Public Class frmPrincipal
         End If            
     End Sub
 
+    Private Sub btnGraficoMensal_Click_1(sender As Object, e As EventArgs) Handles btnGraficoMensal.Click
+        frmGraficoMensal.ShowDialog()
+    End Sub
 End Class
 
 
