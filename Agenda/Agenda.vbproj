@@ -131,6 +131,7 @@
     <Compile Include="Classes\DAO\clsSolicitacaoDAO.vb" />
     <Compile Include="Classes\Modelos\clsTipo.vb" />
     <Compile Include="Classes\clsTools.vb" />
+    <Compile Include="Classes\Serviços\clsServidorHTTP.vb" />
     <Compile Include="Formularios\frmAdicionar.Designer.vb">
       <DependentUpon>frmAdicionar.vb</DependentUpon>
     </Compile>
@@ -217,6 +218,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Agenda.ico" />
+    <None Include="Resources\GraficoAtividades.html" />
     <None Include="Resources\Versoes.html" />
   </ItemGroup>
   <ItemGroup>

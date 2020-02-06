@@ -11,5 +11,8 @@
         Dim locGrafico As New clsGraficoMensal
 
         locGrafico.subGeraGrafico(clsTools.funRetornaData(txtDataInicial), clsTools.funRetornaData(txtDataFinal))
+
+
+        Process.Start("http://localhost:8484/Grafico/")
     End Sub
 End Class

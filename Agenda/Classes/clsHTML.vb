@@ -67,6 +67,7 @@ Public Class clsHTML
 
 
         Return locLista
+        
     End Function
 
     Public Class CamposHTML
