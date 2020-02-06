@@ -113,6 +113,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Modelos\clsAtividadesGrafico.vb" />
     <Compile Include="Classes\Modelos\clsPeriodosAtividades.vb" />
     <Compile Include="Classes\Serviços\clsConexao.vb" />
     <Compile Include="Classes\Serviços\clsAdicionar.vb" />
