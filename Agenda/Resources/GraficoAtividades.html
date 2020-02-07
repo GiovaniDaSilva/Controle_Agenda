@@ -10,37 +10,58 @@
     
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+
+        <div class="jumbotron">
+            <div class="container-fluid">
+                <h2 class="display-4">Gráfico de Atividades</h2>
+                <p>O gráfico abaixo apresentado o percentual das atividades trabalhadas.</p>                
+            </div>
+        </div>
+
     </head>
 
     <body>
+        
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+                
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <div id="canvas-holder">
+                        <canvas id="chart-area"></canvas>
+                    </div>
+                </div>                             
+            </div>            
+        </div>
 
-            <canvas id="grafico"></canvas>
+        <script>
+              $(document).ready(function () {
 
-            <script>
-                $(document).ready(function () {
+                  var ctx = document.getElementById('chart-area').getContext('2d');
+                  var chart = new Chart(ctx, {
+                      // The type of chart we want to create
+                      //type: 'bar',
+                      type: 'pie',
+                      // The data for our dataset
+                      data: {
+                          labels: ['PBI', 'Solicitações', 'Reunião', 'Ausente'],
+                          datasets: [{
+                              label: 'percentual trabalhado nas Atividades do Período',
+                              backgroundColor: ['rgb(255, 99, 132)', 'rgb(0, 99, 132)', 'rgb(100, 99, 132)', 'rgb(180, 99, 132)'],
+                              data: [51.28, 35.89, 10.25, 2.56,],                              
+                          }]
+                      },
 
-                    var ctx = document.getElementById('grafico').getContext('2d');
-                    var chart = new Chart(ctx, {
-                        // The type of chart we want to create
-                        //type: 'bar',
-                        type: 'pie',
-                        // The data for our dataset
-                        data: {
-                            labels: ['PBI','Solicitações','Reunião','Ausente'],
-                            datasets: [{
-                                label: 'percentual trabalhado nas Atividades do Período',
-                                backgroundColor: ['rgb(255, 99, 132)','rgb(0, 99, 132)','rgb(100, 99, 132)','rgb(180, 99, 132)'],                                 
-                                data: [51.28,35.89,10.25,2.56,]
-                            }]
-                        },
+                      // Configuration options go here
+                      options: {}
+                  });
 
-                        // Configuration options go here
-                        options: {}
-                    });
+            });
 
-                });    
-            </script>            
+
+         
+        </script>
+
     </body>
 
 </html>
