@@ -428,7 +428,7 @@ Public Class frmPrincipal
             e.Cancel = True
             subExibiFormulario(False)
         End If
-        glfServidorHTTP.EncerraServidorHTTP 
+        'glfServidorHTTP.EncerraServidorHTTP 
     End Sub
 
     Private Sub AbrirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirToolStripMenuItem.Click
