@@ -55,8 +55,10 @@ Public Class clsPrincipal
             End Select
 
             If locData = vbNullString OrElse locData <> item.Data Then
-                RichAddLineFmt(txtTela, funRetornaDataFormatada(item.Data) & vbNewLine)
-                locData = item.Data
+                Dim data As string
+                data = item.Data & " - " &  Strings.StrConv(String.Format("{0:dddd}", item.Data), VbStrConv.ProperCase)
+                RichAddLineFmt(txtTela, funRetornaDataFormatada(data) & vbNewLine)
+                locData = item.Data                
             End If
 
 
