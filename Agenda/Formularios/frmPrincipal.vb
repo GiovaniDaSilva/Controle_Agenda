@@ -445,7 +445,7 @@ Public Class frmPrincipal
             Process.Start("http://govbr6322:8077/home")
         Else
             If lista(i).ID_TIPO_ATIVIDADE = 1 then
-                Process.Start("http://govbr6322:8077/set_causa?id=" & lista(i).Codigo )
+                Process.Start("http://govbr6322:8077/set_demanda?id=" & lista(i).Codigo )
              Else
                 Process.Start("http://govbr6322:8077/home")
             End If            
