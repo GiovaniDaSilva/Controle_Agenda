@@ -82,7 +82,26 @@
         Return True
     End Function
 
-    public Shared Function HoraVazia(pHora As MaskedTextBox) As Boolean 
-         return Trim(pHora.text.Replace(":", "")) = vbNullString 
+    Public Shared Function HoraVazia(pHora As MaskedTextBox) As Boolean
+        Return Trim(pHora.text.Replace(":", "")) = vbNullString
     End Function
+
+    Public Shared Function RetornArrayLista(ByVal parLista As IEnumerable(Of String), Optional parEhString As Boolean = False) As String
+        Dim retorno As String = vbNullString
+        Dim aux As String
+
+        For Each i In parLista
+            aux = i.ToString.Replace(",", ".")
+
+            If parEhString Then
+                aux = "'" & aux & "'"
+            End If
+
+            retorno &= aux & ","
+        Next
+        Return retorno.Substring(0, retorno.Length - 1)
+
+    End Function
+
+
 End Class

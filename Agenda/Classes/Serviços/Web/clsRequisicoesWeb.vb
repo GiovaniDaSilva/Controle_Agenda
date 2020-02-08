@@ -14,8 +14,6 @@
     End Function
 
     Private Function funRetornaPaginaGrafico() As String
-        Return My.Resources.GraficoAtividades.Replace("{p_atividades}", "'PBI', 'Solicitações', 'Reunião', 'Ausente'").Replace("{p_valores}", "51.28, 35.89, 10.25, 2.56")
-
         Return New clsGraficoWeb().RetornaPaginaGrafico
     End Function
 End Class

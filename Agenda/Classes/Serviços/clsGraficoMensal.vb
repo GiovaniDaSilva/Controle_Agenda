@@ -36,14 +36,12 @@
         locTotais.TotalHorasAusente = funRetornaMinutos(TimeAus)
         locTotais.TotalHorasOutros = funRetornaMinutos(TimeOut)
 
-        Process.Start("http://localhost:8484/Grafico/")
-
         Return locTotais
 
     End Function
 
     Private Function funRetornaMinutos(timeAux As TimeSpan) As Double
-        Return (timeAux.Hours * 60) + timeAux.Minutes
+        Return (timeAux.TotalHours * 60) + timeAux.Minutes
     End Function
 
     Private Function funUltimoDiaMes() As Date
