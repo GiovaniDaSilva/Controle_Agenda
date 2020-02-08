@@ -1,8 +1,11 @@
 ﻿Public Class clsGraficoMensal
 
+    Public Function subGeraGrafico() As clsAtividadesGrafico
 
-    Public Sub subGeraGrafico(ByVal pDataInicial As Date, ByVal pDataFinal As Date)
-        Dim locListaAtividades = New clsAdicionarDAO().carregarAtividades(pDataInicial, pDataFinal)
+        Dim locDataInicial = CDate("01/" & Month(Now) & "/" & Year(Now))
+        Dim locDataFinal = funUltimoDiaMes()
+
+        Dim locListaAtividades = New clsAdicionarDAO().carregarAtividades(locDataInicial, locDataFinal)
         Dim locTotais As New clsAtividadesGrafico
 
         Dim TimeTotal As TimeSpan
@@ -33,19 +36,24 @@
         locTotais.TotalHorasAusente = funRetornaMinutos(TimeAus)
         locTotais.TotalHorasOutros = funRetornaMinutos(TimeOut)
 
+        Process.Start("http://localhost:8484/Grafico/")
 
-        Debug.Print("locTotais.TotalHorasAtividades= " & locTotais.TotalHorasAtividades)
-        Debug.Print("locTotais.TotalHorasSolicitacoes= " & locTotais.TotalHorasSolicitacoes)
-        Debug.Print("locTotais.TotalHorasPBI= " & locTotais.TotalHorasPBI)
-        Debug.Print("locTotais.TotalHorasReuniao= " & locTotais.TotalHorasReuniao)
-        Debug.Print("locTotais.TotalHorasAusente= " & locTotais.TotalHorasAusente)
-        Debug.Print("locTotais.TotalHorasOutros= " & locTotais.TotalHorasOutros)
+        Return locTotais
 
 
-    End Sub
+
+    End Function
 
     Private Function funRetornaMinutos(timeAux As TimeSpan) As Double
         Return (timeAux.Hours * 60) + timeAux.Minutes
+    End Function
+
+    Private Function funUltimoDiaMes() As Date
+        Dim data As Date
+
+        data = DateAdd("m", 1, DateSerial(Year(Now), Month(Now), 1))
+        data = DateAdd("d", -1, data)
+        Return data
     End Function
 
     Public Enum enuTipoAtividades

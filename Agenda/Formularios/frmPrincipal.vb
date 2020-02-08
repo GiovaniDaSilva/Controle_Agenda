@@ -459,7 +459,9 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub btnGraficoMensal_Click_1(sender As Object, e As EventArgs) Handles btnGraficoMensal.Click
-        frmGraficoMensal.ShowDialog()
+        Dim locGrafico As New clsGraficoMensal
+
+        locGrafico.subGeraGrafico()
     End Sub
 End Class
 

@@ -135,6 +135,8 @@
     <Compile Include="Classes\Modelos\clsTipo.vb" />
     <Compile Include="Classes\clsTools.vb" />
     <Compile Include="Classes\Serviços\clsServidorHTTP.vb" />
+    <Compile Include="Classes\Serviços\Web\clsGraficoWeb.vb" />
+    <Compile Include="Classes\Serviços\Web\clsRequisicoesWeb.vb" />
     <Compile Include="Formularios\frmAdicionar.Designer.vb">
       <DependentUpon>frmAdicionar.vb</DependentUpon>
     </Compile>
@@ -145,12 +147,6 @@
       <DependentUpon>frmConfiguracoes.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\frmConfiguracoes.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\frmGraficoMensal.Designer.vb">
-      <DependentUpon>frmGraficoMensal.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\frmGraficoMensal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\frmHTML.Designer.vb">
@@ -189,9 +185,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmConfiguracoes.resx">
       <DependentUpon>frmConfiguracoes.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\frmGraficoMensal.resx">
-      <DependentUpon>frmGraficoMensal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmHTML.resx">
       <DependentUpon>frmHTML.vb</DependentUpon>

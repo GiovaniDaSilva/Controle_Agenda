@@ -27,7 +27,7 @@ Public Class clsServidorHTTP
         listener = New HttpListener
 
         ' Configura o prefixo URI que irá mapear para o HttpListener.
-        listener.Prefixes.Add("http://*:8484/Grafico/")
+        listener.Prefixes.Add("http://*:8484/")
         listener.Start()
 
         ' Cria um numero de tratadores de requisições assincronas
@@ -50,40 +50,23 @@ Public Class clsServidorHTTP
 
     'Este método processa de forma assincrona requisições individuais
     Private Sub RequestHandler(ByVal result As IAsyncResult)
-        
+        Dim locRequisicoesWeb As New clsRequisicoesWeb
         Try
             ' Obtem o HttpListenerContext para a nova requisição
             Dim context As HttpListenerContext = listener.EndGetContext(result)
-        
+
             ' Cria uma resposta usando um StreamWriter 
             Dim sw As New StreamWriter(context.Response.OutputStream, Encoding.UTF8)
-
-            Dim url = context.Request.Url
-            If url = New Uri("http://localhost:19080/giovani") Then
-                If 1 = 1 Then
-
-                End If
-            End If
 
             ' Configura a resposta
             context.Response.ContentType = "text/html"
             context.Response.ContentEncoding = Encoding.UTF8
             context.Response.StatusCode = HttpStatusCode.OK
 
-            'sw.WriteLine("<!DOCTYPE html>")
-            'sw.WriteLine("<html>")
-            'sw.WriteLine("<head>")
-            'sw.WriteLine("<meta charset=""utf-8""> ")
-            'sw.WriteLine("<title>Macoratti .Net - Quase tudo para VB .NET</title>")
-            'sw.WriteLine("</head>")
-            'sw.WriteLine("<body>")
-            'sw.WriteLine("VB .NET 2017 : " & result.AsyncState)
-            'sw.WriteLine("</body>")
-            'sw.WriteLine("</html>")
 
-            sw.WriteLine(My.Resources.GraficoAtividades  )
+            sw.WriteLine(locRequisicoesWeb.trataRequisicoesWeb(context.Request.Url))
 
-            sw.Flush()            
+            sw.Flush()
             ' Fecha a resposta para enviá-la ao cliente
             context.Response.Close()            
         Catch ex As ObjectDisposedException
