@@ -1,6 +1,6 @@
 ﻿Public Class clsGraficoMensal
 
-    Public Function subGeraGrafico() As clsAtividadesGrafico
+    Public Function subGeraDadosGrafico() As clsAtividadesGrafico
 
         Dim locDataInicial = CDate("01/" & Month(Now) & "/" & Year(Now))
         Dim locDataFinal = funUltimoDiaMes()
@@ -39,8 +39,6 @@
         Process.Start("http://localhost:8484/Grafico/")
 
         Return locTotais
-
-
 
     End Function
 
