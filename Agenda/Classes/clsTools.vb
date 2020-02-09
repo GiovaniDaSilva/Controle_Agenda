@@ -27,9 +27,8 @@
         Return Format(parData, "dd/MM/yyyy")
     End Function
 
-
     Public Shared Function Tab() As String
-        Return "       "
+        Return Space(7)
     End Function
 
     Public Shared Function funLimpaHTMLTableSolicitacoes(html As String) As String
