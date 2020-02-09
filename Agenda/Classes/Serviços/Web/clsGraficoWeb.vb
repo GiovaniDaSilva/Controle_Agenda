@@ -55,12 +55,26 @@
 
         html = html.Replace("{p_valores}", clsTools.RetornArrayLista(locValores))
 
-        'Return My.Resources.GraficoAtividades.Replace("{p_atividades}", "'PBI', 'Solicitações', 'Reunião', 'Ausente'").Replace("{p_valores}", "51.28, 35.89, 10.25, 2.56")
+        html = html.Replace("{p_linhas_tabela}", RetornaLinhasTabela(locTipoAtividades, locValores))
 
-        'Return My.Resources.GraficoAtividades.Replace("{p_atividades}", clsTools.RetornArrayLista(locTipoAtividades, True)).Replace("{p_valores}", clsTools.RetornArrayLista(locValores))
+        html = html.Replace("{p_data_inicio}", clsTools.funFormataData(clsTools.RetornaPrimeiroDiaMes()))
+        html = html.Replace("{p_data_final}", clsTools.funFormataData(clsTools.RetornaUltimoDiaMes()))
 
         Return html
     End Function
 
+    Private Function RetornaLinhasTabela(locTipoAtividades As List(Of String), locValores As List(Of String)) As String
+        Dim locRetorno As String = vbNullString
 
+        For i = 0 To locTipoAtividades.Count - 1
+            Dim linha = New List(Of String)
+            linha.Add(locTipoAtividades(i).ToString)
+            linha.Add(locValores(i).ToString & " %")
+            locRetorno &= clsHTMLTools.funLinhaTabela(linha)
+        Next
+
+        Return locRetorno
+
+
+    End Function
 End Class

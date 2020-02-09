@@ -2,8 +2,8 @@
 
     Public Function subGeraDadosGrafico() As clsAtividadesGrafico
 
-        Dim locDataInicial = CDate("01/" & Month(Now) & "/" & Year(Now))
-        Dim locDataFinal = funUltimoDiaMes()
+        Dim locDataInicial = clsTools.RetornaPrimeiroDiaMes()
+        Dim locDataFinal = clsTools.RetornaUltimoDiaMes()
 
         Dim locListaAtividades = New clsAdicionarDAO().carregarAtividades(locDataInicial, locDataFinal)
         Dim locTotais As New clsAtividadesGrafico
@@ -44,13 +44,7 @@
         Return (timeAux.TotalHours * 60) + timeAux.Minutes
     End Function
 
-    Private Function funUltimoDiaMes() As Date
-        Dim data As Date
 
-        data = DateAdd("m", 1, DateSerial(Year(Now), Month(Now), 1))
-        data = DateAdd("d", -1, data)
-        Return data
-    End Function
 
     Public Enum enuTipoAtividades
         Solicitacao = 1

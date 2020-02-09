@@ -23,6 +23,11 @@
         Return Format(parData, "yyyy-MM-dd")
     End Function
 
+    Public Shared Function funFormataData(ByVal parData As Date) As String
+        Return Format(parData, "dd/MM/yyyy")
+    End Function
+
+
     Public Shared Function Tab() As String
         Return "       "
     End Function
@@ -103,5 +108,15 @@
 
     End Function
 
+    Public Shared Function RetornaUltimoDiaMes() As Date
+        Dim data As Date
 
+        data = DateAdd("m", 1, DateSerial(Year(Now), Month(Now), 1))
+        data = DateAdd("d", -1, data)
+        Return data
+    End Function
+
+    Public Shared Function RetornaPrimeiroDiaMes() As Date
+        Return CDate("01/" & Month(Now) & "/" & Year(Now))
+    End Function
 End Class
