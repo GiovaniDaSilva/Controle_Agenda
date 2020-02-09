@@ -1,13 +1,10 @@
 ﻿Public Class clsGraficoMensal
 
-    Public Function subGeraDadosGrafico() As clsAtividadesGrafico
+    Public Function subGeraDadosGrafico(ByVal parDataInicial As Date, ByVal parDataFinal As Date) As clsAtividadesGrafico
 
-        Dim locDataInicial = clsTools.RetornaPrimeiroDiaMes()
-        Dim locDataFinal = clsTools.RetornaUltimoDiaMes()
 
-        Dim locListaAtividades = New clsAdicionarDAO().carregarAtividades(locDataInicial, locDataFinal)
+        Dim locListaAtividades = New clsAdicionarDAO().carregarAtividades(parDataInicial, parDataFinal)
         Dim locTotais As New clsAtividadesGrafico
-
         Dim TimeTotal As TimeSpan
         Dim TimeSol As TimeSpan
         Dim TimePBI As TimeSpan
@@ -15,8 +12,14 @@
         Dim TimeAus As TimeSpan
         Dim TimeOut As TimeSpan
 
+        If locListaAtividades.Count = 0 Then Return locTotais
+
         'Carrega os Timer para cada tipo de ativdade
         For Each item In locListaAtividades
+            If Trim(item.Horas.Replace(":", "")) = vbNullString Then
+                Continue For
+            End If
+
             TimeTotal = TimeTotal.Add(TimeSpan.Parse(item.Horas))
 
             Select Case item.ID_TIPO_ATIVIDADE

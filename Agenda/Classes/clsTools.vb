@@ -107,15 +107,28 @@
 
     End Function
 
-    Public Shared Function RetornaUltimoDiaMes() As Date
+    Public Shared Function RetornaUltimoDiaMes(Optional ByVal mes As Integer = 0) As Date
         Dim data As Date
 
-        data = DateAdd("m", 1, DateSerial(Year(Now), Month(Now), 1))
-        data = DateAdd("d", -1, data)
-        Return data
+        If mes = 0 Then
+            data = DateAdd("m", 1, DateSerial(Year(Now), Month(Now), 1))
+            data = DateAdd("d", -1, data)
+            Return data
+        Else
+            data = DateAdd("m", 1, DateSerial(Year(Now), mes, 1))
+            data = DateAdd("d", -1, data)
+            Return data
+        End If
+
     End Function
 
-    Public Shared Function RetornaPrimeiroDiaMes() As Date
-        Return CDate("01/" & Month(Now) & "/" & Year(Now))
+    Public Shared Function RetornaPrimeiroDiaMes(Optional ByVal mes As Integer = 0) As Date
+
+        If mes = 0 Then
+            Return CDate("01/" & Month(Now) & "/" & Year(Now))
+        Else
+            Return CDate("01/" & mes.ToString("00") & "/" & Year(Now))
+        End If
+
     End Function
 End Class
