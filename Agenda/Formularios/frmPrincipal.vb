@@ -156,6 +156,8 @@ Public Class frmPrincipal
 
         End If
 
+        If e.RowIndex > lista.Count - 1 Then Exit Sub
+
         pHorasDia.Visible = True
         lblHorasDia.Text = controle.funRetornaTotalHorasDia(lista, lista(e.RowIndex).Data)
 
