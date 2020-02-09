@@ -14,7 +14,12 @@
     End Function
 
     Private Function funRetornaPaginaGrafico() As String
-        Return New clsGraficoWeb().RetornaPaginaGrafico
+        Try
+            Return New clsGraficoWeb().RetornaPaginaGrafico
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+        End Try
+        Return vbNullString
     End Function
 End Class
 

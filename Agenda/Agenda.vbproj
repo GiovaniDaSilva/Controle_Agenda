@@ -134,7 +134,7 @@
     <Compile Include="Classes\DAO\clsSolicitacaoDAO.vb" />
     <Compile Include="Classes\Modelos\clsTipo.vb" />
     <Compile Include="Classes\clsTools.vb" />
-    <Compile Include="Classes\Serviços\clsServidorHTTP.vb" />
+    <Compile Include="Classes\Serviços\Web\clsServidorHTTP.vb" />
     <Compile Include="Classes\Serviços\Web\clsGraficoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsRequisicoesWeb.vb" />
     <Compile Include="Formularios\frmAdicionar.Designer.vb">
