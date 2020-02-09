@@ -3,14 +3,17 @@
 Public Class clsRequisicoesWeb
 
     Public Function trataRequisicoesWeb(pUri As Uri) As String
-        Dim locPagRetorno As String = "Não encontrado"
-
-        Select Case pUri.AbsolutePath
-            Case "/Grafico/"
-                locPagRetorno = funRetornaPaginaGrafico(pUri)
-            Case "/Versoes/"
-                locPagRetorno = My.Resources.Versoes
-        End Select
+        Dim locPagRetorno As String = My.Resources.Pagina_Não_Encontrada
+        Try
+            Select Case pUri.AbsolutePath
+                Case "/Grafico/"
+                    locPagRetorno = funRetornaPaginaGrafico(pUri)
+                Case "/Versoes/"
+                    locPagRetorno = My.Resources.Versoes
+            End Select
+        Catch ex As Exception
+            Return locPagRetorno
+        End Try
 
         Return locPagRetorno
     End Function
@@ -36,11 +39,8 @@ Public Class clsRequisicoesWeb
         End If
 
 
-        Try
-            Return New clsGraficoWeb().RetornaPaginaGrafico(locDataInicial, locDataFinal)
-        Catch ex As Exception
-            clsTools.subTrataExcessao(ex)
-        End Try
+
+        Return New clsGraficoWeb().RetornaPaginaGrafico(locDataInicial, locDataFinal)
 
         Return vbNullString
     End Function

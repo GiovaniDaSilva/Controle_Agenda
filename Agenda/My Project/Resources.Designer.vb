@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -64,11 +64,11 @@ Namespace My.Resources
         '''  Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         '''
         '''&lt;html&gt;
-        '''    &lt;head&gt;
-        '''        &lt;script src=&quot;https://code.jquery.com/jquery-3.4.1.js&quot; integrity=&quot;sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
-        '''        &lt;script src=&quot;https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js&quot; integrity=&quot;sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
-        '''    
-        '''        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/boot [rest of string was truncated]&quot;;.
+        '''&lt;head&gt;
+        '''
+        '''    &lt;script src=&quot;https://code.jquery.com/jquery-3.4.1.js&quot; integrity=&quot;sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+        '''    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js&quot; integrity=&quot;sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+        '''    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css&quot; integ [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property GraficoAtividades() As String
             Get
@@ -79,23 +79,26 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to &lt;html&gt;
         '''&lt;head&gt;
-        '''    &lt;style&gt;
-        '''        .Titulo {
-        '''            color: darkblue;
-        '''            font-family: &apos;Segoe UI&apos;, Tahoma, Geneva, Verdana, sans-serif;
-        '''        }
         '''
-        '''        .TituloPrincipal {
-        '''            color: darkblue;
-        '''            font-family: &apos;Segoe UI&apos;, Tahoma, Geneva, Verdana, sans-serif;
-        '''            text-align: center;
-        '''            border-radius: 4px;
-        '''        }
+        '''    &lt;script src=&quot;https://code.jquery.com/jquery-3.4.1.js&quot; integrity=&quot;sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+        '''    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js&quot; integrity=&quot;sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
         '''
-        '''        .Atualizacao {
-        '''            color: black;
-        '''            font-family: &apos;Segoe UI&apos;, Tahoma, Geneva, Verdana, sans-serif;
-        '''         [rest of string was truncated]&quot;;.
+        '''    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css&quot; integrity=&quot;sha384-Vkoo [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Pagina_Não_Encontrada() As String
+            Get
+                Return ResourceManager.GetString("Pagina_Não_Encontrada", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;html&gt;
+        '''&lt;head&gt;
+        '''
+        '''    &lt;script src=&quot;https://code.jquery.com/jquery-3.4.1.js&quot; integrity=&quot;sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+        '''    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js&quot; integrity=&quot;sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+        '''
+        '''    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css&quot; integrity=&quot;sha384-Vkoo [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Versoes() As String
             Get

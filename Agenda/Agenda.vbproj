@@ -216,6 +216,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Agenda.ico" />
+    <None Include="Resources\Pagina Não Encontrada.html" />
     <None Include="Resources\GraficoAtividades.html" />
     <None Include="Resources\Versoes.html" />
   </ItemGroup>
