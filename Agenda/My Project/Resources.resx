@@ -121,6 +121,9 @@
   <data name="GraficoAtividades" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GraficoAtividades.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="Home" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Home.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="Pagina_Não_Encontrada" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Pagina Não Encontrada.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
