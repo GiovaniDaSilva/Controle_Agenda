@@ -27,7 +27,11 @@ Public Class clsServidorHTTP
         listener = New HttpListener
 
         ' Configura o prefixo URI que irá mapear para o HttpListener.
-        listener.Prefixes.Add("http://*:8484/")
+        
+        'Para acesso apartir de qualquer estação
+        'listener.Prefixes.Add("http://*:8484/")
+        listener.Prefixes.Add("http://localhost:8484/")
+
         listener.Start()
 
         ' Cria um numero de tratadores de requisições assincronas
