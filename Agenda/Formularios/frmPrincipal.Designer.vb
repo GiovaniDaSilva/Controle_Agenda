@@ -62,6 +62,7 @@ Partial Class frmPrincipal
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.gridAtividades = New System.Windows.Forms.DataGridView()
         Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.btnGraficoMensal = New System.Windows.Forms.Button()
         Me.pMenu.SuspendLayout
         Me.pHorasAtividade.SuspendLayout
         Me.pHorasDia.SuspendLayout
@@ -73,6 +74,7 @@ Partial Class frmPrincipal
         '
         'pMenu
         '
+        Me.pMenu.Controls.Add(Me.btnGraficoMensal)
         Me.pMenu.Controls.Add(Me.btnAbreCausaErros)
         Me.pMenu.Controls.Add(Me.pHorasAtividade)
         Me.pMenu.Controls.Add(Me.pHorasDia)
@@ -268,7 +270,7 @@ Partial Class frmPrincipal
         Me.btnAtualiza.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnAtualiza.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnAtualiza.Image = CType(resources.GetObject("btnAtualiza.Image"),System.Drawing.Image)
-        Me.btnAtualiza.Location = New System.Drawing.Point(658, 15)
+        Me.btnAtualiza.Location = New System.Drawing.Point(595, 15)
         Me.btnAtualiza.Name = "btnAtualiza"
         Me.btnAtualiza.Size = New System.Drawing.Size(57, 50)
         Me.btnAtualiza.TabIndex = 4
@@ -535,6 +537,23 @@ Partial Class frmPrincipal
         Me.Editar.ReadOnly = true
         Me.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
+        'btnGraficoMensal
+        '
+        Me.btnGraficoMensal.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnGraficoMensal.BackColor = System.Drawing.SystemColors.Control
+        Me.btnGraficoMensal.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.btnGraficoMensal.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.btnGraficoMensal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnGraficoMensal.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnGraficoMensal.Image = CType(resources.GetObject("btnGraficoMensal.Image"),System.Drawing.Image)
+        Me.btnGraficoMensal.Location = New System.Drawing.Point(658, 15)
+        Me.btnGraficoMensal.Name = "btnGraficoMensal"
+        Me.btnGraficoMensal.Size = New System.Drawing.Size(57, 50)
+        Me.btnGraficoMensal.TabIndex = 10
+        Me.ToolTip1.SetToolTip(Me.btnGraficoMensal, "Gráfico de Atividades")
+        Me.btnGraficoMensal.UseVisualStyleBackColor = false
+        '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -599,4 +618,5 @@ End Sub
     Friend WithEvents Splitter1 As Splitter
     Friend WithEvents gridAtividades As DataGridView
     Friend WithEvents Editar As DataGridViewImageColumn
+    Friend WithEvents btnGraficoMensal As Button
 End Class

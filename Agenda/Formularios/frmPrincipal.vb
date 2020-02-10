@@ -6,6 +6,9 @@ Public Class frmPrincipal
     Private controle As New clsPrincipal
     Dim lista As List(Of clsConsultaAtividades)
     Dim ParametrosIni As clsParametrosIni
+
+    Dim glfServidorHTTP As New clsServidorHTTP 
+
     Const MODO_IMPRESSAO = "MODO_IMPRESSAO"
     Const MODO_NORMAL = ""
 
@@ -153,6 +156,8 @@ Public Class frmPrincipal
 
         End If
 
+        If e.RowIndex > lista.Count - 1 Then Exit Sub
+
         pHorasDia.Visible = True
         lblHorasDia.Text = controle.funRetornaTotalHorasDia(lista, lista(e.RowIndex).Data)
 
@@ -198,6 +203,8 @@ Public Class frmPrincipal
         subAtualizaLista()
         controle.subConfiguraTimer(Timer2, ParametrosIni)
         Timer2.Start()
+
+        glfServidorHTTP.InicializaServidor 
 
     End Sub
 
@@ -423,6 +430,7 @@ Public Class frmPrincipal
             e.Cancel = True
             subExibiFormulario(False)
         End If
+        'glfServidorHTTP.EncerraServidorHTTP 
     End Sub
 
     Private Sub AbrirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirToolStripMenuItem.Click
@@ -452,6 +460,9 @@ Public Class frmPrincipal
         End If            
     End Sub
 
+    Private Sub btnGraficoMensal_Click_1(sender As Object, e As EventArgs) Handles btnGraficoMensal.Click
+        Process.Start("http://localhost:8484/Grafico/")
+    End Sub
 End Class
 
 

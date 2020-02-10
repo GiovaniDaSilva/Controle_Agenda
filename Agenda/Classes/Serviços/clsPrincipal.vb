@@ -137,10 +137,12 @@ Public Class clsPrincipal
     End Function
 
     Public Sub funChamaHTMLVersao()
-        Dim locArquivo As String
-        locArquivo = IO.Path.ChangeExtension(IO.Path.GetTempFileName(), ".html")
-        IO.File.WriteAllText(locArquivo, My.Resources.Versoes)
-        Process.Start(locArquivo)
+        'Dim locArquivo As String
+        'locArquivo = IO.Path.ChangeExtension(IO.Path.GetTempFileName(), ".html")
+        'IO.File.WriteAllText(locArquivo, My.Resources.Versoes)
+        'Process.Start(locArquivo)
+
+        Process.Start("http://localhost:8484/Versoes/")
     End Sub
 
     Friend Sub subExibeNotificacao(notifyIcon1 As NotifyIcon)
