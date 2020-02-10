@@ -447,15 +447,16 @@ Public Class frmPrincipal
 
     Private Sub btnAbreCausaErros_Click(sender As Object, e As EventArgs) Handles btnAbreCausaErros.Click
         Dim i As Integer
+        Dim caminho As String = "http://mtz-vconversor:8077/"
 
         i = gridAtividades.CurrentCell.RowIndex         
         If lista Is Nothing  or not gridAtividades.CurrentRow.Selected then
-            Process.Start("http://govbr6322:8077/home")
+            Process.Start(caminho & "home")
         Else
             If lista(i).ID_TIPO_ATIVIDADE = 1 then
-                Process.Start("http://govbr6322:8077/set_demanda?id=" & lista(i).Codigo )
+                Process.Start( caminho & "set_demanda?id=" & lista(i).Codigo )
              Else
-                Process.Start("http://govbr6322:8077/home")
+                Process.Start(caminho & "home")
             End If            
         End If            
     End Sub
