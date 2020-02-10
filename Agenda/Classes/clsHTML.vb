@@ -67,6 +67,7 @@ Public Class clsHTML
 
 
         Return locLista
+
     End Function
 
     Public Class CamposHTML
@@ -77,6 +78,21 @@ Public Class clsHTML
         Public Property SubTipo As Integer
         Public Property Situacao As Integer
     End Class
+End Class
+
+Public Class clsHTMLTools
+    Public Shared Function funLinhaTabela(ByVal pColunas As List(Of String)) As String
+        Dim retorno As String = vbNullString
+
+        retorno = "<tr>"
+        For Each col In pColunas
+            retorno &= "<td>" & col.ToString & "</td>"
+        Next
+        retorno &= "</tr>"
+
+        Return retorno
+    End Function
+
 End Class
 
 

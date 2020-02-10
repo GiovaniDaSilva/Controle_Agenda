@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="icon"  href="https://image.flaticon.com/icons/png/512/124/124050.png">
+
+    <!--https://br.freepik.com/icones-gratis/caderno_928989.htm#page=2&query=agenda&position=30-->
+
+    <style>
+        .Titulo {
+            color: darkblue;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
+
+        .TituloPrincipal {
+            color: darkblue;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .Atualizacao {
+            color: black;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .Fundo {
+            background-color: lightblue;
+        }
+
+        header {
+            min-height: 55px;
+            background-color: dodgerblue;
+            border-radius: 4px;
+        }
+
+        article {
+            padding-bottom: 60px;
+            width: 900px;
+            margin: 0 auto;
+        }
+
+        footer {
+            bottom: 0px;
+            width: 100%;
+            height: 30px;
+            background-color: cornflowerblue;
+            border-radius: 4px;
+            position: fixed;
+        }
+
+        .FormMes{
+            margin-bottom: 50px;
+        }
+    </style>
+
+</head>
+
+
+<body class="Fundo">
+    <header>
+        <h1 class="TituloPrincipal">Gráfico de Atividades</h1><br />
+        <p class="Titulo"><b>Percentual por Tipo de Atividade</b></p>
+    </header>
+        
+    <article style="margin-top:10px">        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        
+        <div class="FormMes">
+            <div class="container-fluid ">
+                <div class=" row justify-content-center">
+                    <div class="col-6">
+                        <form method="get" action="." id="form_mes">
+                            <div class="input-group">
+                                <select class="custom-select" select id="cbmes" name="meseslista" form="form_mes">
+                                    {p_meses_combo}
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit" form="form_mes">Aplicar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-6 ">
+                        <p class="Titulo"><b>Período:</b> {p_data_inicio} - {p_data_final}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid">         
+            <div class="row justify-content-center">
+                <!--Tabela com tipos de atividades-->
+                <div class="col-4">                    
+
+                        <div id="table_perc">
+                            <table class="table">
+                                <tr>
+                                    <th>Tipo de Atividade</th>
+                                    <th>Percentual correspondente</th>
+                                </tr>
+                                {p_linhas_tabela}
+                            </table>
+                        </div>
+                    
+                </div>
+
+                <!--Grafico-->
+                <div class="col-8">
+                    <div id="canvas-holder">
+                        <canvas id="chart-pie"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                var ctx = document.getElementById('chart-pie').getContext('2d');
+                var chart = new Chart(ctx, {                    
+                    type: 'pie',                                        
+                    data: {
+                        labels: [{p_atividades}],
+                        datasets: [{
+                            label: 'Percentual: ',
+                            backgroundColor: gera_cor(),
+                            data: [{p_valores}],
+                        }]
+                    },                                        
+                    options: {
+                        cutoutPercentage: 20,
+                    }
+                });
+            });
+
+            // gera uma cor aleatória em hexadecimal
+            function gera_cor(){
+                var hexadecimais = '0123456789ABCDEF';                
+                var cores = [];
+
+                for (var x = 0; x < 7; x++) {
+                    var cor = '#';
+
+                    // Pega um número aleatório no array acima
+                    for (var i = 0; i < 6; i++ ) {
+                    //E concatena à variável cor
+                        cor += hexadecimais[Math.floor(Math.random() * 16)];
+                    }
+                    cores.push(cor);
+                }
+                return cores;                
+            }
+        </script>
+        
+    </article>
+
+    <footer>        
+    </footer>
+</body>
+
+
+</html>

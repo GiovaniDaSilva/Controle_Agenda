@@ -23,8 +23,12 @@
         Return Format(parData, "yyyy-MM-dd")
     End Function
 
+    Public Shared Function funFormataData(ByVal parData As Date) As String
+        Return Format(parData, "dd/MM/yyyy")
+    End Function
+
     Public Shared Function Tab() As String
-        Return "       "
+        Return Space(7)
     End Function
 
     Public Shared Function funLimpaHTMLTableSolicitacoes(html As String) As String
@@ -82,7 +86,49 @@
         Return True
     End Function
 
-    public Shared Function HoraVazia(pHora As MaskedTextBox) As Boolean 
-         return Trim(pHora.text.Replace(":", "")) = vbNullString 
+    Public Shared Function HoraVazia(pHora As MaskedTextBox) As Boolean
+        Return Trim(pHora.text.Replace(":", "")) = vbNullString
+    End Function
+
+    Public Shared Function RetornArrayLista(ByVal parLista As IEnumerable(Of String), Optional parEhString As Boolean = False) As String
+        Dim retorno As String = vbNullString
+        Dim aux As String
+
+        For Each i In parLista
+            aux = i.ToString.Replace(",", ".")
+
+            If parEhString Then
+                aux = "'" & aux & "'"
+            End If
+
+            retorno &= aux & ","
+        Next
+        Return retorno.Substring(0, retorno.Length - 1)
+
+    End Function
+
+    Public Shared Function RetornaUltimoDiaMes(Optional ByVal mes As Integer = 0) As Date
+        Dim data As Date
+
+        If mes = 0 Then
+            data = DateAdd("m", 1, DateSerial(Year(Now), Month(Now), 1))
+            data = DateAdd("d", -1, data)
+            Return data
+        Else
+            data = DateAdd("m", 1, DateSerial(Year(Now), mes, 1))
+            data = DateAdd("d", -1, data)
+            Return data
+        End If
+
+    End Function
+
+    Public Shared Function RetornaPrimeiroDiaMes(Optional ByVal mes As Integer = 0) As Date
+
+        If mes = 0 Then
+            Return CDate("01/" & Month(Now) & "/" & Year(Now))
+        Else
+            Return CDate("01/" & mes.ToString("00") & "/" & Year(Now))
+        End If
+
     End Function
 End Class

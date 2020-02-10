@@ -49,7 +49,7 @@ Public Class clsAdicionarDAO
 
         Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
 
-            locSQL.AppendFormat ("SELECT T.DESCRICAO, A.CODIGO, P.HORA_INICIAL, P.HORA_FINAL, P.TOTAL FROM ATIVIDADES A
+            locSQL.AppendFormat("SELECT T.DESCRICAO, A.CODIGO, P.HORA_INICIAL, P.HORA_FINAL, P.TOTAL FROM ATIVIDADES A
                             INNER JOIN PERIODO P ON P.ID_ATIVIDADE = A.ID
                             INNER JOIN TIPO_ATIVIDADE T ON T.ID = A.ID_TIPO_ATIVIDADE
                             WHERE A.DATA = '{0}'
@@ -59,14 +59,14 @@ Public Class clsAdicionarDAO
             Using Reader = Comm.ExecuteReader()
                 While Reader.Read()
                     lista.Add(New clsPeriodosAtividades(Reader("DESCRICAO"),
-                                                        val(Reader("CODIGO")),
+                                                        Val(Reader("CODIGO")),
                                                         Reader("HORA_INICIAL"),
                                                         Reader("HORA_FINAL"),
                                                         Reader("TOTAL")))
                 End While
             End Using
         End Using
-        
+
         Return lista
     End Function
 
@@ -130,6 +130,31 @@ Public Class clsAdicionarDAO
 
         Return lista
     End Function
+
+    Public Function carregarAtividades(pDataInicial As Date, pDataFinal As Date) As List(Of clsConsultaAtividades)
+        Dim lista As New List(Of clsConsultaAtividades)
+        Dim locSQL As String
+
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
+            locSQL = funRetornaSQLConsultaComum()
+
+            locSQL &= " AND (A.DATA >= '" & clsTools.funAjustaDataSQL(pDataInicial) & "'"
+            locSQL &= "      AND A.DATA <= '" & clsTools.funAjustaDataSQL(pDataFinal) & "')"
+
+
+            Comm.CommandText = locSQL
+            subCarregaListaAtividades(lista, Comm)
+        End Using
+
+        Return lista
+    End Function
+
+    Public Function carregarAtividades(ByVal parFiltro As clsAtividade) As List(Of clsConsultaAtividades)
+        Dim locIni As New clsParametrosIni
+        locIni = New clsIni().funCarregaIni()
+        Return carregarAtividades(parFiltro, locIni)
+    End Function
+
     Public Function carregarAtividades(ByVal parFiltro As clsAtividade, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
         Dim lista As New List(Of clsConsultaAtividades)
         Dim locSQL As String
