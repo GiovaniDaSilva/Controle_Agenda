@@ -15,10 +15,18 @@ Public Class clsHTMLComum
         Return locMenu.ToString 
     End Function
 
+    Public Shared Function RetornaTituloPagina() As String
+        Dim locMenu As New StringBuilder()
 
+        locMenu.Append("
+            <title>Agenda</title>
+         ")
+        Return locMenu.ToString
+    End Function
 
 
     Public shared sub TrataParametrosComuns(ByRef pagina As string)
-        pagina = pagina.Replace("{p_menu_pagina}",retornaMenuPagina)
+        pagina = pagina.Replace("{p_menu_pagina}", retornaMenuPagina)
+        pagina = pagina.Replace("{p_titulo_pagina}", RetornaTituloPagina)
     End sub
 End Class
