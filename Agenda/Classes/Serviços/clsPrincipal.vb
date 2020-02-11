@@ -142,7 +142,7 @@ Public Class clsPrincipal
         'IO.File.WriteAllText(locArquivo, My.Resources.Versoes)
         'Process.Start(locArquivo)
 
-        Process.Start("http://localhost:8484/Versoes/")
+        Process.Start("http://localhost:8484/Versoes")
     End Sub
 
     Friend Sub subExibeNotificacao(notifyIcon1 As NotifyIcon)

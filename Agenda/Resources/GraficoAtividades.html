@@ -13,12 +13,7 @@
     <!--https://br.freepik.com/icones-gratis/caderno_928989.htm#page=2&query=agenda&position=30-->
 
     <style>
-        .Titulo {
-            color: darkblue;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-        }
-
+       
         .TituloPrincipal {
             color: darkblue;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -26,35 +21,20 @@
             border-radius: 4px;
         }
 
+        .Titulo {
+            color: darkblue;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
+
         .Atualizacao {
             color: black;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         .Fundo {
             background-color: lightblue;
         }
-
-        header {
-            min-height: 55px;
-            background-color: dodgerblue;
-            border-radius: 4px;
-        }
-
-        article {
-            padding-bottom: 60px;
-            width: 900px;
-            margin: 0 auto;
-        }
-
-        footer {
-            bottom: 0px;
-            width: 100%;
-            height: 30px;
-            background-color: cornflowerblue;
-            border-radius: 4px;
-            position: fixed;
-        }
+                
 
         .FormMes{
             margin-bottom: 50px;
@@ -66,18 +46,21 @@
 
 <body class="Fundo">
     <header>
-        <h1 class="TituloPrincipal">Gráfico de Atividades</h1><br />
-        <p class="Titulo"><b>Percentual por Tipo de Atividade</b></p>
+        {p_menu_pagina}        
     </header>
-        
-    <article style="margin-top:10px">        
+    
+    
+    <h1 class="TituloPrincipal">Gráfico de Atividades</h1><br />
+    <p class="Titulo"><b>Percentual por Tipo de Atividade</b></p>
+
+    <div  class="container-fluid"  style="margin-top:10px">        
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
         
         <div class="FormMes">
             <div class="container-fluid ">
                 <div class=" row justify-content-center">
                     <div class="col-6">
-                        <form method="get" action="." id="form_mes">
+                        <form method="get" id="form_mes">
                             <div class="input-group">
                                 <select class="custom-select" select id="cbmes" name="meseslista" form="form_mes">
                                     {p_meses_combo}
@@ -161,10 +144,7 @@
             }
         </script>
         
-    </article>
-
-    <footer>        
-    </footer>
+    </div>
 </body>
 
 

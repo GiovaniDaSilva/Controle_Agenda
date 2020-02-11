@@ -30,20 +30,7 @@
             background-color: lightblue;
         }
 
-        header {
-            min-height: 55px;
-            background-color: dodgerblue;
-            border-radius: 4px;
-        }
 
-        footer {
-            bottom: 0px;
-            width: 100%;
-            height: 30px;
-            background-color: cornflowerblue;
-            border-radius: 4px;
-			position:absolute;
-        }
     </style>
 
 </head>
@@ -51,16 +38,18 @@
 
 <body class="Fundo">
     <header>
-        <h1 class="TituloPrincipal">Página não Encontrada</h1>
+        {p_menu_pagina}  
     </header>
 
-    <img src="https://image.flaticon.com/icons/svg/1603/1603229.svg" style="width:100px; height: 100px; position: center " />
-    A página solicitada não foi encontrada.
+    <h1 class="TituloPrincipal">Página não Encontrada</h1>
 
+    <div class="container-fluid">
+        <img src="https://image.flaticon.com/icons/svg/1603/1603229.svg" style="width:100px; height: 100px; position: center " />
+        A página solicitada não foi encontrada.
+    </div>
 
+    
 
-    <footer>
-    </footer>
 </body>
 
 

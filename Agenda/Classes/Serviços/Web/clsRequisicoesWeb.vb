@@ -6,14 +6,19 @@ Public Class clsRequisicoesWeb
         Dim locPagRetorno As String = My.Resources.Pagina_Não_Encontrada
         Try
             Select Case pUri.AbsolutePath
-                Case "/Grafico/"
+                Case "/Home"
+                    locPagRetorno = My.Resources.Home 
+                Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pUri)
-                Case "/Versoes/"
+                Case "/Versoes"
                     locPagRetorno = My.Resources.Versoes
             End Select
         Catch ex As Exception
             Return locPagRetorno
         End Try
+
+
+        clsHTMLComum.TrataParametrosComuns(locPagRetorno) 
 
         Return locPagRetorno
     End Function

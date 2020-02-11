@@ -462,7 +462,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub btnGraficoMensal_Click_1(sender As Object, e As EventArgs) Handles btnGraficoMensal.Click
-        Process.Start("http://localhost:8484/Grafico/")
+        Process.Start("http://localhost:8484/Grafico")
     End Sub
 End Class
 
