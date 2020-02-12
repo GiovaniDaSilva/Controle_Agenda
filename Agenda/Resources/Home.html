@@ -35,7 +35,7 @@
     <div style="margin-top: 20px;" class="container-fluid">
         
 
-            <table id="Exemplo" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="Exemplo" class="table table-sm" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th class="th-sm">
@@ -62,8 +62,6 @@
                                         
                     {p_linhas_tabela}
 
-
-
                 </tbody>
                 <tfoot>
                     <tr>
@@ -78,8 +76,8 @@
                         </th>
                         <th class="th-sm">
                             Horas
-                        </th>
                         <th class="th-sm">
+                        </th>
                             Descrição
                         </th>
                         <th class="th-sm">
@@ -92,10 +90,15 @@
     
 
     <script>
-        $(document).ready(function() {
-            $('#Exemplo').DataTable( {              
-            } );
-        } );
+
+
+        $(document).ready(function () {
+            $('#Exemplo').DataTable({
+            "scrollY": "300px",
+            "scrollCollapse": true,
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
 
     </script>
 
