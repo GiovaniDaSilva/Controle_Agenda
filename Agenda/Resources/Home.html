@@ -1,6 +1,6 @@
 <html lang="pr-bt">
 <head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {p_links_comum_pagina}
 
 
@@ -13,7 +13,7 @@
 
 
 
-    <!--N„o precisa por enquanto-->
+    <!--N√£o precisa por enquanto-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
@@ -55,6 +55,7 @@
     </style>
 
     {p_titulo_pagina}
+        
 </head>
 
 
@@ -84,9 +85,7 @@
                         <th >
                             Horas
                         </th>
-                        <th >
-                            DescriÁ„o
-                        </th>                        
+                        <th>Descri√ß√£o</th>                        
                     </tr>
                 </thead>
                 <tbody>
@@ -98,6 +97,7 @@
         </div>
     
 
+
     <script>
 
 
@@ -108,7 +108,7 @@
                 select: {
                     style: 'single' //permitir selecionar apenas uma linha
                 },
-                order: [[1, 'desc']], //ordem padr„o: coluna Data em ordem Decrescente
+                order: [[1, 'desc']], //ordem padr√£o: coluna Data em ordem Decrescente
 
                 oLanguage: { sUrl: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json' },
 
@@ -120,7 +120,7 @@
                         type: 'date-br',
                         targets: 1
                     },
-                    {//coluna CÛdigo
+                    {//coluna C√≥digo
                         targets: 3, 
                         render: function (data, type, row, meta) {
                             var id = row[3];
@@ -175,15 +175,15 @@
                         });
                     };
 
-                    //Exibir grid somente apÛs completar a carga
+                    //Exibir grid somente ap√≥s completar a carga
                     $('#dados').show();
                 },
                 select: {
                     style: 'single' //permitir selecionar apenas uma linha
                 },
-                stateSave: true, //salvar automaticamente personalizaÁıes do usu·rio
+                stateSave: true, //salvar automaticamente personaliza√ß√µes do usu√°rio
                 stateLoadParams: function (settings, data) {
-                    //ao carregar personalizaÁıes salvas, garantir que n„o ir· carregar exibiÁ„o da coluna ID
+                    //ao carregar personaliza√ß√µes salvas, garantir que n√£o ir√° carregar exibi√ß√£o da coluna ID
                     data.columns[0].visible = false;
                 },
                 colReorder: true, //permitir mover as colunas de lugar
@@ -191,7 +191,7 @@
                 columnDefs: [
                     { targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis' }, //coluna ID
                     {
-                        targets: 1, //coluna CÛdigo
+                        targets: 1, //coluna C√≥digo
                         render: function (data, type, row, meta) {
                             var id = row[0];
                             return '<a href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + id + '">' + id + '</a>';
@@ -216,18 +216,18 @@
                     {
                         targets: 11, //coluna Tags
                         render: function (data, type, row, meta) {
-                            if (!data) return ''; //quando n„o tem nenhuma tag, o split retorna um item no array, por isso j· retornar antes em branco.
+                            if (!data) return ''; //quando n√£o tem nenhuma tag, o split retorna um item no array, por isso j√° retornar antes em branco.
 
                             var ar_tags = data.split(',');
                             var str_tags = '';
                             ar_tags.forEach(function (n) {
-                                str_tags += '<span class="badge badge-info">#' + n + '</span>' + ' '; //espaÁo em branco no final para separar tags
+                                str_tags += '<span class="badge badge-info">#' + n + '</span>' + ' '; //espa√ßo em branco no final para separar tags
                             });
                             return str_tags;
                         }
                     },
                     {
-                        targets: 12, //coluna do l·pis de ediÁ„o
+                        targets: 12, //coluna do l√°pis de edi√ß√£o
                         searchable: false, orderable: false,
                         render: function (data, type, row, meta) {
                             var id = row[0];
@@ -235,8 +235,8 @@
                         }
                     }
                 ],
-                order: [[1, 'desc']], //ordem padr„o: coluna CÛdigo em ordem Decrescente
-                //posiÁ„o dos elementos
+                order: [[1, 'desc']], //ordem padr√£o: coluna C√≥digo em ordem Decrescente
+                //posi√ß√£o dos elementos
                 dom: "<'row'<'col-md-6'B><'col-md-3'l><'col-md-3'fr>>" +
                 "<'row'<'col-md-12't>>" +
                 "<'row'<'col-md-6'i><'col-md-6'p>>",
@@ -244,11 +244,11 @@
                     { extend: 'colvis', text: '<i class="material-icons">view_column</i>Colunas', columns: ':not(.noVis)' },
                     { extend: 'print', text: '<i class="material-icons">print</i>Imprimir', exportOptions: { modifier: { selected: null }, columns: ':not(.notexport)' } },
                     { extend: 'excelHtml5', text: '<i class="material-icons">save</i>Excel', exportOptions: { modifier: { selected: null }, columns: ':not(.notexport)' } }
-                    //modifier selected È para exportar todas as linhas, pois sen„o gera apenas a linha selecionada
+                    //modifier selected √© para exportar todas as linhas, pois sen√£o gera apenas a linha selecionada
                 ]
             });
 
-            //Evento de SeleÁ„o de Linha - apÛs a seleÁ„o ter ocorrido
+            //Evento de Sele√ß√£o de Linha - ap√≥s a sele√ß√£o ter ocorrido
             tb.on('select.dt deselect.dt', function () {
                 var dataArr = [];
                 var rows = $('tr.selected');
@@ -261,12 +261,12 @@
                 localStorage.setItem('Demandas_selecionadas', dataArr);
             });
 
-            //Evento de SeleÁ„o do Usu·rio - antes da seleÁ„o ter ocorrido
+            //Evento de Sele√ß√£o do Usu√°rio - antes da sele√ß√£o ter ocorrido
             tb.on('user-select', function (e, dt, type, cell, originalEvent) {
                 var row = dt.row(cell.index().row).node();
                 if ($(row).hasClass('selected')) {
                     // deselect
-                    e.preventDefault(); //previnir tirar a seleÁ„o do item selecionado
+                    e.preventDefault(); //previnir tirar a sele√ß√£o do item selecionado
                 }
                 else {
                     // select

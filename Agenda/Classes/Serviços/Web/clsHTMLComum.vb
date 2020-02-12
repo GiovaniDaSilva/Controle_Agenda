@@ -57,7 +57,7 @@ Public Class clsHTMLComum
         Dim texto As New StringBuilder
 
         texto.Append("
-            <meta charset=""UTF-8"">
+            <meta charset=""ISO-8859-1"">
 
             <!--Grafico JQuery-->
             <script src=""https://code.jquery.com/jquery-3.4.1.js"" integrity=""sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="" crossorigin=""anonymous""></script>
