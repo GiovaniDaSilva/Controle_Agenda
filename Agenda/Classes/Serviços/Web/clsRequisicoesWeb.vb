@@ -7,7 +7,7 @@ Public Class clsRequisicoesWeb
         Try
             Select Case pUri.AbsolutePath
                 Case "/Home"
-                    locPagRetorno = My.Resources.Home 
+                    locPagRetorno = funRetornaPaginaHome(pUri)
                 Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pUri)
                 Case "/Versoes"
@@ -21,6 +21,13 @@ Public Class clsRequisicoesWeb
         clsHTMLComum.TrataParametrosComuns(locPagRetorno) 
 
         Return locPagRetorno
+    End Function
+
+    Private Function funRetornaPaginaHome(pUri As Uri) As String
+
+
+        Return New clsHomeWeb().RetornaPaginaGrafico()
+
     End Function
 
     Private Function funRetornaPaginaGrafico(pUri As Uri) As String
@@ -43,11 +50,7 @@ Public Class clsRequisicoesWeb
             locDataFinal = clsTools.RetornaUltimoDiaMes(mesGeracao)
         End If
 
-
-
         Return New clsGraficoWeb().RetornaPaginaGrafico(locDataInicial, locDataFinal)
-
-        Return vbNullString
     End Function
 End Class
 

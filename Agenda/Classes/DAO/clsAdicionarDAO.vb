@@ -121,14 +121,23 @@ Public Class clsAdicionarDAO
 
         Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
             locSQL = funRetornaSQLConsultaComum()
-            locSQL &= " AND A.CODIGO = " & codigo
 
+
+            If codigo <> vbNullString Then
+                locSQL &= " AND A.CODIGO = " & codigo
+            End If
+
+            locSQL &= " ORDER BY A.DATA DESC, A.ID DESC"
 
             Comm.CommandText = locSQL
             subCarregaListaAtividades(lista, Comm)
         End Using
 
         Return lista
+    End Function
+
+    Public Function carregarAtividades() As List(Of clsConsultaAtividades)
+        Return carregarAtividades(vbNullString)
     End Function
 
     Public Function carregarAtividades(pDataInicial As Date, pDataFinal As Date) As List(Of clsConsultaAtividades)
