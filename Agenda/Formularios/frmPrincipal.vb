@@ -449,14 +449,18 @@ Public Class frmPrincipal
         Dim i As Integer
         Dim caminho As String = "http://mtz-vconversor:8077/"
 
-        i = gridAtividades.CurrentCell.RowIndex         
+        Dim Home As string = caminho & "home"
+        Dim Edicao As string = caminho & "set_demanda?id="
+        
+        
         If lista Is Nothing  or not gridAtividades.CurrentRow.Selected then
-            Process.Start(caminho & "home")
+            Process.Start(caminho & Home)
         Else
+            i = gridAtividades.CurrentCell.RowIndex         
             If lista(i).ID_TIPO_ATIVIDADE = 1 then
-                Process.Start( caminho & "set_demanda?id=" & lista(i).Codigo )
+                Process.Start( Edicao & lista(i).Codigo )
              Else
-                Process.Start(caminho & "home")
+                Process.Start(Home)
             End If            
         End If            
     End Sub

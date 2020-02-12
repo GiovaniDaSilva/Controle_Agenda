@@ -31,12 +31,12 @@
 
         For Each atividade In listaAtividades
             Dim linha = New List(Of String)
+            linha.Add(atividade.ID)
             linha.Add(atividade.Data)
             linha.Add(atividade.TIPO_DESCRICAO)
             linha.Add(atividade.Codigo)
             linha.Add(atividade.Horas)
-            linha.Add(atividade.Descricao)
-            linha.Add(atividade.ID)
+            linha.Add(atividade.Descricao)            
             locRetorno &= clsHTMLTools.funLinhaTabela(linha)
         Next
 
