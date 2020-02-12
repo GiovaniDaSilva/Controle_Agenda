@@ -468,6 +468,25 @@ Public Class frmPrincipal
     Private Sub btnGraficoMensal_Click_1(sender As Object, e As EventArgs) Handles btnGraficoMensal.Click
         Process.Start("http://localhost:8484/Grafico")
     End Sub
+
+    Private Sub ImprimirPeriodosDoDiaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImprimirPeriodosDoDiaToolStripMenuItem.Click
+
+        Dim data As Date
+
+        If lista Is Nothing Or Not gridAtividades.CurrentRow.Selected Then
+            MsgBox("Nenhuma atividade selecionada!", vbExclamation)
+            Exit Sub
+        End If
+
+        subConfiguraDescricao(MODO_IMPRESSAO)
+
+        data = lista(gridAtividades.CurrentCell.RowIndex).Data
+        controle.imprimePeriodoDia(txtDescricao, data)
+    End Sub
+
+    Private Sub gridAtividades_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridAtividades.CellContentClick
+
+    End Sub
 End Class
 
 
