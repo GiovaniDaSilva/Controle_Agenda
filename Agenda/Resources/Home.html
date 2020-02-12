@@ -1,7 +1,17 @@
-<html>
+<html lang="pr-bt">
 <head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {p_links_comum_pagina}
+
+
+    <!--Seleção da linha da tabela-->
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.bootstrap4.min.css" />
+
+    <!--Ordenação por Data-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js"></script>
+
 
     <style>
         [p_style_comum_pagina]
@@ -24,6 +34,7 @@
     </style>
 
     {p_titulo_pagina}
+        
 </head>
 
 
@@ -35,74 +46,220 @@
     <div style="margin-top: 20px;" class="container-fluid">
         
 
-            <table id="Exemplo" class="table table-sm" cellspacing="0" width="100%">
+            <table id="Dados" class="table table-sm" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th class="th-sm">
-                            Data
-                        </th>
-                        <th class="th-sm">
-                            Tipo
-                        </th>
-                        <th class="th-sm">
-                            Codigo
-                        </th>
-                        <th class="th-sm">
-                            Horas
-                        </th>
-                        <th class="th-sm">
-                            Descri��o
-                        </th>
-                        <th class="th-sm">
+                        <th>
                             ID
                         </th>
+                        <th >
+                            Data
+                        </th>
+                        <th >
+                            Tipo
+                        </th>
+                        <th >
+                            Codigo
+                        </th>
+                        <th >
+                            Horas
+                        </th>
+                        <th>Descrição</th>                        
                     </tr>
                 </thead>
                 <tbody>
                                         
                     {p_linhas_tabela}
 
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th class="th-sm">
-                            Data
-                        </th>
-                        <th class="th-sm">
-                            Tipo
-                        </th>
-                        <th class="th-sm">
-                            Codigo
-                        </th>
-                        <th class="th-sm">
-                            Horas
-                        <th class="th-sm">
-                        </th>
-                            Descri��o
-                        </th>
-                        <th class="th-sm">
-                            ID
-                        </th>
-                    </tr>
-                </tfoot>
+                </tbody>                
                 </table>
         </div>
     
+
 
     <script>
 
 
         $(document).ready(function () {
-            $('#Exemplo').DataTable({
-            "scrollY": "300px",
-            "scrollCollapse": true,
+           tb = $('#Dados').DataTable({
+                "scrollY": "300px", //Altura da grid com scroll
+                "scrollCollapse": true,
+                select: {
+                    style: 'single' //permitir selecionar apenas uma linha
+                },
+                order: [[1, 'desc']], //ordem padrão: coluna Data em ordem Decrescente
+
+                oLanguage: { sUrl: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json' },
+
+                columnDefs: [
+                    {//coluna ID                          
+                        targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis'
+                    }, 
+                    {//coluna Data
+                        type: 'date-br',
+                        targets: 1
+                    },
+                    {//coluna Código
+                        targets: 3, 
+                        render: function (data, type, row, meta) {
+                            var codigo = row[3];
+                            //Alterar para o ID_TIPO
+                            if (row[2] == 'PBI'){
+                                return '<a href="http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=' + codigo + '">' + codigo + '</a>';
+                            } else {                                
+                                return '<a href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + codigo + '">' + codigo + '</a>';
+                            }
+                            
+                        }
+                    },
+
+                ],
+
             });
-            $('.dataTables_length').addClass('bs-select');
+           $('.dataTables_length').addClass('bs-select');
+
+           $.fn.dataTable.moment('DD/MM/YYYY');
+
+        });
+
+        jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+            "date-br-pre": function (a) {
+                if (a == null || a == "") {
+                    return 0;
+                }
+                var brDatea = a.split('/');
+                return (brDatea[2] + brDatea[1] + brDatea[0]) * 1;
+            },
+
+            "date-br-asc": function (a, b) {
+                return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+            },
+
+            "date-br-desc": function (a, b) {
+                return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+            }
         });
 
     </script>
+<!--
+    <script>
+        $(document).ready(function () {
+            tb = $('#dados').DataTable({
+                initComplete: function () {
+                    //Ao inicializar, carregar linhas selecionadas salvas no storage local baseadas no ID
+                    var api = this.api();
+                    var itens_salvos = localStorage.getItem('Demandas_selecionadas');
+                    if (itens_salvos) {
+                        var selecteds = itens_salvos.split(',');
 
+                        $('#dados').DataTable().rows().every(function () {
+                            if (selecteds.includes(this.data()[0])) {
+                                this.select();
+                            }
+                        });
+                    };
 
+                    //Exibir grid somente após completar a carga
+                    $('#dados').show();
+                },
+                select: {
+                    style: 'single' //permitir selecionar apenas uma linha
+                },
+                stateSave: true, //salvar automaticamente personalizações do usuário
+                stateLoadParams: function (settings, data) {
+                    //ao carregar personalizações salvas, garantir que não irá carregar exibição da coluna ID
+                    data.columns[0].visible = false;
+                },
+                colReorder: true, //permitir mover as colunas de lugar
+                oLanguage: { sUrl: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json' },
+                columnDefs: [
+                    { targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis' }, //coluna ID
+                    {
+                        targets: 1, //coluna Código
+                        render: function (data, type, row, meta) {
+                            var id = row[0];
+                            return '<a href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + id + '">' + id + '</a>';
+                        }
+                    },
+                    {
+                        targets: 9, //coluna Causa
+                        render: function (data, type, row, meta) {
+                            return '<b>' + data + '</b>';
+                        }
+                    },
+                    {
+                        targets: 10, //coluna Justificativa
+                        render: function (data, type, row, meta) {
+                            if (data == 'S') {
+                                return '<i class="material-icons">info</i>'
+                            } else {
+                                return '';
+                            }
+                        }
+                    },
+                    {
+                        targets: 11, //coluna Tags
+                        render: function (data, type, row, meta) {
+                            if (!data) return ''; //quando não tem nenhuma tag, o split retorna um item no array, por isso já retornar antes em branco.
+
+                            var ar_tags = data.split(',');
+                            var str_tags = '';
+                            ar_tags.forEach(function (n) {
+                                str_tags += '<span class="badge badge-info">#' + n + '</span>' + ' '; //espaço em branco no final para separar tags
+                            });
+                            return str_tags;
+                        }
+                    },
+                    {
+                        targets: 12, //coluna do lápis de edição
+                        searchable: false, orderable: false,
+                        render: function (data, type, row, meta) {
+                            var id = row[0];
+                            return '<a class="btn btn-alert" href="/set_demanda?id=' + id + '"><i class="material-icons">edit</i></a>';
+                        }
+                    }
+                ],
+                order: [[1, 'desc']], //ordem padrão: coluna Código em ordem Decrescente
+                //posição dos elementos
+                dom: "<'row'<'col-md-6'B><'col-md-3'l><'col-md-3'fr>>" +
+                "<'row'<'col-md-12't>>" +
+                "<'row'<'col-md-6'i><'col-md-6'p>>",
+                buttons: [
+                    { extend: 'colvis', text: '<i class="material-icons">view_column</i>Colunas', columns: ':not(.noVis)' },
+                    { extend: 'print', text: '<i class="material-icons">print</i>Imprimir', exportOptions: { modifier: { selected: null }, columns: ':not(.notexport)' } },
+                    { extend: 'excelHtml5', text: '<i class="material-icons">save</i>Excel', exportOptions: { modifier: { selected: null }, columns: ':not(.notexport)' } }
+                    //modifier selected é para exportar todas as linhas, pois senão gera apenas a linha selecionada
+                ]
+            });
+
+            //Evento de Seleção de Linha - após a seleção ter ocorrido
+            tb.on('select.dt deselect.dt', function () {
+                var dataArr = [];
+                var rows = $('tr.selected');
+                var rowData = tb.rows(rows).data();
+                $.each($(rowData), function (key, value) {
+                    dataArr.push(value[0]);
+                });
+
+                //Salvar IDs das linhas selecionadas no storage local
+                localStorage.setItem('Demandas_selecionadas', dataArr);
+            });
+
+            //Evento de Seleção do Usuário - antes da seleção ter ocorrido
+            tb.on('user-select', function (e, dt, type, cell, originalEvent) {
+                var row = dt.row(cell.index().row).node();
+                if ($(row).hasClass('selected')) {
+                    // deselect
+                    e.preventDefault(); //previnir tirar a seleção do item selecionado
+                }
+                else {
+                    // select
+                };
+            });
+        });
+    </script>
+
+    -->
     
 </body>
 
