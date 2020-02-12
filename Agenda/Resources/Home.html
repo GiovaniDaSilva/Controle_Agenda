@@ -102,9 +102,14 @@
                     {//coluna Código
                         targets: 3, 
                         render: function (data, type, row, meta) {
-                            var id = row[3];
-                            //falta fazer o if se for pbi ou solicitacao
-                            return '<a href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + id + '">' + id + '</a>';
+                            var codigo = row[3];
+                            //Alterar para o ID_TIPO
+                            if (row[2] == 'PBI'){
+                                return '<a href="http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=' + codigo + '">' + codigo + '</a>';
+                            } else {                                
+                                return '<a href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + codigo + '">' + codigo + '</a>';
+                            }
+                            
                         }
                     },
 
