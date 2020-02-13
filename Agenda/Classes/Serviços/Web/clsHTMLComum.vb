@@ -7,7 +7,7 @@ Public Class clsHTMLComum
         locMenu.Append("
         <nav class=""navbar navbar-dark bg-primary"">            
                 <div >
-                    <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light "" >Home</a>
+                    <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light "" ><i class=""material-icons"">grid_on</i>Home</a>
                     <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" >Grafico</a>
                     <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" >Versões</a>            
                 </div>
@@ -76,6 +76,9 @@ Public Class clsHTMLComum
             <!--icone da agenda-->
             <link rel=""icon"" href=""https://image.flaticon.com/icons/png/512/124/124050.png"">
             <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
+    
+            <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
+
         ")
         Return texto.ToString
     End Function
