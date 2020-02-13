@@ -142,7 +142,7 @@ Public Class clsPrincipal
         'IO.File.WriteAllText(locArquivo, My.Resources.Versoes)
         'Process.Start(locArquivo)
 
-        Process.Start("http://localhost:8484/Versoes/")
+        Process.Start("http://localhost:8484/Versoes")
     End Sub
 
     Friend Sub subExibeNotificacao(notifyIcon1 As NotifyIcon)
@@ -180,6 +180,13 @@ Public Class clsPrincipal
         Return x
         
     End Function
+
+    Friend Sub imprimePeriodoDia(txtDescricao As RichTextBox, data As Date)
+        Dim adicionar As New clsAdicionar
+        txtDescricao.Clear()
+        RichAddLineFmt(txtDescricao, funRetornaDataFormatada(Strings.StrConv(String.Format("{0:dddd}", data), VbStrConv.ProperCase) & " - " & clsTools.funFormataData(data)) & vbNewLine)
+        RichAddLineFmt(txtDescricao, adicionar.RetornaToolTipPeriodosDia(data))
+    End Sub
 End Class
 
 
@@ -240,7 +247,7 @@ Public Class clsListaSolictacao
         RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Horas & clsPrincipal.funRetornaFormatadoDestaque(item.Horas))
 
         If parIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And item.Periodos.Count > 0 Then
-            RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Periodo & clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 24))
+            RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Periodo & clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 11))
         End If
 
 
@@ -271,7 +278,7 @@ Public Class clsListaPBI
         RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Horas & clsPrincipal.funRetornaFormatadoDestaque(item.Horas))
 
         If parIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And item.Periodos.Count > 0 Then
-            RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Periodo & clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 24))
+            RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Periodo & clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 11))
         End If
 
         RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Descricao & item.funRetornaDescricaoTratada())
@@ -290,7 +297,7 @@ Public Class clsListaReuniao
         RichAddLineFmt(parCampo, enuCamposImpressao.Reuniao)
         RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Horas & clsPrincipal.funRetornaFormatadoDestaque(item.Horas))
         If parIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And item.Periodos.Count > 0 Then
-            RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Periodo & clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 24))
+            RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Periodo & clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 11))
         End If
         RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Descricao & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
@@ -307,7 +314,7 @@ Public Class clsListaAusente
         RichAddLineFmt(parCampo, enuCamposImpressao.Ausente)
         RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Horas & clsPrincipal.funRetornaFormatadoDestaque(item.Horas))
         If parIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And item.Periodos.Count > 0 Then
-            RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Periodo & clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 24))
+            RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Periodo & clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 11))
         End If
         RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Descricao & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")
@@ -324,7 +331,7 @@ Public Class clsListaOutros
         RichAddLineFmt(parCampo, enuCamposImpressao.Outros)
         RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Horas & clsPrincipal.funRetornaFormatadoDestaque(item.Horas))
         If parIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And item.Periodos.Count > 0 Then
-            RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Periodo & clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 24))
+            RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Periodo & clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 11))
         End If
         RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Descricao & item.funRetornaDescricaoTratada())
         RichAddLineFmt(parCampo, "")

@@ -117,6 +117,8 @@
 
             ToolTip2.SetToolTip(imgHistorico, controle.RetornaToolTipPeriodosDia(clsTools.funRetornaData(txtData)))
 
+            'Garante que não ficara visivel
+            Calendario.Visible = False
         Catch ex As Exception
             clsTools.subTrataExcessao(ex)
             txtData.Focus()
@@ -256,5 +258,17 @@
 
     Private Sub ToolTip2_Popup(sender As Object, e As PopupEventArgs) Handles ToolTip2.Popup
          e.ToolTipSize = TextRenderer.MeasureText(toolTip2.GetToolTip(e.AssociatedControl), new Font("consolas", 10.0f))
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnCalendario.Click
+        Calendario.Visible = Not Calendario.Visible
+    End Sub
+
+    Private Sub Calendario_DateChanged(sender As Object, e As DateRangeEventArgs) Handles Calendario.DateChanged
+        txtData.Text = Calendario.SelectionStart()
+    End Sub
+
+    Private Sub Calendario_Leave(sender As Object, e As EventArgs) Handles Calendario.Leave
+        Calendario.Visible = False
     End Sub
 End Class

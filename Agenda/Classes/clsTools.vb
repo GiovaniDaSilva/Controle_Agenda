@@ -28,7 +28,7 @@
     End Function
 
     Public Shared Function Tab() As String
-        Return Space(7)
+        Return Space(2)
     End Function
 
     Public Shared Function funLimpaHTMLTableSolicitacoes(html As String) As String
