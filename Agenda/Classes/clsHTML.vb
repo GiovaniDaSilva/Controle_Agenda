@@ -81,12 +81,23 @@ Public Class clsHTML
 End Class
 
 Public Class clsHTMLTools
-    Public Shared Function funLinhaTabela(ByVal pColunas As List(Of String)) As String
+    Public Shared Function funLinhaTabela(ByVal pColunas As List(Of String), optional byval classe As String = vbNullString , Optional byval estilo As string = vbNullString) As String
         Dim retorno As String = vbNullString
+
 
         retorno = "<tr>"
         For Each col In pColunas
-            retorno &= "<td>" & col.ToString & "</td>"
+            retorno &= "<td "
+
+            If classe <> vbNullString 
+                retorno &= classe
+            End If
+            
+            If estilo  <> vbNullString 
+                retorno &= estilo 
+            End If
+
+            retorno &= " >" & col.ToString & "</td>"
         Next
         retorno &= "</tr>"
 

@@ -65,9 +65,7 @@ Public Class clsServidorHTTP
             ' Configura a resposta
             context.Response.ContentType = "text/html"
             context.Response.ContentEncoding = Encoding.UTF8
-            context.Response.StatusCode = HttpStatusCode.OK
-
-
+            context.Response.StatusCode = HttpStatusCode.OK            
             sw.WriteLine(locRequisicoesWeb.trataRequisicoesWeb(context.Request.Url))
 
             sw.Flush()
