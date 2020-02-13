@@ -516,12 +516,16 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub gridAtividades_MouseDown(sender As Object, e As MouseEventArgs) Handles gridAtividades.MouseDown
+
         If (e.Button = MouseButtons.Right) Then
-                
-        dim hti = gridAtividades.HitTest(e.X, e.Y)
-        gridAtividades.ClearSelection()
-        gridAtividades.Rows(hti.RowIndex).Selected = True
-    End If
+
+            Dim hti = gridAtividades.HitTest(e.X, e.Y)
+            gridAtividades.ClearSelection()
+            If hti.RowIndex > -1 Then
+                gridAtividades.CurrentCell = gridAtividades.Rows(hti.RowIndex).Cells(0)
+                gridAtividades.Rows(hti.RowIndex).Selected = True
+            End If
+        End If
 
 
     End Sub
