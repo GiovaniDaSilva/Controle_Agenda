@@ -119,16 +119,20 @@ Public Class frmPrincipal
     End Sub
 
 
-    Private Sub gridAtividades_Click(sender As Object, e As EventArgs) Handles gridAtividades.Click 
+    Private Sub gridAtividades_Click(sender As Object, e As EventArgs) Handles gridAtividades.Click
 
         If My.Computer.Keyboard.AltKeyDown Then
-            subConfiguraDescricao(MODO_IMPRESSAO)
-            controle.subListarAtivdades(txtDescricao, lista(gridAtividades.CurrentCell.RowIndex), ParametrosIni)
+            ImprimeAtividade()
         Else
             subAtualizaDescricao()
         End If
 
 
+    End Sub
+
+    Private Sub ImprimeAtividade()
+        subConfiguraDescricao(MODO_IMPRESSAO)
+        controle.subListarAtivdades(txtDescricao, lista(gridAtividades.CurrentCell.RowIndex), ParametrosIni)
     End Sub
 
     Private Sub subAtualizaDescricao()
@@ -147,11 +151,7 @@ Public Class frmPrincipal
             subChamaFormularioAdicionarEdicao(e.RowIndex)
         ElseIf (e.ColumnIndex = enuIndexColunas.CODIGO) Then
             If My.Computer.Keyboard.CtrlKeyDown Then
-                If lista(e.RowIndex).ID_TIPO_ATIVIDADE = 1 Then
-                    Process.Start("http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?" & lista(e.RowIndex).Codigo)
-                ElseIf lista(e.RowIndex).ID_TIPO_ATIVIDADE = 2 Then
-                    Process.Start("http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=" & lista(e.RowIndex).Codigo)
-                End If
+                AbreSolPBI(e.RowIndex)
             End If
 
         End If
@@ -165,14 +165,22 @@ Public Class frmPrincipal
 
     End Sub
 
+    Private Sub AbreSolPBI(index As Integer)
+        If lista(index).ID_TIPO_ATIVIDADE = 1 Then
+            Process.Start("http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?" & lista(index).Codigo)
+        ElseIf lista(index).ID_TIPO_ATIVIDADE = 2 Then
+            Process.Start("http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=" & lista(index).Codigo)
+        End If
+    End Sub
+
     Private Sub subAtualizaHorasAtividade(e As DataGridViewCellEventArgs)
-        if val(lista(e.RowIndex).Codigo) <= 0 Then
-            pHorasAtividade.Visible = false
-            Exit sub
+        If Val(lista(e.RowIndex).Codigo) <= 0 Then
+            pHorasAtividade.Visible = False
+            Exit Sub
         End If
 
         pHorasAtividade.Visible = True
-        lblHorasAtividade.Text = controle.funRetornaTotalHorasAtividade(lista(e.RowIndex).Codigo )
+        lblHorasAtividade.Text = controle.funRetornaTotalHorasAtividade(lista(e.RowIndex).Codigo)
     End Sub
 
 
@@ -473,10 +481,7 @@ Public Class frmPrincipal
 
         Dim data As Date
 
-        If lista Is Nothing Or Not gridAtividades.CurrentRow.Selected Then
-            MsgBox("Nenhuma atividade selecionada!", vbExclamation)
-            Exit Sub
-        End If
+        If Not PossuiAtividadeSeleciona() Then Exit Sub
 
         subConfiguraDescricao(MODO_IMPRESSAO)
 
@@ -484,8 +489,30 @@ Public Class frmPrincipal
         controle.imprimePeriodoDia(txtDescricao, data)
     End Sub
 
-    Private Sub gridAtividades_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridAtividades.CellContentClick
+    Private Function PossuiAtividadeSeleciona() As Boolean
+        If lista Is Nothing Or Not gridAtividades.CurrentRow.Selected Then
+            MsgBox("Nenhuma atividade selecionada!", vbExclamation)
+            Return False
+        End If
+        Return True
+    End Function
 
+    Private Sub ImprimirAividadeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImprimirAividadeToolStripMenuItem.Click
+
+        If Not PossuiAtividadeSeleciona() Then Exit Sub
+
+        ImprimeAtividade()
+    End Sub
+
+    Private Sub AbrirSolPBIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirSolPBIToolStripMenuItem.Click
+        If Not PossuiAtividadeSeleciona() Then Exit Sub
+
+        If lista(gridAtividades.CurrentCell.RowIndex).ID_TIPO_ATIVIDADE > 2 Then
+            MsgBox("Seleciona uma atividade do tipo Solicitação ou PBI.", vbInformation)
+            Exit Sub
+        End If
+
+        AbreSolPBI(gridAtividades.CurrentCell.RowIndex)
     End Sub
 End Class
 

@@ -65,6 +65,8 @@ Partial Class frmPrincipal
         Me.Editar = New System.Windows.Forms.DataGridViewImageColumn()
         Me.menuGrid = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ImprimirPeriodosDoDiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImprimirAividadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AbrirSolPBIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pMenu.SuspendLayout()
         Me.pHorasAtividade.SuspendLayout()
         Me.pHorasDia.SuspendLayout()
@@ -561,15 +563,27 @@ Partial Class frmPrincipal
         '
         'menuGrid
         '
-        Me.menuGrid.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImprimirPeriodosDoDiaToolStripMenuItem})
+        Me.menuGrid.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImprimirPeriodosDoDiaToolStripMenuItem, Me.ImprimirAividadeToolStripMenuItem, Me.AbrirSolPBIToolStripMenuItem})
         Me.menuGrid.Name = "menuGrid"
-        Me.menuGrid.Size = New System.Drawing.Size(207, 26)
+        Me.menuGrid.Size = New System.Drawing.Size(207, 92)
         '
         'ImprimirPeriodosDoDiaToolStripMenuItem
         '
         Me.ImprimirPeriodosDoDiaToolStripMenuItem.Name = "ImprimirPeriodosDoDiaToolStripMenuItem"
         Me.ImprimirPeriodosDoDiaToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.ImprimirPeriodosDoDiaToolStripMenuItem.Text = "Imprimir Periodos do Dia"
+        '
+        'ImprimirAividadeToolStripMenuItem
+        '
+        Me.ImprimirAividadeToolStripMenuItem.Name = "ImprimirAividadeToolStripMenuItem"
+        Me.ImprimirAividadeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ImprimirAividadeToolStripMenuItem.Text = "Imprimir Atividade"
+        '
+        'AbrirSolPBIToolStripMenuItem
+        '
+        Me.AbrirSolPBIToolStripMenuItem.Name = "AbrirSolPBIToolStripMenuItem"
+        Me.AbrirSolPBIToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.AbrirSolPBIToolStripMenuItem.Text = "Abrir Sol/PBI"
         '
         'frmPrincipal
         '
@@ -639,4 +653,6 @@ Partial Class frmPrincipal
     Friend WithEvents btnGraficoMensal As Button
     Friend WithEvents menuGrid As ContextMenuStrip
     Friend WithEvents ImprimirPeriodosDoDiaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ImprimirAividadeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AbrirSolPBIToolStripMenuItem As ToolStripMenuItem
 End Class
