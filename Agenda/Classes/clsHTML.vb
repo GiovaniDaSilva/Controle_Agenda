@@ -1,4 +1,6 @@
-﻿Imports HtmlAgilityPack
+﻿Imports System.IO
+Imports System.Net
+Imports HtmlAgilityPack
 
 
 Public Class clsHTML
@@ -95,7 +97,7 @@ End Class
 ''' Classe para tratar funções que auxiliar o preenchimento do html
 ''' </summary>
 Public Class clsHTMLTools
-    Public Shared Function funLinhaTabela(ByVal pColunas As List(Of String), optional byval classe As String = vbNullString , Optional byval estilo As string = vbNullString) As String
+    Public Shared Function funLinhaTabela(ByVal pColunas As List(Of String), Optional ByVal classe As String = vbNullString, Optional ByVal estilo As String = vbNullString) As String
         Dim retorno As String = vbNullString
 
 
@@ -103,12 +105,12 @@ Public Class clsHTMLTools
         For Each col In pColunas
             retorno &= "<td "
 
-            If classe <> vbNullString 
+            If classe <> vbNullString
                 retorno &= classe
             End If
-            
-            If estilo  <> vbNullString 
-                retorno &= estilo 
+
+            If estilo <> vbNullString
+                retorno &= estilo
             End If
 
             retorno &= " >" & col.ToString & "</td>"
@@ -116,6 +118,24 @@ Public Class clsHTMLTools
         retorno &= "</tr>"
 
         Return retorno
+    End Function
+
+    ''' <summary>
+    ''' Ajustar o campo dentro do array que venho do post, removendo o nome do campo e o sinal de igual
+    ''' </summary>
+    ''' <param name="campo"></param>
+    ''' <returns></returns>
+    Public Shared Function RetornaValorPost(ByVal campo As String) As String
+        Return campo.ToString.Replace(campo.ToString.Substring(0, campo.IndexOf("=") + 1), "")
+    End Function
+
+    ''' <summary>
+    ''' Converte o post dentro do request em array de string
+    ''' </summary>
+    ''' <param name="pContext"></param>
+    ''' <returns></returns>
+    Public Shared Function RetornaPostEmArray(pContext As HttpListenerContext) As String()
+        Return New StreamReader(pContext.Request.InputStream).ReadToEnd().Split(New Char() {"?", "&"})
     End Function
 
 End Class

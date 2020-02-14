@@ -163,23 +163,6 @@ Public Class clsTools
 
     End Function
 
-    ''' <summary>
-    ''' Ajustar o campo dentro do array que venho do post, removendo o nome do campo e o sinal de igual
-    ''' </summary>
-    ''' <param name="campo"></param>
-    ''' <returns></returns>
-    Public Shared Function RetornaValorPost(ByVal campo As String) As String
-        Return campo.ToString.Replace(campo.ToString.Substring(0, campo.IndexOf("=") + 1), "")
-    End Function
-
-    ''' <summary>
-    ''' Converte o post dentro do request em array de string
-    ''' </summary>
-    ''' <param name="pContext"></param>
-    ''' <returns></returns>
-    Public Shared Function RetornaPostEmArray(pContext As HttpListenerContext) As String()
-        Return New StreamReader(pContext.Request.InputStream).ReadToEnd().Split(New Char() {"?", "&"})
-    End Function
 
     ''' <summary>
     ''' Retorna um determinado campo de uma determinada tabela

@@ -42,7 +42,7 @@ Public Class clsRequisicoesWeb
         Dim locDescricao As string = vbnullstring
 
         If pContext.Request.HttpMethod = "POST" Then
-            dim ID = clsTools.RetornaPostEmArray(pContext)
+            dim ID = clsHTMLTools.RetornaPostEmArray(pContext)
             
             locDescricao = clsTools.RetornaCampoTabela("ATIVIDADES", "DESCRICAO", "ID = " & ID(0))            
         End If
@@ -68,13 +68,13 @@ Public Class clsRequisicoesWeb
         End If
         
         If pContext.Request.HttpMethod = "POST" Then
-            post = clsTools.RetornaPostEmArray(pContext)
+            post = clsHTMLTools.RetornaPostEmArray(pContext)
 
-            Dim data = clsTools.RetornaValorPost(post(0))
+            Dim data = clsHTMLTools.RetornaValorPost(post(0))
             If data <> vbNullString Then
                 locParametros.Data = CDate(data)
             End If
-            locParametros.Tipo = clsTools.RetornaValorPost(post(1))
+            locParametros.Tipo = clsHTMLTools.RetornaValorPost(post(1))
         End If
 
         Return New clsHomeWeb().RetornaPaginaHome(locParametros)
