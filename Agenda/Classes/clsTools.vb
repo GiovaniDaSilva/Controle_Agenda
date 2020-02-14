@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Text
 
 Public Class clsTools
     Public Shared Function funRetornaData(ByVal pCampo As MaskedTextBox) As Date
@@ -140,5 +141,24 @@ Public Class clsTools
     End Function
     Public Shared Function RetornaPostEmArray(pContext As HttpListenerContext) As String()
         Return New StreamReader(pContext.Request.InputStream).ReadToEnd().Split(New Char() {"?", "&"})
+    End Function
+
+    Public shared Function RetornaCampoTabela(ByVal parTabela As String, ByVal parCampo As String, ByVal parWhere As String) As String
+        Dim locSQL As New StringBuilder(String.Empty)
+        Dim locResultado As String = vbNullString 
+
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
+
+            locSQL.AppendFormat("SELECT {0} AS VALOR FROM {1} WHERE {2}",parCampo, parTabela , parWhere  )
+            Comm.CommandText = locSQL.ToString
+
+            Using Reader = Comm.ExecuteReader()
+                if Reader.Read() then
+                    locResultado = Reader("VALOR")
+                End if
+            End Using
+        End Using
+
+        Return locResultado 
     End Function
 End Class

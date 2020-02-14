@@ -10,6 +10,8 @@ Public Class clsRequisicoesWeb
             Select Case pContext.Request.Url.AbsolutePath
                 Case "/Home"
                     locPagRetorno = funRetornaPaginaHome(pContext)
+                Case "/home_get_descricao"
+                    locPagRetorno = funRetornaDescricaoAtividade(pContext)
                 Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pContext)
                 Case "/Versoes"
@@ -25,6 +27,18 @@ Public Class clsRequisicoesWeb
         Return locPagRetorno
     End Function
 
+    Private Function funRetornaDescricaoAtividade(pContext As HttpListenerContext) As String
+        Dim DAO As New clsAdicionarDAO 
+        Dim locDescricao As string = vbnullstring
+
+        If pContext.Request.HttpMethod = "POST" Then
+            dim ID = clsTools.RetornaPostEmArray(pContext)
+            
+            locDescricao = clsTools.RetornaCampoTabela("ATIVIDADES", "DESCRICAO", "ID = " & ID(0))            
+        End If
+        Return locDescricao 
+    End Function
+
     Private Function funRetornaPaginaHome(pContext As HttpListenerContext) As String
 
         Dim post() As String
@@ -37,8 +51,7 @@ Public Class clsRequisicoesWeb
         ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
             locParametros.Data = Now.AddDays(-7)
         End If
-
-
+        
         If pContext.Request.HttpMethod = "POST" Then
             post = clsTools.RetornaPostEmArray(pContext)
 

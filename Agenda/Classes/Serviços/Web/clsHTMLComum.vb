@@ -52,6 +52,11 @@ Public Class clsHTMLComum
         .Fundo {
             background-color: lightblue;
         }
+        
+		.material-icons {
+			vertical-align: -5px; /*Correção para a posição do ícone verticalmente*/
+		}
+
 
          ")
         Return locMenu.ToString

@@ -135,7 +135,7 @@
 
         $(document).ready(function () {
             tb = $('#Dados').DataTable({
-                "scrollY": "500px", //Altura da grid com scroll
+                "scrollY": "400px", //Altura da grid com scroll
                 "scrollCollapse": true,
                 select: {
                     style: 'single' //permitir selecionar apenas uma linha
@@ -173,21 +173,43 @@
 
             });
             $('.dataTables_length').addClass('bs-select');
-
+            
             $.fn.dataTable.moment('DD/MM/YYYY');
 
-
+            //Seleção da Atividade
             tb.on('select.dt deselect.dt', function () {
                 var rows = $('tr.selected');
                 var rowData = tb.rows(rows).data();
-                $.each($(rowData), function (key, value) {
-                    document.getElementById('txtdescricao').value = value[5];
+                var id = 0;
+
+                //limpa o campo descricao
+                document.getElementById('txtdescricao').value = ""
+
+                $.each($(rowData), function (key, value) {                           
+                    id = value[0]
                 });
+                if (id > 0) {
+              
+                    $.ajax({
+                        url: 'home_get_descricao',
+                        type: 'POST',
+                        dataType: 'text',//'json',
+                        data: id,
 
+                        success: function (descricao) {
+                            document.getElementById('txtdescricao').value = descricao;
+                        },
 
-            });
+                        error: function (descricao) {
+                            alert(descricao);
+                        }
+                    });
+                }
+            });          
+
         });
 
+        //Ordenação da coluna data
         jQuery.extend(jQuery.fn.dataTableExt.oSort, {
             "date-br-pre": function (a) {
                 if (a == null || a == "") {
@@ -205,7 +227,6 @@
                 return ((a < b) ? 1 : ((a > b) ? -1 : 0));
             }
         });
-
 
 
     </script>
