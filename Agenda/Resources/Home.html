@@ -36,6 +36,10 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
+        .botaoSubMenu{
+            border:none;
+        }
     </style>
 
     {p_titulo_pagina}
@@ -47,10 +51,10 @@
     <header>
         {p_menu_pagina}
 
-
+        <!--Sub Menu-->
         <nav class="navbar navbar-light Fundo" >
             <div>
-                <a href=" Home" id="btn_home" class=" btn btn-primary btn-outline-light ">Nova Atividade</a>                
+                <a href=" Home" id="btn_home" class=" btn btn-primary btn-outline-light botaoSubMenu">Nova Atividade</a>                
             </div>            
         </nav>
 
@@ -112,10 +116,13 @@
         </div>
     </form>
 
+
+        width="100%"
         -->
-    <div class="container-fluid">
+    <!--Div como oculta, exibe apos a carga da grid para evitar piscar enquanto redimensiona-->
+    <div id="dadosHome" class="container-fluid" style="display:none">
         <div style="margin-top: 20px;" class="container-fluid">
-            <table id="Dados" class="table table-sm nowrap" cellspacing="0" width="100%">
+            <table id="Dados" class="table table-sm nowrap" cellspacing="0" > 
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -130,8 +137,7 @@
                     {p_linhas_tabela}
                 </tbody>
             </table>
-        </div>
-
+        </div>         
         <div class="form-group" style="margin-top: 40px">
             <label for="comment"><b>Descrição:</b></label>
             <textarea readonly class="form-control" rows="10" id="txtdescricao" name="info"></textarea>
@@ -178,6 +184,11 @@
                     }
 
                 ],
+
+                initComplete: function () {               
+                    //Exibir a diva somente após completar a carga
+                    $('#dadosHome').show();
+                },
 
             });
             $('.dataTables_length').addClass('bs-select');
