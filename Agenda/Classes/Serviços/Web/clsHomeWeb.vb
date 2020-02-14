@@ -1,17 +1,20 @@
 ﻿Public Class clsHomeWeb
 
-    Public Function RetornaPaginaGrafico() As String
-
-        Return GeraPagina()
+    Public Function RetornaPaginaHome(parametros As clsHomeParametros) As String
+        Return GeraPagina(parametros)
 
     End Function
 
-    Private Function GeraPagina() As String
+    Private Function GeraPagina(parametros As clsHomeParametros) As String
 
         Dim locAtividades As New List(Of clsConsultaAtividades)
         Dim DAO As New clsAdicionarDAO
+        Dim Filtro As New clsAtividade
 
-        locAtividades = DAO.carregarAtividades()
+        Filtro.Data = parametros.Data
+        Filtro.ID_TIPO_ATIVIDADE = parametros.Tipo
+
+        locAtividades = DAO.carregarAtividades(Filtro)
 
         Return RetornaHTML(locAtividades)
 
@@ -34,9 +37,9 @@
             linha.Add(atividade.ID)
             linha.Add(atividade.Data)
             linha.Add(atividade.TIPO_DESCRICAO)
-            linha.Add(atividade.Codigo)
+            linha.Add(atividade.funRetornaCodigoTratado)
             linha.Add(atividade.Horas)
-            linha.Add(atividade.Descricao)            
+            linha.Add(atividade.funRetornaDescricaoTratada)
             locRetorno &= clsHTMLTools.funLinhaTabela(linha, "class=""descricao""")
         Next
 

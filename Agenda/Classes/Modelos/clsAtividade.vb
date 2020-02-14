@@ -20,6 +20,10 @@
     Public Property ID_TIPO_ATIVIDADE As Integer
     Public Property Periodos As List(Of clsPeriodo)
 
+    Public Function funRetornaCodigoTratado() As String
+        Return IIf(CInt(Codigo) > 0, Codigo, "")
+    End Function
+
     Public Function funRetornaDescricaoTratada() As String
         Return Descricao.ToString().Replace(ControlChars.Lf, " ").Replace("<", "&lt;").Replace(">", "&gt;")
     End Function

@@ -7,12 +7,16 @@ Public Class clsHTMLComum
         locMenu.Append("
         <nav class=""navbar navbar-dark bg-primary"">            
                 <div >
-                    <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light "" ><i class=""material-icons"">grid_on</i>Home</a>
-                    <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" >Grafico</a>
-                    <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" >Versões</a>            
+                    <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light ""><i class=""material-icons"">home</i>Home</a>
+                    <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">pie_chart</i>Grafico</a>
+                    <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>Versões</a>            
+                </div>
+                <div class=""float-right"">
+                    <span style=""font-size: 30px; font-family: Comic Sans MS, Comic Sans, cursive; color: White;"">Agenda</span>              
+                    <img style="""" src=""https://image.flaticon.com/icons/png/512/124/124050.png"""" width=""50"" height=""50""> </img>                    
                 </div>
         </nav>")
-        Return locMenu.ToString 
+        Return locMenu.ToString
     End Function
 
     Public Shared Function RetornaTituloPagina() As String
