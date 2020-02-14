@@ -7,13 +7,13 @@ Public Class clsHTMLComum
         locMenu.Append("
         <nav class=""navbar navbar-dark bg-primary"">            
                 <div >
-                    <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light ""><i class=""material-icons"">home</i>&nbsp;Home</a>
+                    <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light ""><i class=""material-icons"">home</i>Home</a>
                     <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">pie_chart</i>&nbsp;Grafico</a>
                     <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>            
                 </div>
                 <div class=""float-right"">
-                    <span style=""font-size: 30px; font-family: Comic Sans MS, Comic Sans, cursive; color: White;"">Agenda</span>              
-                    <img style="""" src=""https://image.flaticon.com/icons/png/512/124/124050.png"""" width=""50"" height=""50""> </img>                    
+                    <span class=""agenda"">Agenda</span>              
+                    <img  src=""https://image.flaticon.com/icons/png/512/124/124050.png"""" width=""50"" height=""50""> </img>                    
                 </div>
         </nav>")
         Return locMenu.ToString
@@ -56,7 +56,12 @@ Public Class clsHTMLComum
 		.material-icons {
 			vertical-align: -5px; /*Correção para a posição do ícone verticalmente*/
 		}
-
+    
+        .agenda{
+           font-size: 30px; 
+           font-family: Comic Sans MS, Comic Sans, cursive; 
+            color: White;
+        }
 
          ")
         Return locMenu.ToString

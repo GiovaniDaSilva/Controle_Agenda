@@ -3,6 +3,12 @@ Imports System.Net
 Imports System.Text
 
 Public Class clsTools
+
+    ''' <summary>
+    ''' Converte o conteudo do campo texto em um date
+    ''' </summary>
+    ''' <param name="pCampo"></param>
+    ''' <returns></returns>
     Public Shared Function funRetornaData(ByVal pCampo As MaskedTextBox) As Date
         Dim locData As Date
 
@@ -23,10 +29,20 @@ Public Class clsTools
         Return locData
     End Function
 
+    ''' <summary>
+    ''' Formata a data para o padrao de banco de dados
+    ''' </summary>
+    ''' <param name="parData"></param>
+    ''' <returns></returns>
     Public Shared Function funAjustaDataSQL(ByVal parData As Date) As String
         Return Format(parData, "yyyy-MM-dd")
     End Function
 
+    ''' <summary>
+    ''' Formata a data para o padrao pt-br
+    ''' </summary>
+    ''' <param name="parData"></param>
+    ''' <returns></returns>
     Public Shared Function funFormataData(ByVal parData As Date) As String
         Return Format(parData, "dd/MM/yyyy")
     End Function
@@ -64,6 +80,14 @@ Public Class clsTools
     Public Shared Sub subTrataExcessao(e As Exception)
         MsgBox("Ocorreu o seguinte erro: " & e.Message)
     End Sub
+
+    ''' <summary>
+    ''' Valida o campo hora
+    ''' hora valida, minuto valido
+    ''' </summary>
+    ''' <param name="parHoras"></param>
+    ''' <param name="parPermiteEmBranco"></param>
+    ''' <returns></returns>
     Public Shared Function funValidaHora(ByVal parHoras As String, Optional ByVal parPermiteEmBranco As Boolean = False) As Boolean
 
         Dim locHora = Trim(parHoras.Replace(":", ""))
@@ -90,10 +114,12 @@ Public Class clsTools
         Return True
     End Function
 
-    Public Shared Function HoraVazia(pHora As MaskedTextBox) As Boolean
-        Return Trim(pHora.Text.Replace(":", "")) = vbNullString
-    End Function
-
+    ''' <summary>
+    ''' Converte os dados da lista em uma string     
+    ''' </summary>
+    ''' <param name="parLista"></param>
+    ''' <param name="parEhString"></param>
+    ''' <returns></returns>
     Public Shared Function RetornArrayLista(ByVal parLista As IEnumerable(Of String), Optional parEhString As Boolean = False) As String
         Dim retorno As String = vbNullString
         Dim aux As String
@@ -126,6 +152,7 @@ Public Class clsTools
 
     End Function
 
+    
     Public Shared Function RetornaPrimeiroDiaMes(Optional ByVal mes As Integer = 0) As Date
 
         If mes = 0 Then
@@ -136,13 +163,31 @@ Public Class clsTools
 
     End Function
 
+    ''' <summary>
+    ''' Ajustar o campo dentro do array que venho do post, removendo o nome do campo e o sinal de igual
+    ''' </summary>
+    ''' <param name="campo"></param>
+    ''' <returns></returns>
     Public Shared Function RetornaValorPost(ByVal campo As String) As String
         Return campo.ToString.Replace(campo.ToString.Substring(0, campo.IndexOf("=") + 1), "")
     End Function
+
+    ''' <summary>
+    ''' Converte o post dentro do request em array de string
+    ''' </summary>
+    ''' <param name="pContext"></param>
+    ''' <returns></returns>
     Public Shared Function RetornaPostEmArray(pContext As HttpListenerContext) As String()
         Return New StreamReader(pContext.Request.InputStream).ReadToEnd().Split(New Char() {"?", "&"})
     End Function
 
+    ''' <summary>
+    ''' Retorna um determinado campo de uma determinada tabela
+    ''' </summary>
+    ''' <param name="parTabela"></param>
+    ''' <param name="parCampo"></param>
+    ''' <param name="parWhere"></param>
+    ''' <returns></returns>
     Public shared Function RetornaCampoTabela(ByVal parTabela As String, ByVal parCampo As String, ByVal parWhere As String) As String
         Dim locSQL As New StringBuilder(String.Empty)
         Dim locResultado As String = vbNullString 

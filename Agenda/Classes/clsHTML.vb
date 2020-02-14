@@ -2,6 +2,12 @@
 
 
 Public Class clsHTML
+
+    ''' <summary>
+    ''' Carrega as colunas necessárias da pagina HTML do sistema de consulta de solicitações
+    ''' </summary>
+    ''' <param name="pHTML"></param>
+    ''' <returns></returns>
     Public Shared Function funCarregaSolicitacoes(ByVal pHTML As String) As List(Of clsSolicitacao)
 
 
@@ -25,10 +31,11 @@ Public Class clsHTML
         Dim table = nodes(5)
 
         'For Each table As HtmlNode In nodes(5)
-        Dim camposHTML As New CamposHTML
+        Dim camposHTML As New CamposHTMLSolicitacaoImport
         For Each row As HtmlNode In table.SelectNodes("tr")
             iLinha += 1
 
+            'Define a posição das colunas
             If iLinha = 1 Then
                 iColuna = 0
                 For Each cell As HtmlNode In row.SelectNodes("th|td")
@@ -46,6 +53,7 @@ Public Class clsHTML
                 Continue For
             End If
 
+            'Alimenta as colunas a serem importadas
             locSolicitaco = New clsSolicitacao
             iColuna = 0
             For Each cell As HtmlNode In row.SelectNodes("th|td")
@@ -70,7 +78,10 @@ Public Class clsHTML
 
     End Function
 
-    Public Class CamposHTML
+    ''' <summary>
+    ''' Classe que define os campos a serem importados na impressao das atividades
+    ''' </summary>
+    Public Class CamposHTMLSolicitacaoImport
         Public Property UF As Integer
         Public Property Codigo As Integer
         Public Property Resumo As Integer
@@ -80,6 +91,9 @@ Public Class clsHTML
     End Class
 End Class
 
+''' <summary>
+''' Classe para tratar funções que auxiliar o preenchimento do html
+''' </summary>
 Public Class clsHTMLTools
     Public Shared Function funLinhaTabela(ByVal pColunas As List(Of String), optional byval classe As String = vbNullString , Optional byval estilo As string = vbNullString) As String
         Dim retorno As String = vbNullString

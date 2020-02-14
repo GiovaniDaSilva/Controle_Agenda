@@ -4,6 +4,11 @@ Imports System.Web
 
 Public Class clsRequisicoesWeb
 
+    ''' <summary>
+    ''' Trata as requisições do servidor
+    ''' </summary>
+    ''' <param name="pContext"></param>
+    ''' <returns></returns>
     Public Function trataRequisicoesWeb(pContext As HttpListenerContext) As String
         Dim locPagRetorno As String = My.Resources.Pagina_Não_Encontrada
         Try
@@ -27,6 +32,11 @@ Public Class clsRequisicoesWeb
         Return locPagRetorno
     End Function
 
+    ''' <summary>
+    ''' Retorna a descrição da atividade da pagina hora atraves de ajax
+    ''' </summary>
+    ''' <param name="pContext"></param>
+    ''' <returns></returns>
     Private Function funRetornaDescricaoAtividade(pContext As HttpListenerContext) As String
         Dim DAO As New clsAdicionarDAO 
         Dim locDescricao As string = vbnullstring
@@ -39,6 +49,11 @@ Public Class clsRequisicoesWeb
         Return locDescricao 
     End Function
 
+    ''' <summary>
+    ''' Chama a classe para tratar a pagina home
+    ''' </summary>
+    ''' <param name="pContext"></param>
+    ''' <returns></returns>
     Private Function funRetornaPaginaHome(pContext As HttpListenerContext) As String
 
         Dim post() As String
@@ -66,7 +81,11 @@ Public Class clsRequisicoesWeb
 
     End Function
 
-
+    ''' <summary>
+    ''' Chama a classe para tratar a pagina de grafico
+    ''' </summary>
+    ''' <param name="pContext"></param>
+    ''' <returns></returns>
     Private Function funRetornaPaginaGrafico(pContext As HttpListenerContext) As String
         Dim locDataInicial = clsTools.RetornaPrimeiroDiaMes()
         Dim locDataFinal = clsTools.RetornaUltimoDiaMes()
