@@ -20,6 +20,10 @@
             font-weight: bold;
         }
 
+        /*
+
+        scroll sem um table comum
+        <div class="table-wrapper-scroll-y my-custom-scrollbar col-md-5"> table... </div>
         .my-custom-scrollbar {
             position: relative;
             height: 200px;
@@ -29,6 +33,8 @@
         .table-wrapper-scroll-y {
             display: block;
         }
+
+        */
 
         .thead-blue {
             color: black;
@@ -49,7 +55,8 @@
         <!--Sub Menu-->
         <nav class="navbar navbar-light Fundo">
             <div>
-                <a href=" Home" id="btnSalvar" form="form_dados" type="submit" class=" btn btn-primary btn-outline-light botaoSubMenu">Salvar</a>
+                <button class="btn btn-primary btn-outline-light botaoSubMenu" type="submit" form="form_dados">Salvar</button>
+                <input type="reset" value="Limpar" form="form_dados" class=" btn btn-primary btn-outline-light botaoSubMenu" />
             </div>
         </nav>
 
@@ -111,125 +118,124 @@
 
                 <!--Grid de Periodos-->
                 <div id="dadosHome" class="form-row col-md-9">
-                    <div class="table-wrapper-scroll-y my-custom-scrollbar col-md-5">
-                        <div style="margin-top: 20px;">
-                            <table id="dados" class="table table-sm nowrap" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Hora Inicio</th>
-                                        <th>Hora Fim</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>08:00</td>
-                                        <td>10:30</td>
-                                        <td>02:30</td>
-                                    </tr>
+                    <div style="margin-top: 20px;" class="col-md-5">
+                        <table id="dados" class="table table-sm nowrap" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hora Inicio</th>
+                                    <th>Hora Fim</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
 
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
             </div>
 
@@ -255,7 +261,25 @@
     <script>
 
         $(document).ready(function () {
-            
+            tb = $('#dados').DataTable({
+                "scrollY": "100px", //Altura da grid com scroll
+                "scrollCollapse": true,
+                paging: false,
+                searching: false,
+                info: false,
+                select: {
+                    style: 'single' //permitir selecionar apenas uma linha
+                },
+
+                oLanguage: { sUrl: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json' },
+            });
+
+
+            //Seleção da Atividade
+            tb.on('select.dt deselect.dt', function () {
+
+            });
+
         });
 
     </script>
