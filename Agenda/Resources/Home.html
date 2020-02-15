@@ -14,16 +14,9 @@
 
 
     <style>
-        [p_style_comum_pagina] .my-custom-scrollbar {
-            position: relative;
-            height: 400px;
-            overflow: auto;
-        }
-
-        .table-wrapper-scroll-y {
-            display: block;
-        }
-
+        [p_style_comum_pagina] 
+        
+      
         .thead-blue {
             color: black;
             background-color: cornflowerblue;
@@ -54,7 +47,7 @@
         <!--Sub Menu-->
         <nav class="navbar navbar-light Fundo" >
             <div>
-                <a href=" Home" id="btn_home" class=" btn btn-primary btn-outline-light botaoSubMenu">Nova Atividade</a>                
+                <a href="CadastroAtividade" id="btnCadastroAtivdade" class=" btn btn-primary btn-outline-light botaoSubMenu">Nova Atividade</a>                
             </div>            
         </nav>
 
@@ -85,40 +78,7 @@
             </div>
         </form>
     </div>
-    <!--
-    <form action="/acao" method="POST">
-        <input type="hidden" name="pg" value="home">
-        <div class="input-group mb-3 input-group-sm">
-            <div class="input-group-prepend">
-
-                <span class="input-group-text">Data Inicial:</span>
-                <div class="input-group-text">
-                    <input type="date" class="form-control" name="data_ini" value="2020-01-14">
-                </div>
-
-
-                <span class="input-group-text">Data Final:</span>
-                <div class="input-group-text">
-                    <input type="date" class="form-control" name="data_fim" value="">
-                </div>
-
-                <span class="input-group-text">Causa:</span>
-                <div class="input-group-text">
-                    <select name="find_causa" class="form-control">
-                        <option value="">Todas</option>
-                        <option value="P">Preenchidas</option>
-                        <option value="B">Em branco</option>
-                    </select>
-                </div>
-
-                <button type="submit" name="op" value="filtrar" class="btn btn-secondary"><i class="material-icons">search</i>Filtrar</button>
-            </div>
-        </div>
-    </form>
-
-
-        width="100%"
-        -->
+   
     <!--Div como oculta, exibe apos a carga da grid para evitar piscar enquanto redimensiona-->
     <div id="dadosHome" class="container-fluid" style="display:none">
         <div style="margin-top: 20px;" class="container-fluid">

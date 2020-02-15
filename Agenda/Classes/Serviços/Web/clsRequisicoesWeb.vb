@@ -17,6 +17,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaPaginaHome(pContext)
                 Case "/home_get_descricao"
                     locPagRetorno = funRetornaDescricaoAtividade(pContext)
+                Case "/CadastroAtividade"
+                    locPagRetorno = funRetornaCadastroAtividade(pContext)
                 Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pContext)
                 Case "/Versoes"
@@ -30,6 +32,10 @@ Public Class clsRequisicoesWeb
         clsHTMLComum.TrataParametrosComuns(locPagRetorno)
 
         Return locPagRetorno
+    End Function
+
+    Private Function funRetornaCadastroAtividade(pContext As HttpListenerContext) As String
+        Return My.Resources.CadastroAtividade
     End Function
 
     ''' <summary>

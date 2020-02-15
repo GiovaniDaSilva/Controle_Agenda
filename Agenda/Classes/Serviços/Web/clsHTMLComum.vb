@@ -92,7 +92,7 @@ Public Class clsHTMLComum
             <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
     
             <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
-
+    
         ")
         Return texto.ToString
     End Function

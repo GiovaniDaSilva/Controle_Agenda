@@ -1,0 +1,267 @@
+<html lang="pr-bt">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {p_links_comum_pagina}
+
+
+    <!--Seleção da linha da tabela-->
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.bootstrap4.min.css" />
+
+
+    <style>
+        [p_style_comum_pagina]
+
+        .botaoSubMenu {
+            border: none;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .my-custom-scrollbar {
+            position: relative;
+            height: 200px;
+            overflow: auto;
+        }
+
+        .table-wrapper-scroll-y {
+            display: block;
+        }
+
+        .thead-blue {
+            color: black;
+            background-color: cornflowerblue;
+            border-color: cornflowerblue;
+        }
+    </style>
+
+    {p_titulo_pagina}
+
+</head>
+
+
+<body class="Fundo">
+    <header>
+        {p_menu_pagina}
+
+        <!--Sub Menu-->
+        <nav class="navbar navbar-light Fundo">
+            <div>
+                <a href=" Home" id="btnSalvar" form="form_dados" type="submit" class=" btn btn-primary btn-outline-light botaoSubMenu">Salvar</a>
+            </div>
+        </nav>
+
+    </header>
+
+    <div class="container-fluid">
+        <form method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
+            <div class="form-row">
+
+                <!--Campo data-->
+                <div class="form-group col-md-2">
+                    <label for="txtData" class="label">Data</label>
+                    <input type="date" class="form-control" id="txtData" name="txtData" form="form_dados">
+                </div>
+                &nbsp;
+
+                <!--Campo Tipo-->
+                <div class="form-group col-md-2">
+                    <label for="cbTipo" class="label">Tipo de Atividade</label>
+                    <select class="custom-select" select id="cbTipo" name="tipoAtividade" form="form_dados">
+                        <option value="1"> Solicitação</option>
+                        <option value="2"> PBI</option>
+                        <option value="3"> Reunião</option>
+                        <option value="4"> Ausente</option>
+                        <option value="5"> Outros</option>
+                    </select>
+                </div>
+                &nbsp;
+                <!--Campo Código-->
+                <div class="form-group col-md-1">
+                    <label for="txtCodigo" class="label">Codigo</label>
+                    <input type="number" class="form-control" id="txtCodigo" name="txtCodigo" form="form_dados">
+                </div>
+                &nbsp;
+
+                <!--Campo Horas Totais-->
+                <div class="form-group col-md-1">
+                    <label for="txtHoraTotal" class="label">Total</label>
+                    <input type="time" class="form-control" id="txtHoraTotal" name="txtHoraTotal" form="form_dados">
+                </div>
+
+            </div>
+
+            <!--Hora inicial - Final-->
+            <div class="form-row">
+
+                <!--Campo inicio-->
+                <div class="form-group col-md-1">
+                    <label for="txtHoraInicio" class="label">De</label>
+                    <input type="time" class="form-control" id="txtHoraInicio" name="txtHoraInicio" form="form_dados">
+                </div>
+                &nbsp;
+
+                <!--Campo fim-->
+                <div class="form-group col-md-1">
+                    <label for="txtHoraFinal" class="label">Até</label>
+                    <input type="time" class="form-control" id="txtHoraFinal" name="txtHoraFinal" form="form_dados">
+                </div>
+
+                <!--Grid de Periodos-->
+                <div id="dadosHome" class="form-row col-md-9">
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar col-md-5">
+                        <div style="margin-top: 20px;">
+                            <table id="dados" class="table table-sm nowrap" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Hora Inicio</th>
+                                        <th>Hora Fim</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>08:00</td>
+                                        <td>10:30</td>
+                                        <td>02:30</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Campo Descrição-->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+
+                    <div class="form-group" style="margin-top: 40px">
+                        <label for="txtdescricao" class="label">Descrição</label>
+                        <textarea class="form-control" rows="10" id="txtdescricao" name="txtdescricao"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            
+        });
+
+    </script>
+
+
+</body>
+
+
+</html>
