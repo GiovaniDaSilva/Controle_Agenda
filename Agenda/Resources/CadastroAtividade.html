@@ -56,14 +56,14 @@
         <nav class="navbar navbar-light Fundo">
             <div>
                 <button class="btn btn-primary btn-outline-light botaoSubMenu" type="submit" form="form_dados">Salvar</button>
-                <input type="reset" value="Limpar" form="form_dados" class=" btn btn-primary btn-outline-light botaoSubMenu" />
+                <input type="reset" value="Limpar" form="form_dados" class=" btn btn-primary btn-outline-light botaoSubMenu" />              
             </div>
         </nav>
 
     </header>
 
     <div class="container-fluid">
-        <form method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
+        <form  method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
             <div class="form-row">
 
                 <!--Campo data-->
@@ -282,6 +282,52 @@
 
         });
 
+        /*
+
+        //Metodo para montar o json
+        (function ($) {
+            $.fn.serializeFormJSON = function () {
+                var o = {};
+                var a = this.serializeArray();
+                $.each(a, function () {
+                    if (o[this.name]) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
+                        }
+                        o[this.name].push(this.value || '');
+                    } else {
+                        o[this.name] = this.value || '';
+                    }
+                });
+                return o;
+            };
+        })(jQuery);
+
+        //Evento de submit do formulario
+        $('form').submit(function (e) {
+            e.preventDefault();
+            var formData = $(this).serializeFormJSON();
+            
+              $.ajax({
+                    url: 'CadastroAtividade_Salvar',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: formData,
+
+                    success: function (descricao) {
+                        if (descricao == 'Sucesso') {
+                            alert(descricao);
+                        }
+                    },
+
+                    error: function (descricao) {
+                        alert(descricao);
+                    }
+              });
+
+            
+        });
+        */
     </script>
 
 

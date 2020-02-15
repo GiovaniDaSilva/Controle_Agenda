@@ -34,7 +34,17 @@ Public Class clsRequisicoesWeb
         Return locPagRetorno
     End Function
 
+    ''' <summary>
+    ''' Retorna a Pagina de Cadastro de Atividade
+    ''' </summary>
+    ''' <param name="pContext"></param>
+    ''' <returns></returns>
     Private Function funRetornaCadastroAtividade(pContext As HttpListenerContext) As String
+
+        If pContext.Request.HttpMethod = "POST" Then
+            Dim dados = clsHTMLTools.RetornaPostEmArray(pContext)
+        End If
+
         Return My.Resources.CadastroAtividade
     End Function
 
