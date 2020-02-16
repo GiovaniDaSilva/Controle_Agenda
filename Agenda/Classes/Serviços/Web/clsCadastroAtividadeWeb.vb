@@ -9,8 +9,25 @@
 
     Friend Function RetornaCadastroAtividade_Salvar(json As String) As String
 
+        Dim atividade = DeserializarNewtonsoft(json)
+
+
         Return json.ToString
     End Function
+
+
+
+
+    'Private Function DeserializarNewtonsoft(json As String) As List(Of clsPeriodoWeb)
+    ' 'Dim Json = System.IO.File.ReadAllText("pedidos2.json")
+    ' Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of clsPeriodoWeb))(json)
+    ' End Function
+
+    Private Function DeserializarNewtonsoft(json As String) As clsAtividadeWeb
+        'Dim Json = System.IO.File.ReadAllText("pedidos2.json")
+        Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of clsAtividadeWeb)(json)
+    End Function
+
 End Class
 
 
