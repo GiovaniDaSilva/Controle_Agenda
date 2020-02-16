@@ -40,6 +40,7 @@
             linha.Add(atividade.funRetornaCodigoTratado)
             linha.Add(atividade.Horas)
             linha.Add(atividade.funRetornaDescricaoTratada)
+            linha.Add("")
             locRetorno &= clsHTMLTools.funLinhaTabela(linha, "class=""descricao""")
         Next
 
