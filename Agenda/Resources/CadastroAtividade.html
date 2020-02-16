@@ -70,15 +70,15 @@
 
                 <!--Campo data-->
                 <div class="form-group col-md-2">
-                    <label for="txtData" class="label">Data</label>
-                    <input type="date" class="form-control" id="txtData" name="txtData" form="form_dados">
+                    <label for="dataAtividade" class="label">Data</label>
+                    <input type="date" class="form-control" id="dataAtividade" name="dataAtividade" form="form_dados">
                 </div>
                 &nbsp;
 
                 <!--Campo Tipo-->
                 <div class="form-group col-md-2">
-                    <label for="cbTipo" class="label">Tipo de Atividade</label>
-                    <select class="custom-select" select id="cbTipo" name="tipoAtividade" form="form_dados">
+                    <label for="tipoAtividade" class="label">Tipo de Atividade</label>
+                    <select class="custom-select" select id="tipoAtividade" name="tipoAtividade" form="form_dados">
                         <option value="1"> Solicitação</option>
                         <option value="2"> PBI</option>
                         <option value="3"> Reunião</option>
@@ -89,15 +89,15 @@
                 &nbsp;
                 <!--Campo Código-->
                 <div class="form-group col-md-1">
-                    <label for="txtCodigo" class="label">Codigo</label>
-                    <input type="number" class="form-control" id="txtCodigo" name="txtCodigo" form="form_dados">
+                    <label for="codigoAtividade" class="label">Codigo</label>
+                    <input type="number" class="form-control" id="codigoAtividade" name="codigoAtividade" form="form_dados">
                 </div>
                 &nbsp;
 
                 <!--Campo Horas Totais-->
                 <div class="form-group col-md-1">
-                    <label for="txtHoraTotal" class="label">Total</label>
-                    <input type="time" class="form-control" id="txtHoraTotal" name="txtHoraTotal" form="form_dados">
+                    <label for="horaTotal" class="label">Total</label>
+                    <input type="time" class="form-control" id="horaTotal" name="horaTotal" form="form_dados">
                 </div>
 
             </div>
@@ -107,15 +107,15 @@
 
                 <!--Campo inicio-->
                 <div class="form-group col-md-1">
-                    <label for="txtHoraInicio" class="label">De</label>
-                    <input type="time" class="form-control" id="txtHoraInicio" name="txtHoraInicio" form="form_dados">
+                    <label for="horaInicio" class="label">De</label>
+                    <input type="time" class="form-control" id="horaInicio" name="horaInicio" form="form_dados">
                 </div>
                 &nbsp;
 
                 <!--Campo fim-->
                 <div class="form-group col-md-1">
-                    <label for="txtHoraFinal" class="label">Até</label>
-                    <input type="time" class="form-control" id="txtHoraFinal" name="txtHoraFinal" form="form_dados">
+                    <label for="horaFinal" class="label">Até</label>
+                    <input type="time" class="form-control" id="horaFinal" name="horaFinal" form="form_dados">
                 </div>
 
                 <!--Grid de Periodos-->
@@ -125,8 +125,8 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Hora Inicio</th>
-                                    <th>Hora Fim</th>
+                                    <th>De</th>
+                                    <th>Até</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>
@@ -138,12 +138,47 @@
                                     <td>02:30</td>
                                 </tr>
                                 <tr>
-                                    <td>1</td>
+                                    <td>2</td>
                                     <td>08:00</td>
                                     <td>10:30</td>
                                     <td>02:30</td>
-                                </tr>                              
-
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>08:00</td>
+                                    <td>10:30</td>
+                                    <td>02:30</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -157,8 +192,8 @@
                 <div class="form-group col-md-6">
 
                     <div class="form-group" style="margin-top: 40px">
-                        <label for="txtdescricao" class="label">Descrição</label>
-                        <textarea class="form-control" rows="10" id="txtdescricao" name="txtdescricao"></textarea>
+                        <label for="descricaoAtividade" class="label">Descrição</label>
+                        <textarea class="form-control" rows="10" id="descricaoAtividade" name="descricaoAtividade"></textarea>
                     </div>
 
                 </div>
@@ -239,7 +274,7 @@
 
                 success: function (descricao) {
                     alert("sucesso");
-                    document.getElementById('txtdescricao').value = descricao;
+                    document.getElementById('descricaoAtividade').value = descricao;
                 },
 
                 error: function (descricao) {

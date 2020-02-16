@@ -38,13 +38,13 @@ Public Class clsRequisicoesWeb
 
     Private Function funRetornaCadastroAtividade_Salvar(pContext As HttpListenerContext) As String
 
-        If pContext.Request.HttpMethod = "POST" Then
-            Dim x = New StreamReader(pContext.Request.InputStream).ReadToEnd()
+        Dim json As String = vbNullString
 
-            Return x.ToString()
+        If pContext.Request.HttpMethod = "POST" Then
+            json = New StreamReader(pContext.Request.InputStream).ReadToEnd()
         End If
 
-        Return ""
+        Return New clsCadastroAtividadeWeb().RetornaCadastroAtividade_Salvar(json)
     End Function
 
     ''' <summary>
@@ -53,12 +53,7 @@ Public Class clsRequisicoesWeb
     ''' <param name="pContext"></param>
     ''' <returns></returns>
     Private Function funRetornaCadastroAtividade(pContext As HttpListenerContext) As String
-
-        If pContext.Request.HttpMethod = "POST" Then
-            Dim dados = clsHTMLTools.RetornaPostEmArray(pContext)
-        End If
-
-        Return My.Resources.CadastroAtividade
+        Return New clsCadastroAtividadeWeb().RetornaPaginaCadastroAtividade()
     End Function
 
     ''' <summary>
