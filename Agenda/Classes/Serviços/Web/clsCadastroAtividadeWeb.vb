@@ -14,6 +14,7 @@ Public Class clsCadastroAtividadeWeb
         html = html.Replace("[p_id_atividade]", pAtividade.ID)
         html = html.Replace("{p_lista_tipo_atividade}", RetornaListaTipoAtividade(pAtividade))
         html = html.Replace("{p_linhas_tabela_periodo}", RetornaLinhasTabelaPeriodo(pAtividade))
+        html = html.Replace("{p_retorna_botao_excluir_atividade}", RetornaBotaoExcluirAtividade(pAtividade))
 
         Return html
     End Function
@@ -117,6 +118,17 @@ Public Class clsCadastroAtividadeWeb
 
         Return locRetorno
 
+    End Function
+
+    Private Function RetornaBotaoExcluirAtividade(pAtividade As clsAtividade) As String
+        Dim texto As New StringBuilder(vbNullString)
+
+        If pAtividade.ID = 0 Then Return ""
+
+        texto.AppendFormat("
+            <input id=""btnExcluir"" type=""button"" value=""Excluir"" form=""form_dados"" class="" btn btn-danger"" data-toggle=""modal"" data-target=""#confirmaExclusao"" />        
+        ")
+        Return texto.ToString
     End Function
 
 End Class

@@ -59,6 +59,7 @@
             <div>
                 <button class="btn btn-success" type="submit" form="form_dados">Salvar</button>
                 <input id="btnLimpa" type="reset" value="Limpar" form="form_dados" class=" btn btn-warning" />
+                {p_retorna_botao_excluir_atividade}
             </div>
         </nav>
 
@@ -160,6 +161,22 @@
     </div>
 
 
+    <!--Mensagem modal de confirmação de exclusão-->
+    <div class="modal fade" id="confirmaExclusao" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p> Deseja excluir a atividade?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btn_delete">Apagar Registo</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
     <script>
 
@@ -192,10 +209,11 @@
 
             document.getElementById('dataAtividade').value = RetornaDataAtual();
 
+
             [p_inicializa_campos_atividade]
 
+            //busca a descricao da atividade a ser editada, sem o ajax nao funcionava quando tinha quebra de linha
             var id = [p_id_atividade];
-
             if (id > 0) {
                 $.ajax({
                     url: 'home_get_descricao',
@@ -209,8 +227,31 @@
                 });
             }
 
-        });
+            //click do botao de confirmação ao excluir
+            $('#btn_delete').on('click', function () {
+                $('#confirmaExclusao').modal('hide');
 
+                var id = [p_id_atividade];
+                if (id > 0) {
+                    $.ajax({
+                        url: 'CadastroAtividade_excluir',
+                        type: 'POST',
+                        dataType: 'text',
+                        data: id + "", //Força a conversão para string
+
+                        success: function (retorno) {
+                            if (retorno == 'Excluido') {
+                                alert("Registro Excluido.");
+                            }
+                            else {
+                                alert("Erro ao excluir atividade.");
+                            }
+                        }
+                    });
+                }
+
+            });
+        });
 
 
         function AdicionaPeiodoGrid(tb) {
