@@ -19,6 +19,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaDescricaoAtividade(pContext)
                 Case "/CadastroAtividade"
                     locPagRetorno = funRetornaCadastroAtividade(pContext)
+                Case "/CadastroAtividade_salvar"
+                    locPagRetorno = funRetornaCadastroAtividade_Salvar(pContext)
                 Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pContext)
                 Case "/Versoes"
@@ -32,6 +34,17 @@ Public Class clsRequisicoesWeb
         clsHTMLComum.TrataParametrosComuns(locPagRetorno)
 
         Return locPagRetorno
+    End Function
+
+    Private Function funRetornaCadastroAtividade_Salvar(pContext As HttpListenerContext) As String
+
+        If pContext.Request.HttpMethod = "POST" Then
+            Dim x = New StreamReader(pContext.Request.InputStream).ReadToEnd()
+
+            Return x.ToString()
+        End If
+
+        Return ""
     End Function
 
     ''' <summary>
