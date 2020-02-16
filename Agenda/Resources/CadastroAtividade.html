@@ -97,7 +97,7 @@
                 <!--Campo Horas Totais-->
                 <div class="form-group col-md-1">
                     <label for="horaTotal" class="label">Total</label>
-                    <input  readonly  type="time" class="form-control" id="horaTotal" name="horaTotal" form="form_dados">
+                    <input readonly type="time" class="form-control" id="horaTotal" name="horaTotal" form="form_dados">
                 </div>
 
             </div>
@@ -197,9 +197,27 @@
 
 
             document.getElementById('dataAtividade').value = RetornaDataAtual();
+
+            [p_inicializa_campos_atividade]
+                        
+            var id = [p_id_atividade];                       
+            
+            if (id > 0) {
+                $.ajax({
+                    url: 'home_get_descricao',
+                    type: 'POST',
+                    dataType: 'text',//'json',
+                    data: id + "", //Força a conversão para string
+
+                    success: function (descricao) {
+                        document.getElementById('descricaoAtividade').value = descricao;
+                    }
+                });
+            }
+
         });
 
-        
+
 
         function AdicionaPeiodoGrid(tb) {
 
@@ -223,7 +241,7 @@
                 fim, //Final
                 tot // Total
             ]).draw(false);
-                       
+
             //Limpa os campos de horas
             document.getElementById('horaInicio').value = "";
             document.getElementById('horaFinal').value = "";
@@ -244,8 +262,8 @@
                 alert('Informe a data da atividade.');
                 return
             }
-            
-            
+
+
             var json = ConvertFormToJSON("#form_dados");
 
             $.ajax({
@@ -256,7 +274,7 @@
                 data: json,
 
                 success: function (descricao) {
-                    alert("Gravado com sucesso!");                                        
+                    alert("Gravado com sucesso!");
                     document.getElementById("btnLimpa").click();
                 },
 
@@ -265,9 +283,9 @@
                 }
 
             });
-            
+
         });
-        
+
         [p_funcao_retorna_data_atual]
 
         [p_funcao_calcula_soma_horas]

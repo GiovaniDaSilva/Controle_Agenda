@@ -1,9 +1,34 @@
-﻿Public Class clsCadastroAtividadeWeb
+﻿Imports System.Text
+
+Public Class clsCadastroAtividadeWeb
 
     Public Function RetornaPaginaCadastroAtividade(pAtividade As clsAtividade) As String
-        Return My.Resources.CadastroAtividade
+        Return RetornaHTML(pAtividade)
     End Function
 
+
+    Private Function RetornaHTML(pAtividade As clsAtividade) As String
+        Dim html As String
+        html = My.Resources.CadastroAtividade
+        html = html.Replace("[p_inicializa_campos_atividade]", RetornaLinhasInicializacaoCampos(pAtividade))
+        html = html.Replace("[p_id_atividade]", pAtividade.ID)
+
+        Return html
+    End Function
+
+    Private Function RetornaLinhasInicializacaoCampos(pAtividade As clsAtividade) As String
+        Dim texto As New StringBuilder(vbNullString)
+
+        If pAtividade.ID = 0 Then Return ""
+
+        texto.AppendFormat("
+            document.getElementById('dataAtividade').value = ""{0}"";
+            document.getElementById('codigoAtividade').value = ""{1}"";
+            document.getElementById('horaTotal').value = ""{2}"";            
+
+        ", clsTools.funAjustaDataSQL(pAtividade.Data), pAtividade.Codigo, pAtividade.Horas, pAtividade.ID)
+        Return texto.ToString
+    End Function
 
     Friend Function RetornaCadastroAtividade_Salvar(json As String) As String
 

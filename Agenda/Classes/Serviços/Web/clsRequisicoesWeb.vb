@@ -27,9 +27,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = My.Resources.Versoes
             End Select
         Catch ex As Exception
-            Return locPagRetorno
+            Return ex.Message
         End Try
-
 
         clsHTMLComum.TrataParametrosComuns(locPagRetorno)
 
@@ -53,7 +52,7 @@ Public Class clsRequisicoesWeb
     ''' <param name="pContext"></param>
     ''' <returns></returns>
     Private Function funRetornaCadastroAtividade(pContext As HttpListenerContext) As String
-        Dim locAtividade As clsAtividade
+        Dim locAtividade As New clsAtividade
 
 
         If pContext.Request.Url.Query <> vbNullString AndAlso pContext.Request.HttpMethod = "GET" Then
