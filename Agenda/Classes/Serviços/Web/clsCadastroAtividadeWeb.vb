@@ -37,7 +37,7 @@
         With locAtividade
             .Codigo = IIf(atividade.codigoAtividade = vbNullString, "0", atividade.codigoAtividade)
             .Data = atividade.dataAtividade
-            .Horas = IIf(atividade.horaTotal = vbNullString, "  :  ", atividade.horaTotal)
+            .Horas = IIf(atividade.horaTotal = vbNullString, "  :  ", atividade.horaTotal) 'informado : para mander o padrao do desktop
             .ID_TIPO_ATIVIDADE = atividade.tipoAtividade
             .Descricao = atividade.descricaoAtividade
             .Periodos = locPeriodos

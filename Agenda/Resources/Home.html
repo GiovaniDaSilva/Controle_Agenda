@@ -19,8 +19,9 @@
       
         .thead-blue {
             color: black;
-            background-color: cornflowerblue;
-            border-color: cornflowerblue;
+            background-color: #0099cc;
+            border:none ;
+            border-color: #0099cc;
         }
 
         td.descricao {
@@ -80,10 +81,11 @@
     </div>
    
     <!--Div como oculta, exibe apos a carga da grid para evitar piscar enquanto redimensiona-->
-    <div id="dadosHome" class="container-fluid" style="display:none">
+    <div id="dadosHome" class="container-fluid" style="        display: none
+">
         <div style="margin-top: 20px;" class="container-fluid">
-            <table id="Dados" class="table table-sm nowrap" cellspacing="0" > 
-                <thead>
+            <table id="Dados" class="table nowrap" cellspacing="0" > 
+                <thead class="thead-blue">
                     <tr>
                         <th>ID</th>
                         <th>Data</th>
