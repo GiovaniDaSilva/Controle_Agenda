@@ -103,7 +103,6 @@ Public Class clsHTMLComum
         pagina = pagina.Replace("{p_links_comum_pagina}", RetornLinksComnsPagina)
         pagina = pagina.Replace("[p_funcao_calcula_diferencao_horas]", RetornaFuncaoCalculaDiferencaHoras)
         pagina = pagina.Replace("[p_funcao_calcula_soma_horas]", RetornaFuncaoCalculaSomaHoras)
-        pagina = pagina.Replace("[p_funcao_converte_form_to_json]", RetornaFuncaoConverteFormToJson)
         pagina = pagina.Replace("[p_funcao_retorna_data_atual]", RetornaFuncaoRetornaDataAtual)
 
     End Sub
@@ -172,36 +171,7 @@ Public Class clsHTMLComum
         Return texto.ToString
     End Function
 
-    Public Shared Function RetornaFuncaoConverteFormToJson() As String
-        Dim texto As New StringBuilder(vbNullString)
 
-        texto.Append("
-                 //Converte a tabela em json
-                //Tenho que ver como referenciar esse projeto no meu projeto do github
-                //https://github.com/lightswitch05/table-to-json
-
-                //Metodo para montar o json
-                function ConvertFormToJSON(form) {
-
-                    var array = jQuery(form).serializeArray();
-                    var json = {};
-
-                    //monta o json com id dos campos e conteudo
-                    jQuery.each(array, function () {
-                        json[this.name] = this.value || '';
-                    });
-
-                    json['id_atividade'] = '0';                   
-
-                    //Adicionado a tabela ao json
-                    var table = $('#dados').tableToJSON();
-                    json['Periodo'] = table;
-
-                    return JSON.stringify(json);
-                };
-        ")
-        Return texto.ToString
-    End Function
 
     Public Shared Function RetornaFuncaoRetornaDataAtual() As String
         Dim texto As New StringBuilder(vbNullString)

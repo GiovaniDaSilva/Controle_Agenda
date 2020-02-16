@@ -13,6 +13,7 @@ Public Class clsCadastroAtividadeWeb
         html = html.Replace("[p_inicializa_campos_atividade]", RetornaLinhasInicializacaoCampos(pAtividade))
         html = html.Replace("[p_id_atividade]", pAtividade.ID)
         html = html.Replace("{p_lista_tipo_atividade}", RetornaListaTipoAtividade(pAtividade))
+        html = html.Replace("{p_linhas_tabela_periodo}", RetornaLinhasTabelaPeriodo(pAtividade))
 
         Return html
     End Function
@@ -98,6 +99,26 @@ Public Class clsCadastroAtividadeWeb
         Return retorno.ToString
 
     End Function
+
+    Private Function RetornaLinhasTabelaPeriodo(pAtividade As clsAtividade) As String
+        Dim locRetorno As String = vbNullString
+
+        If pAtividade.ID = 0 Then Return ""
+        If pAtividade.Periodos.Count = 0 Then Return ""
+
+        For Each periodo In pAtividade.Periodos
+            Dim linha = New List(Of String)
+            linha.Add(periodo.ID)
+            linha.Add(periodo.Hora_Inicial)
+            linha.Add(periodo.Hora_Final)
+            linha.Add(periodo.Total)
+            locRetorno &= clsHTMLTools.funLinhaTabela(linha)
+        Next
+
+        Return locRetorno
+
+    End Function
+
 End Class
 
 

@@ -79,7 +79,7 @@
                 <div class="form-group col-md-2">
                     <label for="tipoAtividade" class="label">Tipo de Atividade</label>
                     <select class="custom-select" select id="tipoAtividade" name="tipoAtividade" form="form_dados">
-                        {p_lista_tipo_atividade}           
+                        {p_lista_tipo_atividade}
                     </select>
                 </div>
                 &nbsp;
@@ -127,9 +127,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--
-                                    {p_linhas_tabela_periodo}
-                                 -->
+                                {p_linhas_tabela_periodo}
                             </tbody>
                         </table>
                     </div>
@@ -195,9 +193,9 @@
             document.getElementById('dataAtividade').value = RetornaDataAtual();
 
             [p_inicializa_campos_atividade]
-                        
-            var id = [p_id_atividade];                       
-            
+
+            var id = [p_id_atividade];
+
             if (id > 0) {
                 $.ajax({
                     url: 'home_get_descricao',
@@ -288,7 +286,30 @@
 
         [p_funcao_calcula_diferencao_horas]
 
-        [p_funcao_converte_form_to_json]
+
+        //Converte a tabela em json
+        //Tenho que ver como referenciar esse projeto no meu projeto do github
+        //https://github.com/lightswitch05/table-to-json
+
+        //Metodo para montar o json
+        function ConvertFormToJSON(form) {
+
+            var array = jQuery(form).serializeArray();
+            var json = {};
+
+            //monta o json com id dos campos e conteudo
+            jQuery.each(array, function () {
+                json[this.name] = this.value || '';
+            });
+
+            json['id_atividade'] = '[p_id_atividade]';
+
+            //Adicionado a tabela ao json
+            var table = $('#dados').tableToJSON();
+            json['Periodo'] = table;
+
+            return JSON.stringify(json);
+        };
 
     </script>
 
