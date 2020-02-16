@@ -59,6 +59,8 @@
             <div>
                 <button class="btn btn-primary btn-outline-light botaoSubMenu" type="submit" form="form_dados">Salvar</button>
                 <input type="reset" value="Limpar" form="form_dados" class=" btn btn-primary btn-outline-light botaoSubMenu" />
+
+                <button id="btnAdicionarPeriodo" class="btn btn-primary btn-outline-light botaoSubMenu" type="button" form="form_dados">Adicionar periodo</button>
             </div>
         </nav>
 
@@ -137,48 +139,6 @@
                                     <td>10:30</td>
                                     <td>02:30</td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>08:00</td>
-                                    <td>10:30</td>
-                                    <td>02:30</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>08:00</td>
-                                    <td>10:30</td>
-                                    <td>02:30</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>08:00</td>
-                                    <td>10:30</td>
-                                    <td>02:30</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>08:00</td>
-                                    <td>10:30</td>
-                                    <td>02:30</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>08:00</td>
-                                    <td>10:30</td>
-                                    <td>02:30</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>08:00</td>
-                                    <td>10:30</td>
-                                    <td>02:30</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>08:00</td>
-                                    <td>10:30</td>
-                                    <td>02:30</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -227,8 +187,51 @@
 
             });
 
+
+            //Click do botao adicionar periodo
+            $('#btnAdicionarPeriodo').on('click', function () {
+                AdicionaPeiodoGrid(tb);
+            });
+
         });
 
+
+        function AdicionaPeiodoGrid(tb) {
+
+            var ini = document.getElementById('horaInicio').value
+            var fim = document.getElementById('horaFinal').value;
+            var tot = diff(ini, fim);
+
+            tb.row.add([
+                0, //ID
+                ini,
+                fim,
+                tot
+            ]).draw(false);
+
+            //Limpa os campos de horas
+            document.getElementById('horaInicio').value = "";
+            document.getElementById('horaFinal').value = "";
+        };
+
+        //Calcula a diferença entre as horas
+        //https://stackoverflow.com/questions/10804042/calculate-time-difference-with-javascript
+        function diff(start, end) {
+            start = start.split(":");
+            end = end.split(":");
+            var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+            var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+            var diff = endDate.getTime() - startDate.getTime();
+            var hours = Math.floor(diff / 1000 / 60 / 60);
+            diff -= hours * 1000 * 60 * 60;
+            var minutes = Math.floor(diff / 1000 / 60);
+
+            // If using time pickers with 24 hours format, add the below line get exact hours
+            if (hours < 0)
+                hours = hours + 24;
+
+            return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
+        }
 
         //Converte a tabela em json
         //Tenho que ver como referenciar esse projeto no meu projeto do github
@@ -237,7 +240,7 @@
 
         //Metodo para montar o json
         function ConvertFormToJSON(form) {
-            
+
             var array = jQuery(form).serializeArray();
             var json = {};
 
