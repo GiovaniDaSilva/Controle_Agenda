@@ -105,7 +105,7 @@ Public Class clsPrincipal
         locDia = atividades.FindAll(Function(X) X.Data = pData)
 
         For Each item In locDia
-            If Trim(item.Horas) <> ":" Then
+            If Trim(item.Horas) <> ":" AndAlso Trim(item.Horas) <> vbNullString Then
                 locTime = locTime.Add(TimeSpan.Parse(item.Horas))
             End If
         Next

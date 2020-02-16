@@ -111,6 +111,14 @@ Public Class clsTools
             Throw New Exception("Hora Inválida.")
         End If
 
+        If Not IsNumeric(Mid(locHora, 1, 2)) Then
+            Throw New Exception("Hora Inválida.")
+        End If
+
+        If Not IsNumeric(Mid(locHora, 3, 4)) Then
+            Throw New Exception("Hora Inválida.")
+        End If
+
         Return True
     End Function
 
