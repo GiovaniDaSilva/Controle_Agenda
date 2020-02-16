@@ -131,12 +131,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>08:00</td>
-                                    <td>10:30</td>
-                                    <td>02:30</td>
-                                </tr>
+                                <!--
+                                    {p_linhas_tabela_periodo}
+                                 -->
                             </tbody>
                         </table>
                     </div>
@@ -202,20 +199,7 @@
             document.getElementById('dataAtividade').value = RetornaDataAtual();
         });
 
-        function RetornaDataAtual() {
-            // Obtém a data/hora atual
-            var data = new Date();
-
-            // Guarda cada pedaço em uma variável
-            var dia = data.getDate();           // 1-31
-            var mes = ("0" + (data.getMonth() + 1)).slice(-2);  // 0-11 (zero=janeiro)
-            var ano4 = data.getFullYear();       // 4 dígitos
-
-            // Formata a data e a hora (note o mês + 1)
-            var str_data = ano4 + '-' + (mes) + '-' + dia;
-
-            return str_data;
-        }
+        
 
         function AdicionaPeiodoGrid(tb) {
 
@@ -235,13 +219,11 @@
 
             tb.row.add([
                 0, //ID
-                ini,
-                fim,
-                tot
+                ini, //Inicio
+                fim, //Final
+                tot // Total
             ]).draw(false);
-
-
-
+                       
             //Limpa os campos de horas
             document.getElementById('horaInicio').value = "";
             document.getElementById('horaFinal').value = "";
@@ -252,81 +234,6 @@
 
             document.getElementById('horaTotal').value = somaHora(hora, tot, false);
         };
-
-
-        //Função para somar duas horas
-        //http://www.cesar.inf.br/blog/?cat=173
-        function somaHora(hrA, hrB, zerarHora) {
-            if (hrA.length != 5 || hrB.length != 5) return "00:00";
-
-            temp = 0;
-            nova_h = 0;
-            novo_m = 0;
-
-            hora1 = hrA.substr(0, 2) * 1;
-            hora2 = hrB.substr(0, 2) * 1;
-            minu1 = hrA.substr(3, 2) * 1;
-            minu2 = hrB.substr(3, 2) * 1;
-
-            temp = minu1 + minu2;
-            while (temp > 59) {
-                nova_h++;
-                temp = temp - 60;
-            }
-            novo_m = temp.toString().length == 2 ? temp : ("0" + temp);
-
-            temp = hora1 + hora2 + nova_h;
-            while (temp > 23 && zerarHora) {
-                temp = temp - 24;
-            }
-            nova_h = temp.toString().length == 2 ? temp : ("0" + temp);
-
-            return nova_h + ':' + novo_m;
-        };
-
-        //Calcula a diferença entre as horas
-        //https://stackoverflow.com/questions/10804042/calculate-time-difference-with-javascript
-        function diff(start, end) {
-            start = start.split(":");
-            end = end.split(":");
-            var startDate = new Date(0, 0, 0, start[0], start[1], 0);
-            var endDate = new Date(0, 0, 0, end[0], end[1], 0);
-            var diff = endDate.getTime() - startDate.getTime();
-            var hours = Math.floor(diff / 1000 / 60 / 60);
-            diff -= hours * 1000 * 60 * 60;
-            var minutes = Math.floor(diff / 1000 / 60);
-
-            // If using time pickers with 24 hours format, add the below line get exact hours
-            if (hours < 0)
-                hours = hours + 24;
-
-            return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
-        }
-
-        //Converte a tabela em json
-        //Tenho que ver como referenciar esse projeto no meu projeto do github
-        //https://github.com/lightswitch05/table-to-json
-
-        //Metodo para montar o json
-        function ConvertFormToJSON(form) {
-
-            var array = jQuery(form).serializeArray();
-            var json = {};
-
-            //monta o json com id dos campos e conteudo
-            jQuery.each(array, function () {
-                json[this.name] = this.value || '';
-            });
-
-
-            //Adicionado a tabela ao json
-            var table = $('#dados').tableToJSON();
-            json['Periodo'] = table;
-
-
-            return JSON.stringify(json);
-        };
-                     
 
         //Evento de submit do formulario
         $("#form_dados").submit(function (e) {
@@ -351,9 +258,16 @@
                 }
 
             });
-
-
+            
         });
+        
+        [p_funcao_retorna_data_atual]
+
+        [p_funcao_calcula_soma_horas]
+
+        [p_funcao_calcula_diferencao_horas]
+
+        [p_funcao_converte_form_to_json]
 
     </script>
 
