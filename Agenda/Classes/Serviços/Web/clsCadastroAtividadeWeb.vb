@@ -12,6 +12,7 @@ Public Class clsCadastroAtividadeWeb
         html = My.Resources.CadastroAtividade
         html = html.Replace("[p_inicializa_campos_atividade]", RetornaLinhasInicializacaoCampos(pAtividade))
         html = html.Replace("[p_id_atividade]", pAtividade.ID)
+        html = html.Replace("{p_lista_tipo_atividade}", RetornaListaTipoAtividade(pAtividade))
 
         Return html
     End Function
@@ -80,6 +81,21 @@ Public Class clsCadastroAtividadeWeb
         Catch ex As Exception
             Return False
         End Try
+
+    End Function
+
+    Private Function RetornaListaTipoAtividade(pAtividadade As clsAtividade) As String
+        Dim retorno As New StringBuilder(vbNullString)
+        Dim selected As String = "selected"
+        Dim tipos As List(Of clsTipo)
+
+        tipos = New clsAdicionarDAO().CarregaTipos()
+
+        For Each tipo In tipos
+            retorno.AppendFormat("<option value = ""{0}"" {1}> {2}</Option>", tipo.ID, IIf(pAtividadade.ID_TIPO_ATIVIDADE = tipo.ID, selected, ""), tipo.DESCRICAO)
+        Next
+
+        Return retorno.ToString
 
     End Function
 End Class
