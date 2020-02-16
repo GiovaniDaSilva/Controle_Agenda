@@ -1,6 +1,6 @@
 ﻿Public Class clsCadastroAtividadeWeb
 
-    Public Function RetornaPaginaCadastroAtividade() As String
+    Public Function RetornaPaginaCadastroAtividade(pAtividade As clsAtividade) As String
         Return My.Resources.CadastroAtividade
     End Function
 
@@ -35,6 +35,7 @@
         Next
 
         With locAtividade
+            .ID = Val(atividade.id_atividade)
             .Codigo = IIf(atividade.codigoAtividade = vbNullString, "0", atividade.codigoAtividade)
             .Data = atividade.dataAtividade
             .Horas = IIf(atividade.horaTotal = vbNullString, "  :  ", atividade.horaTotal) 'informado : para mander o padrao do desktop
@@ -63,6 +64,7 @@ End Class
 ''' Classes para carregar a partir do json
 ''' </summary>
 Public Class clsAtividadeWeb
+    Public Property id_atividade As String
     Public Property dataAtividade As String
     Public Property tipoAtividade As Integer
     Public Property codigoAtividade As String

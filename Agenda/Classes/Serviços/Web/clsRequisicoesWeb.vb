@@ -53,7 +53,22 @@ Public Class clsRequisicoesWeb
     ''' <param name="pContext"></param>
     ''' <returns></returns>
     Private Function funRetornaCadastroAtividade(pContext As HttpListenerContext) As String
-        Return New clsCadastroAtividadeWeb().RetornaPaginaCadastroAtividade()
+        Dim locAtividade As clsAtividade
+
+
+        If pContext.Request.Url.Query <> vbNullString AndAlso pContext.Request.HttpMethod = "GET" Then
+
+            Dim arr = clsHTMLTools.RetornaGetEmArray(pContext)
+            Dim id = Val(clsHTMLTools.RetornaValorPostGet(arr(1)))
+
+            If id <= 0 Then
+                Throw New Exception("ID da ativiadde zerado.")
+            End If
+
+            locAtividade = New clsAtividade(id)
+        End If
+
+        Return New clsCadastroAtividadeWeb().RetornaPaginaCadastroAtividade(locAtividade)
     End Function
 
     ''' <summary>
@@ -94,11 +109,11 @@ Public Class clsRequisicoesWeb
         If pContext.Request.HttpMethod = "POST" Then
             post = clsHTMLTools.RetornaPostEmArray(pContext)
 
-            Dim data = clsHTMLTools.RetornaValorPost(post(0))
+            Dim data = clsHTMLTools.RetornaValorPostGet(post(0))
             If data <> vbNullString Then
                 locParametros.Data = CDate(data)
             End If
-            locParametros.Tipo = clsHTMLTools.RetornaValorPost(post(1))
+            locParametros.Tipo = clsHTMLTools.RetornaValorPostGet(post(1))
         End If
 
         Return New clsHomeWeb().RetornaPaginaHome(locParametros)
@@ -114,9 +129,6 @@ Public Class clsRequisicoesWeb
         Dim locDataInicial = clsTools.RetornaPrimeiroDiaMes()
         Dim locDataFinal = clsTools.RetornaUltimoDiaMes()
 
-        'Pode ser feito com array
-        'Dim parts() As String
-        'parts = pUri.ToString.Split(New Char() {"?", "&"})
 
         If pContext.Request.Url.Query <> vbNullString Then
             Dim mesGeracao = String.Join(String.Empty, pContext.Request.Url.ToString.Split("?").Skip(1)).Replace("meseslista=", "")

@@ -191,6 +191,7 @@ Public Class clsHTMLComum
                         json[this.name] = this.value || '';
                     });
 
+                    json['id_atividade'] = '0';                   
 
                     //Adicionado a tabela ao json
                     var table = $('#dados').tableToJSON();

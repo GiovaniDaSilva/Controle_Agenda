@@ -85,7 +85,7 @@
 ">
         <div style="margin-top: 20px;" class="container-fluid">
             <table id="Dados" class="table nowrap" cellspacing="0" > 
-                <thead class="thead-blue">
+                <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
                         <th>Data</th>
@@ -148,7 +148,7 @@
                     {//coluna Editar
                         render: function (data, type, row) {
                             var id = row[0];
-                                return "<a href='/editar/" + id + "' class='btn btn-primary'>Editar</a>"
+                                return "<a href='/CadastroAtividade?id=" + id + "' class='btn btn-primary'>Editar</a>"
                             },
                         targets: 6,
                         width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário

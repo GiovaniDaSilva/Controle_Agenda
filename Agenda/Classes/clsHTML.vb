@@ -125,7 +125,7 @@ Public Class clsHTMLTools
     ''' </summary>
     ''' <param name="campo"></param>
     ''' <returns></returns>
-    Public Shared Function RetornaValorPost(ByVal campo As String) As String
+    Public Shared Function RetornaValorPostGet(ByVal campo As String) As String
         Return campo.ToString.Replace(campo.ToString.Substring(0, campo.IndexOf("=") + 1), "")
     End Function
 
@@ -136,6 +136,15 @@ Public Class clsHTMLTools
     ''' <returns></returns>
     Public Shared Function RetornaPostEmArray(pContext As HttpListenerContext) As String()
         Return New StreamReader(pContext.Request.InputStream).ReadToEnd().Split(New Char() {"?", "&"})
+    End Function
+
+    ''' <summary>
+    ''' Converte o get dentro da url em array de string
+    ''' </summary>
+    ''' <param name="pContext"></param>
+    ''' <returns></returns>
+    Public Shared Function RetornaGetEmArray(pContext As HttpListenerContext) As String()
+        Return pContext.Request.Url.Query.ToString.Split(New Char() {"?", "&"})
     End Function
 
 End Class
