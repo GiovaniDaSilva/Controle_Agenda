@@ -24,9 +24,9 @@ End Class
 ''' Classes para carregar a partir do json
 ''' </summary>
 Public Class clsAtividadeWeb
-    Public Property dataAtividade As Date
+    Public Property dataAtividade As String
     Public Property tipoAtividade As Integer
-    Public Property codigoAtividade As Integer
+    Public Property codigoAtividade As String
     Public Property horaTotal As String
     Public Property horaInicio As String
     Public Property horaFinal As String

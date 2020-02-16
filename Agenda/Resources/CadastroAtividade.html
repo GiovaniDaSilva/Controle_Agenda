@@ -57,10 +57,8 @@
         <!--Sub Menu-->
         <nav class="navbar navbar-light Fundo">
             <div>
-                <button class="btn btn-primary btn-outline-light botaoSubMenu" type="submit" form="form_dados">Salvar</button>
-                <input type="reset" value="Limpar" form="form_dados" class=" btn btn-primary btn-outline-light botaoSubMenu" />
-
-                <button id="btnAdicionarPeriodo" class="btn btn-primary btn-outline-light botaoSubMenu" type="button" form="form_dados">Adicionar periodo</button>
+                <button class="btn btn-success" type="submit" form="form_dados">Salvar</button>
+                <input type="reset" value="Limpar" form="form_dados" class=" btn btn-warning" />
             </div>
         </nav>
 
@@ -147,6 +145,13 @@
             </div>
 
 
+            <!--Botão Adicionar Periodo-->
+            <div class="form-row">
+                <div class="form-group col-md-1">
+                    <button id="btnAdicionarPeriodo" class="btn btn-info" type="button" form="form_dados">Adicionar</button>
+                </div>
+            </div>
+
             <!--Campo Descrição-->
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -193,14 +198,40 @@
                 AdicionaPeiodoGrid(tb);
             });
 
+
+            document.getElementById('dataAtividade').value = RetornaDataAtual();
         });
 
+        function RetornaDataAtual() {
+            // Obtém a data/hora atual
+            var data = new Date();
+
+            // Guarda cada pedaço em uma variável
+            var dia = data.getDate();           // 1-31
+            var mes = ("0" + (data.getMonth() + 1)).slice(-2);  // 0-11 (zero=janeiro)
+            var ano4 = data.getFullYear();       // 4 dígitos
+
+            // Formata a data e a hora (note o mês + 1)
+            var str_data = ano4 + '-' + (mes) + '-' + dia;
+
+            return str_data;
+        }
 
         function AdicionaPeiodoGrid(tb) {
 
             var ini = document.getElementById('horaInicio').value
             var fim = document.getElementById('horaFinal').value;
             var tot = diff(ini, fim);
+
+            if (ini == '') {
+                alert('Informe a hora de inicio.')
+                return
+            }
+
+            if (fim == '') {
+                alert('Informe a hora de final.')
+                return
+            }
 
             tb.row.add([
                 0, //ID
@@ -209,9 +240,48 @@
                 tot
             ]).draw(false);
 
+
+
             //Limpa os campos de horas
             document.getElementById('horaInicio').value = "";
             document.getElementById('horaFinal').value = "";
+
+            //Pega hora total, ou alimenta se ainda não tiver
+            var hora = document.getElementById('horaTotal').value;
+            if (hora == '') { hora = '00:00'; }
+
+            document.getElementById('horaTotal').value = somaHora(hora, tot, false);
+        };
+
+
+        //Função para somar duas horas
+        //http://www.cesar.inf.br/blog/?cat=173
+        function somaHora(hrA, hrB, zerarHora) {
+            if (hrA.length != 5 || hrB.length != 5) return "00:00";
+
+            temp = 0;
+            nova_h = 0;
+            novo_m = 0;
+
+            hora1 = hrA.substr(0, 2) * 1;
+            hora2 = hrB.substr(0, 2) * 1;
+            minu1 = hrA.substr(3, 2) * 1;
+            minu2 = hrB.substr(3, 2) * 1;
+
+            temp = minu1 + minu2;
+            while (temp > 59) {
+                nova_h++;
+                temp = temp - 60;
+            }
+            novo_m = temp.toString().length == 2 ? temp : ("0" + temp);
+
+            temp = hora1 + hora2 + nova_h;
+            while (temp > 23 && zerarHora) {
+                temp = temp - 24;
+            }
+            nova_h = temp.toString().length == 2 ? temp : ("0" + temp);
+
+            return nova_h + ':' + novo_m;
         };
 
         //Calcula a diferença entre as horas
@@ -237,7 +307,6 @@
         //Tenho que ver como referenciar esse projeto no meu projeto do github
         //https://github.com/lightswitch05/table-to-json
 
-
         //Metodo para montar o json
         function ConvertFormToJSON(form) {
 
@@ -257,10 +326,7 @@
 
             return JSON.stringify(json);
         };
-
-
-
-
+                     
 
         //Evento de submit do formulario
         $("#form_dados").submit(function (e) {
