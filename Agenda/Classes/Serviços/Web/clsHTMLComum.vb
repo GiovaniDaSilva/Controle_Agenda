@@ -90,7 +90,8 @@ Public Class clsHTMLComum
             <!--icone da agenda-->
             <link rel=""icon"" href=""https://image.flaticon.com/icons/png/512/124/124050.png"">
             <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
-    
+            
+            <!--icone dos botão-->
             <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
     
         ")

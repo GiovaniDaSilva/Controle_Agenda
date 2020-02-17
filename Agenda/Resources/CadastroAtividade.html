@@ -66,98 +66,163 @@
     </header>
 
     <div class="container-fluid">
-        <form method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
-            <div class="form-row">
+        <div class="row">
+            <div class="col-md-7">
+                <form method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
+                    <div class="form-row">
+                        <!--Campo data-->
+                        <div class="form-group col-md-3">
+                            <label for="dataAtividade" class="label">Data</label>
+                            <input type="date" class="form-control" id="dataAtividade" name="dataAtividade" form="form_dados">
+                        </div>
+                        &nbsp;
 
-                <!--Campo data-->
-                <div class="form-group col-md-2">
-                    <label for="dataAtividade" class="label">Data</label>
-                    <input type="date" class="form-control" id="dataAtividade" name="dataAtividade" form="form_dados">
-                </div>
-                &nbsp;
+                        <!--Campo Tipo-->
+                        <div class="form-group col-md-3">
+                            <label for="tipoAtividade" class="label">Tipo de Atividade</label>
+                            <select class="custom-select" select id="tipoAtividade" name="tipoAtividade" form="form_dados">
+                                {p_lista_tipo_atividade}
+                            </select>
+                        </div>
+                        &nbsp;
+                        <!--Campo Código-->
+                        <div class="form-group col-md-2">
+                            <label for="codigoAtividade" class="label">Codigo</label>
+                            <input type="number" class="form-control" id="codigoAtividade" name="codigoAtividade" form="form_dados">
+                        </div>
+                        &nbsp;
 
-                <!--Campo Tipo-->
-                <div class="form-group col-md-2">
-                    <label for="tipoAtividade" class="label">Tipo de Atividade</label>
-                    <select class="custom-select" select id="tipoAtividade" name="tipoAtividade" form="form_dados">
-                        {p_lista_tipo_atividade}
-                    </select>
-                </div>
-                &nbsp;
-                <!--Campo Código-->
-                <div class="form-group col-md-1">
-                    <label for="codigoAtividade" class="label">Codigo</label>
-                    <input type="number" class="form-control" id="codigoAtividade" name="codigoAtividade" form="form_dados">
-                </div>
-                &nbsp;
-
-                <!--Campo Horas Totais-->
-                <div class="form-group col-md-1">
-                    <label for="horaTotal" class="label">Total</label>
-                    <input readonly type="time" class="form-control" id="horaTotal" name="horaTotal" form="form_dados">
-                </div>
-
-            </div>
-
-            <!--Hora inicial - Final-->
-            <div class="form-row">
-
-                <!--Campo inicio-->
-                <div class="form-group col-md-1">
-                    <label for="horaInicio" class="label">De</label>
-                    <input type="time" class="form-control" id="horaInicio" name="horaInicio" form="form_dados">
-                </div>
-                &nbsp;
-
-                <!--Campo fim-->
-                <div class="form-group col-md-1">
-                    <label for="horaFinal" class="label">Até</label>
-                    <input type="time" class="form-control" id="horaFinal" name="horaFinal" form="form_dados">
-                </div>
-
-                <!--Grid de Periodos-->
-                <div id="dadosHome" class="form-row col-md-9">
-                    <div style="margin-top: 20px;" class="col-md-5">
-                        <table id="dados" class="table table-sm nowrap" cellspacing="0" form="form_dados" name="tabelaPeriodos">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>De</th>
-                                    <th>Ate</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {p_linhas_tabela_periodo}
-                            </tbody>
-                        </table>
+                        <!--Campo Horas Totais-->
+                        <div class="form-group col-md-2">
+                            <label for="horaTotal" class="label">Total</label>
+                            <input readonly type="time" class="form-control" id="horaTotal" name="horaTotal" form="form_dados">
+                        </div>                        
                     </div>
 
-                </div>
-            </div>
+                    <!--Hora inicial - Final-->
+                    <div class="form-row">
 
+                        <!--Campo inicio-->
+                        <div class="form-group col-md-2">
+                            <label for="horaInicio" class="label">De</label>
+                            <input type="time" class="form-control" id="horaInicio" name="horaInicio" form="form_dados">
+                        </div>
+                        &nbsp;
 
-            <!--Botão Adicionar Periodo-->
-            <div class="form-row">
-                <div class="form-group col-md-1">
-                    <button id="btnAdicionarPeriodo" class="btn btn-info" type="button" form="form_dados">Adicionar</button>
-                </div>
-            </div>
+                        <!--Campo fim-->
+                        <div class="form-group col-md-2">
+                            <label for="horaFinal" class="label">Até</label>
+                            <input type="time" class="form-control" id="horaFinal" name="horaFinal" form="form_dados">
+                        </div>
 
-            <!--Campo Descrição-->
-            <div class="form-row">
-                <div class="form-group col-md-6">
-
-                    <div class="form-group" style="margin-top: 40px">
-                        <label for="descricaoAtividade" class="label">Descrição</label>
-                        <textarea class="form-control" rows="10" id="descricaoAtividade" name="descricaoAtividade"></textarea>
+                        <!--Botão Adicionar Periodo-->
+                        <div class="form-group col-md-1">     
+                            <label for="btnAdicionarPeriodo" class="label">&nbsp; </label>
+                            <button style="vertical-align:5px" id="btnAdicionarPeriodo" class="btn btn-info" type="button" form="form_dados">Adicionar</button>
+                        </div>    
                     </div>
 
-                </div>
+
+                    
+                    <div class="form-row">
+                        <!--Grid de Periodos-->
+                        <div id="dadosHome" class="col-md-10" style="margin-top: 20px;">
+                            
+                                <table id="dados" class="table table-sm nowrap" cellspacing="0" form="form_dados" name="tabelaPeriodos">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>De</th>
+                                            <th>Ate</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {p_linhas_tabela_periodo}
+                                    </tbody>
+                                </table>
+                            
+                        </div>
+                        
+                    </div>
+
+                    <!--Campo Descrição-->
+                    <div class="form-row">
+                        <div class="form-group col-md-10">
+
+                            <div class="form-group" style="margin-top: 40px">
+                                <label for="descricaoAtividade" class="label">Descrição</label>
+                                <textarea class="form-control" rows="10" id="descricaoAtividade" name="descricaoAtividade"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
             </div>
-
-
-        </form>
+            <div class="col-md-5" style="margin-top: 30px">
+                <label for="tablePeriodos" class="label">Períodos desta data</label>                
+                <table id="tablePeriodos" class="table table-bordered table-sm table-hover table-primary table-striped" cellspacing="0" name="tablePeriodos">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Código</th>
+                            <th>De</th>
+                            <th>Ate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr >
+                            <td>Descricao</td>
+                            <td>1234</td>
+                            <td>08:00</td>
+                            <td>10:00</td>
+                        </tr>
+                        <tr>
+                            <td>Descricao</td>
+                            <td>1234</td>
+                            <td>08:00</td>
+                            <td>10:00</td>
+                        </tr>
+                        <tr>
+                            <td>Descricao</td>
+                            <td>1234</td>
+                            <td>08:00</td>
+                            <td>10:00</td>
+                        </tr>
+                        <tr>
+                            <td>Descricao</td>
+                            <td>1234</td>
+                            <td>08:00</td>
+                            <td>10:00</td>
+                        </tr>
+                        <tr>
+                            <td>Descricao</td>
+                            <td>1234</td>
+                            <td>08:00</td>
+                            <td>10:00</td>
+                        </tr>
+                        <tr>
+                            <td>Descricao</td>
+                            <td>1234</td>
+                            <td>08:00</td>
+                            <td>10:00</td>
+                        </tr>
+                        <tr>
+                            <td>Descricao</td>
+                            <td>1234</td>
+                            <td>08:00</td>
+                            <td>10:00</td>
+                        </tr>
+                        <tr>
+                            <td>Descricao</td>
+                            <td>1234</td>
+                            <td>08:00</td>
+                            <td>10:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 
@@ -182,7 +247,7 @@
 
         $(document).ready(function () {
             tb = $('#dados').DataTable({
-                "scrollY": "100px", //Altura da grid com scroll
+                "scrollY": "200px", //Altura da grid com scroll
                 "scrollCollapse": true,
                 paging: false,
                 searching: false,
@@ -192,6 +257,12 @@
                 },
 
                 oLanguage: { sUrl: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json' },
+
+                columnDefs: [
+                    {//coluna ID
+                        targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis'
+                    }
+                ]
             });
 
 
