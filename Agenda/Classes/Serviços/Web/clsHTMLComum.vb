@@ -62,6 +62,11 @@ Public Class clsHTMLComum
            font-family: Comic Sans MS, Comic Sans, cursive; 
             color: White;
         }
+         
+        .label {
+            font-weight: bold;  
+            color: black;
+        }
 
          ")
         Return locMenu.ToString
