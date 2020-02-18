@@ -22,6 +22,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaCadastroAtividade(pContext)
                 Case "/CadastroAtividade_salvar"
                     locPagRetorno = funRetornaCadastroAtividade_Salvar(pContext)
+                Case "/CadastroAtividade_excluir"
+                    locPagRetorno = funRetornaCadastroAtividade_Excluir(pContext)
                 Case "/CadastroAtividade_get_periodos_dia"
                     locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pContext)
                 Case "/Grafico"
@@ -38,11 +40,16 @@ Public Class clsRequisicoesWeb
         Return locPagRetorno
     End Function
 
+    Private Function funRetornaCadastroAtividade_Excluir(pContext As HttpListenerContext) As String
+        If pContext.Request.HttpMethod = "POST" Then
+            Dim arr = clsHTMLTools.RetornaPostEmArray(pContext)
+        End If
+
+
+    End Function
+
     Private Function funRetornaCadastroAtividadePeriodosDia(pContext As HttpListenerContext) As String
-        Const SEM_PERIODO = "<tr><td colspan=""4"">Sem período cadastrado</td></tr>"
-        Dim texto As New StringBuilder
-        Dim listaAtividadesPeriodos As New List(Of clsPeriodosAtividades)
-        Dim linhasPeriodo As String = vbNullString
+        Dim data As Date
 
         If pContext.Request.HttpMethod = "POST" Then
             Dim arr = clsHTMLTools.RetornaPostEmArray(pContext)
@@ -51,43 +58,10 @@ Public Class clsRequisicoesWeb
                 Throw New Exception("Data inválida.")
             End If
 
-            Dim data As Date
-            data = CDate(arr(0))
-
-            listaAtividadesPeriodos = New clsAdicionarDAO().retornaPeriodoAtividades(data)
+            Data = CDate(arr(0))
         End If
 
-        For Each periodo In listaAtividadesPeriodos
-            Dim linha = New List(Of String)
-            linha.Add(periodo.descricao_tipo)
-            linha.Add(periodo.codigo_atividade)
-            linha.Add(periodo.hora_inicial)
-            linha.Add(periodo.hora_final)
-            linhasPeriodo &= clsHTMLTools.funLinhaTabela(linha)
-        Next
-
-        If linhasPeriodo = vbNullString Then
-            linhasPeriodo = SEM_PERIODO
-        End If
-
-        texto.AppendFormat("
-                <table id=""tablePeriodosDia"" class=""table table-bordered table-sm table-hover table-primary table-striped"" cellspacing=""0"" name=""tablePeriodosDia"">
-                <thead>
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Código</th>
-                        <th>De</th>
-                        <th>Ate</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {0}
-                </tbody>
-            </table>
-            ", linhasPeriodo)
-
-
-        Return texto.ToString
+        Return New clsCadastroAtividadeWeb().RetornaTabelaPeriodosDia(data)
     End Function
 
     Private Function funRetornaCadastroAtividade_Salvar(pContext As HttpListenerContext) As String

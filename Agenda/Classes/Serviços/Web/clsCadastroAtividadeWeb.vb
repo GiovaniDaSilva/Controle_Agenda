@@ -52,7 +52,6 @@ Public Class clsCadastroAtividadeWeb
             locHora = pAtividade.Horas
         End If
 
-
         texto.AppendFormat("
             document.getElementById('dataAtividade').value = ""{0}"";
             document.getElementById('codigoAtividade').value = ""{1}"";
@@ -75,25 +74,16 @@ Public Class clsCadastroAtividadeWeb
         End If
     End Function
 
-    Friend Function RetornaTabelaPeriodosDia(pContext As HttpListenerContext) As String
+    Friend Function RetornaTabelaPeriodosDia(pData As Date) As String
         Const SEM_PERIODO = "<tr><td colspan=""4"">Sem período cadastrado</td></tr>"
 
         Dim listaAtividadesPeriodos As New List(Of clsPeriodosAtividades)
         Dim linhasPeriodo As String = vbNullString
 
-        If pContext.Request.HttpMethod = "POST" Then
-            Dim arr = clsHTMLTools.RetornaPostEmArray(pContext)
+        listaAtividadesPeriodos = New clsAdicionarDAO().retornaPeriodoAtividades(pData)
 
-            If Not IsDate(arr(0)) Then
-                Throw New Exception("Data inválida.")
-            End If
 
-            Dim data As Date = CDate(arr(0))
-
-            listaAtividadesPeriodos = New clsAdicionarDAO().retornaPeriodoAtividades(data)
-        End If
-
-        For Each periodo In listaAtividadesPeriodos
+            For Each periodo In listaAtividadesPeriodos
             Dim linha = New List(Of String)
             linha.Add(periodo.descricao_tipo)
             linha.Add(periodo.codigo_atividade)

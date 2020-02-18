@@ -244,13 +244,8 @@
                         dataType: 'text',
                         data: id + "", //Força a conversão para string
 
-                        success: function (retorno) {
-                            if (retorno == 'Excluido') {
-                                alert("Registro Excluido.");
-                            }
-                            else {
-                                alert("Erro ao excluir atividade.");
-                            }
+                        success: function (retorno) {                            
+                           alert("Registro Excluido.");                            
                         }
                     });
                 }
