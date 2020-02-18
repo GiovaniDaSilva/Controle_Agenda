@@ -40,6 +40,15 @@
             color: black;
             font-size: 12px; 
         }
+
+        .labelTotais {
+            font-weight: bold;
+            font-size: 14px;
+            border: none;
+        }
+        .corVerdeVivo {
+            color: #339933;
+        }
     </style>
 
     {p_titulo_pagina}
@@ -51,14 +60,27 @@
     <header>
         {p_menu_pagina}
 
-        <!--Sub Menu-->
-        <nav class="navbar navbar-light Fundo" >
-            <div>
-                <a href="CadastroAtividade" id="btnCadastroAtivdade" class=" btn btn-success btn-outline-light botaoSubMenu">Nova Atividade</a>                
-            </div>            
-        </nav>
-
     </header>
+
+    <!--Sub Menu-->
+    
+        <div class="form-row" style="margin-top: 10px; margin-left: 20px">
+            <div class="col-md-10">
+                <a href="CadastroAtividade" id="btnCadastroAtivdade" class=" btn btn-success btn-outline-light botaoSubMenu">Nova Atividade</a>
+            </div>
+
+            <div class="col-md-1 float-right">
+                <span class="Fundo labelTotais">Total do Dia:</span>
+                <span class="Fundo labelTotais corVerdeVivo">08:30</span>
+            </div>
+            <div class="col-md-1 float-right">
+                <span class="Fundo labelTotais">Da Atividade:</span>
+                <span class="Fundo labelTotais corVerdeVivo">08:00</span>
+            </div>
+            
+            
+        </div>
+
 
     <div class="container-fluid">
         <form method="post" id="form_Filtro" style="margin-top: 10px; margin-bottom: 10px">
