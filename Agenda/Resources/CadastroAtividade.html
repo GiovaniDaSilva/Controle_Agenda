@@ -17,7 +17,7 @@
         .botaoSubMenu {
             border: none;
         }
-                
+
 
         /*
 
@@ -93,7 +93,7 @@
                         <div class="form-group col-md-2">
                             <label for="horaTotal" class="label">Total</label>
                             <input readonly type="time" class="form-control" id="horaTotal" name="horaTotal" form="form_dados">
-                        </div>                        
+                        </div>
                     </div>
 
                     <!--Hora inicial - Final-->
@@ -113,34 +113,34 @@
                         </div>
 
                         <!--Botão Adicionar Periodo-->
-                        <div class="form-group col-md-1">     
+                        <div class="form-group col-md-1">
                             <label for="btnAdicionarPeriodo" class="label">&nbsp; </label>
                             <button style="vertical-align:5px" id="btnAdicionarPeriodo" class="btn btn-info" type="button" form="form_dados">Adicionar</button>
-                        </div>    
+                        </div>
                     </div>
 
 
-                    
+
                     <div class="form-row">
                         <!--Grid de Periodos-->
                         <div id="dadosHome" class="col-md-10" style="margin-top: 20px;">
-                            
-                                <table id="dados" class="table table-sm nowrap" cellspacing="0" form="form_dados" name="tabelaPeriodos">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>De</th>
-                                            <th>Ate</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {p_linhas_tabela_periodo}
-                                    </tbody>
-                                </table>
-                            
+
+                            <table id="dados" class="table table-sm nowrap" cellspacing="0" form="form_dados" name="tabelaPeriodos">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>De</th>
+                                        <th>Ate</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {p_linhas_tabela_periodo}
+                                </tbody>
+                            </table>
+
                         </div>
-                        
+
                     </div>
 
                     <!--Campo Descrição-->
@@ -157,67 +157,8 @@
                 </form>
             </div>
             <div class="col-md-5" style="margin-top: 30px">
-                <label for="tablePeriodos" class="label">Períodos desta data</label>                
-                <table id="tablePeriodos" class="table table-bordered table-sm table-hover table-primary table-striped" cellspacing="0" name="tablePeriodos">
-                    <thead>
-                        <tr>
-                            <th>Tipo</th>
-                            <th>Código</th>
-                            <th>De</th>
-                            <th>Ate</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr >
-                            <td>Descricao</td>
-                            <td>1234</td>
-                            <td>08:00</td>
-                            <td>10:00</td>
-                        </tr>
-                        <tr>
-                            <td>Descricao</td>
-                            <td>1234</td>
-                            <td>08:00</td>
-                            <td>10:00</td>
-                        </tr>
-                        <tr>
-                            <td>Descricao</td>
-                            <td>1234</td>
-                            <td>08:00</td>
-                            <td>10:00</td>
-                        </tr>
-                        <tr>
-                            <td>Descricao</td>
-                            <td>1234</td>
-                            <td>08:00</td>
-                            <td>10:00</td>
-                        </tr>
-                        <tr>
-                            <td>Descricao</td>
-                            <td>1234</td>
-                            <td>08:00</td>
-                            <td>10:00</td>
-                        </tr>
-                        <tr>
-                            <td>Descricao</td>
-                            <td>1234</td>
-                            <td>08:00</td>
-                            <td>10:00</td>
-                        </tr>
-                        <tr>
-                            <td>Descricao</td>
-                            <td>1234</td>
-                            <td>08:00</td>
-                            <td>10:00</td>
-                        </tr>
-                        <tr>
-                            <td>Descricao</td>
-                            <td>1234</td>
-                            <td>08:00</td>
-                            <td>10:00</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <label for="tablePeriodosDia" class="label">Períodos desta data</label>
+                {p_linhas_tabela_periodo_dia}
             </div>
         </div>
     </div>
@@ -263,12 +204,6 @@
             });
 
 
-            //Seleção da Atividade
-            tb.on('select.dt deselect.dt', function () {
-
-            });
-
-
             //Click do botao adicionar periodo
             $('#btnAdicionarPeriodo').on('click', function () {
                 AdicionaPeiodoGrid(tb);
@@ -276,9 +211,11 @@
 
 
             document.getElementById('dataAtividade').value = RetornaDataAtual();
-
-
+                        
             [p_inicializa_campos_atividade]
+
+            CarregaGridPeriodosDia();
+
 
             //busca a descricao da atividade a ser editada, sem o ajax nao funcionava quando tinha quebra de linha
             var id = [p_id_atividade];
@@ -319,8 +256,32 @@
                 }
 
             });
+
+
+            //Evento de alteação da data da atividade
+            $('#dataAtividade').on('change', function () {
+                CarregaGridPeriodosDia();
+            });
+
         });
 
+        function CarregaGridPeriodosDia() {
+
+            var data = document.getElementById('dataAtividade').value;
+
+            $.ajax({
+                cache: false,
+                url: 'CadastroAtividade_get_periodos_dia',
+                type: 'POST',
+                dataType: 'text',
+                data: data,
+
+                success: function (html) {                                        
+                      $("#tablePeriodosDia").html(html);
+                S}                
+
+            });
+        } 
 
         function AdicionaPeiodoGrid(tb) {
 

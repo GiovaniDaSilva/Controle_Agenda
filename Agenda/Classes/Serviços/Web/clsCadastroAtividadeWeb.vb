@@ -1,4 +1,5 @@
-﻿Imports System.Text
+﻿Imports System.Net
+Imports System.Text
 
 Public Class clsCadastroAtividadeWeb
 
@@ -15,8 +16,29 @@ Public Class clsCadastroAtividadeWeb
         html = html.Replace("{p_lista_tipo_atividade}", RetornaListaTipoAtividade(pAtividade))
         html = html.Replace("{p_linhas_tabela_periodo}", RetornaLinhasTabelaPeriodo(pAtividade))
         html = html.Replace("{p_retorna_botao_excluir_atividade}", RetornaBotaoExcluirAtividade(pAtividade))
+        html = html.Replace("{p_linhas_tabela_periodo_dia}", RetornaTabelaPeriodosDia(vbNullString))
 
         Return html
+    End Function
+
+    Private Function RetornaTabelaPeriodosDia(pLinhas As String) As String
+        Dim texto As New StringBuilder(vbNullString)
+        texto.AppendFormat("
+                <table id=""tablePeriodosDia"" class=""table table-bordered table-sm table-hover table-primary table-striped"" cellspacing=""0"" name=""tablePeriodosDia"">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Código</th>
+                        <th>De</th>
+                        <th>Ate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {0}
+                </tbody>
+            </table>
+            ", pLinhas)
+        Return texto.ToString
     End Function
 
     Private Function RetornaLinhasInicializacaoCampos(pAtividade As clsAtividade) As String
@@ -41,6 +63,40 @@ Public Class clsCadastroAtividadeWeb
         controle.Gravar(funRetornaAtividade(atividade))
 
         Return json.ToString
+    End Function
+
+    Friend Function RetornaTabelaPeriodosDia(pContext As HttpListenerContext) As String
+        Const SEM_PERIODO = "<tr><td colspan=""4"">Sem período cadastrado</td></tr>"
+
+        Dim listaAtividadesPeriodos As New List(Of clsPeriodosAtividades)
+        Dim linhasPeriodo As String = vbNullString
+
+        If pContext.Request.HttpMethod = "POST" Then
+            Dim arr = clsHTMLTools.RetornaPostEmArray(pContext)
+
+            If Not IsDate(arr(0)) Then
+                Throw New Exception("Data inválida.")
+            End If
+
+            Dim data As Date = CDate(arr(0))
+
+            listaAtividadesPeriodos = New clsAdicionarDAO().retornaPeriodoAtividades(data)
+        End If
+
+        For Each periodo In listaAtividadesPeriodos
+            Dim linha = New List(Of String)
+            linha.Add(periodo.descricao_tipo)
+            linha.Add(periodo.codigo_atividade)
+            linha.Add(periodo.hora_inicial)
+            linha.Add(periodo.hora_final)
+            linhasPeriodo &= clsHTMLTools.funLinhaTabela(linha)
+        Next
+
+        If linhasPeriodo = vbNullString Then
+            linhasPeriodo = SEM_PERIODO
+        End If
+
+        Return RetornaTabelaPeriodosDia(linhasPeriodo)
     End Function
 
     Private Function DeserializarNewtonsoft(json As String) As clsAtividadeWeb
