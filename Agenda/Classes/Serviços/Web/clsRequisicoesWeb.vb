@@ -41,10 +41,18 @@ Public Class clsRequisicoesWeb
     End Function
 
     Private Function funRetornaCadastroAtividade_Excluir(pContext As HttpListenerContext) As String
+        Dim id As Long = 0
+
         If pContext.Request.HttpMethod = "POST" Then
             Dim arr = clsHTMLTools.RetornaPostEmArray(pContext)
+
+            If Not IsNumeric(arr(0)) Then
+                Throw New Exception("ID inválido.")
+            End If
+            id = arr(0)
         End If
 
+        Return New clsCadastroAtividadeWeb().funRetornaCadastroAtividade_Excluir(id)
 
     End Function
 

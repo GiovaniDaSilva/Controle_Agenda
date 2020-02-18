@@ -245,7 +245,8 @@
                         data: id + "", //Força a conversão para string
 
                         success: function (retorno) {                            
-                           alert("Registro Excluido.");                            
+                            alert("Registro Excluido.");      
+                            window.location.href = "Home"
                         }
                     });
                 }
@@ -336,6 +337,8 @@
 
                     alert("Gravado com sucesso!");
                     document.getElementById("btnLimpa").click();
+                    document.getElementById('dataAtividade').value = RetornaDataAtual();
+                    CarregaGridPeriodosDia();
 
                     /*
                     if (result == 'Sucesso') {

@@ -61,6 +61,10 @@ Public Class clsCadastroAtividadeWeb
         Return texto.ToString
     End Function
 
+    Friend Function funRetornaCadastroAtividade_Excluir(id As Long) As String
+        Return New clsAdicionarDAO().Excluir(id)
+    End Function
+
     Friend Function RetornaCadastroAtividade_Salvar(json As String) As String
 
         RetornaCadastroAtividade_Salvar = "Erro"
