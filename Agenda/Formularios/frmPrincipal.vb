@@ -529,6 +529,10 @@ Public Class frmPrincipal
 
 
     End Sub
+
+    Private Sub btnVersaoWeb_Click(sender As Object, e As EventArgs) Handles btnVersaoWeb.Click
+        Process.Start("http://localhost:8484/Home")
+    End Sub
 End Class
 
 
