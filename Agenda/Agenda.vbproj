@@ -227,7 +227,6 @@
     <None Include="Resources\Home.html" />
     <None Include="Resources\Pagina Não Encontrada.html" />
     <None Include="Resources\GraficoAtividades.html" />
-    <None Include="Resources\Versoes.html" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
