@@ -172,5 +172,40 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Pagina_Não_Encontrada", resourceCulture)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;html&gt;
+        '''&lt;head&gt;
+        '''
+        '''    {p_links_comum_pagina}
+        '''
+        '''    &lt;style&gt;
+        '''        [p_style_comum_pagina]
+        '''    &lt;/style&gt;
+        '''
+        '''    {p_titulo_pagina}
+        '''&lt;/head&gt;
+        '''
+        '''
+        '''&lt;body class=&quot;Fundo&quot;&gt;
+        '''    &lt;header&gt;
+        '''        {p_menu_pagina}        
+        '''    &lt;/header&gt;
+        '''
+        '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Atualizações&lt;/h1&gt;
+        '''
+        '''    &lt;div class=&quot;container-fluid&quot;&gt;
+        '''        
+        '''        &lt;h2 class=&quot;Titulo&quot;&gt;v.0.11&lt;/h2&gt;
+        '''        &lt;p class=&quot;Atualizacao&quot;&gt;
+        '''            &lt;ul&gt;
+        '''                &lt;li&gt;Adicionado a chamada do Agenda na versão Web.&lt;/li&gt;&lt;/br&gt;
+        '''                [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Versoes() As String
+            Get
+                Return ResourceManager.GetString("Versoes", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace
