@@ -63,14 +63,6 @@ Public Class clsHomeWeb
     End Function
 
     Private function RetornaTiposAtividadesFiltro(parametros As clsHomeParametros) As String
-         '<option value="0"> Todos</option>
-    '               <option value="1"> Solicitação</option>
-    '               <option value="2"> PBI</option>
-    '               <option value="3"> Reunião</option>
-    '               <option value="4"> Ausente</option>
-    '               <option value="5"> Outros</option>
-
-
         Dim retorno As New StringBuilder(vbNullString)
         Dim selected As String = "selected"
         Dim tipos As List(Of clsTipo)
