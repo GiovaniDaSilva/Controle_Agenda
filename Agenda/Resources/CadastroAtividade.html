@@ -211,7 +211,7 @@
 
 
             document.getElementById('dataAtividade').value = RetornaDataAtual();
-                        
+
             [p_inicializa_campos_atividade]
 
             CarregaGridPeriodosDia();
@@ -276,12 +276,12 @@
                 dataType: 'text',
                 data: data,
 
-                success: function (html) {                                        
-                      $("#tablePeriodosDia").html(html);
-                S}                
+                success: function (html) {
+                    $("#tablePeriodosDia").html(html);
+                }
 
             });
-        } 
+        }
 
         function AdicionaPeiodoGrid(tb) {
 
@@ -337,9 +337,19 @@
                 dataType: 'text',
                 data: json,
 
-                success: function (descricao) {
+                success: function (result) {
+
                     alert("Gravado com sucesso!");
                     document.getElementById("btnLimpa").click();
+
+                    /*
+                    if (result == 'Sucesso') {
+                        alert("Gravado com sucesso!");
+                        document.getElementById("btnLimpa").click();
+                    } else {
+                        alert("Erro ao gravar atividade. " + result);
+                    }
+                    */
                 },
 
                 error: function (descricao) {

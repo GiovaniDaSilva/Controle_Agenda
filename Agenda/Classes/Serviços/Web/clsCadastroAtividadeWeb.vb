@@ -46,23 +46,33 @@ Public Class clsCadastroAtividadeWeb
 
         If pAtividade.ID = 0 Then Return ""
 
+        Dim locHora As String = vbNullString
+
+        If Not Trim(pAtividade.Horas).Replace(":", "") = vbNullString Then
+            locHora = pAtividade.Horas
+        End If
+
+
         texto.AppendFormat("
             document.getElementById('dataAtividade').value = ""{0}"";
             document.getElementById('codigoAtividade').value = ""{1}"";
             document.getElementById('horaTotal').value = ""{2}"";            
 
-        ", clsTools.funAjustaDataSQL(pAtividade.Data), pAtividade.Codigo, pAtividade.Horas, pAtividade.ID)
+        ", clsTools.funAjustaDataSQL(pAtividade.Data), pAtividade.Codigo, locHora, pAtividade.ID)
         Return texto.ToString
     End Function
 
     Friend Function RetornaCadastroAtividade_Salvar(json As String) As String
 
+        RetornaCadastroAtividade_Salvar = "Erro"
+
         Dim atividade = DeserializarNewtonsoft(json)
         Dim controle As New clsAdicionar
 
-        controle.Gravar(funRetornaAtividade(atividade))
 
-        Return json.ToString
+        If controle.Gravar(funRetornaAtividade(atividade)) Then
+            Return "Sucesso"
+        End If
     End Function
 
     Friend Function RetornaTabelaPeriodosDia(pContext As HttpListenerContext) As String

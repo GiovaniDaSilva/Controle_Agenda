@@ -4,6 +4,8 @@ Imports Agenda
 Public Class clsAdicionarDAO
     Public Function gravarAtividade(parAtivdade As clsAtividade) As Boolean
 
+        gravarAtividade = False
+
         Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao())
 
             If parAtivdade.ID > 0 Then
