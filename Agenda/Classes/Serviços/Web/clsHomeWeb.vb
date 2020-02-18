@@ -1,4 +1,7 @@
-﻿Public Class clsHomeWeb
+﻿Imports System.Text
+Imports Agenda
+
+Public Class clsHomeWeb
 
     Public Function RetornaPaginaHome(parametros As clsHomeParametros) As String
         Return GeraPagina(parametros)
@@ -16,17 +19,28 @@
 
         locAtividades = DAO.carregarAtividades(Filtro)
 
-        Return RetornaHTML(locAtividades)
+        Return RetornaHTML(locAtividades, parametros)
 
     End Function
 
-    Private Function RetornaHTML(listaAtividades As List(Of clsConsultaAtividades)) As String
+    Private Function RetornaHTML(listaAtividades As List(Of clsConsultaAtividades), parametros As clsHomeParametros) As String
         Dim html As String
         html = My.Resources.Home
 
         html = html.Replace("{p_linhas_tabela}", RetornaLinhasTabela(listaAtividades))
+        html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(parametros))
+        html = html.Replace("{p_tipos_atividades_filtro}", RetornaTiposAtividadesFiltro(parametros))
 
         Return html
+    End Function
+
+    Private Function RetornaInicializaCamposFiltro(parametros As clsHomeParametros) As string
+        Dim texto As New StringBuilder(vbNullString)
+        texto.AppendFormat("
+            document.getElementById('data_ini').value = ""{0}"";                  
+        ", clsTools.funAjustaDataSQL(parametros.Data))
+        Return texto.ToString
+
     End Function
 
     Private Function RetornaLinhasTabela(listaAtividades As List(Of clsConsultaAtividades)) As String
@@ -47,6 +61,30 @@
         Return locRetorno
 
     End Function
+
+    Private function RetornaTiposAtividadesFiltro(parametros As clsHomeParametros) As String
+         '<option value="0"> Todos</option>
+    '               <option value="1"> Solicitação</option>
+    '               <option value="2"> PBI</option>
+    '               <option value="3"> Reunião</option>
+    '               <option value="4"> Ausente</option>
+    '               <option value="5"> Outros</option>
+
+
+        Dim retorno As New StringBuilder(vbNullString)
+        Dim selected As String = "selected"
+        Dim tipos As List(Of clsTipo)
+
+        tipos = New clsAdicionarDAO().CarregaTipos()
+
+        retorno.AppendFormat("<option value = ""{0}"" {1}> {2}</Option>", 0, IIf(parametros.tipo = 0, selected, ""), "Todos")
+
+        For Each tipo In tipos
+            retorno.AppendFormat("<option value = ""{0}"" {1}> {2}</Option>", tipo.ID, IIf(parametros .Tipo = tipo.ID, selected, ""), tipo.DESCRICAO)
+        Next
+        Return retorno.ToString
+        
+    End function
 
 
 End Class
