@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Modelos\clsAtividadesGrafico.vb" />
+    <Compile Include="Classes\Modelos\clsDetalhesAtividadeWeb.vb" />
     <Compile Include="Classes\Modelos\clsHomeParametros.vb" />
     <Compile Include="Classes\Modelos\clsPeriodosAtividades.vb" />
     <Compile Include="Classes\clsConexao.vb" />

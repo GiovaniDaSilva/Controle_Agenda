@@ -14,13 +14,13 @@
 
 
     <style>
-        [p_style_comum_pagina] 
-        
-      
+        [p_style_comum_pagina]
+
+
         .thead-blue {
             color: black;
             background-color: #0099cc;
-            border:none ;
+            border: none;
             border-color: #0099cc;
         }
 
@@ -28,17 +28,17 @@
             max-width: 300px;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;            
+            white-space: nowrap;
         }
 
-        .botaoSubMenu{
-            border:none;
+        .botaoSubMenu {
+            border: none;
         }
 
-        .labelSpan{
-            font-weight: bold; 
+        .labelSpan {
+            font-weight: bold;
             color: black;
-            font-size: 12px; 
+            font-size: 12px;
         }
 
         .labelTotais {
@@ -46,6 +46,7 @@
             font-size: 14px;
             border: none;
         }
+
         .corVerdeVivo {
             color: #339933;
         }
@@ -63,23 +64,21 @@
     </header>
 
     <!--Sub Menu-->
-    
-        <div class="form-row" style="margin-top: 10px; margin-left: 20px">
-            <div class="col-md-10">
-                <a href="CadastroAtividade" id="btnCadastroAtivdade" class=" btn btn-success btn-outline-light botaoSubMenu">Nova Atividade</a>
-            </div>
 
-            <div class="col-md-1 float-right">
-                <span class="Fundo labelTotais">Total do Dia:</span>
-                <span class="Fundo labelTotais corVerdeVivo">08:30</span>
-            </div>
-            <div class="col-md-1 float-right">
-                <span class="Fundo labelTotais">Da Atividade:</span>
-                <span class="Fundo labelTotais corVerdeVivo">08:00</span>
-            </div>
-            
-            
+    <div class="form-row" style="margin-top: 10px; margin-left: 20px; margin-right: 20px">
+        <div class="col-md-10">
+            <a href="CadastroAtividade" id="btnCadastroAtivdade" class=" btn btn-success btn-outline-light botaoSubMenu">Nova Atividade</a>
         </div>
+
+        <div class="col-md-1 float-right">
+            <span class="Fundo labelTotais">Total do Dia:&nbsp;</span>
+            <span class="Fundo labelTotais corVerdeVivo" id="totalHorasDia">00:00</span>
+        </div>
+        <div class="col-md-1 float-right">
+            <span class="Fundo labelTotais">Da Atividade:</span>
+            <span class="Fundo labelTotais corVerdeVivo" id="totalHorasAtividade">00:00</span>
+        </div>
+    </div>
 
 
     <div class="container-fluid">
@@ -92,7 +91,7 @@
                     &nbsp;
                     <span style="border:none" class="input-group-text Fundo labelSpan"><b>Tipo de Atividade:</b></span>
                     <select class="custom-select" select id="cbTipo" name="tipoAtividade" form="form_Filtro">
-                       {p_tipos_atividades_filtro}
+                        {p_tipos_atividades_filtro}
                     </select>
                     &nbsp;
                     <div class="input-group-append">
@@ -102,11 +101,11 @@
             </div>
         </form>
     </div>
-   
+
     <!--Div como oculta, exibe apos a carga da grid para evitar piscar enquanto redimensiona-->
     <div id="dadosHome" class="container-fluid" style="display: none">
         <div style="margin-top: 20px;" class="container-fluid">
-            <table id="Dados" class="table nowrap table-hover table-info table-striped table-sm" cellspacing="0" > 
+            <table id="Dados" class="table nowrap table-hover table-info table-striped table-sm" cellspacing="0">
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
@@ -122,7 +121,7 @@
                     {p_linhas_tabela}
                 </tbody>
             </table>
-        </div>         
+        </div>
         <div class="form-group" style="margin-top: 40px">
             <label for="comment" class="label">Descrição:</label>
             <textarea readonly class="form-control" rows="10" id="txtdescricao" name="info"></textarea>
@@ -133,7 +132,6 @@
 
 
         $(document).ready(function () {
-
             
             [p_inicializa_campos_filtro]
 
@@ -174,14 +172,14 @@
                     {//coluna Editar
                         render: function (data, type, row) {
                             var id = row[0];
-                            return "<a href='/CadastroAtividade?id=" + id + "' class='btn btn-outline-primary'>Editar</a>"
-                            },
+                            return "<a href='/CadastroAtividade?id=" + id + "' class='btn btn-outline-success'>Editar</a>"
+                        },
                         targets: 6,
                         width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
-                    }   
+                    }
                 ],
 
-                initComplete: function () {               
+                initComplete: function () {
                     //Exibir a diva somente após completar a carga
                     $('#dadosHome').show();
                     tb.columns.adjust();
@@ -189,7 +187,7 @@
 
             });
             $('.dataTables_length').addClass('bs-select');
-            
+
             $.fn.dataTable.moment('DD/MM/YYYY');
 
             //Seleção da Atividade
@@ -197,39 +195,43 @@
                 var rows = $('tr.selected');
                 var rowData = tb.rows(rows).data();
                 var id = 0;
+                var dados;
 
-                //limpa o campo descricao
-                document.getElementById('txtdescricao').value = ""
-
-                $.each($(rowData), function (key, value) {                           
-                    id = value[0]
+                $.each($(rowData), function (key, value) {
+                    id = value[0];
+                    dados = "id=" + value[0] + "&data=" + value[1] + "&codigo=" + value[3];
                 });
+
                 if (id > 0) {
-              
                     $.ajax({
-                        url: 'home_get_descricao',
+                        url: 'home_get_detalhes',
                         type: 'POST',
                         dataType: 'text',//'json',
-                        data: id,
+                        data: dados,
 
-                        success: function (descricao) {
-                            document.getElementById('txtdescricao').value = descricao;
+                        success: function (objectJson) {
+                            var object = JSON.parse(objectJson);
 
+                            document.getElementById('txtdescricao').value = object.Descricao;
+                            document.getElementById("totalHorasDia").innerHTML = object.TotalHoraDia;
+                            document.getElementById("totalHorasAtividade").innerHTML = object.TotalHorasAtividade;
 
-                            /*
-                            var arr_from_json = JSON.parse( descricao );
-                            document.getElementById('txtdescricao').value = arr_from_json.teste;
-                            
-                            */
                         },
 
                         error: function (descricao) {
                             alert(descricao);
                         }
                     });
+                } else {
+
+                    //limpa o campo descricao
+                    document.getElementById('txtdescricao').value = "";         
+                    document.getElementById("totalHorasDia").innerHTML = "00:00";
+                    document.getElementById("totalHorasAtividade").innerHTML = "00:00";
+
                 }
-            });          
-            
+            });
+
 
         });
 
@@ -254,7 +256,7 @@
 
 
     </script>
-    
+
 </body>
 
 

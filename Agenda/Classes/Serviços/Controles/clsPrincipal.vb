@@ -97,6 +97,12 @@ Public Class clsPrincipal
         Return locIni.funCarregaIni
     End Function
 
+    Public Function funRetornaTotalHorasDia(pData As Date) As String
+        Dim listaAtividade As New List(Of clsConsultaAtividades)
+        listaAtividade = New clsAdicionarDAO().carregarAtividades(CDate(pData), CDate(pData))
+
+        Return New clsPrincipal().funRetornaTotalHorasDia(listaAtividade, pData)
+    End Function
 
     Public Function funRetornaTotalHorasDia(atividades As List(Of clsConsultaAtividades), pData As Date) As String
         Dim locDia As New List(Of clsConsultaAtividades)

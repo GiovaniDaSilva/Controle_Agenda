@@ -61,6 +61,31 @@ Public Class clsCadastroAtividadeWeb
         Return texto.ToString
     End Function
 
+    Friend Function funRetornaCadastroAtividade_Detalhes(Detalhes As clsParametrosDetalhesAtividadeWeb) As String
+        Dim locDetalhes As New clsDetalhesAtividadeWeb
+
+        locDetalhes.Descricao = funRetornaDescricaoAtividade(Detalhes.id)
+        locDetalhes.TotalHoraDia = New clsPrincipal().funRetornaTotalHorasDia(Detalhes.data)
+        locDetalhes.TotalHorasAtividade = IIf(Val(Detalhes.codigo) <= 0, "00:00", New clsPrincipal().funRetornaTotalHorasAtividade(Detalhes.codigo))
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(locDetalhes)
+
+    End Function
+
+    ''' <summary>
+    ''' Retorna a descrição da atividade da pagina hora atraves de ajax
+    ''' </summary>
+    ''' <param name="pContext"></param>
+    ''' <returns></returns>
+    Private Function funRetornaDescricaoAtividade(pId As Long) As String
+        Dim DAO As New clsAdicionarDAO
+        Dim locDescricao As String = vbNullString
+
+        locDescricao = clsTools.RetornaCampoTabela("ATIVIDADES", "DESCRICAO", "ID = " & pId)
+        Return locDescricao
+    End Function
+
+
     Friend Function funRetornaCadastroAtividade_Excluir(id As Long) As String
         Return New clsAdicionarDAO().Excluir(id)
     End Function

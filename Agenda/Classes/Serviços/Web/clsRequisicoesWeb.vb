@@ -16,8 +16,8 @@ Public Class clsRequisicoesWeb
             Select Case pContext.Request.Url.AbsolutePath
                 Case "/Home"
                     locPagRetorno = funRetornaPaginaHome(pContext)
-                Case "/home_get_descricao"
-                    locPagRetorno = funRetornaDescricaoAtividade(pContext)
+                Case "/home_get_detalhes"
+                    locPagRetorno = funRetornaDetalhesAtividade(pContext)
                 Case "/CadastroAtividade"
                     locPagRetorno = funRetornaCadastroAtividade(pContext)
                 Case "/CadastroAtividade_salvar"
@@ -38,6 +38,28 @@ Public Class clsRequisicoesWeb
         clsHTMLComum.TrataParametrosComuns(locPagRetorno)
 
         Return locPagRetorno
+    End Function
+
+    Private Function funRetornaDetalhesAtividade(pContext As HttpListenerContext) As String
+        Dim locDetalhes As New clsParametrosDetalhesAtividadeWeb
+        If pContext.Request.HttpMethod = "POST" Then
+            Dim arr = clsHTMLTools.RetornaPostEmArray(pContext)
+
+            If Not IsNumeric(clsHTMLTools.RetornaValorPostGet(arr(0))) Then
+                Throw New Exception("ID inválido.")
+            End If
+
+            If Not IsDate(clsHTMLTools.RetornaValorPostGet(arr(1))) Then
+                Throw New Exception("Data inválido.")
+            End If
+
+
+            locDetalhes.id = Val(clsHTMLTools.RetornaValorPostGet(arr(0)))
+            locDetalhes.data = CDate(clsHTMLTools.RetornaValorPostGet(arr(1)))
+            locDetalhes.codigo = clsHTMLTools.RetornaValorPostGet(arr(2))
+        End If
+
+        Return New clsCadastroAtividadeWeb().funRetornaCadastroAtividade_Detalhes(locDetalhes)
     End Function
 
     Private Function funRetornaCadastroAtividade_Excluir(pContext As HttpListenerContext) As String
@@ -66,7 +88,7 @@ Public Class clsRequisicoesWeb
                 Throw New Exception("Data inválida.")
             End If
 
-            Data = CDate(arr(0))
+            data = CDate(arr(0))
         End If
 
         Return New clsCadastroAtividadeWeb().RetornaTabelaPeriodosDia(data)
