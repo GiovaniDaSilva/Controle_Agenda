@@ -15,11 +15,13 @@ Public Class clsRequisicoesWeb
         Try
             Select Case pContext.Request.Url.AbsolutePath
                 Case "/Home"
-                    locPagRetorno = funRetornaPaginaHome(pContext)
+                    locPagRetorno = funRetornaPaginaHome(pContext)                
                 Case "/home_get_detalhes"
                     locPagRetorno = funRetornaDetalhesAtividade(pContext)
                 Case "/CadastroAtividade"
                     locPagRetorno = funRetornaCadastroAtividade(pContext)
+                Case "/CadastroAtividade_get_descricao"
+                    locPagRetorno = funRetornaDescricaoAtividade(pContext)
                 Case "/CadastroAtividade_salvar"
                     locPagRetorno = funRetornaCadastroAtividade_Salvar(pContext)
                 Case "/CadastroAtividade_excluir"
