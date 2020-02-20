@@ -12,6 +12,7 @@ Public Class clsRequisicoesWeb
     ''' <returns></returns>
     Public Function trataRequisicoesWeb(pContext As HttpListenerContext) As String
         Dim locPagRetorno As String = My.Resources.Pagina_Não_Encontrada
+        trataRequisicoesWeb = ""
         Try
             Select Case pContext.Request.Url.AbsolutePath
                 Case "/Home"
@@ -33,13 +34,15 @@ Public Class clsRequisicoesWeb
                 Case "/Versoes"
                     locPagRetorno = My.Resources.Versoes
             End Select
+
+
+             clsHTMLComum.TrataParametrosComuns(locPagRetorno)
+            Return locPagRetorno
+
         Catch ex As Exception
             Return ex.Message
-        End Try
-
-        clsHTMLComum.TrataParametrosComuns(locPagRetorno)
-
-        Return locPagRetorno
+        End Try        
+        
     End Function
 
     Private Function funRetornaDetalhesAtividade(pContext As HttpListenerContext) As String
