@@ -192,6 +192,8 @@ Public Class frmPrincipal
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        glfServidorHTTP.InicializaServidor()
+
         Me.Text = Me.Text & VERSAO_SISTEMA
 
         subCarregaIni()
@@ -211,9 +213,7 @@ Public Class frmPrincipal
         subAtualizaLista()
         controle.subConfiguraTimer(Timer2, ParametrosIni)
         Timer2.Start()
-
-        glfServidorHTTP.InicializaServidor()
-
+        
     End Sub
 
     Private Sub subCarregaIni()
