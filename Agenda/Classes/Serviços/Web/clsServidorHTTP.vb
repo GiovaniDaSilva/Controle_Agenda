@@ -8,7 +8,7 @@ Public Class clsServidorHTTP
 
     ' Configura o mumero maximo de requisições que 
     ' podem ser tratadas concorrentemente
-    Private maxRequestHandlers As Integer = 5
+    Private maxRequestHandlers As Integer = 10
     ' Um inteirousado para atribui cada requisição HTTP 
     ' um identificador unico
     Private requestHandlerID As Integer = 0
