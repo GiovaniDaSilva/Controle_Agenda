@@ -7,12 +7,12 @@ Public Class frmPrincipal
     Dim lista As List(Of clsConsultaAtividades)
     Dim ParametrosIni As clsParametrosIni
 
-    Dim glfServidorHTTP As New clsServidorHTTP 
+    Dim glfServidorHTTP As New clsServidorHTTP
 
     Const MODO_IMPRESSAO = "MODO_IMPRESSAO"
     Const MODO_NORMAL = ""
 
-    Public CONST VERSAO_SISTEMA = "0.10"
+    Public Const VERSAO_SISTEMA = "1.0"
 
     Private Enum enuPosicaoColunas
         DATA = 1
@@ -47,7 +47,7 @@ Public Class frmPrincipal
 
         txtDescricao.Clear()
         pHorasDia.Visible = False
-        pHorasAtividade.Visible = false
+        pHorasAtividade.Visible = False
     End Sub
 
     Private Sub btnAtualiza_Click(sender As Object, e As EventArgs) Handles btnAtualiza.Click
@@ -95,7 +95,7 @@ Public Class frmPrincipal
         txtDescricao.SelectionStart = 0
     End Sub
 
-    Private Sub txtDescricao_Leave(sender As Object, e As EventArgs) Handles txtDescricao.Leave 
+    Private Sub txtDescricao_Leave(sender As Object, e As EventArgs) Handles txtDescricao.Leave
         Dim locAlterou As Boolean = Not lista(gridAtividades.CurrentCell.RowIndex).Descricao.Equals(txtDescricao.Text)
         If txtDescricao.Tag = MODO_IMPRESSAO Then
             Exit Sub
@@ -103,11 +103,11 @@ Public Class frmPrincipal
 
         'Não permite excluir toda a descrição na tela inicial.
         'Contornar o problema de perder toda a descrição do primeiro registros da grid
-        If txtDescricao.Text = vbNullString And lista(gridAtividades.CurrentCell.RowIndex).Descricao <> vbNullString  then
-            MsgBox("Não é permitido apagar a descrição através da tela inicial."& _ 
-                    vbnewline & "Utilize o botão alterar atividade neste caso.")
+        If txtDescricao.Text = vbNullString And lista(gridAtividades.CurrentCell.RowIndex).Descricao <> vbNullString Then
+            MsgBox("Não é permitido apagar a descrição através da tela inicial." &
+                    vbNewLine & "Utilize o botão alterar atividade neste caso.")
             txtDescricao.Text = lista(gridAtividades.CurrentCell.RowIndex).Descricao
-            Exit sub
+            Exit Sub
         End If
 
         lista(gridAtividades.CurrentCell.RowIndex).Descricao = txtDescricao.Text
@@ -145,7 +145,7 @@ Public Class frmPrincipal
         End If
     End Sub
 
-    Private Sub gridAtividades_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles  gridAtividades.CellClick 
+    Private Sub gridAtividades_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridAtividades.CellClick
         If e.RowIndex < 0 Then Exit Sub
         If (e.ColumnIndex = enuIndexColunas.EDITAR) Then
             subChamaFormularioAdicionarEdicao(e.RowIndex)
@@ -191,7 +191,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        
+
         Me.Text = Me.Text & VERSAO_SISTEMA
 
         subCarregaIni()
@@ -212,7 +212,7 @@ Public Class frmPrincipal
         controle.subConfiguraTimer(Timer2, ParametrosIni)
         Timer2.Start()
 
-        glfServidorHTTP.InicializaServidor 
+        glfServidorHTTP.InicializaServidor()
 
     End Sub
 
@@ -232,11 +232,11 @@ Public Class frmPrincipal
 
 
 
-    Private Sub gridAtividades_KeyDown(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyDown 
+    Private Sub gridAtividades_KeyDown(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyDown
         subAtualizaDescricao()
     End Sub
 
-    Private Sub gridAtividades_KeyUp(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyUp 
+    Private Sub gridAtividades_KeyUp(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyUp
         subAtualizaDescricao()
     End Sub
 
@@ -399,7 +399,7 @@ Public Class frmPrincipal
         controle.funChamaHTMLVersao()
     End Sub
 
-    Private Sub gridAtividades_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles gridAtividades.CellFormatting 
+    Private Sub gridAtividades_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles gridAtividades.CellFormatting
 
         If gridAtividades.Rows.Count = 0 Then Exit Sub
 
@@ -423,7 +423,7 @@ Public Class frmPrincipal
             Me.ShowInTaskbar = True
             Me.Show()
             Me.WindowState = FormWindowState.Normal
-            subAtualizaLista 
+            subAtualizaLista()
         Else
             Me.ShowIcon = False
             Me.ShowInTaskbar = False
@@ -434,7 +434,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub frmPrincipal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If ParametrosIni.TempoNotificacao <> enuTempoNotificacao.NaoUsar then
+        If ParametrosIni.TempoNotificacao <> enuTempoNotificacao.NaoUsar Then
             e.Cancel = True
             subExibiFormulario(False)
         End If
@@ -457,20 +457,20 @@ Public Class frmPrincipal
         Dim i As Integer
         Dim caminho As String = "http://mtz-vconversor:8077/"
 
-        Dim Home As string = caminho & "home"
-        Dim Edicao As string = caminho & "set_demanda?id="
-        
-        
-        If lista Is Nothing  or not gridAtividades.CurrentRow.Selected then
+        Dim Home As String = caminho & "home"
+        Dim Edicao As String = caminho & "set_demanda?id="
+
+
+        If lista Is Nothing Or Not gridAtividades.CurrentRow.Selected Then
             Process.Start(caminho & Home)
         Else
-            i = gridAtividades.CurrentCell.RowIndex         
-            If lista(i).ID_TIPO_ATIVIDADE = 1 then
-                Process.Start( Edicao & lista(i).Codigo )
-             Else
+            i = gridAtividades.CurrentCell.RowIndex
+            If lista(i).ID_TIPO_ATIVIDADE = 1 Then
+                Process.Start(Edicao & lista(i).Codigo)
+            Else
                 Process.Start(Home)
-            End If            
-        End If            
+            End If
+        End If
     End Sub
 
     Private Sub btnGraficoMensal_Click_1(sender As Object, e As EventArgs) Handles btnGraficoMensal.Click
@@ -513,6 +513,25 @@ Public Class frmPrincipal
         End If
 
         AbreSolPBI(gridAtividades.CurrentCell.RowIndex)
+    End Sub
+
+    Private Sub gridAtividades_MouseDown(sender As Object, e As MouseEventArgs) Handles gridAtividades.MouseDown
+
+        If (e.Button = MouseButtons.Right) Then
+
+            Dim hti = gridAtividades.HitTest(e.X, e.Y)
+            gridAtividades.ClearSelection()
+            If hti.RowIndex > -1 Then
+                gridAtividades.CurrentCell = gridAtividades.Rows(hti.RowIndex).Cells(0)
+                gridAtividades.Rows(hti.RowIndex).Selected = True
+            End If
+        End If
+
+
+    End Sub
+
+    Private Sub btnVersaoWeb_Click(sender As Object, e As EventArgs) Handles btnVersaoWeb.Click
+        Process.Start("http://localhost:8484/Home")
     End Sub
 End Class
 

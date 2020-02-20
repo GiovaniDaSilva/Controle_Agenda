@@ -2,6 +2,7 @@
 Imports System.Net
 Imports System.Text
 Imports System.Threading
+Imports Newtonsoft.Json
 
 Public Class clsServidorHTTP
 
@@ -27,7 +28,7 @@ Public Class clsServidorHTTP
         listener = New HttpListener
 
         ' Configura o prefixo URI que irá mapear para o HttpListener.
-        
+
         'Para acesso apartir de qualquer estação
         'listener.Prefixes.Add("http://*:8484/")
         listener.Prefixes.Add("http://localhost:8484/")
@@ -67,22 +68,21 @@ Public Class clsServidorHTTP
             context.Response.ContentEncoding = Encoding.UTF8
             context.Response.StatusCode = HttpStatusCode.OK
 
-
-            sw.WriteLine(locRequisicoesWeb.trataRequisicoesWeb(context.Request.Url))
+            sw.WriteLine(locRequisicoesWeb.trataRequisicoesWeb(context))
 
             sw.Flush()
             ' Fecha a resposta para enviá-la ao cliente
-            context.Response.Close()            
+            context.Response.Close()
         Catch ex As ObjectDisposedException
             Console.WriteLine("{0}: HttpListener disposed--shutting down.", result.AsyncState)
         Finally
             ' Inicia outro manipulador a menos que o HttpListener esteja fechado
-            If listener.IsListening Then                
+            If listener.IsListening Then
                 listener.BeginGetContext(AddressOf RequestHandler, "RequestHandler_" &
                     Interlocked.Increment(requestHandlerID))
             End If
         End Try
     End Sub
 
-  
+
 End Class

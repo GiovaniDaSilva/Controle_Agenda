@@ -12,6 +12,19 @@
     Public Sub New()
     End Sub
 
+    Public Sub New(id As Long)
+        Dim DAO As New clsAdicionarDAO
+        Dim atividade = DAO.carregarAtividades(id)
+
+        Me.ID = atividade.ID
+        Me.Data = atividade.Data
+        Me.Codigo = atividade.Codigo
+        Me.Horas = atividade.Horas
+        Me.Descricao = atividade.Descricao
+        Me.ID_TIPO_ATIVIDADE = atividade.ID_TIPO_ATIVIDADE
+        Me.Periodos = atividade.Periodos
+    End Sub
+
     Public Property ID As Long
     Public Property Data As Date
     Public Property Codigo As String
@@ -19,6 +32,10 @@
     Public Property Descricao As String
     Public Property ID_TIPO_ATIVIDADE As Integer
     Public Property Periodos As List(Of clsPeriodo)
+
+    Public Function funRetornaCodigoTratado() As String
+        Return IIf(CInt(Codigo) > 0, Codigo, "")
+    End Function
 
     Public Function funRetornaDescricaoTratada() As String
         Return Descricao.ToString().Replace(ControlChars.Lf, " ").Replace("<", "&lt;").Replace(">", "&gt;")

@@ -1,14 +1,24 @@
-﻿Public Class clsTools
-    Public Shared function funRetornaData(byval pCampo as MaskedTextBox ) as date
-        Dim locData As date
+﻿Imports System.IO
+Imports System.Net
+Imports System.Text
+
+Public Class clsTools
+
+    ''' <summary>
+    ''' Converte o conteudo do campo texto em um date
+    ''' </summary>
+    ''' <param name="pCampo"></param>
+    ''' <returns></returns>
+    Public Shared Function funRetornaData(ByVal pCampo As MaskedTextBox) As Date
+        Dim locData As Date
 
         If pCampo.Text = vbNullString Then
-            return New Date(1900,12,31)
+            Return New Date(1900, 12, 31)
         End If
-        
-        Dim ano = mid(pCampo.Text,5,9)
-        Dim mes = mid(pCampo.Text,3,2)
-        Dim dia = mid(pCampo.Text,1,2)
+
+        Dim ano = Mid(pCampo.Text, 5, 9)
+        Dim mes = Mid(pCampo.Text, 3, 2)
+        Dim dia = Mid(pCampo.Text, 1, 2)
 
         Try
             locData = New Date(ano, mes, dia)
@@ -19,10 +29,20 @@
         Return locData
     End Function
 
+    ''' <summary>
+    ''' Formata a data para o padrao de banco de dados
+    ''' </summary>
+    ''' <param name="parData"></param>
+    ''' <returns></returns>
     Public Shared Function funAjustaDataSQL(ByVal parData As Date) As String
         Return Format(parData, "yyyy-MM-dd")
     End Function
 
+    ''' <summary>
+    ''' Formata a data para o padrao pt-br
+    ''' </summary>
+    ''' <param name="parData"></param>
+    ''' <returns></returns>
     Public Shared Function funFormataData(ByVal parData As Date) As String
         Return Format(parData, "dd/MM/yyyy")
     End Function
@@ -35,17 +55,17 @@
         Return html.Replace("<tbody>", "").Replace("</tbody>", "").Replace("<font color=""#ffffff"" style=""font: 11px Calibri"">", "").Replace("</font>", "").Replace("border=""0"" cellspacing=""1"" cellpadding=""2""", "").Replace(" align=""CENTER"" bgcolor=""#688fb0""", "").Replace(" valign=""top"" align=""left"" bgcolor=""#e0e0e0""", "").Replace("<font style=""font: 11px Calibri"">", "")
     End Function
 
-    public Shared Function funRetornaUltimoIDBanco() As Integer
-               
+    Public Shared Function funRetornaUltimoIDBanco() As Integer
+
         Dim locID As Integer = 0
         Try
             Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
                 Comm.CommandText = "select last_insert_rowid() as ID"
 
                 Using Reader = Comm.ExecuteReader()
-                    if Reader.Read() then
-                        locID = Reader("ID")                        
-                    End if
+                    If Reader.Read() Then
+                        locID = Reader("ID")
+                    End If
                 End Using
             End Using
 
@@ -54,18 +74,26 @@
         End Try
 
         Return locID
-        
+
     End Function
 
     Public Shared Sub subTrataExcessao(e As Exception)
         MsgBox("Ocorreu o seguinte erro: " & e.Message)
     End Sub
-    Public Shared Function funValidaHora(ByVal parHoras As String, optional byval parPermiteEmBranco As Boolean = false) As Boolean
+
+    ''' <summary>
+    ''' Valida o campo hora
+    ''' hora valida, minuto valido
+    ''' </summary>
+    ''' <param name="parHoras"></param>
+    ''' <param name="parPermiteEmBranco"></param>
+    ''' <returns></returns>
+    Public Shared Function funValidaHora(ByVal parHoras As String, Optional ByVal parPermiteEmBranco As Boolean = False) As Boolean
 
         Dim locHora = Trim(parHoras.Replace(":", ""))
 
         'TimeSpan.Parse("12:10")
-        If Not parPermiteEmBranco then
+        If Not parPermiteEmBranco Then
             If locHora = vbNullString Then ' Then
                 Throw New Exception("Hora não informada.")
             End If
@@ -83,13 +111,23 @@
             Throw New Exception("Hora Inválida.")
         End If
 
+        If Not IsNumeric(Mid(locHora, 1, 2)) Then
+            Throw New Exception("Hora Inválida.")
+        End If
+
+        If Not IsNumeric(Mid(locHora, 3, 4)) Then
+            Throw New Exception("Hora Inválida.")
+        End If
+
         Return True
     End Function
 
-    Public Shared Function HoraVazia(pHora As MaskedTextBox) As Boolean
-        Return Trim(pHora.text.Replace(":", "")) = vbNullString
-    End Function
-
+    ''' <summary>
+    ''' Converte os dados da lista em uma string     
+    ''' </summary>
+    ''' <param name="parLista"></param>
+    ''' <param name="parEhString"></param>
+    ''' <returns></returns>
     Public Shared Function RetornArrayLista(ByVal parLista As IEnumerable(Of String), Optional parEhString As Boolean = False) As String
         Dim retorno As String = vbNullString
         Dim aux As String
@@ -122,6 +160,7 @@
 
     End Function
 
+    
     Public Shared Function RetornaPrimeiroDiaMes(Optional ByVal mes As Integer = 0) As Date
 
         If mes = 0 Then
@@ -130,5 +169,32 @@
             Return CDate("01/" & mes.ToString("00") & "/" & Year(Now))
         End If
 
+    End Function
+
+
+    ''' <summary>
+    ''' Retorna um determinado campo de uma determinada tabela
+    ''' </summary>
+    ''' <param name="parTabela"></param>
+    ''' <param name="parCampo"></param>
+    ''' <param name="parWhere"></param>
+    ''' <returns></returns>
+    Public shared Function RetornaCampoTabela(ByVal parTabela As String, ByVal parCampo As String, ByVal parWhere As String) As String
+        Dim locSQL As New StringBuilder(String.Empty)
+        Dim locResultado As String = vbNullString 
+
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
+
+            locSQL.AppendFormat("SELECT {0} AS VALOR FROM {1} WHERE {2}",parCampo, parTabela , parWhere  )
+            Comm.CommandText = locSQL.ToString
+
+            Using Reader = Comm.ExecuteReader()
+                if Reader.Read() then
+                    locResultado = Reader("VALOR")
+                End if
+            End Using
+        End Using
+
+        Return locResultado 
     End Function
 End Class

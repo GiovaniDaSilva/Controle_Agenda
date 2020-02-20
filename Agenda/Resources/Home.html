@@ -16,73 +16,127 @@
     <style>
         [p_style_comum_pagina]
 
-        .my-custom-scrollbar {
-            position: relative;
-            height: 400px;
-            overflow: auto;
-        }
-
-        .table-wrapper-scroll-y {
-            display: block;
-        }
 
         .thead-blue {
             color: black;
-            background-color: cornflowerblue;
-            border-color: cornflowerblue;
+            background-color: #0099cc;
+            border: none;
+            border-color: #0099cc;
+        }
+
+        td.descricao {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .botaoSubMenu {
+            border: none;
+        }
+
+        .labelSpan {
+            font-weight: bold;
+            color: black;
+            font-size: 12px;
+        }
+
+        .labelTotais {
+            font-weight: bold;
+            font-size: 14px;
+            border: none;
+        }
+
+        .corVerdeVivo {
+            color: #339933;
         }
     </style>
 
     {p_titulo_pagina}
-        
+
 </head>
 
 
 <body class="Fundo">
-    <header>        
+    <header>
         {p_menu_pagina}
-    </header>
-        
-    <div style="margin-top: 20px;" class="container-fluid">
-        
 
-            <table id="Dados" class="table table-sm" cellspacing="0" width="100%">
-                <thead>
+    </header>
+
+    <!--Sub Menu-->
+
+    <div class="form-row" style="margin-top: 10px; margin-left: 20px; margin-right: 20px">
+        <div class="col-md-10">
+            <a href="CadastroAtividade" id="btnCadastroAtivdade" class=" btn btn-success btn-outline-light botaoSubMenu">Nova Atividade</a>
+        </div>
+
+        <div class="col-md-1 float-right">
+            <span class="Fundo labelTotais">Total do Dia:&nbsp;</span>
+            <span class="Fundo labelTotais corVerdeVivo" id="totalHorasDia">00:00</span>
+        </div>
+        <div class="col-md-1 float-right">
+            <span class="Fundo labelTotais">Da Atividade:</span>
+            <span class="Fundo labelTotais corVerdeVivo" id="totalHorasAtividade">00:00</span>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <form method="post" id="form_Filtro" style="margin-top: 10px; margin-bottom: 10px">
+            <div class="input-group mb-3 input-group-sm">
+                <div class="input-group-prepend">
+
+                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>A partir de:</b></span>
+                    <input type="date" class="form-control" id="data_ini" name="data_ini" form="form_Filtro">
+                    &nbsp;
+                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Tipo de Atividade:</b></span>
+                    <select class="custom-select" select id="cbTipo" name="tipoAtividade" form="form_Filtro">
+                        {p_tipos_atividades_filtro}
+                    </select>
+                    &nbsp;
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" form="form_Filtro">Aplicar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--Div como oculta, exibe apos a carga da grid para evitar piscar enquanto redimensiona-->
+    <div id="dadosHome" class="container-fluid" style="display: none">
+        <div style="margin-top: 20px;" class="container-fluid">
+            <table id="Dados" class="table nowrap table-hover table-info table-striped table-sm" cellspacing="0">
+                <thead class="thead-dark">
                     <tr>
-                        <th>
-                            ID
-                        </th>
-                        <th >
-                            Data
-                        </th>
-                        <th >
-                            Tipo
-                        </th>
-                        <th >
-                            Codigo
-                        </th>
-                        <th >
-                            Horas
-                        </th>
-                        <th>Descrição</th>                        
+                        <th>ID</th>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Codigo</th>
+                        <th>Horas</th>
+                        <th>Descrição</th>
+                        <th>Acao</th>
                     </tr>
                 </thead>
                 <tbody>
-                                        
                     {p_linhas_tabela}
-
-                </tbody>                
-                </table>
+                </tbody>
+            </table>
         </div>
-    
-
+        <div class="form-group" style="margin-top: 40px">
+            <label for="comment" class="label">Descrição:</label>
+            <textarea readonly class="form-control" rows="10" id="txtdescricao" name="info"></textarea>
+        </div>
+    </div>
 
     <script>
 
 
         $(document).ready(function () {
-           tb = $('#Dados').DataTable({
-                "scrollY": "300px", //Altura da grid com scroll
+            
+            [p_inicializa_campos_filtro]
+
+            tb = $('#Dados').DataTable({
+                "scrollY": "400px", //Altura da grid com scroll
                 "scrollCollapse": true,
                 select: {
                     style: 'single' //permitir selecionar apenas uma linha
@@ -92,36 +146,96 @@
                 oLanguage: { sUrl: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json' },
 
                 columnDefs: [
-                    {//coluna ID                          
+                    {//coluna ID
                         targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis'
-                    }, 
+                    },
                     {//coluna Data
                         type: 'date-br',
                         targets: 1
                     },
                     {//coluna Código
-                        targets: 3, 
+                        targets: 3,
                         render: function (data, type, row, meta) {
                             var codigo = row[3];
                             //Alterar para o ID_TIPO
-                            if (row[2] == 'PBI'){
+                            if (row[2] == 'PBI') {
                                 return '<a href="http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=' + codigo + '">' + codigo + '</a>';
-                            } else {                                
+                            } else {
                                 return '<a href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + codigo + '">' + codigo + '</a>';
                             }
-                            
+
                         }
                     },
-
+                    {//coluna Descrição
+                        targets: 5
+                    },
+                    {//coluna Editar
+                        render: function (data, type, row) {
+                            var id = row[0];
+                            return "<a href='/CadastroAtividade?id=" + id + "' class='btn btn-outline-success'>Editar</a>"
+                        },
+                        targets: 6,
+                        width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
+                    }
                 ],
 
-            });
-           $('.dataTables_length').addClass('bs-select');
+                initComplete: function () {
+                    //Exibir a diva somente após completar a carga
+                    $('#dadosHome').show();
+                    tb.columns.adjust();
+                },
 
-           $.fn.dataTable.moment('DD/MM/YYYY');
+            });
+            $('.dataTables_length').addClass('bs-select');
+
+            $.fn.dataTable.moment('DD/MM/YYYY');
+
+            //Seleção da Atividade
+            tb.on('select.dt deselect.dt', function () {
+                var rows = $('tr.selected');
+                var rowData = tb.rows(rows).data();
+                var id = 0;
+                var dados;
+
+                $.each($(rowData), function (key, value) {
+                    id = value[0];
+                    dados = "id=" + value[0] + "&data=" + value[1] + "&codigo=" + value[3];
+                });
+
+                if (id > 0) {
+                    $.ajax({
+                        url: 'home_get_detalhes',
+                        type: 'POST',
+                        dataType: 'text',//'json',
+                        data: dados,
+
+                        success: function (objectJson) {
+                            var object = JSON.parse(objectJson);
+
+                            document.getElementById('txtdescricao').value = object.Descricao;
+                            document.getElementById("totalHorasDia").innerHTML = object.TotalHoraDia;
+                            document.getElementById("totalHorasAtividade").innerHTML = object.TotalHorasAtividade;
+
+                        },
+
+                        error: function (descricao) {
+                            alert(descricao);
+                        }
+                    });
+                } else {
+
+                    //limpa o campo descricao
+                    document.getElementById('txtdescricao').value = "";         
+                    document.getElementById("totalHorasDia").innerHTML = "00:00";
+                    document.getElementById("totalHorasAtividade").innerHTML = "00:00";
+
+                }
+            });
+
 
         });
 
+        //Ordenação da coluna data
         jQuery.extend(jQuery.fn.dataTableExt.oSort, {
             "date-br-pre": function (a) {
                 if (a == null || a == "") {
@@ -140,127 +254,9 @@
             }
         });
 
-    </script>
-<!--
-    <script>
-        $(document).ready(function () {
-            tb = $('#dados').DataTable({
-                initComplete: function () {
-                    //Ao inicializar, carregar linhas selecionadas salvas no storage local baseadas no ID
-                    var api = this.api();
-                    var itens_salvos = localStorage.getItem('Demandas_selecionadas');
-                    if (itens_salvos) {
-                        var selecteds = itens_salvos.split(',');
 
-                        $('#dados').DataTable().rows().every(function () {
-                            if (selecteds.includes(this.data()[0])) {
-                                this.select();
-                            }
-                        });
-                    };
-
-                    //Exibir grid somente após completar a carga
-                    $('#dados').show();
-                },
-                select: {
-                    style: 'single' //permitir selecionar apenas uma linha
-                },
-                stateSave: true, //salvar automaticamente personalizações do usuário
-                stateLoadParams: function (settings, data) {
-                    //ao carregar personalizações salvas, garantir que não irá carregar exibição da coluna ID
-                    data.columns[0].visible = false;
-                },
-                colReorder: true, //permitir mover as colunas de lugar
-                oLanguage: { sUrl: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json' },
-                columnDefs: [
-                    { targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis' }, //coluna ID
-                    {
-                        targets: 1, //coluna Código
-                        render: function (data, type, row, meta) {
-                            var id = row[0];
-                            return '<a href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + id + '">' + id + '</a>';
-                        }
-                    },
-                    {
-                        targets: 9, //coluna Causa
-                        render: function (data, type, row, meta) {
-                            return '<b>' + data + '</b>';
-                        }
-                    },
-                    {
-                        targets: 10, //coluna Justificativa
-                        render: function (data, type, row, meta) {
-                            if (data == 'S') {
-                                return '<i class="material-icons">info</i>'
-                            } else {
-                                return '';
-                            }
-                        }
-                    },
-                    {
-                        targets: 11, //coluna Tags
-                        render: function (data, type, row, meta) {
-                            if (!data) return ''; //quando não tem nenhuma tag, o split retorna um item no array, por isso já retornar antes em branco.
-
-                            var ar_tags = data.split(',');
-                            var str_tags = '';
-                            ar_tags.forEach(function (n) {
-                                str_tags += '<span class="badge badge-info">#' + n + '</span>' + ' '; //espaço em branco no final para separar tags
-                            });
-                            return str_tags;
-                        }
-                    },
-                    {
-                        targets: 12, //coluna do lápis de edição
-                        searchable: false, orderable: false,
-                        render: function (data, type, row, meta) {
-                            var id = row[0];
-                            return '<a class="btn btn-alert" href="/set_demanda?id=' + id + '"><i class="material-icons">edit</i></a>';
-                        }
-                    }
-                ],
-                order: [[1, 'desc']], //ordem padrão: coluna Código em ordem Decrescente
-                //posição dos elementos
-                dom: "<'row'<'col-md-6'B><'col-md-3'l><'col-md-3'fr>>" +
-                "<'row'<'col-md-12't>>" +
-                "<'row'<'col-md-6'i><'col-md-6'p>>",
-                buttons: [
-                    { extend: 'colvis', text: '<i class="material-icons">view_column</i>Colunas', columns: ':not(.noVis)' },
-                    { extend: 'print', text: '<i class="material-icons">print</i>Imprimir', exportOptions: { modifier: { selected: null }, columns: ':not(.notexport)' } },
-                    { extend: 'excelHtml5', text: '<i class="material-icons">save</i>Excel', exportOptions: { modifier: { selected: null }, columns: ':not(.notexport)' } }
-                    //modifier selected é para exportar todas as linhas, pois senão gera apenas a linha selecionada
-                ]
-            });
-
-            //Evento de Seleção de Linha - após a seleção ter ocorrido
-            tb.on('select.dt deselect.dt', function () {
-                var dataArr = [];
-                var rows = $('tr.selected');
-                var rowData = tb.rows(rows).data();
-                $.each($(rowData), function (key, value) {
-                    dataArr.push(value[0]);
-                });
-
-                //Salvar IDs das linhas selecionadas no storage local
-                localStorage.setItem('Demandas_selecionadas', dataArr);
-            });
-
-            //Evento de Seleção do Usuário - antes da seleção ter ocorrido
-            tb.on('user-select', function (e, dt, type, cell, originalEvent) {
-                var row = dt.row(cell.index().row).node();
-                if ($(row).hasClass('selected')) {
-                    // deselect
-                    e.preventDefault(); //previnir tirar a seleção do item selecionado
-                }
-                else {
-                    // select
-                };
-            });
-        });
     </script>
 
-    -->
-    
 </body>
 
 

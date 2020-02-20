@@ -77,8 +77,11 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.17.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.11.17\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.11.19.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.19\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -118,23 +121,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Modelos\clsAtividadesGrafico.vb" />
+    <Compile Include="Classes\Modelos\clsDetalhesAtividadeWeb.vb" />
+    <Compile Include="Classes\Modelos\clsHomeParametros.vb" />
     <Compile Include="Classes\Modelos\clsPeriodosAtividades.vb" />
-    <Compile Include="Classes\Serviços\clsConexao.vb" />
-    <Compile Include="Classes\Serviços\clsAdicionar.vb" />
+    <Compile Include="Classes\clsConexao.vb" />
+    <Compile Include="Classes\Serviços\Controles\clsAdicionar.vb" />
     <Compile Include="Classes\DAO\clsAdicionarDAO.vb" />
     <Compile Include="Classes\Modelos\clsAtividade.vb" />
     <Compile Include="Classes\clsEnumString.vb" />
     <Compile Include="Classes\clsHTML.vb" />
     <Compile Include="Classes\Serviços\clsGraficoMensal.vb" />
-    <Compile Include="Classes\Serviços\clsIni.vb" />
+    <Compile Include="Classes\clsIni.vb" />
     <Compile Include="Classes\Modelos\clsParametrosIni.vb" />
     <Compile Include="Classes\Modelos\clsPeriodo.vb" />
-    <Compile Include="Classes\Serviços\clsPrincipal.vb" />
-    <Compile Include="Classes\Serviços\clsRegistro.vb" />
+    <Compile Include="Classes\Serviços\Controles\clsPrincipal.vb" />
+    <Compile Include="Classes\clsRegistro.vb" />
     <Compile Include="Classes\Modelos\clsSolicitacao.vb" />
     <Compile Include="Classes\DAO\clsSolicitacaoDAO.vb" />
     <Compile Include="Classes\Modelos\clsTipo.vb" />
     <Compile Include="Classes\clsTools.vb" />
+    <Compile Include="Classes\Serviços\Web\clsCadastroAtividadeWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsHomeWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsHTMLComum.vb" />
     <Compile Include="Classes\Serviços\Web\clsServidorHTTP.vb" />
@@ -165,7 +171,7 @@
       <DependentUpon>frmPrincipal.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HTML Text\RichHTMLFormatting.vb" />
+    <Compile Include="Formata RichText\RichHTMLFormatting.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -218,10 +224,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Agenda.ico" />
+    <None Include="Resources\Versoes.html" />
+    <None Include="Resources\CadastroAtividade.html" />
     <None Include="Resources\Home.html" />
     <None Include="Resources\Pagina Não Encontrada.html" />
     <None Include="Resources\GraficoAtividades.html" />
-    <None Include="Resources\Versoes.html" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

@@ -25,6 +25,7 @@ Partial Class frmPrincipal
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPrincipal))
         Me.pMenu = New System.Windows.Forms.Panel()
+        Me.btnVersaoWeb = New System.Windows.Forms.Button()
         Me.btnGraficoMensal = New System.Windows.Forms.Button()
         Me.btnAbreCausaErros = New System.Windows.Forms.Button()
         Me.pHorasAtividade = New System.Windows.Forms.Panel()
@@ -79,6 +80,7 @@ Partial Class frmPrincipal
         '
         'pMenu
         '
+        Me.pMenu.Controls.Add(Me.btnVersaoWeb)
         Me.pMenu.Controls.Add(Me.btnGraficoMensal)
         Me.pMenu.Controls.Add(Me.btnAbreCausaErros)
         Me.pMenu.Controls.Add(Me.pHorasAtividade)
@@ -95,6 +97,23 @@ Partial Class frmPrincipal
         Me.pMenu.Name = "pMenu"
         Me.pMenu.Size = New System.Drawing.Size(998, 77)
         Me.pMenu.TabIndex = 0
+        '
+        'btnVersaoWeb
+        '
+        Me.btnVersaoWeb.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnVersaoWeb.BackColor = System.Drawing.Color.Gold
+        Me.btnVersaoWeb.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
+        Me.btnVersaoWeb.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
+        Me.btnVersaoWeb.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnVersaoWeb.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnVersaoWeb.Location = New System.Drawing.Point(494, 15)
+        Me.btnVersaoWeb.Name = "btnVersaoWeb"
+        Me.btnVersaoWeb.Size = New System.Drawing.Size(95, 50)
+        Me.btnVersaoWeb.TabIndex = 11
+        Me.btnVersaoWeb.Text = "Versão Web    Em Construção"
+        Me.ToolTip1.SetToolTip(Me.btnVersaoWeb, "Versão web em desenvolvimento, se encontrar problemas reporte. Obrigado.")
+        Me.btnVersaoWeb.UseVisualStyleBackColor = false
         '
         'btnGraficoMensal
         '
@@ -655,4 +674,5 @@ End Sub
     Friend WithEvents ImprimirPeriodosDoDiaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImprimirAividadeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AbrirSolPBIToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents btnVersaoWeb As Button
 End Class

@@ -7,12 +7,16 @@ Public Class clsHTMLComum
         locMenu.Append("
         <nav class=""navbar navbar-dark bg-primary"">            
                 <div >
-                    <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light "" >Home</a>
-                    <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" >Grafico</a>
-                    <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" >Versões</a>            
+                    <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light ""><i class=""material-icons"">home</i>Home</a>
+                    <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">pie_chart</i>&nbsp;Grafico</a>
+                    <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>            
+                </div>
+                <div class=""float-right"">
+                    <span class=""agenda"">Agenda</span>              
+                    <img  src=""https://image.flaticon.com/icons/png/512/124/124050.png"""" width=""50"" height=""50""> </img>                    
                 </div>
         </nav>")
-        Return locMenu.ToString 
+        Return locMenu.ToString
     End Function
 
     Public Shared Function RetornaTituloPagina() As String
@@ -48,6 +52,21 @@ Public Class clsHTMLComum
         .Fundo {
             background-color: lightblue;
         }
+        
+		.material-icons {
+			vertical-align: -5px; /*Correção para a posição do ícone verticalmente*/
+		}
+    
+        .agenda{
+           font-size: 30px; 
+           font-family: Comic Sans MS, Comic Sans, cursive; 
+            color: White;
+        }
+         
+        .label {
+            font-weight: bold;  
+            color: black;
+        }
 
          ")
         Return locMenu.ToString
@@ -76,14 +95,110 @@ Public Class clsHTMLComum
             <!--icone da agenda-->
             <link rel=""icon"" href=""https://image.flaticon.com/icons/png/512/124/124050.png"">
             <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
+            
+            <!--icone dos botão-->
+            <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
+    
         ")
         Return texto.ToString
     End Function
-    Public shared sub TrataParametrosComuns(ByRef pagina As string)
+    Public Shared Sub TrataParametrosComuns(ByRef pagina As String)
         pagina = pagina.Replace("{p_menu_pagina}", retornaMenuPagina)
         pagina = pagina.Replace("{p_titulo_pagina}", RetornaTituloPagina)
         pagina = pagina.Replace("[p_style_comum_pagina]", RetornaStyleComumPagina)
         pagina = pagina.Replace("{p_links_comum_pagina}", RetornLinksComnsPagina)
+        pagina = pagina.Replace("[p_funcao_calcula_diferencao_horas]", RetornaFuncaoCalculaDiferencaHoras)
+        pagina = pagina.Replace("[p_funcao_calcula_soma_horas]", RetornaFuncaoCalculaSomaHoras)
+        pagina = pagina.Replace("[p_funcao_retorna_data_atual]", RetornaFuncaoRetornaDataAtual)
 
-    End sub
+    End Sub
+
+    Public Shared Function RetornaFuncaoCalculaSomaHoras() As String
+        Dim texto As New StringBuilder(vbNullString)
+
+        texto.Append("
+            //Função para somar duas horas
+            //http://www.cesar.inf.br/blog/?cat=173
+            function somaHora(hrA, hrB, zerarHora) {
+                if (hrA.length != 5 || hrB.length != 5) return ""00:00"";
+
+                temp = 0;
+                nova_h = 0;
+                novo_m = 0;
+
+                hora1 = hrA.substr(0, 2) * 1;
+                hora2 = hrB.substr(0, 2) * 1;
+                minu1 = hrA.substr(3, 2) * 1;
+                minu2 = hrB.substr(3, 2) * 1;
+
+                temp = minu1 + minu2;
+                while (temp > 59) {
+                    nova_h++;
+                    temp = temp - 60;
+                }
+                novo_m = temp.toString().length == 2 ? temp : (""0"" + temp);
+
+                temp = hora1 + hora2 + nova_h;
+                while (temp > 23 && zerarHora) {
+                    temp = temp - 24;
+                }
+                nova_h = temp.toString().length == 2 ? temp : (""0"" + temp);
+
+                return nova_h + ':' + novo_m;
+            };
+        ")
+        Return texto.ToString
+    End Function
+
+
+    Public Shared Function RetornaFuncaoCalculaDiferencaHoras() As String
+        Dim texto As New StringBuilder(vbNullString)
+
+        texto.Append("
+            //Calcula a diferença entre as horas
+            //https://stackoverflow.com/questions/10804042/calculate-time-difference-with-javascript
+            function diff(start, end) {
+                start = start.split("":"");
+                end = end.split("":"");
+                var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+                var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+                var diff = endDate.getTime() - startDate.getTime();
+                var hours = Math.floor(diff / 1000 / 60 / 60);
+                diff -= hours * 1000 * 60 * 60;
+                var minutes = Math.floor(diff / 1000 / 60);
+
+                // If using time pickers with 24 hours format, add the below line get exact hours
+                if (hours < 0)
+                    hours = hours + 24;
+
+                return (hours <= 9 ? ""0"" : """") + hours + "":"" + (minutes <= 9 ? ""0"" : """") + minutes;
+            };
+        ")
+        Return texto.ToString
+    End Function
+
+
+
+    Public Shared Function RetornaFuncaoRetornaDataAtual() As String
+        Dim texto As New StringBuilder(vbNullString)
+
+        texto.Append("
+                function RetornaDataAtual() {
+                // Obtém a data/hora atual
+                var data = new Date();
+
+                // Guarda cada pedaço em uma variável
+                var dia = data.getDate();           // 1-31
+                var mes = (""0"" + (data.getMonth() + 1)).slice(-2);  // 0-11 (zero=janeiro)
+                var ano4 = data.getFullYear();       // 4 dígitos
+
+                // Formata a data e a hora (note o mês + 1)
+                var str_data = ano4 + '-' + (mes) + '-' + dia;
+
+                return str_data;
+            };
+        ")
+        Return texto.ToString
+    End Function
+
 End Class
