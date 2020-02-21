@@ -60,19 +60,48 @@ Public Class clsServidorHTTP
             ' Obtem o HttpListenerContext para a nova requisição
             Dim context As HttpListenerContext = listener.EndGetContext(result)
 
-            ' Cria uma resposta usando um StreamWriter 
-            Dim sw As New StreamWriter(context.Response.OutputStream, Encoding.UTF8)
+
+            Dim retorno As String
+            retorno = locRequisicoesWeb.trataRequisicoesWeb(context)
+
+
+
+            Dim webPage() As Byte
+            webPage = Encoding.UTF8.GetBytes(retorno)
+
 
             ' Configura a resposta
             context.Response.ContentType = "text/html"
             context.Response.ContentEncoding = Encoding.UTF8
             context.Response.StatusCode = HttpStatusCode.OK
+            context.Response.ContentLength64 = webPage.Length
 
-            sw.WriteLine(locRequisicoesWeb.trataRequisicoesWeb(context))
+            Dim outputStream = context.Response.OutputStream
 
-            sw.Flush()
+
+            Dim canWrite As Boolean
+            canWrite = outputStream.CanWrite
+            Dim count As Integer = 0
+            Do While Not canWrite
+                System.Threading.Thread.Sleep(1000)
+                canWrite = outputStream.CanWrite
+                count += 1
+                If count = 10 Then Exit Do
+            Loop
+
+            outputStream.Write(webPage, 0, webPage.Length)
+            outputStream.Flush()
+
+
+            ' Cria uma resposta usando um StreamWriter 
+            'Dim sw As New StreamWriter(context.Response.OutputStream, Encoding.UTF8)
+            'sw.WriteLine()
+            'sw.Flush()
+
             ' Fecha a resposta para enviá-la ao cliente
             context.Response.Close()
+
+
         Catch ex As ObjectDisposedException
             Console.WriteLine("{0}: HttpListener disposed--shutting down.", result.AsyncState)
         Finally
