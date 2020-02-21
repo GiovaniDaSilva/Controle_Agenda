@@ -8,7 +8,7 @@ Public Class clsServidorHTTP
 
     ' Configura o mumero maximo de requisições que 
     ' podem ser tratadas concorrentemente
-    Private maxRequestHandlers As Integer = 10
+    Private maxRequestHandlers As Integer = 30
     ' Um inteirousado para atribui cada requisição HTTP 
     ' um identificador unico
     Private requestHandlerID As Integer = 0
@@ -65,7 +65,6 @@ Public Class clsServidorHTTP
             retorno = locRequisicoesWeb.trataRequisicoesWeb(context)
 
 
-
             Dim webPage() As Byte
             webPage = Encoding.UTF8.GetBytes(retorno)
 
@@ -77,30 +76,26 @@ Public Class clsServidorHTTP
             context.Response.ContentLength64 = webPage.Length
 
             Dim outputStream = context.Response.OutputStream
-
-
             Dim canWrite As Boolean
-            canWrite = outputStream.CanWrite
             Dim count As Integer = 0
+
+            canWrite = outputStream.CanWrite
             Do While Not canWrite
                 System.Threading.Thread.Sleep(1000)
                 canWrite = outputStream.CanWrite
                 count += 1
+
+                'Maximo de 10 tentativas
                 If count = 10 Then Exit Do
             Loop
 
-            outputStream.Write(webPage, 0, webPage.Length)
-            outputStream.Flush()
-
-
-            ' Cria uma resposta usando um StreamWriter 
-            'Dim sw As New StreamWriter(context.Response.OutputStream, Encoding.UTF8)
-            'sw.WriteLine()
-            'sw.Flush()
+            If canWrite Then
+                outputStream.Write(webPage, 0, webPage.Length)
+                outputStream.Flush()
+            End If
 
             ' Fecha a resposta para enviá-la ao cliente
             context.Response.Close()
-
 
         Catch ex As ObjectDisposedException
             Console.WriteLine("{0}: HttpListener disposed--shutting down.", result.AsyncState)
