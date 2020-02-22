@@ -56,26 +56,27 @@ Public Class clsServidorHTTP
     'Este método processa de forma assincrona requisições individuais
     Private Sub RequestHandler(ByVal result As IAsyncResult)
         Dim locRequisicoesWeb As New clsRequisicoesWeb
+        Dim locReqWeb As New clsReqWeb
         Try
             ' Obtem o HttpListenerContext para a nova requisição
             Dim context As HttpListenerContext = listener.EndGetContext(result)
 
+            locReqWeb.Context = context
 
-            Dim retorno As String
-            retorno = locRequisicoesWeb.trataRequisicoesWeb(context)
+            locRequisicoesWeb.trataRequisicoesWeb(locReqWeb)
 
 
             Dim webPage() As Byte
-            webPage = Encoding.UTF8.GetBytes(retorno)
+            webPage = Encoding.UTF8.GetBytes(locReqWeb.HTML)
 
 
             ' Configura a resposta
-            context.Response.ContentType = "text/html"
-            context.Response.ContentEncoding = Encoding.UTF8
-            context.Response.StatusCode = HttpStatusCode.OK
-            context.Response.ContentLength64 = webPage.Length
+            locReqWeb.Context.Response.ContentType = "text/html"
+            locReqWeb.Context.Response.ContentEncoding = Encoding.UTF8
+            'locReqWeb.Context.Response.StatusCode = HttpStatusCode.OK
+            locReqWeb.Context.Response.ContentLength64 = webPage.Length
 
-            Dim outputStream = context.Response.OutputStream
+            Dim outputStream = locReqWeb.Context.Response.OutputStream
             Dim canWrite As Boolean
             Dim count As Integer = 0
 
@@ -95,7 +96,7 @@ Public Class clsServidorHTTP
             End If
 
             ' Fecha a resposta para enviá-la ao cliente
-            context.Response.Close()
+            locReqWeb.Context.Response.Close()
 
         Catch ex As ObjectDisposedException
             Console.WriteLine("{0}: HttpListener disposed--shutting down.", result.AsyncState)

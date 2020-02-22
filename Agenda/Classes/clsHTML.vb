@@ -147,6 +147,15 @@ Public Class clsHTMLTools
         Return pContext.Request.Url.Query.ToString.Split(New Char() {"?", "&"})
     End Function
 
+    Public Shared Function RetornaPaginaErro(pTitulo As String, pMensagem As String) As String
+        Dim locPagRetorno As String
+        locPagRetorno = My.Resources.Pagina_Não_Encontrada.Replace("{p_titulo}", pTitulo).Replace("{p_mensagem}", pMensagem)
+        clsHTMLComum.TrataParametrosComuns(locPagRetorno)
+
+        Return locPagRetorno
+    End Function
+
+
 End Class
 
 

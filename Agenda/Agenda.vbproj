@@ -143,6 +143,7 @@
     <Compile Include="Classes\Serviços\Web\clsCadastroAtividadeWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsHomeWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsHTMLComum.vb" />
+    <Compile Include="Classes\Serviços\Web\clsReqWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsServidorHTTP.vb" />
     <Compile Include="Classes\Serviços\Web\clsGraficoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsRequisicoesWeb.vb" />

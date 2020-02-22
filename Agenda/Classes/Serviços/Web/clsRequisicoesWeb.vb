@@ -6,55 +6,56 @@ Imports System.Web
 Public Class clsRequisicoesWeb
 
     ''' <summary>
-    ''' Trata as requisições do servidor
+    ''' Trata as requisições web
     ''' </summary>
-    ''' <param name="pContext"></param>
-    ''' <returns></returns>
-    Public Function trataRequisicoesWeb(ByVal pContext As HttpListenerContext) As String
-        Dim locPagRetorno As String = My.Resources.Pagina_Não_Encontrada
-        trataRequisicoesWeb = ""
+    ''' <param name="pReqWeb"></param>
+    Public Sub trataRequisicoesWeb(pReqWeb As clsReqWeb)
+        Dim locPagRetorno As String = clsHTMLTools.RetornaPaginaErro("Página não encontrada", "A página solicitada não foi encontrada.")
         Try
-            Select Case pContext.Request.Url.AbsolutePath
+            Select Case pReqWeb.Context.Request.Url.AbsolutePath
                 Case "/Home"
-                    locPagRetorno = funRetornaPaginaHome(pContext)
+                    locPagRetorno = funRetornaPaginaHome(pReqWeb)
                 Case "/home_get_detalhes"
-                    locPagRetorno = funRetornaDetalhesAtividade(pContext)
+                    locPagRetorno = funRetornaDetalhesAtividade(pReqWeb)
                 Case "/CadastroAtividade"
-                    locPagRetorno = funRetornaCadastroAtividade(pContext)
+                    locPagRetorno = funRetornaCadastroAtividade(pReqWeb.Context)
                 Case "/CadastroAtividade_get_descricao"
-                    locPagRetorno = funRetornaDescricaoAtividade(pContext)
+                    locPagRetorno = funRetornaDescricaoAtividade(pReqWeb.Context)
                 Case "/CadastroAtividade_salvar"
-                    locPagRetorno = funRetornaCadastroAtividade_Salvar(pContext)
+                    locPagRetorno = funRetornaCadastroAtividade_Salvar(pReqWeb.Context)
                 Case "/CadastroAtividade_excluir"
-                    locPagRetorno = funRetornaCadastroAtividade_Excluir(pContext)
+                    locPagRetorno = funRetornaCadastroAtividade_Excluir(pReqWeb.Context)
                 Case "/CadastroAtividade_get_periodos_dia"
-                    locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pContext)
+                    locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pReqWeb.Context)
                 Case "/Grafico"
-                    locPagRetorno = funRetornaPaginaGrafico(pContext)
+                    locPagRetorno = funRetornaPaginaGrafico(pReqWeb.Context)
                 Case "/Versoes"
                     locPagRetorno = My.Resources.Versoes
             End Select
 
-
             clsHTMLComum.TrataParametrosComuns(locPagRetorno)
-            Return locPagRetorno
+
+            pReqWeb.HTML = locPagRetorno
+            pReqWeb.Context.Response.StatusCode = HttpStatusCode.OK
 
         Catch ex As Exception
-            Return ex.Message
+            pReqWeb.HTML = clsHTMLTools.RetornaPaginaErro("Ops.. Ocorreu o seguinte erro", ex.Message)
         End Try
 
-    End Function
+    End Sub
 
-    Private Function funRetornaDetalhesAtividade(pContext As HttpListenerContext) As String
+    Private Function funRetornaDetalhesAtividade(pReqWeb As clsReqWeb) As String
         Dim locDetalhes As New clsParametrosDetalhesAtividadeWeb
-        If pContext.Request.HttpMethod = "POST" Then
-            Dim arr = clsHTMLTools.RetornaPostEmArray(pContext)
+        If pReqWeb.Context.Request.HttpMethod = "POST" Then
+            Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
 
             If Not IsNumeric(clsHTMLTools.RetornaValorPostGet(arr(0))) Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
                 Throw New Exception("ID inválido.")
             End If
 
             If Not IsDate(clsHTMLTools.RetornaValorPostGet(arr(1))) Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
                 Throw New Exception("Data inválido.")
             End If
 
@@ -150,37 +151,61 @@ Public Class clsRequisicoesWeb
         End If
         Return locDescricao
     End Function
-
     ''' <summary>
     ''' Chama a classe para tratar a pagina home
     ''' </summary>
-    ''' <param name="pContext"></param>
+    ''' <param name="pReqWeb"></param>
     ''' <returns></returns>
-    Private Function funRetornaPaginaHome(pContext As HttpListenerContext) As String
+    Private Function funRetornaPaginaHome(pReqWeb As clsReqWeb) As String
 
         Dim post() As String
         Dim locParametros As New clsHomeParametros
         Dim ParametrosIni = New clsIni().funCarregaIni()
+        Dim retorno As String = ""
 
-        'Por default pega do ini
-        If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
-            locParametros.Data = Now
-        ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
-            locParametros.Data = Now.AddDays(-7)
-        End If
+        Try
 
-        If pContext.Request.HttpMethod = "POST" Then
-            post = clsHTMLTools.RetornaPostEmArray(pContext)
-
-            Dim data = clsHTMLTools.RetornaValorPostGet(post(0))
-            If data <> vbNullString Then
-                locParametros.Data = CDate(data)
+            'Por default pega do ini
+            If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
+                locParametros.Data = Now
+            ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
+                locParametros.Data = Now.AddDays(-7)
             End If
-            locParametros.Tipo = clsHTMLTools.RetornaValorPostGet(post(1))
-        End If
 
-        Return New clsHomeWeb().RetornaPaginaHome(locParametros)
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
 
+                post = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+                If post.Count = 0 Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Parâmetros do POST não foram informados.")
+                End If
+
+                Dim data = clsHTMLTools.RetornaValorPostGet(post(0))
+                If data <> vbNullString Then
+                    If Not IsDate(data) Then
+                        pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                        Throw New Exception("Data do POST inválida.")
+                    End If
+                    locParametros.Data = CDate(data)
+                End If
+
+                Dim tipo = clsHTMLTools.RetornaValorPostGet(post(1))
+                If tipo < 0 Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Tipo de Atividade do POST inválido.")
+                End If
+                locParametros.Tipo = tipo
+            End If
+
+            Try
+                Return New clsHomeWeb().RetornaPaginaHome(locParametros)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw New Exception("Erro ao carregar a página Home.")
+            End Try
+        Catch ex As Exception
+            Throw
+        End Try
     End Function
 
     ''' <summary>
