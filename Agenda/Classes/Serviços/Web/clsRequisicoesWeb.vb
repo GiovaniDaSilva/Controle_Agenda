@@ -85,13 +85,11 @@ Public Class clsRequisicoesWeb
 
                 id = arr(0)
             End If
-
-
+            
             If id <= 0 Then
                 Throw New Exception("ID inválido.")
             End If
-
-
+            
             retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
             retorno.descricao = New clsCadastroAtividadeWeb().funRetornaCadastroAtividade_Excluir(id)            
         Catch ex As Exception
