@@ -254,9 +254,20 @@
                         dataType: 'text',
                         data: id + "", //Força a conversão para string
 
-                        success: function (retorno) {                            
-                            alert("Registro Excluido.");      
-                            window.location.href = "Home";
+                        success: function (objectJson) {     
+                            var object = JSON.parse(objectJson);
+
+                            //sucesso
+                            if (object.codigo == 100) {
+                                alert("Registro Excluido.");
+                                window.location.href = "Home";
+                            }
+
+                            //ocorreu um erro
+                            else if (object.codigo == 200) {
+                                alert(object.descricao);                                
+                            }                                               
+                            
                         }
                     });
                 }

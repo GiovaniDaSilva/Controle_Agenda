@@ -70,18 +70,36 @@ Public Class clsRequisicoesWeb
 
     Private Function funRetornaCadastroAtividade_Excluir(pContext As HttpListenerContext) As String
         Dim id As Long = 0
+        Dim retorno As New clsRetornoAjax
+        Try
+            If pContext.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pContext)
 
-        If pContext.Request.HttpMethod = "POST" Then
-            Dim arr = clsHTMLTools.RetornaPostEmArray(pContext)
+                If arr.Count = 0 Then
+                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                End If
 
-            If Not IsNumeric(arr(0)) Then
+                If Not IsNumeric(arr(0)) Then
+                    Throw New Exception("ID inválido.")
+                End If
+
+                id = arr(0)
+            End If
+
+
+            If id <= 0 Then
                 Throw New Exception("ID inválido.")
             End If
-            id = arr(0)
-        End If
 
-        Return New clsCadastroAtividadeWeb().funRetornaCadastroAtividade_Excluir(id)
 
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+            retorno.descricao = New clsCadastroAtividadeWeb().funRetornaCadastroAtividade_Excluir(id)            
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
     End Function
 
     Private Function funRetornaCadastroAtividadePeriodosDia(pReqWeb As clsReqWeb) As String
@@ -104,7 +122,7 @@ Public Class clsRequisicoesWeb
             End If
 
             Try
-                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO 
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
                 retorno.descricao = New clsCadastroAtividadeWeb().RetornaTabelaPeriodosDia(data)
             Catch ex As Exception
                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
@@ -112,10 +130,10 @@ Public Class clsRequisicoesWeb
             End Try
 
         Catch ex As Exception
-            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO 
-            retorno.descricao = ex.Message 
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
         End Try
-        
+
         Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
 
     End Function
