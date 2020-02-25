@@ -226,8 +226,18 @@
                     dataType: 'text',//'json',
                     data: id + "", //Força a conversão para string
 
-                    success: function (descricao) {
-                        document.getElementById('descricaoAtividade').value = descricao;
+                    success: function (objectJson) {
+                        var object = JSON.parse(objectJson);
+
+                        //sucesso
+                        if (object.codigo == 100) {
+                            document.getElementById('descricaoAtividade').value = object.descricao;
+                        }
+                        //ocorreu um erro
+                        else if (object.codigo == 200){
+                            alert(object.descricao);
+                            window.location.href = "Home";
+                        }                                               
                     }
                 });
             }
@@ -246,7 +256,7 @@
 
                         success: function (retorno) {                            
                             alert("Registro Excluido.");      
-                            window.location.href = "Home"
+                            window.location.href = "Home";
                         }
                     });
                 }
