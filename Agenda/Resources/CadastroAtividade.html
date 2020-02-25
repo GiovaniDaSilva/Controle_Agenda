@@ -282,8 +282,18 @@
                 dataType: 'text',
                 data: data,
 
-                success: function (html) {
-                    $("#tablePeriodosDia").html(html);
+                success: function (objectJson) {
+                    var object = JSON.parse(objectJson);
+
+                    //sucesso
+                    if (object.codigo == 100) {
+                        $("#tablePeriodosDia").html(object.descricao);
+                    }
+                    //ocorreu um erro
+                    else if (object.codigo == 200) {
+                        alert(object.descricao);
+                        window.location.href = "Home";
+                    }                                                                              
                 }
 
             });

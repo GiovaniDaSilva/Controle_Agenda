@@ -26,7 +26,7 @@ Public Class clsRequisicoesWeb
                 Case "/CadastroAtividade_excluir"
                     locPagRetorno = funRetornaCadastroAtividade_Excluir(pReqWeb.Context)
                 Case "/CadastroAtividade_get_periodos_dia"
-                    locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pReqWeb.Context)
+                    locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pReqWeb)
                 Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pReqWeb)
                 Case "/Versoes"
@@ -84,20 +84,40 @@ Public Class clsRequisicoesWeb
 
     End Function
 
-    Private Function funRetornaCadastroAtividadePeriodosDia(pContext As HttpListenerContext) As String
+    Private Function funRetornaCadastroAtividadePeriodosDia(pReqWeb As clsReqWeb) As String
         Dim data As Date
+        Dim retorno As New clsRetornoAjax
 
-        If pContext.Request.HttpMethod = "POST" Then
-            Dim arr = clsHTMLTools.RetornaPostEmArray(pContext)
+        Try
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
 
-            If Not IsDate(arr(0)) Then
-                Throw New Exception("Data inválida.")
+                If arr.Count = 0 Then
+                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                End If
+
+                If Not IsDate(arr(0)) Then
+                    Throw New Exception("Data inválida.")
+                End If
+
+                data = CDate(arr(0))
             End If
 
-            data = CDate(arr(0))
-        End If
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO 
+                retorno.descricao = New clsCadastroAtividadeWeb().RetornaTabelaPeriodosDia(data)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw New Exception("Erro ao carregar os períodos do dia.")
+            End Try
 
-        Return New clsCadastroAtividadeWeb().RetornaTabelaPeriodosDia(data)
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO 
+            retorno.descricao = ex.Message 
+        End Try
+        
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+
     End Function
 
     Private Function funRetornaCadastroAtividade_Salvar(pContext As HttpListenerContext) As String
@@ -147,44 +167,44 @@ Public Class clsRequisicoesWeb
 
     End Function
 
-  ''' <summary>
-  ''' Retorna a descrição da atividade da pagina hora atraves de ajax
-  ''' </summary>
-  ''' <param name="pReqWeb"></param>
-  ''' <returns></returns>
+    ''' <summary>
+    ''' Retorna a descrição da atividade da pagina hora atraves de ajax
+    ''' </summary>
+    ''' <param name="pReqWeb"></param>
+    ''' <returns></returns>
     Private Function funRetornaDescricaoAtividade(pReqWeb As clsReqWeb) As String
-        Dim DAO As New clsAdicionarDAO        
-        Dim retorno As New clsRetornoAjax 
+        Dim DAO As New clsAdicionarDAO
+        Dim retorno As New clsRetornoAjax
 
         Try
             If pReqWeb.Context.Request.HttpMethod = "POST" Then
-            Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
 
-            If arr.Count = 0 Then
-               pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
-               Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                If arr.Count = 0 Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                End If
+
+                Dim id = arr(0)
+                If Val(id) <= 0 Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("ID da atividade inválido.")
+                End If
+
+                Try
+                    retorno.descricao = clsTools.RetornaCampoTabela("ATIVIDADES", "DESCRICAO", "ID = " & id)
+                    retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                Catch ex As Exception
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                    Throw New Exception("Erro ao carregar descrição da atividade.")
+                End Try
+
             End If
-
-            Dim id = arr(0)
-            If val(id) <= 0 Then
-                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
-                Throw New Exception("ID da atividade inválido.")
-            End If      
-            
-            Try
-                retorno.descricao  = clsTools.RetornaCampoTabela("ATIVIDADES", "DESCRICAO", "ID = " & id )
-                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO 
-            Catch ex As Exception
-                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError 
-                Throw New Exception("Erro ao carregar descrição da atividade.")
-            End Try            
-
-        End If
         Catch ex As Exception
-            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO   
-            retorno.descricao = ex.Message             
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
         End Try
-        
+
         Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
     End Function
     ''' <summary>
