@@ -4,10 +4,33 @@ Public Class clsAdicionar
     Private DAO As New clsAdicionarDAO
     Public Function Gravar(parAtividade As clsAtividade) As Boolean
 
+        subValidaAtividade(parAtividade)
 
         Return DAO.gravarAtividade(parAtividade)
 
     End Function
+
+    Private Sub subValidaAtividade(parAtividade As clsAtividade)
+        Dim ini = New clsIni().funCarregaIni()
+
+        If Val(parAtividade.Codigo) > 9999999 Then
+            Throw New Exception("Código da atividade não deve ser superior a 999999.")
+        End If
+
+        If DateDiff("d", CDate("01/01/1900"), parAtividade.Data) < 0 Then
+            Throw New Exception("Data Inválida.")
+        End If
+
+        If ini.Horastrabalhadas = enuHorasTrabalhadas.Periodo Then
+            If Trim(parAtividade.Horas) <> ":" And parAtividade.Periodos.Count = 0 Then
+                Throw New Exception("Não é permitido horas trabalhadas sem período informado.")
+            End If
+
+            If Trim(parAtividade.Horas) = ":" And parAtividade.Periodos.Count > 0 Then
+                Throw New Exception("Horas totais não informado.")
+            End If
+        End If
+    End Sub
 
     Public Sub CarregaComboTipo(pTipo As ComboBox)
         Dim locListaTipo As List(Of clsTipo)

@@ -91,16 +91,17 @@ Public Class clsCadastroAtividadeWeb
     End Function
 
     Friend Function RetornaCadastroAtividade_Salvar(json As String) As String
-
         RetornaCadastroAtividade_Salvar = "Erro"
 
-        Dim atividade = DeserializarNewtonsoft(json)
         Dim controle As New clsAdicionar
+        Dim atividadejson = DeserializarNewtonsoft(json)
+        Dim atividade = funRetornaAtividade(atividadejson)
 
-
-        If controle.Gravar(funRetornaAtividade(atividade)) Then
+        If controle.Gravar(atividade) Then
             Return "Sucesso"
         End If
+
+
     End Function
 
     Friend Function RetornaTabelaPeriodosDia(pData As Date) As String

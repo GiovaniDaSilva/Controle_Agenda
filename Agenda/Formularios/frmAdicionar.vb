@@ -51,10 +51,18 @@
     End Sub
 
     Private Sub btnGravar_Click(sender As Object, e As EventArgs) Handles btnGravar.Click
-        If controle.Gravar(funRetornaAtividade) Then
-            MsgBox("Atividade gravada com sucesso.", MsgBoxStyle.Information)
-        End If
-        Me.Close()
+
+        Try
+            If controle.Gravar(funRetornaAtividade) Then
+                MsgBox("Atividade gravada com sucesso.", MsgBoxStyle.Information)
+            End If
+
+            Me.Close()
+
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+        End Try
+
     End Sub
 
     Private Function funRetornaAtividade() As clsAtividade

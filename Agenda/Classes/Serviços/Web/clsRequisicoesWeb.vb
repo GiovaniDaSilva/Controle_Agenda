@@ -22,9 +22,9 @@ Public Class clsRequisicoesWeb
                 Case "/CadastroAtividade_get_descricao"
                     locPagRetorno = funRetornaDescricaoAtividade(pReqWeb)
                 Case "/CadastroAtividade_salvar"
-                    locPagRetorno = funRetornaCadastroAtividade_Salvar(pReqWeb.Context)
+                    locPagRetorno = funRetornaCadastroAtividade_Salvar(pReqWeb)
                 Case "/CadastroAtividade_excluir"
-                    locPagRetorno = funRetornaCadastroAtividade_Excluir(pReqWeb.Context)
+                    locPagRetorno = funRetornaCadastroAtividade_Excluir(pReqWeb)
                 Case "/CadastroAtividade_get_periodos_dia"
                     locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pReqWeb)
                 Case "/Grafico"
@@ -68,30 +68,40 @@ Public Class clsRequisicoesWeb
         Return New clsCadastroAtividadeWeb().funRetornaCadastroAtividade_Detalhes(locDetalhes)
     End Function
 
-    Private Function funRetornaCadastroAtividade_Excluir(pContext As HttpListenerContext) As String
+    Private Function funRetornaCadastroAtividade_Excluir(pReqWeb As clsReqWeb) As String
         Dim id As Long = 0
         Dim retorno As New clsRetornoAjax
         Try
-            If pContext.Request.HttpMethod = "POST" Then
-                Dim arr = clsHTMLTools.RetornaPostEmArray(pContext)
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
 
                 If arr.Count = 0 Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
                     Throw New Exception("Parâmetros da Pagina estão inválidos.")
                 End If
 
                 If Not IsNumeric(arr(0)) Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
                     Throw New Exception("ID inválido.")
                 End If
 
                 id = arr(0)
             End If
-            
+
             If id <= 0 Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
                 Throw New Exception("ID inválido.")
             End If
-            
-            retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
-            retorno.descricao = New clsCadastroAtividadeWeb().funRetornaCadastroAtividade_Excluir(id)            
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsCadastroAtividadeWeb().funRetornaCadastroAtividade_Excluir(id)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
         Catch ex As Exception
             retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
             retorno.descricao = ex.Message
@@ -130,21 +140,44 @@ Public Class clsRequisicoesWeb
         Catch ex As Exception
             retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
             retorno.descricao = ex.Message
+            pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
         End Try
 
         Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
 
     End Function
 
-    Private Function funRetornaCadastroAtividade_Salvar(pContext As HttpListenerContext) As String
+    Private Function funRetornaCadastroAtividade_Salvar(pReqWeb As clsReqWeb) As String
 
         Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
 
-        If pContext.Request.HttpMethod = "POST" Then
-            json = New StreamReader(pContext.Request.InputStream).ReadToEnd()
-        End If
+        Try
 
-        Return New clsCadastroAtividadeWeb().RetornaCadastroAtividade_Salvar(json)
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                json = New StreamReader(pReqWeb.Context.Request.InputStream).ReadToEnd()
+
+                If json = vbNullString Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                End If
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsCadastroAtividadeWeb().RetornaCadastroAtividade_Salvar(json)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
     End Function
 
     ''' <summary>

@@ -234,10 +234,10 @@
                             document.getElementById('descricaoAtividade').value = object.descricao;
                         }
                         //ocorreu um erro
-                        else if (object.codigo == 200){
+                        else if (object.codigo == 200) {
                             alert(object.descricao);
                             window.location.href = "Home";
-                        }                                               
+                        }
                     }
                 });
             }
@@ -254,7 +254,7 @@
                         dataType: 'text',
                         data: id + "", //Força a conversão para string
 
-                        success: function (objectJson) {     
+                        success: function (objectJson) {
                             var object = JSON.parse(objectJson);
 
                             //sucesso
@@ -265,9 +265,9 @@
 
                             //ocorreu um erro
                             else if (object.codigo == 200) {
-                                alert(object.descricao);                                
-                            }                                               
-                            
+                                alert(object.descricao);
+                            }
+
                         }
                     });
                 }
@@ -304,7 +304,7 @@
                     else if (object.codigo == 200) {
                         alert(object.descricao);
                         window.location.href = "Home";
-                    }                                                                              
+                    }
                 }
 
             });
@@ -364,21 +364,22 @@
                 dataType: 'text',
                 data: json,
 
-                success: function (result) {
+                success: function (objectJson) {
+   
+                    var object = JSON.parse(objectJson);
 
-                    alert("Gravado com sucesso!");
-                    document.getElementById("btnLimpa").click();
-                    document.getElementById('dataAtividade').value = RetornaDataAtual();
-                    CarregaGridPeriodosDia();
-
-                    /*
-                    if (result == 'Sucesso') {
-                        alert("Gravado com sucesso!");
-                        document.getElementById("btnLimpa").click();
-                    } else {
-                        alert("Erro ao gravar atividade. " + result);
+                    //sucesso
+                    if (object.codigo == 100) {
+                        alert("Gravado com sucesso!");                        
+                        window.location.href = "Home";
                     }
-                    */
+
+                    //ocorreu um erro
+                    else if (object.codigo == 200) {
+                        alert(object.descricao);
+                    }
+
+
                 },
 
                 error: function (descricao) {
