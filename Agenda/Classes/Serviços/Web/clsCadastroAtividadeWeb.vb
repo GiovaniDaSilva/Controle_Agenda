@@ -119,6 +119,7 @@ Public Class clsCadastroAtividadeWeb
             linha.Add(periodo.codigo_atividade)
             linha.Add(periodo.hora_inicial)
             linha.Add(periodo.hora_final)
+            linha.Add("")
             linhasPeriodo &= clsHTMLTools.funLinhaTabela(linha)
         Next
 

@@ -132,6 +132,7 @@
                                         <th>De</th>
                                         <th>Ate</th>
                                         <th>Total</th>
+                                        <th>Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -199,6 +200,14 @@
                 columnDefs: [
                     {//coluna ID
                         targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis'
+                    },
+                    {//coluna excluir
+                        render: function (data, type, row) {
+                            //var id = row[0];
+                            return "<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>"
+                        },
+                        targets: 4,
+                        width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
                     }
                 ]
             });
@@ -208,6 +217,10 @@
             $('#btnAdicionarPeriodo').on('click', function () {
                 AdicionaPeiodoGrid(tb);
             });
+
+
+
+            //Click do botao excluir periodo
 
 
             document.getElementById('dataAtividade').value = RetornaDataAtual();
@@ -282,6 +295,11 @@
 
         });
 
+
+        function excluiPeriodo() {
+            alert("teste click");
+        };
+
         function CarregaGridPeriodosDia() {
 
             var data = document.getElementById('dataAtividade').value;
@@ -330,7 +348,8 @@
                 0, //ID
                 ini, //Inicio
                 fim, //Final
-                tot // Total
+                tot, // Total
+                ""
             ]).draw(false);
 
             //Limpa os campos de horas
@@ -365,12 +384,12 @@
                 data: json,
 
                 success: function (objectJson) {
-   
+
                     var object = JSON.parse(objectJson);
 
                     //sucesso
                     if (object.codigo == 100) {
-                        alert("Gravado com sucesso!");                        
+                        alert("Gravado com sucesso!");
                         window.location.href = "Home";
                     }
 
