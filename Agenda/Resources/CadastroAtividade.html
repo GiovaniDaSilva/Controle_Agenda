@@ -132,7 +132,7 @@
                                         <th>De</th>
                                         <th>Ate</th>
                                         <th>Total</th>
-                                        <th>Ação</th>
+                                        <th>Ação</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -200,8 +200,9 @@
                 columnDefs: [
                     {//coluna ID
                         targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis'
-                    },
-                    {//coluna excluir
+                    }
+                                        
+                    ,{//coluna excluir
                         render: function (data, type, row) {
                             //var id = row[0];
                             return "<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>"
@@ -213,16 +214,26 @@
             });
 
 
+            //Seleção da Atividade
+            tb.on('select.dt deselect.dt', function () {
+                var rows = $('tr.selected');
+                var rowData = tb.rows(rows).data();
+                var id = 0;
+                var dados;
+
+                $.each($(rowData), function (key, value) {
+                    id = value[0];
+                });
+
+            });
+
+
             //Click do botao adicionar periodo
             $('#btnAdicionarPeriodo').on('click', function () {
                 AdicionaPeiodoGrid(tb);
             });
 
-
-
-            //Click do botao excluir periodo
-
-
+                       
             document.getElementById('dataAtividade').value = RetornaDataAtual();
 
             [p_inicializa_campos_atividade]
@@ -298,24 +309,21 @@
         //Remove a linha do periodo
         function excluiPeriodo() {
 
-            
+
             var tot
-            var rowData = tb.rows(tb.row('.selected').index()).data();
-            $.each($(rowData), function (key, value) {                
+            var rowData = tb.rows('.selected').data();
+            $.each($(rowData), function (key, value) {
                 tot = value[3];
             });
             
-
-            
-            tb.row(tb.row('.selected').index()).remove().draw(false);
-
+            tb.row('.selected').remove().draw(false);
             
             //Pega hora total, ou alimenta se ainda não tiver
             var hora = document.getElementById('horaTotal').value;
             if (hora == '') { hora = '00:00'; }
-            
-            document.getElementById('horaTotal').value = subtraiHora(hora, tot);           
-                
+
+            document.getElementById('horaTotal').value = subtraiHora(hora, tot);
+
 
         };
 

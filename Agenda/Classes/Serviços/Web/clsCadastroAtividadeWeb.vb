@@ -119,7 +119,6 @@ Public Class clsCadastroAtividadeWeb
             linha.Add(periodo.codigo_atividade)
             linha.Add(periodo.hora_inicial)
             linha.Add(periodo.hora_final)
-            linha.Add("")
             linhasPeriodo &= clsHTMLTools.funLinhaTabela(linha)
         Next
 
@@ -200,6 +199,9 @@ Public Class clsCadastroAtividadeWeb
             linha.Add(periodo.Hora_Inicial)
             linha.Add(periodo.Hora_Final)
             linha.Add(periodo.Total)
+            'linha.Add("")
+            linha.Add("<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>")
+
             locRetorno &= clsHTMLTools.funLinhaTabela(linha)
         Next
 
