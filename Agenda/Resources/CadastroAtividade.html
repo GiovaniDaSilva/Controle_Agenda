@@ -295,9 +295,28 @@
 
         });
 
-
+        //Remove a linha do periodo
         function excluiPeriodo() {
-            alert("teste click");
+
+            
+            var tot
+            var rowData = tb.rows(tb.row('.selected').index()).data();
+            $.each($(rowData), function (key, value) {                
+                tot = value[3];
+            });
+            
+
+            
+            tb.row(tb.row('.selected').index()).remove().draw(false);
+
+            
+            //Pega hora total, ou alimenta se ainda não tiver
+            var hora = document.getElementById('horaTotal').value;
+            if (hora == '') { hora = '00:00'; }
+            
+            document.getElementById('horaTotal').value = subtraiHora(hora, tot);           
+                
+
         };
 
         function CarregaGridPeriodosDia() {
@@ -328,6 +347,7 @@
             });
         }
 
+        //inseri o periodo na grid
         function AdicionaPeiodoGrid(tb) {
 
             var ini = document.getElementById('horaInicio').value
@@ -414,6 +434,35 @@
         [p_funcao_calcula_soma_horas]
 
         [p_funcao_calcula_diferencao_horas]
+
+
+        function subtraiHora(hrA, hrB) {
+            if (hrA.length != 5 || hrB.length != 5) return "00:00";
+
+            temp = 0;
+            nova_h = 0;
+            novo_m = 0;
+
+            hora1 = hrA.substr(0, 2) * 1;
+            hora2 = hrB.substr(0, 2) * 1;
+            minu1 = hrA.substr(3, 2) * 1;
+            minu2 = hrB.substr(3, 2) * 1;
+
+            temp = minu1 - minu2;
+            while (temp < 0) {
+                nova_h++;
+                temp = temp + 60;
+            }
+            novo_m = temp.toString().length == 2 ? temp : ("0" + temp);
+
+            temp = hora1 - hora2 - nova_h;
+            while (temp < 0) {
+                temp = temp + 24;
+            }
+            nova_h = temp.toString().length == 2 ? temp : ("0" + temp);
+
+            return nova_h + ':' + novo_m;
+        }
 
 
         //Converte a tabela em json
