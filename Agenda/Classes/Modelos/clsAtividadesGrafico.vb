@@ -39,3 +39,24 @@
     End Function
 
 End Class
+
+Public Class clsAtividadesGraficoPrincipal
+
+    Public Property TotalHorasAtividades As TimeSpan
+
+    Public Property Atividades As List(Of clsAtividadesGrafico2)
+End Class
+
+
+Public Class clsAtividadesGrafico2
+    Public Sub New(idAtividade As Integer, descricaoAtividade As String)
+        Me.IdAtividade = idAtividade
+        Me.DescricaoAtividade = descricaoAtividade
+    End Sub
+
+    Public Property IdAtividade As Integer
+
+    Public Property DescricaoAtividade As String
+
+    Public Property TotalHoras As TimeSpan
+End Class
