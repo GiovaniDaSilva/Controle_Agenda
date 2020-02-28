@@ -39,7 +39,6 @@ Public Class clsPrincipal
 
 
         For Each item In lista
-
             Select Case item.ID_TIPO_ATIVIDADE
 
                 Case enuTipoAtividades.SOLICITACAO
@@ -51,14 +50,14 @@ Public Class clsPrincipal
                 Case enuTipoAtividades.AUSENTE
                     objeto = New clsListaAusente
                 Case Else
-                    objeto = New clsListaOutros
+                    objeto = New clsListaOutros(item.TIPO_DESCRICAO)
             End Select
 
             If locData = vbNullString OrElse locData <> item.Data Then
-                Dim data As string
-                data = item.Data & " - " &  Strings.StrConv(String.Format("{0:dddd}", item.Data), VbStrConv.ProperCase)
+                Dim data As String
+                data = item.Data & " - " & Strings.StrConv(String.Format("{0:dddd}", item.Data), VbStrConv.ProperCase)
                 RichAddLineFmt(txtTela, funRetornaDataFormatada(data) & vbNewLine)
-                locData = item.Data                
+                locData = item.Data
             End If
 
 
@@ -330,11 +329,17 @@ End Class
 Public Class clsListaOutros
     Implements clsIListaAtividades
 
+    Private descricaoAtividade As String
+
+    Public Sub New(Optional descricaoTipo As String = "Outros")
+        descricaoAtividade = descricaoTipo
+    End Sub
+
     Public Sub subListaAtividade(parCampo As RichTextBox, item As clsConsultaAtividades, parIni As clsParametrosIni) Implements clsIListaAtividades.subListaAtividade
         'Outros       
         '       Horas: xx:xx        
         '       Descrição: xxxxxxxxxxxx      
-        RichAddLineFmt(parCampo, enuCamposImpressao.Outros)
+        RichAddLineFmt(parCampo, enuCamposImpressao.Outros(descricaoAtividade))
         RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Horas & clsPrincipal.funRetornaFormatadoDestaque(item.Horas))
         If parIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And item.Periodos.Count > 0 Then
             RichAddLineFmt(parCampo, clsTools.Tab & enuCamposImpressao.Periodo & clsPrincipal.funRetornaToolTipoPeriodo(item.Periodos, 11))

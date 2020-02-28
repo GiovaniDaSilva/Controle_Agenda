@@ -54,7 +54,11 @@ Public MustInherit Class enuCamposImpressao
     Public Shared Property PBI As String = "<fs:10><fc:" & Color.DarkBlue.Name & "><b><u>PBI</u></b></fc></fs>"
     Public Shared Property Ausente As String = "<fs:10><fc:" & Color.DarkBlue.Name & "><b><u>Ausente</u></b></fc></fs>"
     Public Shared Property Reuniao As String = "<fs:10><fc:" & Color.DarkBlue.Name & "><b><u>Reunião</u></b></fc></fs>"
-    Public Shared Property Outros As String = "<fs:10><fc:" & Color.DarkBlue.Name & "><b><u>Outros</u></b></fc></fs>"
+    'Public Shared Property Outros As String = "<fs:10><fc:" & Color.DarkBlue.Name & "><b><u>Outros</u></b></fc></fs>"
+
+    Public Shared Function Outros(descricao As String) As String
+        Return "<fs:10><fc:" & Color.DarkBlue.Name & "><b><u>" & descricao & "</u></b></fc></fs>"
+    End Function
 End Class
 
 
