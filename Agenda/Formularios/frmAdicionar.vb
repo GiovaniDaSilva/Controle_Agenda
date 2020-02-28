@@ -274,6 +274,8 @@
 
     Private Sub Calendario_DateChanged(sender As Object, e As DateRangeEventArgs) Handles Calendario.DateChanged
         txtData.Text = Calendario.SelectionStart()
+        Calendario.Visible = False
+        cbTipo.Focus()
     End Sub
 
     Private Sub Calendario_Leave(sender As Object, e As EventArgs) Handles Calendario.Leave
