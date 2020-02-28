@@ -154,6 +154,12 @@
     <Compile Include="Formularios\frmAdicionar.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\frmCadastroTipoAtividade.Designer.vb">
+      <DependentUpon>frmCadastroTipoAtividade.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmCadastroTipoAtividade.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\frmConfiguracoes.Designer.vb">
       <DependentUpon>frmConfiguracoes.vb</DependentUpon>
     </Compile>
@@ -193,6 +199,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Formularios\frmAdicionar.resx">
       <DependentUpon>frmAdicionar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmCadastroTipoAtividade.resx">
+      <DependentUpon>frmCadastroTipoAtividade.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmConfiguracoes.resx">
       <DependentUpon>frmConfiguracoes.vb</DependentUpon>
