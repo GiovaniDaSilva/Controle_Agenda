@@ -48,29 +48,19 @@
     End Sub
 
     Private Sub txtDescricao_Leave(sender As Object, e As EventArgs) Handles txtDescricao.Leave
-        If Not ValidaCampoDescricao() Then Exit Sub
+
+        Try
+            If Not controle.ValidaCampoDescricao(txtDescricao.Text, indexAlteracao) Then Exit Sub
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+            txtDescricao.Focus()
+            Exit Sub
+        End Try
 
         listaTipo(indexAlteracao).DESCRICAO = txtDescricao.Text
         subAtualizaGrid()
     End Sub
 
-
-    Private Function ValidaCampoDescricao() As Boolean
-        If indexAlteracao = -1 Then
-            Return False
-        End If
-
-        Return True
-    End Function
-
-    Private Function ValidaCampoCodigo() As Boolean
-        If indexAlteracao = -1 Then
-            Return False
-        End If
-
-
-        Return True
-    End Function
 
 
     Private Sub subAtualizaGrid()
@@ -78,7 +68,14 @@
     End Sub
 
     Private Sub txtCodigo_Leave(sender As Object, e As EventArgs) Handles txtCodigo.Leave
-        If Not ValidaCampoCodigo() Then Exit Sub
+        Try
+            If Not controle.ValidaCampoCodigo(Val(txtCodigo.Text), indexAlteracao, listaTipo) Then Exit Sub
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+            txtCodigo.Text = listaTipo(indexAlteracao).CODIGO
+            txtCodigo.Focus()
+            Exit Sub
+        End Try
 
         listaTipo(indexAlteracao).CODIGO = Val(txtCodigo.Text)
         subAtualizaGrid()
