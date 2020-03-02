@@ -189,6 +189,11 @@ Public Class clsHTMLComum
 
                 // Guarda cada pedaço em uma variável
                 var dia = data.getDate();           // 1-31
+                
+                if (dia.toString().length == 1){
+                    dia = ""0"" + dia;
+                }                
+              
                 var mes = (""0"" + (data.getMonth() + 1)).slice(-2);  // 0-11 (zero=janeiro)
                 var ano4 = data.getFullYear();       // 4 dígitos
 
