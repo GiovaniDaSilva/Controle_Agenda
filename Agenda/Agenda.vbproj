@@ -134,6 +134,7 @@
     <Compile Include="Classes\clsIni.vb" />
     <Compile Include="Classes\Modelos\clsParametrosIni.vb" />
     <Compile Include="Classes\Modelos\clsPeriodo.vb" />
+    <Compile Include="Classes\Serviços\Controles\clsCadastroTipoAtividade.vb" />
     <Compile Include="Classes\Serviços\Controles\clsPrincipal.vb" />
     <Compile Include="Classes\clsRegistro.vb" />
     <Compile Include="Classes\Modelos\clsSolicitacao.vb" />

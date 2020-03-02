@@ -24,15 +24,14 @@ Partial Class frmCadastroTipoAtividade
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCadastroTipoAtividade))
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.gridPeriodo = New System.Windows.Forms.DataGridView()
-        Me.Excluir = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.txtDescricao = New System.Windows.Forms.TextBox()
+        Me.gridTipo = New System.Windows.Forms.DataGridView()
         Me.btnExcluir = New System.Windows.Forms.Button()
         Me.btnLimpar = New System.Windows.Forms.Button()
         Me.btnGravar = New System.Windows.Forms.Button()
         Me.lblCodigo = New System.Windows.Forms.Label()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
-        CType(Me.gridPeriodo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gridTipo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -44,39 +43,30 @@ Partial Class frmCadastroTipoAtividade
         Me.Label1.TabIndex = 8
         Me.Label1.Text = "Descrição"
         '
-        'TextBox1
+        'txtDescricao
         '
-        Me.TextBox1.Location = New System.Drawing.Point(107, 36)
-        Me.TextBox1.MaxLength = 30
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(275, 20)
-        Me.TextBox1.TabIndex = 9
+        Me.txtDescricao.Location = New System.Drawing.Point(107, 36)
+        Me.txtDescricao.MaxLength = 30
+        Me.txtDescricao.Name = "txtDescricao"
+        Me.txtDescricao.Size = New System.Drawing.Size(275, 20)
+        Me.txtDescricao.TabIndex = 9
         '
-        'gridPeriodo
+        'gridTipo
         '
-        Me.gridPeriodo.AllowUserToAddRows = False
-        Me.gridPeriodo.AllowUserToDeleteRows = False
-        Me.gridPeriodo.AllowUserToResizeColumns = False
-        Me.gridPeriodo.AllowUserToResizeRows = False
-        Me.gridPeriodo.BackgroundColor = System.Drawing.Color.LightGray
-        Me.gridPeriodo.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.gridPeriodo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridPeriodo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Excluir})
-        Me.gridPeriodo.Location = New System.Drawing.Point(12, 82)
-        Me.gridPeriodo.Name = "gridPeriodo"
-        Me.gridPeriodo.ReadOnly = True
-        Me.gridPeriodo.RowHeadersVisible = False
-        Me.gridPeriodo.Size = New System.Drawing.Size(503, 289)
-        Me.gridPeriodo.TabIndex = 10
-        Me.gridPeriodo.TabStop = False
-        '
-        'Excluir
-        '
-        Me.Excluir.HeaderText = ""
-        Me.Excluir.Image = CType(resources.GetObject("Excluir.Image"), System.Drawing.Image)
-        Me.Excluir.Name = "Excluir"
-        Me.Excluir.ReadOnly = True
-        Me.Excluir.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gridTipo.AllowUserToAddRows = False
+        Me.gridTipo.AllowUserToDeleteRows = False
+        Me.gridTipo.AllowUserToResizeColumns = False
+        Me.gridTipo.AllowUserToResizeRows = False
+        Me.gridTipo.BackgroundColor = System.Drawing.Color.LightGray
+        Me.gridTipo.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.gridTipo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridTipo.Location = New System.Drawing.Point(12, 82)
+        Me.gridTipo.Name = "gridTipo"
+        Me.gridTipo.ReadOnly = True
+        Me.gridTipo.RowHeadersVisible = False
+        Me.gridTipo.Size = New System.Drawing.Size(503, 289)
+        Me.gridTipo.TabIndex = 10
+        Me.gridTipo.TabStop = False
         '
         'btnExcluir
         '
@@ -140,8 +130,8 @@ Partial Class frmCadastroTipoAtividade
         Me.Controls.Add(Me.btnExcluir)
         Me.Controls.Add(Me.btnLimpar)
         Me.Controls.Add(Me.btnGravar)
-        Me.Controls.Add(Me.gridPeriodo)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.gridTipo)
+        Me.Controls.Add(Me.txtDescricao)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtCodigo)
         Me.Controls.Add(Me.lblCodigo)
@@ -152,15 +142,14 @@ Partial Class frmCadastroTipoAtividade
         Me.Name = "frmCadastroTipoAtividade"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Cadastro de Tipo de Atividade"
-        CType(Me.gridPeriodo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gridTipo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents gridPeriodo As DataGridView
-    Friend WithEvents Excluir As DataGridViewImageColumn
+    Friend WithEvents txtDescricao As TextBox
+    Friend WithEvents gridTipo As DataGridView
     Friend WithEvents btnExcluir As Button
     Friend WithEvents btnLimpar As Button
     Friend WithEvents btnGravar As Button
