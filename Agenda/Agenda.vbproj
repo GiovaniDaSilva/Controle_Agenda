@@ -120,6 +120,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DAO\clsCadastroTipoAtividadeDAO.vb" />
     <Compile Include="Classes\Modelos\clsAtividadesGrafico.vb" />
     <Compile Include="Classes\Modelos\clsDetalhesAtividadeWeb.vb" />
     <Compile Include="Classes\Modelos\clsHomeParametros.vb" />

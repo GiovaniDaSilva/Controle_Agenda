@@ -26,18 +26,19 @@ Partial Class frmCadastroTipoAtividade
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtDescricao = New System.Windows.Forms.TextBox()
         Me.gridTipo = New System.Windows.Forms.DataGridView()
-        Me.btnExcluir = New System.Windows.Forms.Button()
         Me.btnLimpar = New System.Windows.Forms.Button()
         Me.btnGravar = New System.Windows.Forms.Button()
         Me.lblCodigo = New System.Windows.Forms.Label()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
+        Me.Excluir = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.btnNovo = New System.Windows.Forms.Button()
         CType(Me.gridTipo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(104, 20)
+        Me.Label1.Location = New System.Drawing.Point(198, 12)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(55, 13)
         Me.Label1.TabIndex = 8
@@ -45,10 +46,10 @@ Partial Class frmCadastroTipoAtividade
         '
         'txtDescricao
         '
-        Me.txtDescricao.Location = New System.Drawing.Point(107, 36)
+        Me.txtDescricao.Location = New System.Drawing.Point(201, 28)
         Me.txtDescricao.MaxLength = 30
         Me.txtDescricao.Name = "txtDescricao"
-        Me.txtDescricao.Size = New System.Drawing.Size(275, 20)
+        Me.txtDescricao.Size = New System.Drawing.Size(314, 20)
         Me.txtDescricao.TabIndex = 9
         '
         'gridTipo
@@ -60,6 +61,7 @@ Partial Class frmCadastroTipoAtividade
         Me.gridTipo.BackgroundColor = System.Drawing.Color.LightGray
         Me.gridTipo.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.gridTipo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridTipo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Excluir})
         Me.gridTipo.Location = New System.Drawing.Point(12, 82)
         Me.gridTipo.Name = "gridTipo"
         Me.gridTipo.ReadOnly = True
@@ -67,18 +69,6 @@ Partial Class frmCadastroTipoAtividade
         Me.gridTipo.Size = New System.Drawing.Size(503, 289)
         Me.gridTipo.TabIndex = 10
         Me.gridTipo.TabStop = False
-        '
-        'btnExcluir
-        '
-        Me.btnExcluir.BackColor = System.Drawing.SystemColors.Control
-        Me.btnExcluir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnExcluir.Image = CType(resources.GetObject("btnExcluir.Image"), System.Drawing.Image)
-        Me.btnExcluir.Location = New System.Drawing.Point(459, 388)
-        Me.btnExcluir.Name = "btnExcluir"
-        Me.btnExcluir.Size = New System.Drawing.Size(57, 50)
-        Me.btnExcluir.TabIndex = 13
-        Me.btnExcluir.UseVisualStyleBackColor = False
-        Me.btnExcluir.Visible = False
         '
         'btnLimpar
         '
@@ -105,7 +95,7 @@ Partial Class frmCadastroTipoAtividade
         'lblCodigo
         '
         Me.lblCodigo.AutoSize = True
-        Me.lblCodigo.Location = New System.Drawing.Point(9, 20)
+        Me.lblCodigo.Location = New System.Drawing.Point(103, 12)
         Me.lblCodigo.Name = "lblCodigo"
         Me.lblCodigo.Size = New System.Drawing.Size(40, 13)
         Me.lblCodigo.TabIndex = 6
@@ -113,7 +103,7 @@ Partial Class frmCadastroTipoAtividade
         '
         'txtCodigo
         '
-        Me.txtCodigo.Location = New System.Drawing.Point(12, 36)
+        Me.txtCodigo.Location = New System.Drawing.Point(106, 28)
         Me.txtCodigo.Mask = "00"
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(57, 20)
@@ -121,13 +111,31 @@ Partial Class frmCadastroTipoAtividade
         Me.txtCodigo.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.txtCodigo.ValidatingType = GetType(Integer)
         '
+        'Excluir
+        '
+        Me.Excluir.HeaderText = "Excluir"
+        Me.Excluir.Image = CType(resources.GetObject("Excluir.Image"), System.Drawing.Image)
+        Me.Excluir.Name = "Excluir"
+        Me.Excluir.ReadOnly = True
+        '
+        'btnNovo
+        '
+        Me.btnNovo.BackColor = System.Drawing.SystemColors.Control
+        Me.btnNovo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnNovo.Image = CType(resources.GetObject("btnNovo.Image"), System.Drawing.Image)
+        Me.btnNovo.Location = New System.Drawing.Point(12, 12)
+        Me.btnNovo.Name = "btnNovo"
+        Me.btnNovo.Size = New System.Drawing.Size(57, 50)
+        Me.btnNovo.TabIndex = 14
+        Me.btnNovo.UseVisualStyleBackColor = False
+        '
         'frmCadastroTipoAtividade
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.ClientSize = New System.Drawing.Size(528, 450)
-        Me.Controls.Add(Me.btnExcluir)
+        Me.Controls.Add(Me.btnNovo)
         Me.Controls.Add(Me.btnLimpar)
         Me.Controls.Add(Me.btnGravar)
         Me.Controls.Add(Me.gridTipo)
@@ -150,9 +158,10 @@ Partial Class frmCadastroTipoAtividade
     Friend WithEvents Label1 As Label
     Friend WithEvents txtDescricao As TextBox
     Friend WithEvents gridTipo As DataGridView
-    Friend WithEvents btnExcluir As Button
     Friend WithEvents btnLimpar As Button
     Friend WithEvents btnGravar As Button
     Friend WithEvents lblCodigo As Label
     Friend WithEvents txtCodigo As MaskedTextBox
+    Friend WithEvents Excluir As DataGridViewImageColumn
+    Friend WithEvents btnNovo As Button
 End Class
