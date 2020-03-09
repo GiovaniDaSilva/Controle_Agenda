@@ -55,6 +55,8 @@
     Private Sub txtDescricao_Leave(sender As Object, e As EventArgs) Handles txtDescricao.Leave
 
         Try
+            If Not txtDescricao.Enabled Then Exit Sub
+
             If Not controle.ValidaCampoDescricao(txtDescricao.Text, indexAlteracao) Then Exit Sub
         Catch ex As Exception
             clsTools.subTrataExcessao(ex)
@@ -65,7 +67,7 @@
         If indexAlteracao >= 0 Then
             listaTipo(indexAlteracao).DESCRICAO = txtDescricao.Text
         Else
-            AdicionaTipo
+            AdicionaTipo()
         End If
 
         subAtualizaGrid()
@@ -100,12 +102,14 @@
             If Not controle.ValidaCampoCodigo(Val(txtCodigo.Text), indexAlteracao, listaTipo) Then Exit Sub
         Catch ex As Exception
             clsTools.subTrataExcessao(ex)
-            txtCodigo.Text = listaTipo(indexAlteracao).CODIGO
             txtCodigo.Focus()
             Exit Sub
         End Try
 
-        listaTipo(indexAlteracao).CODIGO = Val(txtCodigo.Text)
+        If indexAlteracao > -1 Then
+            listaTipo(indexAlteracao).CODIGO = Val(txtCodigo.Text)
+        End If
+
     End Sub
 
     Private Sub btnLimpar_Click(sender As Object, e As EventArgs) Handles btnLimpar.Click
@@ -121,7 +125,10 @@
     End Sub
 
     Private Sub subInseriListaExcluido(rowIndex As Integer)
-        listaTipoExcluidos.Add(listaTipo(rowIndex))
+        If controle.ValidaExclusao(listaTipo(rowIndex)) Then
+            listaTipoExcluidos.Add(listaTipo(rowIndex))
+        End If
+
     End Sub
 
     Private Sub subHabilitaCampos(ByVal valor As Boolean)
@@ -134,6 +141,15 @@
     End Sub
 
     Private Sub btnGravar_Click(sender As Object, e As EventArgs) Handles btnGravar.Click
-        controle.GravaTipos(listaTipo, listaTipoExcluidos)
+
+        Try
+            If controle.GravaTipos(listaTipo, listaTipoExcluidos) Then
+                MsgBox("Gravado com Sucesso.", vbInformation)
+            End If
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+        End Try
+
+        subLimpaCampos()
     End Sub
 End Class
