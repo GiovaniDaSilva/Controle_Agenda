@@ -65,7 +65,8 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Agenda.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -236,9 +237,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Agenda.ico" />
     <None Include="Resources\Agenda.ico" />
-    <None Include="Resources\favicon.ico" />
     <None Include="Resources\Versoes.html" />
     <None Include="Resources\CadastroAtividade.html" />
     <None Include="Resources\Home.html" />
