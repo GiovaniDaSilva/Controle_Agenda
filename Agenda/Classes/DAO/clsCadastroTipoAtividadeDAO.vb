@@ -42,4 +42,19 @@ Public Class clsCadastroTipoAtividadeDAO
 
         Return locSQL.ToString()
     End Function
+
+    Public Function TipoSendoUsado(pTipo As clsTipo) As Boolean
+
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
+            Comm.CommandText = "SELECT ID FROM ATIVIDADES WHERE ID_TIPO_ATIVIDADE = " & pTipo.ID
+
+            Using Reader = Comm.ExecuteReader()
+                If Reader.Read() Then
+                    Return True
+                End If
+            End Using
+        End Using
+
+        Return False
+    End Function
 End Class

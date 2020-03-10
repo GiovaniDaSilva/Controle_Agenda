@@ -34,7 +34,7 @@
         Return True
     End Function
 
-    Friend Function GravaTipos(parTipos As List(Of clsTipo), parTiposRemovidos As List(Of clsTipo)) As Boolean
+    Public Function GravaTipos(parTipos As List(Of clsTipo), parTiposRemovidos As List(Of clsTipo)) As Boolean
 
         If Not funValidaCampos(parTipos) Then Return False
 
@@ -56,7 +56,15 @@
         Return True
     End Function
 
-    Friend Function ValidaExclusao(clsTipo As clsTipo) As Boolean
+    Public Function ValidaExclusao(pTipo As clsTipo) As Boolean
+        Dim msg As String = "Tipo de Atividadae não pode ser excluída." & vbNewLine
+        Dim dao As New clsCadastroTipoAtividadeDAO
 
+        If dao.TipoSendoUsado(pTipo) Then
+            Throw New Exception(msg & "A mesma esta sendo utilizada por uma atividade cadastrada.")
+        End If
+        Return True
     End Function
+
+
 End Class

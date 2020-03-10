@@ -42,6 +42,7 @@
         gridTipo.Columns("CODIGO").HeaderText = "Código"
         gridTipo.Columns("DESCRICAO").HeaderText = "Descrição"
         gridTipo.Columns("DESCRICAO").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        gridTipo.Columns("EXCLUIR").AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
     End Sub
 
     Private Sub gridTipo_DoubleClick(sender As Object, e As EventArgs) Handles gridTipo.DoubleClick
@@ -118,18 +119,33 @@
 
     Private Sub gridTipo_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridTipo.CellClick
         If (e.ColumnIndex = enuColunas.EXCLUIR) Then
-            subInseriListaExcluido(e.RowIndex)
-            listaTipo.RemoveAt(e.RowIndex)
-            subAtualizaGrid()
+            subExcluiTipoAtividade(e)
         End If
     End Sub
 
-    Private Sub subInseriListaExcluido(rowIndex As Integer)
-        If controle.ValidaExclusao(listaTipo(rowIndex)) Then
-            listaTipoExcluidos.Add(listaTipo(rowIndex))
+    Private Sub subExcluiTipoAtividade(e As DataGridViewCellEventArgs)
+        Try
+
+            If funValidaExcludsao(e.RowIndex) Then
+                listaTipoExcluidos.Add(listaTipo(e.RowIndex))
+                listaTipo.RemoveAt(e.RowIndex)
+                subAtualizaGrid()
+            End If
+
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+        End Try
+    End Sub
+
+    Private Function funValidaExcludsao(rowIndex As Integer) As Boolean
+
+        If Not controle.ValidaExclusao(listaTipo(rowIndex)) Then
+            Return False
         End If
 
-    End Sub
+        Return True
+
+    End Function
 
     Private Sub subHabilitaCampos(ByVal valor As Boolean)
         txtCodigo.Enabled = valor
@@ -138,6 +154,7 @@
 
     Private Sub btnNovo_Click(sender As Object, e As EventArgs) Handles btnNovo.Click
         subHabilitaCampos(True)
+        txtCodigo.Focus()
     End Sub
 
     Private Sub btnGravar_Click(sender As Object, e As EventArgs) Handles btnGravar.Click
