@@ -13,10 +13,11 @@ Public Class clsHTMLComum
                 </div>
                 <div class=""float-right"">
                     <span class=""agenda"">Agenda</span>              
-                    <img  src=""https://image.flaticon.com/icons/png/512/124/124050.png"""" width=""50"" height=""50""> </img>                    
+                    <img  src=""favicon.ico"""" width=""50"" height=""50""> </img>                               
                 </div>
         </nav>")
         Return locMenu.ToString
+
     End Function
 
     Public Shared Function RetornaTituloPagina() As String
@@ -92,14 +93,11 @@ Public Class clsHTMLComum
             <script src=""https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js""></script>
             <script src=""https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js""></script>
 
-            <!--icone da agenda-->
-            <link rel=""icon"" href=""https://image.flaticon.com/icons/png/512/124/124050.png"">
-            <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
-            
-            <!--icone dos botão-->
+            <!--icone botao-->         
             <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
     
         ")
+
         Return texto.ToString
     End Function
     Public Shared Sub TrataParametrosComuns(ByRef pagina As String)

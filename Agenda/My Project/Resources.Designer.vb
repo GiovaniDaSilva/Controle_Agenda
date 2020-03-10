@@ -61,6 +61,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        '''</summary>
+        Friend ReadOnly Property Agenda() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Agenda", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &lt;html lang=&quot;pr-bt&quot;&gt;
         '''&lt;head&gt;
         '''    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
@@ -160,12 +170,19 @@ Namespace My.Resources
         '''        {p_menu_pagina}  
         '''    &lt;/header&gt;
         '''
-        '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Página não Encontrada&lt;/h1&gt;
+        '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;{p_titulo}&lt;/h1&gt;
         '''
         '''    &lt;div class=&quot;container-fluid&quot;&gt;
         '''        &lt;img src=&quot;https://image.flaticon.com/icons/svg/1603/1603229.svg&quot; style=&quot;width:100px; height: 100px; position: center &quot; /&gt;
-        '''        A página solicitada não foi encontrada.
-        '''    &lt;/di [rest of string was truncated]&quot;;.
+        '''        {p_mensagem}
+        '''    &lt;/div&gt;
+        '''
+        '''    
+        '''
+        '''&lt;/body&gt;
+        '''
+        '''
+        '''&lt;/html&gt;.
         '''</summary>
         Friend ReadOnly Property Pagina_Não_Encontrada() As String
             Get
@@ -195,12 +212,12 @@ Namespace My.Resources
         '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Atualizações&lt;/h1&gt;
         '''
         '''    &lt;div class=&quot;container-fluid&quot;&gt;
-        '''        
-        '''        &lt;h2 class=&quot;Titulo&quot;&gt;v.0.11&lt;/h2&gt;
+        '''
+        '''        &lt;h2 class=&quot;Titulo&quot;&gt;v.1.2&lt;/h2&gt;
         '''        &lt;p class=&quot;Atualizacao&quot;&gt;
         '''            &lt;ul&gt;
-        '''                &lt;li&gt;Adicionado a chamada do Agenda na versão Web.&lt;/li&gt;&lt;/br&gt;
-        '''                [rest of string was truncated]&quot;;.
+        '''                &lt;li&gt;Adicionado funcionalidade para cadastro do Tipo de Atividade.&lt;/li&gt;&lt;/br&gt;
+        '''         [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Versoes() As String
             Get

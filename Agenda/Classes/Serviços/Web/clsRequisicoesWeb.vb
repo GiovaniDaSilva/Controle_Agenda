@@ -31,6 +31,9 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaPaginaGrafico(pReqWeb)
                 Case "/Versoes"
                     locPagRetorno = My.Resources.Versoes
+                Case "/favicon.ico"
+                    pReqWeb.RetornaIcone = True
+                    Exit Sub
             End Select
 
             clsHTMLComum.TrataParametrosComuns(locPagRetorno)

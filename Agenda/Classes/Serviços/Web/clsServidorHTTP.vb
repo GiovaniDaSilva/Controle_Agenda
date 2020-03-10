@@ -66,15 +66,17 @@ Public Class clsServidorHTTP
             locRequisicoesWeb.trataRequisicoesWeb(locReqWeb)
 
 
-            Dim webPage() As Byte
-            webPage = Encoding.UTF8.GetBytes(locReqWeb.HTML)
+            Dim webPage() As Byte = Encoding.UTF8.GetBytes("")
 
+            If Not locReqWeb.RetornaIcone Then
+                webPage = Encoding.UTF8.GetBytes(locReqWeb.HTML)
 
-            ' Configura a resposta
-            locReqWeb.Context.Response.ContentType = "text/html"
-            locReqWeb.Context.Response.ContentEncoding = Encoding.UTF8
-            'locReqWeb.Context.Response.StatusCode = HttpStatusCode.OK
-            locReqWeb.Context.Response.ContentLength64 = webPage.Length
+                ' Configura a resposta
+                locReqWeb.Context.Response.ContentType = "text/html"
+                locReqWeb.Context.Response.ContentEncoding = Encoding.UTF8
+                locReqWeb.Context.Response.ContentLength64 = webPage.Length
+            End If
+
 
             Dim outputStream = locReqWeb.Context.Response.OutputStream
             Dim canWrite As Boolean
@@ -91,7 +93,12 @@ Public Class clsServidorHTTP
             Loop
 
             If canWrite Then
-                outputStream.Write(webPage, 0, webPage.Length)
+                If Not locReqWeb.RetornaIcone Then
+                    outputStream.Write(webPage, 0, webPage.Length)
+                Else
+                    My.Resources.Agenda.Save(outputStream)
+                End If
+
                 outputStream.Flush()
             End If
 

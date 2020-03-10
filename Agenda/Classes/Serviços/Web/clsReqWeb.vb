@@ -6,4 +6,6 @@ Public Class clsReqWeb
     Public Property Code As Integer
     Public Property Context As HttpListenerContext
 
+    Public Property RetornaIcone As Boolean
+
 End Class

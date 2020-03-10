@@ -237,6 +237,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Agenda.ico" />
+    <None Include="Resources\Agenda.ico" />
+    <None Include="Resources\favicon.ico" />
     <None Include="Resources\Versoes.html" />
     <None Include="Resources\CadastroAtividade.html" />
     <None Include="Resources\Home.html" />
