@@ -140,4 +140,12 @@
         End If
 
     End Sub
+
+    Private Sub ToolTip1_Popup(sender As Object, e As PopupEventArgs) Handles ToolTip1.Popup
+
+    End Sub
+
+    Private Sub TipoDeAtividadeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TipoDeAtividadeToolStripMenuItem.Click
+        frmCadastroTipoAtividade.ShowDialog()
+    End Sub
 End Class

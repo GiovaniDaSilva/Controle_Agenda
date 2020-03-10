@@ -29,6 +29,16 @@ Public Class clsTools
         Return locData
     End Function
 
+
+    ''' <summary>
+    ''' Retorna os minutos de um timespan
+    ''' </summary>
+    ''' <param name="timeAux"></param>
+    ''' <returns></returns>
+    Public Shared Function funRetornaMinutos(timeAux As TimeSpan) As Double
+        Return (timeAux.TotalHours * 60) + timeAux.Minutes
+    End Function
+
     ''' <summary>
     ''' Formata a data para o padrao de banco de dados
     ''' </summary>

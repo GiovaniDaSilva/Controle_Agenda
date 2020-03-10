@@ -120,6 +120,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DAO\clsCadastroTipoAtividadeDAO.vb" />
     <Compile Include="Classes\Modelos\clsAtividadesGrafico.vb" />
     <Compile Include="Classes\Modelos\clsDetalhesAtividadeWeb.vb" />
     <Compile Include="Classes\Modelos\clsHomeParametros.vb" />
@@ -134,6 +135,7 @@
     <Compile Include="Classes\clsIni.vb" />
     <Compile Include="Classes\Modelos\clsParametrosIni.vb" />
     <Compile Include="Classes\Modelos\clsPeriodo.vb" />
+    <Compile Include="Classes\Serviços\Controles\clsCadastroTipoAtividade.vb" />
     <Compile Include="Classes\Serviços\Controles\clsPrincipal.vb" />
     <Compile Include="Classes\clsRegistro.vb" />
     <Compile Include="Classes\Modelos\clsSolicitacao.vb" />
@@ -152,6 +154,12 @@
       <DependentUpon>frmAdicionar.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\frmAdicionar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmCadastroTipoAtividade.Designer.vb">
+      <DependentUpon>frmCadastroTipoAtividade.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmCadastroTipoAtividade.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\frmConfiguracoes.Designer.vb">
@@ -193,6 +201,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Formularios\frmAdicionar.resx">
       <DependentUpon>frmAdicionar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmCadastroTipoAtividade.resx">
+      <DependentUpon>frmCadastroTipoAtividade.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmConfiguracoes.resx">
       <DependentUpon>frmConfiguracoes.vb</DependentUpon>

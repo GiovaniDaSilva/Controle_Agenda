@@ -3,52 +3,39 @@
 Public Class clsGraficoWeb
     Public Function RetornaPaginaGrafico(pDataInicial As Date, pDataFinal As Date) As String
         Dim locGrafico As New clsGraficoMensal
-        Dim locDados As clsAtividadesGrafico
+        Dim locDados As clsAtividadesGraficoPrincipal
 
-        locDados = locGrafico.subGeraDadosGrafico(pDataInicial, pDataFinal)
+        locDados = locGrafico.subGeraDadosGrafico2(pDataInicial, pDataFinal)
 
         Return GeraPagina(locDados, pDataInicial, pDataFinal)
 
     End Function
 
-    Private Function GeraPagina(ByVal parDados As clsAtividadesGrafico, pDataInicial As Date, pDataFinal As Date) As String
+
+    Private Function GeraPagina(ByVal parDados As clsAtividadesGraficoPrincipal, pDataInicial As Date, pDataFinal As Date) As String
         Dim locTipoAtividades As New List(Of String)
         Dim locValores As New List(Of String)
 
 
-        If parDados.TotalHorasAtividades <= 0 Then
+        If clsTools.funRetornaMinutos(parDados.TotalHorasAtividades) <= 0 Then
             locTipoAtividades.Add("Sem apontamentos neste período.")
             locValores.Add(100)
         End If
 
-        If parDados.TotalHorasSolicitacoes > 0 Then
-            locTipoAtividades.Add(enuTipoAtividade.Solicitacao)
-            locValores.Add(parDados.PercentualSolicitacoes)
-        End If
+        If parDados.Atividades IsNot Nothing Then
+            For Each item In parDados.Atividades
 
-        If parDados.TotalHorasPBI > 0 Then
-            locTipoAtividades.Add(enuTipoAtividade.PBI)
-            locValores.Add(parDados.PercentualPBI)
-        End If
-
-        If parDados.TotalHorasReuniao > 0 Then
-            locTipoAtividades.Add(enuTipoAtividade.Reuniao)
-            locValores.Add(parDados.PercentualReuniao)
-        End If
-
-        If parDados.TotalHorasAusente > 0 Then
-            locTipoAtividades.Add(enuTipoAtividade.Ausente)
-            locValores.Add(parDados.PercentualAusente)
-        End If
-
-        If parDados.TotalHorasOutros > 0 Then
-            locTipoAtividades.Add(enuTipoAtividade.Outros)
-            locValores.Add(parDados.PercentualOutros)
+                If clsTools.funRetornaMinutos(item.TotalHoras) > 0 Then
+                    locTipoAtividades.Add(item.DescricaoAtividade)
+                    locValores.Add(item.RetornaPercentual(parDados.TotalHorasAtividades))
+                End If
+            Next
         End If
 
         Return RetornaHTML(locTipoAtividades, locValores, pDataInicial, pDataFinal)
 
     End Function
+
 
     Private Function RetornaHTML(locTipoAtividades As List(Of String), locValores As List(Of String), pDataInicial As Date, pDataFinal As Date) As String
         Dim html As String
