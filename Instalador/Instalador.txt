@@ -1,0 +1,3 @@
+Script abaixo é do aplicativo Inno Setup Compiler.
+
+Com ele é possívle gerar o instalador da Agenda.
