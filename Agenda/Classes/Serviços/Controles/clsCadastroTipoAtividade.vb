@@ -57,7 +57,7 @@
     End Function
 
     Public Function ValidaExclusao(pTipo As clsTipo) As Boolean
-        Dim msg As String = "Tipo de Atividadae não pode ser excluída." & vbNewLine
+        Dim msg As String = "Tipo de Atividade não pode ser excluída." & vbNewLine
         Dim dao As New clsCadastroTipoAtividadeDAO
 
         If dao.TipoSendoUsado(pTipo) Then
