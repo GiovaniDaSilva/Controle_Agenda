@@ -25,6 +25,7 @@ Public MustInherit Class enuParametrosIni
     Public Shared Property SolicitarHTML As String = "SolicitarHTML"
     Public Shared Property CaminhoBase As String = "CaminhoBase"
     Public Shared Property TempoNotificacao As String = "TempoNotificacao"
+    Public Shared Property Mail As String = "Mail"
 End Class
 
 Public MustInherit Class enuTempoNotificacao
@@ -38,7 +39,9 @@ End Class
 Public MustInherit Class enuGrupoIni
     Public Shared Property Geral As String = "Geral"
     Public Shared Property Dados As String = "Dados"
+    Public Shared Property Email As String = "Email"
 End Class
+
 
 Public MustInherit Class enuCamposImpressao
     Public Shared Property Codigo As String = "<b>Código: </b>"

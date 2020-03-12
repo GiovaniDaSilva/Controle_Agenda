@@ -12,7 +12,7 @@ Public Class frmPrincipal
     Const MODO_IMPRESSAO = "MODO_IMPRESSAO"
     Const MODO_NORMAL = ""
 
-    Public Const VERSAO_SISTEMA = "1.2"
+    Public Const VERSAO_SISTEMA = "1.3"
 
     Private Enum enuPosicaoColunas
         DATA = 1
@@ -229,7 +229,6 @@ Public Class frmPrincipal
         cbTipo.SelectedIndex = -1
         txtCodigo.Clear()
     End Sub
-
 
 
     Private Sub gridAtividades_KeyDown(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyDown

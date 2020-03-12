@@ -50,6 +50,8 @@ Partial Class frmConfiguracoes
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.CadastroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TipoDeAtividadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -58,6 +60,7 @@ Partial Class frmConfiguracoes
         Me.GroupBox3.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -197,16 +200,16 @@ Partial Class frmConfiguracoes
         Me.GroupBox2.Controls.Add(Me.GroupBox5)
         Me.GroupBox2.Controls.Add(Me.GroupBox3)
         Me.GroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 229)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 208)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(715, 182)
+        Me.GroupBox2.Size = New System.Drawing.Size(715, 144)
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Dados"
         '
         'txtCaminhoBase
         '
-        Me.txtCaminhoBase.Location = New System.Drawing.Point(32, 149)
+        Me.txtCaminhoBase.Location = New System.Drawing.Point(32, 110)
         Me.txtCaminhoBase.Name = "txtCaminhoBase"
         Me.txtCaminhoBase.Size = New System.Drawing.Size(662, 20)
         Me.txtCaminhoBase.TabIndex = 5
@@ -214,7 +217,7 @@ Partial Class frmConfiguracoes
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(29, 133)
+        Me.Label1.Location = New System.Drawing.Point(29, 94)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(92, 13)
         Me.Label1.TabIndex = 4
@@ -227,7 +230,7 @@ Partial Class frmConfiguracoes
         Me.GroupBox5.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.GroupBox5.Location = New System.Drawing.Point(443, 31)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(251, 71)
+        Me.GroupBox5.Size = New System.Drawing.Size(251, 51)
         Me.GroupBox5.TabIndex = 2
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Solicitar HTML ao imprimir atividades?"
@@ -236,7 +239,7 @@ Partial Class frmConfiguracoes
         '
         Me.rbNaoHTML.AutoSize = True
         Me.rbNaoHTML.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbNaoHTML.Location = New System.Drawing.Point(155, 33)
+        Me.rbNaoHTML.Location = New System.Drawing.Point(155, 25)
         Me.rbNaoHTML.Name = "rbNaoHTML"
         Me.rbNaoHTML.Size = New System.Drawing.Size(44, 17)
         Me.rbNaoHTML.TabIndex = 1
@@ -248,7 +251,7 @@ Partial Class frmConfiguracoes
         Me.rbSimHTML.AutoSize = True
         Me.rbSimHTML.Checked = True
         Me.rbSimHTML.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbSimHTML.Location = New System.Drawing.Point(73, 33)
+        Me.rbSimHTML.Location = New System.Drawing.Point(73, 25)
         Me.rbSimHTML.Name = "rbSimHTML"
         Me.rbSimHTML.Size = New System.Drawing.Size(41, 17)
         Me.rbSimHTML.TabIndex = 0
@@ -263,7 +266,7 @@ Partial Class frmConfiguracoes
         Me.GroupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.GroupBox3.Location = New System.Drawing.Point(32, 31)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(251, 71)
+        Me.GroupBox3.Size = New System.Drawing.Size(251, 51)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Ordenação das atividades por data"
@@ -273,7 +276,7 @@ Partial Class frmConfiguracoes
         Me.rbDecrescente.AutoSize = True
         Me.rbDecrescente.Checked = True
         Me.rbDecrescente.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbDecrescente.Location = New System.Drawing.Point(155, 33)
+        Me.rbDecrescente.Location = New System.Drawing.Point(155, 25)
         Me.rbDecrescente.Name = "rbDecrescente"
         Me.rbDecrescente.Size = New System.Drawing.Size(85, 17)
         Me.rbDecrescente.TabIndex = 1
@@ -285,7 +288,7 @@ Partial Class frmConfiguracoes
         '
         Me.rbCrescente.AutoSize = True
         Me.rbCrescente.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbCrescente.Location = New System.Drawing.Point(44, 33)
+        Me.rbCrescente.Location = New System.Drawing.Point(44, 25)
         Me.rbCrescente.Name = "rbCrescente"
         Me.rbCrescente.Size = New System.Drawing.Size(72, 17)
         Me.rbCrescente.TabIndex = 0
@@ -313,9 +316,6 @@ Partial Class frmConfiguracoes
         Me.ToolTip1.SetToolTip(Me.BtnExecutarBackup, "Realizar backup da base de dados")
         Me.BtnExecutarBackup.UseVisualStyleBackColor = False
         '
-        'ToolTip1
-        '
-        '
         'MenuStrip1
         '
         Me.MenuStrip1.BackColor = System.Drawing.Color.SkyBlue
@@ -340,6 +340,24 @@ Partial Class frmConfiguracoes
         Me.TipoDeAtividadeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.TipoDeAtividadeToolStripMenuItem.Text = "Tipo de Atividade"
         '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.txtEmail)
+        Me.GroupBox7.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.GroupBox7.Location = New System.Drawing.Point(12, 360)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(715, 51)
+        Me.GroupBox7.TabIndex = 7
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "E-mail para backup"
+        '
+        'txtEmail
+        '
+        Me.txtEmail.Location = New System.Drawing.Point(32, 19)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(662, 20)
+        Me.txtEmail.TabIndex = 6
+        '
         'frmConfiguracoes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -347,6 +365,7 @@ Partial Class frmConfiguracoes
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.ClientSize = New System.Drawing.Size(739, 475)
+        Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.BtnExecutarBackup)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.GroupBox2)
@@ -373,6 +392,8 @@ Partial Class frmConfiguracoes
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -404,4 +425,6 @@ Partial Class frmConfiguracoes
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents CadastroToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TipoDeAtividadeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents txtEmail As TextBox
 End Class

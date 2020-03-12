@@ -39,6 +39,48 @@
         Return locRetorno 
     End Function
 
+    ''' <summary>
+    ''' Executa o backup da base e retorna o caminho do backup
+    ''' </summary>
+    ''' <param name="pCaminhoBase"></param>
+    ''' <returns></returns>
+    Public Shared Function ExecutaBackupBase(ByVal pCaminhoBase As String) As String
+        Dim nomeBackup As String
+        Dim caminhoBackup As String
+
+        If Trim(pCaminhoBase) = vbNullString Then
+            Throw New Exception("Caminho da base de dados não foi informado.")
+        End If
+
+        'Cria o diretorio dos backups
+        caminhoBackup = Application.StartupPath & "\backups"
+
+        'Trata o nome o backup
+        nomeBackup = caminhoBackup & "\BancoAgenda_" & Now.ToString.Replace("/", "-").Replace(":", "-").Replace(" ", "-") & ".db"
+
+        CaminhoBase = pCaminhoBase
+        If ExisteBase() Then
+            If Not IO.Directory.Exists(caminhoBackup) Then
+                IO.Directory.CreateDirectory(caminhoBackup)
+            End If
+
+            'Cria uma nova conexão para backup
+            Dim locNovo = New System.Data.SQLite.SQLiteConnection("Data Source=" & nomeBackup & ";")
+            locNovo.Open()
+            Try
+                glfConexao.BackupDatabase(locNovo, "main", "main", -1, Nothing, 0)
+            Finally
+                locNovo.Close()
+            End Try
+
+            If IO.File.Exists(nomeBackup) Then
+                MsgBox("Backup realizado com sucesso. Disponivel em: " & nomeBackup)
+                Return nomeBackup
+            End If
+        End If
+
+        Return vbNullString
+    End Function
 End Class
 
 
