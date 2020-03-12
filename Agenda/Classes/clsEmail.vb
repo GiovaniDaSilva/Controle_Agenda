@@ -17,7 +17,7 @@ Public Class clsEmail
     Public Function EnviaEmail() As Boolean
         Dim mail As New MailMessage
 
-        If EmailDestino = vbNullString Then
+        If Trim(EmailDestino) = vbNullString Then
             Throw New Exception("E-mail de destino não foi informado.")
         End If
 

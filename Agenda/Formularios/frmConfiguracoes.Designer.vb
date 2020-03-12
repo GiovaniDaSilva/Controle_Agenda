@@ -50,6 +50,8 @@ Partial Class frmConfiguracoes
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.CadastroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TipoDeAtividadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -58,6 +60,7 @@ Partial Class frmConfiguracoes
         Me.GroupBox3.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -337,6 +340,24 @@ Partial Class frmConfiguracoes
         Me.TipoDeAtividadeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.TipoDeAtividadeToolStripMenuItem.Text = "Tipo de Atividade"
         '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.txtEmail)
+        Me.GroupBox7.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.GroupBox7.Location = New System.Drawing.Point(12, 360)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(715, 51)
+        Me.GroupBox7.TabIndex = 7
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "E-mail para backup"
+        '
+        'txtEmail
+        '
+        Me.txtEmail.Location = New System.Drawing.Point(32, 19)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(662, 20)
+        Me.txtEmail.TabIndex = 6
+        '
         'frmConfiguracoes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -344,6 +365,7 @@ Partial Class frmConfiguracoes
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.ClientSize = New System.Drawing.Size(739, 475)
+        Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.BtnExecutarBackup)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.GroupBox2)
@@ -370,6 +392,8 @@ Partial Class frmConfiguracoes
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -401,4 +425,6 @@ Partial Class frmConfiguracoes
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents CadastroToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TipoDeAtividadeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents txtEmail As TextBox
 End Class

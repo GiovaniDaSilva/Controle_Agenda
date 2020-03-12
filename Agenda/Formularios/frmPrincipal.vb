@@ -231,7 +231,6 @@ Public Class frmPrincipal
     End Sub
 
 
-
     Private Sub gridAtividades_KeyDown(sender As Object, e As KeyEventArgs) Handles gridAtividades.KeyDown
         subAtualizaDescricao()
     End Sub

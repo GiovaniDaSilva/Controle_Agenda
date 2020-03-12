@@ -48,6 +48,8 @@
             Case Else : cbTempoNotificacao.SelectedIndex = 1
         End Select
 
+        txtEmail.Text = glfParametros.Email
+
     End Sub
 
     Private Sub subPreenheParametros()
@@ -71,6 +73,8 @@
             Case 3 : glfParametros.TempoNotificacao = enuTempoNotificacao.Hora4
             Case 4 : glfParametros.TempoNotificacao = enuTempoNotificacao.NaoUsar
         End Select
+
+        glfParametros.Email = txtEmail.Text
 
     End Sub
 
@@ -139,7 +143,7 @@
         Me.Cursor = Cursors.WaitCursor
 
         Dim email As New clsEmail
-        email.EmailDestino = "giovani.senior@gmail.com"
+        email.EmailDestino = txtEmail.Text
         email.Assunto = "Agenda Backup da base"
 
         If caminhoBackup = vbNullString Then
