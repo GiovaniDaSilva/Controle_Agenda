@@ -12,11 +12,11 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
 
 
 
-    Public Function funCarregaIni() As clsParametrosIni
+    Public Function funCarregaIni(Optional pExibiMensagem As Boolean = True) As clsParametrosIni
         Dim nome_arquivo_ini As String = nomeArquivoINI()
         Dim locParametros As New clsParametrosIni
 
-        If Not File.Exists(nome_arquivo_ini) Then
+        If Not File.Exists(nome_arquivo_ini) AndAlso pExibiMensagem Then
             MsgBox("Será carregado os valores padrão do sistema.")
         End If
 

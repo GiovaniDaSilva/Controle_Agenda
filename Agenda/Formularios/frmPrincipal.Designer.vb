@@ -607,7 +607,7 @@ Partial Class frmPrincipal
         '
         'TimerControleGeral
         '
-        Me.TimerControleGeral.Interval = 10000
+        Me.TimerControleGeral.Interval = 7200000
         '
         'frmPrincipal
         '

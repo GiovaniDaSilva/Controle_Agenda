@@ -16,9 +16,9 @@ Public Class clsVerificacoesTimerGeral
         Dim ini As New clsParametrosIni
         Dim nomeBackup As String
 
-        ini = New clsIni().funCarregaIni()
+        ini = New clsIni().funCarregaIni(False)
 
-        If ini Is Nothing Then Exit Sub
+        If ini.Email = vbNullString Then Exit Sub
 
         dataUltbackup = clsRegistro.RetornaDatabackup()
 
