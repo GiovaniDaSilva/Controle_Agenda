@@ -213,6 +213,7 @@ Public Class frmPrincipal
         subAtualizaLista()
         controle.subConfiguraTimer(TimerNotificacao, ParametrosIni)
         TimerNotificacao.Start()
+        TimerControleGeral.Start()
 
     End Sub
 
@@ -534,7 +535,11 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub TimerControleGeral_Tick(sender As Object, e As EventArgs) Handles TimerControleGeral.Tick
+        Me.Cursor = Cursors.WaitCursor
+
         controle.ExecutaValidacoesTimerGeral()
+
+        Me.Cursor = Cursors.Default
     End Sub
 End Class
 

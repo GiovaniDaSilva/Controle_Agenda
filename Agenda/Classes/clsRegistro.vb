@@ -41,7 +41,14 @@ Public Class clsRegistro
     End Sub
 
     Public Shared Function RetornaDatabackup() As Date
-        Return CDate(GetSetting(APLICACAO, "Config", "DataBackup"))
+        Dim registro = GetSetting(APLICACAO, "Config", "DataBackup")
+        Dim data As Date = Now
+
+        If registro IsNot Nothing AndAlso registro <> String.Empty Then
+            data = CDate(registro)
+        End If
+
+        Return data
     End Function
 
 End Class

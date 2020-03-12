@@ -13,12 +13,35 @@ Public Class clsVerificacoesTimerGeral
     ''' </summary>
     Private Sub ExecutaBackupBase()
         Dim dataUltbackup As Date
+        Dim ini As New clsParametrosIni
+        Dim nomeBackup As String
+
+        ini = New clsIni().funCarregaIni()
+
+        If ini Is Nothing Then Exit Sub
 
         dataUltbackup = clsRegistro.RetornaDatabackup()
 
         If DateDiff("d", Now, dataUltbackup) < 0 Then
-            MsgBox("Executa backup", vbInformation)
+            clsRegistro.GravaDataBackup(Now)
+            nomeBackup = clsConexao.ExecutaBackupBase(ini.CaminhoBase, False)
+
+            subEnviaEmailBackup(nomeBackup, ini.Email)
         End If
 
+    End Sub
+
+    Private Sub subEnviaEmailBackup(pNomeBackup As String, pEmail As String)
+
+        Dim email As New clsEmail
+        email.EmailDestino = pEmail
+        email.Assunto = "Agenda Backup Automatico da base"
+
+        If pNomeBackup = vbNullString Then
+            Throw New Exception("Caminho do backup não foi informado.")
+        End If
+
+        email.CaminhoAnexo = pNomeBackup
+        email.EnviaEmail()
     End Sub
 End Class
