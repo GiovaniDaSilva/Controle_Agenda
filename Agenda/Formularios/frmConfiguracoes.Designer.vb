@@ -197,16 +197,16 @@ Partial Class frmConfiguracoes
         Me.GroupBox2.Controls.Add(Me.GroupBox5)
         Me.GroupBox2.Controls.Add(Me.GroupBox3)
         Me.GroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 229)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 208)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(715, 182)
+        Me.GroupBox2.Size = New System.Drawing.Size(715, 144)
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Dados"
         '
         'txtCaminhoBase
         '
-        Me.txtCaminhoBase.Location = New System.Drawing.Point(32, 149)
+        Me.txtCaminhoBase.Location = New System.Drawing.Point(32, 110)
         Me.txtCaminhoBase.Name = "txtCaminhoBase"
         Me.txtCaminhoBase.Size = New System.Drawing.Size(662, 20)
         Me.txtCaminhoBase.TabIndex = 5
@@ -214,7 +214,7 @@ Partial Class frmConfiguracoes
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(29, 133)
+        Me.Label1.Location = New System.Drawing.Point(29, 94)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(92, 13)
         Me.Label1.TabIndex = 4
@@ -227,7 +227,7 @@ Partial Class frmConfiguracoes
         Me.GroupBox5.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.GroupBox5.Location = New System.Drawing.Point(443, 31)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(251, 71)
+        Me.GroupBox5.Size = New System.Drawing.Size(251, 51)
         Me.GroupBox5.TabIndex = 2
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Solicitar HTML ao imprimir atividades?"
@@ -236,7 +236,7 @@ Partial Class frmConfiguracoes
         '
         Me.rbNaoHTML.AutoSize = True
         Me.rbNaoHTML.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbNaoHTML.Location = New System.Drawing.Point(155, 33)
+        Me.rbNaoHTML.Location = New System.Drawing.Point(155, 25)
         Me.rbNaoHTML.Name = "rbNaoHTML"
         Me.rbNaoHTML.Size = New System.Drawing.Size(44, 17)
         Me.rbNaoHTML.TabIndex = 1
@@ -248,7 +248,7 @@ Partial Class frmConfiguracoes
         Me.rbSimHTML.AutoSize = True
         Me.rbSimHTML.Checked = True
         Me.rbSimHTML.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbSimHTML.Location = New System.Drawing.Point(73, 33)
+        Me.rbSimHTML.Location = New System.Drawing.Point(73, 25)
         Me.rbSimHTML.Name = "rbSimHTML"
         Me.rbSimHTML.Size = New System.Drawing.Size(41, 17)
         Me.rbSimHTML.TabIndex = 0
@@ -263,7 +263,7 @@ Partial Class frmConfiguracoes
         Me.GroupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.GroupBox3.Location = New System.Drawing.Point(32, 31)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(251, 71)
+        Me.GroupBox3.Size = New System.Drawing.Size(251, 51)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Ordenação das atividades por data"
@@ -273,7 +273,7 @@ Partial Class frmConfiguracoes
         Me.rbDecrescente.AutoSize = True
         Me.rbDecrescente.Checked = True
         Me.rbDecrescente.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbDecrescente.Location = New System.Drawing.Point(155, 33)
+        Me.rbDecrescente.Location = New System.Drawing.Point(155, 25)
         Me.rbDecrescente.Name = "rbDecrescente"
         Me.rbDecrescente.Size = New System.Drawing.Size(85, 17)
         Me.rbDecrescente.TabIndex = 1
@@ -285,7 +285,7 @@ Partial Class frmConfiguracoes
         '
         Me.rbCrescente.AutoSize = True
         Me.rbCrescente.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbCrescente.Location = New System.Drawing.Point(44, 33)
+        Me.rbCrescente.Location = New System.Drawing.Point(44, 25)
         Me.rbCrescente.Name = "rbCrescente"
         Me.rbCrescente.Size = New System.Drawing.Size(72, 17)
         Me.rbCrescente.TabIndex = 0
@@ -312,9 +312,6 @@ Partial Class frmConfiguracoes
         Me.BtnExecutarBackup.TabIndex = 5
         Me.ToolTip1.SetToolTip(Me.BtnExecutarBackup, "Realizar backup da base de dados")
         Me.BtnExecutarBackup.UseVisualStyleBackColor = False
-        '
-        'ToolTip1
-        '
         '
         'MenuStrip1
         '

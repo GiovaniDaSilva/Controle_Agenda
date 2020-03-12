@@ -114,38 +114,48 @@
     End Sub
 
     Private Sub BtnExecutarBackup_Click(sender As Object, e As EventArgs) Handles BtnExecutarBackup.Click
-        Dim nomeBackup As String
-        Dim caminhoBackup As String
+        Try
+            Dim caminhoBackup As String
 
-        caminhoBackup = Application.StartupPath & "\backups"
-        nomeBackup = caminhoBackup & "\BancoAgenda_" & Now.ToString.Replace("/", "-").Replace(":", "-").Replace(" ", "-") & ".db"
+            caminhoBackup = clsConexao.ExecutaBackupBase(txtCaminhoBase.Text)
 
-        clsConexao.CaminhoBase = txtCaminhoBase.Text
-        If clsConexao.ExisteBase Then
-            If Not IO.Directory.Exists(caminhoBackup) Then
-                IO.Directory.CreateDirectory(caminhoBackup)
+            If caminhoBackup <> vbNullString Then
+                funEnviaBackupEmail(caminhoBackup)
             End If
-            
-            Dim locNovo = New System.Data.SQLite.SQLiteConnection("Data Source=" & nomeBackup & ";")
-            locNovo.Open()
-            Try
-                clsConexao.glfConexao.BackupDatabase(locNovo, "main", "main", -1, Nothing, 0)
-            Finally
-                locNovo.Close()
-            End Try
 
-            If IO.File.Exists(nomeBackup) Then
-                MsgBox("Backup realizado com sucesso. Disponivel em: " & nomeBackup)
-            End If
-        End If
+
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+        End Try
 
     End Sub
 
-    Private Sub ToolTip1_Popup(sender As Object, e As PopupEventArgs) Handles ToolTip1.Popup
+    Private Sub funEnviaBackupEmail(caminhoBackup As String)
 
+        If MsgBox("Deseja enviar o backup por e-mail?", MsgBoxStyle.YesNo, "Questão") = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+
+        Dim email As New clsEmail
+        email.EmailDestino = "giovani.senior@gmail.com"
+        email.Assunto = "Agenda Backup da base"
+
+        If caminhoBackup = vbNullString Then
+            Throw New Exception("Caminho do backup não foi informado.")
+        End If
+        email.CaminhoAnexo = caminhoBackup
+
+        If email.EnviaEmail() Then
+            MsgBox("E- mail com o backup foi enviado com sucesso.", vbInformation)
+        End If
+
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub TipoDeAtividadeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TipoDeAtividadeToolStripMenuItem.Click
         frmCadastroTipoAtividade.ShowDialog()
     End Sub
+
 End Class
