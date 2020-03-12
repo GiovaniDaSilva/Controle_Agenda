@@ -4,6 +4,8 @@ Controlar atividades diarias
 Software desenvolvido com para facilitar o controle de horas em cada atividade diária.
 Com ele, é possível cadastrar atividades e as horas gastas em cada uma delas, facilitando o apontamento de horas e melhorando o gerenciamento de tempo.
 
+OBS: Imagens abaixo são da primeira versão...
+
 <h2>Tela Principal</h2>
 <img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Tela%20Principal.PNG">
 
