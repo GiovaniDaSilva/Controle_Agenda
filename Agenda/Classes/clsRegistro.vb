@@ -2,6 +2,9 @@
 
 Public Class clsRegistro
 
+    Const APLICACAO = "Controle Agenda"
+
+
     Public Shared Sub subRegistrarAplicacaoInicializacaoWindows()
        ' dim caminho As String = "C:\_vbn\Consulta_Cep\Consulta_Cep\bin\Debug\Consulta_Cep.exe"
 
@@ -21,15 +24,24 @@ Public Class clsRegistro
 
     End Sub
 
-    Public Shared function subExisteRegistroAplicacao() As Boolean
+    Public Shared Function subExisteRegistroAplicacao() As Boolean
         Using key As RegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True)
             Dim registro = key.GetValue("Controle Agenda")
             Return not registro Is Nothing 
        End Using
 
         Return false
-    End function
+    End Function
 
     'Abrir a pasta de inicializar automaticamente windows shell:startup
+
+
+    Public Shared Sub GravaDataBackup(pData As Date)
+        SaveSetting(APLICACAO, "Config", "DataBackup", pData)
+    End Sub
+
+    Public Shared Function RetornaDatabackup() As Date
+        Return CDate(GetSetting(APLICACAO, "Config", "DataBackup"))
+    End Function
 
 End Class
