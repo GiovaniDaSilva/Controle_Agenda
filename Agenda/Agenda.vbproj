@@ -144,13 +144,13 @@
     <Compile Include="Classes\DAO\clsSolicitacaoDAO.vb" />
     <Compile Include="Classes\Modelos\clsTipo.vb" />
     <Compile Include="Classes\clsTools.vb" />
-    <Compile Include="Classes\Serviços\Web\clsCadastroAtividadeWeb.vb" />
-    <Compile Include="Classes\Serviços\Web\clsHomeWeb.vb" />
+    <Compile Include="Classes\Serviços\Web\Controles\clsCadastroAtividadeWeb.vb" />
+    <Compile Include="Classes\Serviços\Web\Controles\clsHomeWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsHTMLComum.vb" />
-    <Compile Include="Classes\Serviços\Web\clsReqWeb.vb" />
+    <Compile Include="Classes\Serviços\Web\Servidor\clsReqWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsRetornoAjax.vb" />
-    <Compile Include="Classes\Serviços\Web\clsServidorHTTP.vb" />
-    <Compile Include="Classes\Serviços\Web\clsGraficoWeb.vb" />
+    <Compile Include="Classes\Serviços\Web\Servidor\clsServidorHTTP.vb" />
+    <Compile Include="Classes\Serviços\Web\Controles\clsGraficoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsRequisicoesWeb.vb" />
     <Compile Include="Formularios\frmAdicionar.Designer.vb">
       <DependentUpon>frmAdicionar.vb</DependentUpon>
