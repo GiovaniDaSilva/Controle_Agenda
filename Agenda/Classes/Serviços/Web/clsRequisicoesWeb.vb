@@ -55,7 +55,11 @@ Public Class clsRequisicoesWeb
         retorno = My.Resources.Impressao
         Dim x As String
 
-        Dim atividades = New clsAdicionarDAO().carregarAtividades()
+        Dim filtro As New clsAtividade
+        Dim ini = New clsIni().funCarregaIni
+        filtro.Data = Now.AddDays(-7)
+
+        Dim atividades = New clsAdicionarDAO().carregarAtividades(filtro, ini)
 
         For Each item In atividades
             x &= "&nbsp <b>codigo:</b> " & item.Codigo
