@@ -8,7 +8,8 @@ Public Class clsHTMLComum
         <nav class=""navbar navbar-dark bg-primary"">            
                 <div >
                     <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light ""><i class=""material-icons"">home</i>Home</a>
-                    <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">pie_chart</i>&nbsp;Grafico</a>
+                    <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">pie_chart</i>&nbsp;Gráfico</a>
+                    <a href=""Impressao"" id=""bt_impressao"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">print</i>&nbsp;Impressão</a>            
                     <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>            
                 </div>
                 <div class=""float-right"">
