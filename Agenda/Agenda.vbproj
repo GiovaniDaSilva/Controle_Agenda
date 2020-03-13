@@ -147,6 +147,7 @@
     <Compile Include="Classes\Serviços\Web\Controles\clsCadastroAtividadeWeb.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsHomeWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsHTMLComum.vb" />
+    <Compile Include="Classes\Serviços\Web\Controles\clsImpressaoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\Servidor\clsReqWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsRetornoAjax.vb" />
     <Compile Include="Classes\Serviços\Web\Servidor\clsServidorHTTP.vb" />
