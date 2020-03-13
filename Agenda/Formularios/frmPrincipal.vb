@@ -213,6 +213,8 @@ Public Class frmPrincipal
         subAtualizaLista()
         controle.subConfiguraTimer(TimerNotificacao, ParametrosIni)
         TimerNotificacao.Start()
+
+        TimerControleGeral.Interval = 120 * 60000 '120 minutos x 1 minuto do timer
         TimerControleGeral.Start()
 
     End Sub

@@ -22,7 +22,7 @@ Public Class clsVerificacoesTimerGeral
 
         dataUltbackup = clsRegistro.RetornaDatabackup()
 
-        If DateDiff("d", Now, dataUltbackup) < 0 Then
+        If DateTime.Compare(clsTools.funFormataData(dataUltbackup), clsTools.funFormataData(Now)) - 1 Then
             clsRegistro.GravaDataBackup(Now)
             nomeBackup = clsConexao.ExecutaBackupBase(ini.CaminhoBase, False)
 
