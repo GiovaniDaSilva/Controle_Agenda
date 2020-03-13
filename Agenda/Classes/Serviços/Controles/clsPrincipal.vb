@@ -192,6 +192,11 @@ Public Class clsPrincipal
         RichAddLineFmt(txtDescricao, funRetornaDataFormatada(Strings.StrConv(String.Format("{0:dddd}", data), VbStrConv.ProperCase) & " - " & clsTools.funFormataData(data)) & vbNewLine)
         RichAddLineFmt(txtDescricao, adicionar.RetornaToolTipPeriodosDia(data))
     End Sub
+
+    Public Sub ExecutaValidacoesTimerGeral()
+        Dim validacoes As New clsVerificacoesTimerGeral
+        validacoes.ExecutaValidacoes()
+    End Sub
 End Class
 
 

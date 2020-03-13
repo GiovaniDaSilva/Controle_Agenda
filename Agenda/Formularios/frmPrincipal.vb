@@ -12,7 +12,7 @@ Public Class frmPrincipal
     Const MODO_IMPRESSAO = "MODO_IMPRESSAO"
     Const MODO_NORMAL = ""
 
-    Public Const VERSAO_SISTEMA = "1.3"
+    Public Const VERSAO_SISTEMA = "1.4"
 
     Private Enum enuPosicaoColunas
         DATA = 1
@@ -211,9 +211,12 @@ Public Class frmPrincipal
         End If
 
         subAtualizaLista()
-        controle.subConfiguraTimer(Timer2, ParametrosIni)
-        Timer2.Start()
-        
+        controle.subConfiguraTimer(TimerNotificacao, ParametrosIni)
+        TimerNotificacao.Start()
+
+        TimerControleGeral.Interval = 120 * 60000 '120 minutos x 1 minuto do timer
+        TimerControleGeral.Start()
+
     End Sub
 
     Private Sub subCarregaIni()
@@ -325,7 +328,7 @@ Public Class frmPrincipal
         controle.Configurar(ParametrosIni)
         subCarregaIni()
 
-        controle.subConfiguraTimer(Timer2, ParametrosIni)
+        controle.subConfiguraTimer(TimerNotificacao, ParametrosIni)
     End Sub
 
     'Variaveis de Controle da Animação
@@ -349,12 +352,12 @@ Public Class frmPrincipal
             locTop = locTopMax
         End If
 
-        Timer1.Interval = 1
-        Timer1.Start()
+        TimerAnimacaoMenu.Interval = 1
+        TimerAnimacaoMenu.Start()
     End Sub
 
 
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles TimerAnimacaoMenu.Tick
 
         If locSobeDesce Then
             subDesceMenu()
@@ -373,7 +376,7 @@ Public Class frmPrincipal
             End If
             pFiltro.Top = CInt(locTop)
         Else
-            Timer1.Stop()
+            TimerAnimacaoMenu.Stop()
         End If
     End Sub
 
@@ -385,7 +388,7 @@ Public Class frmPrincipal
             End If
             pFiltro.Top = CInt(locTop)
         Else
-            Timer1.Stop()
+            TimerAnimacaoMenu.Stop()
         End If
     End Sub
 
@@ -448,7 +451,7 @@ Public Class frmPrincipal
         End
     End Sub
 
-    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles TimerNotificacao.Tick
         controle.subExibeNotificacao(NotifyIcon1)
     End Sub
 
@@ -531,6 +534,14 @@ Public Class frmPrincipal
 
     Private Sub btnVersaoWeb_Click(sender As Object, e As EventArgs) Handles btnVersaoWeb.Click
         Process.Start("http://localhost:8484/Home")
+    End Sub
+
+    Private Sub TimerControleGeral_Tick(sender As Object, e As EventArgs) Handles TimerControleGeral.Tick
+        Me.Cursor = Cursors.WaitCursor
+
+        controle.ExecutaValidacoesTimerGeral()
+
+        Me.Cursor = Cursors.Default
     End Sub
 End Class
 

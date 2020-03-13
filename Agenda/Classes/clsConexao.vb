@@ -44,7 +44,7 @@
     ''' </summary>
     ''' <param name="pCaminhoBase"></param>
     ''' <returns></returns>
-    Public Shared Function ExecutaBackupBase(ByVal pCaminhoBase As String) As String
+    Public Shared Function ExecutaBackupBase(ByVal pCaminhoBase As String, Optional pExibeMensagem As Boolean = True) As String
         Dim nomeBackup As String
         Dim caminhoBackup As String
 
@@ -74,10 +74,14 @@
             End Try
 
             If IO.File.Exists(nomeBackup) Then
-                MsgBox("Backup realizado com sucesso. Disponivel em: " & nomeBackup)
+
+                If pExibeMensagem Then
+                    MsgBox("Backup realizado com sucesso. Disponivel em: " & nomeBackup)
+                End If
+
                 Return nomeBackup
+                End If
             End If
-        End If
 
         Return vbNullString
     End Function
