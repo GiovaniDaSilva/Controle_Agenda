@@ -6,6 +6,9 @@ Com ele, é possível cadastrar atividades e as horas gastas em cada uma delas, 
 
 OBS: Imagens abaixo são da primeira versão...
 
+Nota: Atualmente, a aplicação possui um servidor HTTP interno, podendo ser executado tambem na WEB. Na web atualmente possui Pagina Home, Cadastro de Atividades, Grafico e Relatório de atualizações.
+
+
 <h2>Tela Principal</h2>
 <img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Tela%20Principal.PNG">
 
