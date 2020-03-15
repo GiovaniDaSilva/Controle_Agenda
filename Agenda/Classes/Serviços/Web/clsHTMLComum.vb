@@ -221,4 +221,49 @@ Public Class clsHTMLComum
 
     End Function
 
+    Public Shared Function RetornaTabelaPeriodosDia(pData As Date) As String
+        Const SEM_PERIODO = "<tr><td colspan=""4"">Sem período cadastrado</td></tr>"
+
+        Dim listaAtividadesPeriodos As New List(Of clsPeriodosAtividades)
+        Dim linhasPeriodo As String = vbNullString
+
+        listaAtividadesPeriodos = New clsAdicionarDAO().retornaPeriodoAtividades(pData)
+
+
+        For Each periodo In listaAtividadesPeriodos
+            Dim linha = New List(Of String)
+            linha.Add(periodo.descricao_tipo)
+            linha.Add(periodo.codigo_atividade)
+            linha.Add(periodo.hora_inicial)
+            linha.Add(periodo.hora_final)
+            linhasPeriodo &= clsHTMLTools.funLinhaTabela(linha)
+        Next
+
+        If linhasPeriodo = vbNullString Then
+            linhasPeriodo = SEM_PERIODO
+        End If
+
+        Return RetornaTabelaPeriodosDia(linhasPeriodo)
+    End Function
+
+    Public Shared Function RetornaTabelaPeriodosDia(pLinhas As String) As String
+        Dim texto As New StringBuilder(vbNullString)
+        texto.AppendFormat("
+                <table id=""tablePeriodosDia"" class=""table table-bordered table-sm table-hover table-primary table-striped"" cellspacing=""0"" name=""tablePeriodosDia"">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Código</th>
+                        <th>De</th>
+                        <th>Ate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {0}
+                </tbody>
+            </table>
+            ", pLinhas)
+        Return texto.ToString
+    End Function
+
 End Class

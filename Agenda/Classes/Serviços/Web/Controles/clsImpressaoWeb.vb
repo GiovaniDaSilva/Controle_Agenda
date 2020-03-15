@@ -24,6 +24,10 @@ Public Class clsImpressaoWeb
         html = html.Replace("{p_dados_impresso}", funRetornaSolicitacos(pFiltro))
         html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(pFiltro.ID_TIPO_ATIVIDADE))
         html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(pFiltro.Data))
+        html = html.Replace("{p_linhas_tabela_periodo_dia}", clsHTMLComum.RetornaTabelaPeriodosDia(Now))
+        html = html.Replace("{data_atual}", clsTools.funFormataData(Now))
+
+
 
         Return html
     End Function
@@ -103,7 +107,7 @@ Public Class clsListaSolicitacaoWeb
         End If
 
         clsHTMLTools.Imprime(html, "Descrição: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
-        clsHTMLTools.Imprime(html, pAtividade.Descricao, clsHTMLTools.enuEstiloImpressao.Informacao)
+        clsHTMLTools.Imprime(html, pAtividade.funRetornaDescricaoTratada, clsHTMLTools.enuEstiloImpressao.Informacao)
 
     End Sub
 End Class
@@ -133,6 +137,6 @@ Public Class clsListaDemaisAtividades
         End If
 
         clsHTMLTools.Imprime(html, "Descrição: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
-        clsHTMLTools.Imprime(html, pAtividade.Descricao, clsHTMLTools.enuEstiloImpressao.Informacao)
+        clsHTMLTools.Imprime(html, pAtividade.funRetornaDescricaoTratada, clsHTMLTools.enuEstiloImpressao.Informacao)
     End Sub
 End Class

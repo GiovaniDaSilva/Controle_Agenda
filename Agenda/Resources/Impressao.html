@@ -41,6 +41,9 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        label  {
+            line-height: 15px;
+        }
     </style>
 
     {p_titulo_pagina}
@@ -77,10 +80,19 @@
     </div>
 
     <div class="container-fluid">
-        <p style="line-height: 5px; ">
-            {p_dados_impresso}
-        </p>
+        
 
+        <div class="row">
+            <div class="col-md-7">
+                <p style="line-height: 5px; ">
+                    {p_dados_impresso}
+                </p>
+            </div>
+            <div class="col-md-5" style="margin-top: 30px">
+                <label for="tablePeriodosDia" class="label">Períodos de hoje ({data_atual}) </label>
+                {p_linhas_tabela_periodo_dia}
+            </div>
+        </div>
     </div>
 
 

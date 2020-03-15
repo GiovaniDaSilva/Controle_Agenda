@@ -185,7 +185,7 @@ Public Class clsRequisicoesWeb
 
             Try
                 retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
-                retorno.descricao = New clsCadastroAtividadeWeb().RetornaTabelaPeriodosDia(data)
+                retorno.descricao = clsHTMLComum.RetornaTabelaPeriodosDia(data)
             Catch ex As Exception
                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
                 Throw New Exception("Erro ao carregar os períodos do dia.")
