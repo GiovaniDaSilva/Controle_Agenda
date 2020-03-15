@@ -273,5 +273,7 @@ Public Class clsHTMLTools
         Return locPagRetorno
     End Function
 
-
+    Friend Shared Function Imprime(data As String) As String
+        Return data
+    End Function
 End Class

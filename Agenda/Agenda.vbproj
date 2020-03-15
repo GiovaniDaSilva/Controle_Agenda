@@ -128,6 +128,7 @@
     <Compile Include="Classes\Modelos\clsHomeParametros.vb" />
     <Compile Include="Classes\Modelos\clsPeriodosAtividades.vb" />
     <Compile Include="Classes\clsConexao.vb" />
+    <Compile Include="Classes\modEnumerador.vb" />
     <Compile Include="Classes\Serviços\Controles\clsAdicionar.vb" />
     <Compile Include="Classes\DAO\clsAdicionarDAO.vb" />
     <Compile Include="Classes\Modelos\clsAtividade.vb" />
