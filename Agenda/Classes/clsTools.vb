@@ -215,6 +215,7 @@ End Class
 ''' Classe para tratar funções que auxiliar o preenchimento do html
 ''' </summary>
 Public Class clsHTMLTools
+
     Public Shared Function funLinhaTabela(ByVal pColunas As List(Of String), Optional ByVal classe As String = vbNullString, Optional ByVal estilo As String = vbNullString) As String
         Dim retorno As String = vbNullString
 
@@ -273,7 +274,55 @@ Public Class clsHTMLTools
         Return locPagRetorno
     End Function
 
-    Friend Shared Function Imprime(data As String) As String
-        Return data
+    Public Shared Sub Imprime(html As StringBuilder, dado As String, Optional estilo As enuEstiloImpressao = enuEstiloImpressao.Informacao, Optional PulaLinha As Boolean = False)
+        If PulaLinha Then html.Append("</br>")
+
+        html.Append(funRetornaEstilo(estilo, dado))
+    End Sub
+
+    Public Shared Sub PulaLinha(html As StringBuilder, linhas As Integer)
+
+        If linhas = 0 Then
+            Throw New Exception("Numero de linhas deve ser superior a zero.")
+        End If
+
+        For i = 0 To linhas
+            html.Append("</br>")
+        Next
+    End Sub
+
+    Private Shared Function funRetornaEstilo(estilo As enuEstiloImpressao, dado As String) As String
+        Select Case estilo
+            Case enuEstiloImpressao.Data
+                Return Paragrafo(dado, "estiloData")
+            Case enuEstiloImpressao.Titulo
+                Return Tab() & Paragrafo(dado, "estiloTitulo")
+            Case enuEstiloImpressao.Titulo_Destaque
+                Return Paragrafo(dado, "estiloTituloDestaque")
+            Case enuEstiloImpressao.Informacao
+                Return Paragrafo(dado, "estiloInformacao")
+            Case enuEstiloImpressao.Informacao_Destaque
+                Return Paragrafo(dado, "estiloInformacaoDestaque")
+            Case Else
+                Return ""
+        End Select
     End Function
+
+    Public Shared Function Paragrafo(campo As String, classe As String) As String
+        Return String.Format("<label class = {0}> {1} </label>", classe, campo)
+    End Function
+
+
+    Public Shared Function Tab() As String
+        Return "&nbsp &nbsp"
+    End Function
+
+    Public Enum enuEstiloImpressao
+        Data = 1
+        Titulo = 2
+        Titulo_Destaque = 3
+        Informacao = 4
+        Informacao_Destaque = 5
+    End Enum
+
 End Class

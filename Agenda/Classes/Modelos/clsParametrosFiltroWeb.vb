@@ -1,4 +1,4 @@
-﻿Public Class clsHomeParametros
+﻿Public Class clsParametrosFiltroWeb
     Public Property Data As Date
 
     Public Property Tipo As Integer

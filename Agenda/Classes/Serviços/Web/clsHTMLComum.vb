@@ -205,4 +205,20 @@ Public Class clsHTMLComum
         Return texto.ToString
     End Function
 
+    Public Shared Function RetornaTiposAtividadesFiltro(parametros As clsParametrosFiltroWeb) As String
+        Dim retorno As New StringBuilder(vbNullString)
+        Dim selected As String = "selected"
+        Dim tipos As List(Of clsTipo)
+
+        tipos = New clsAdicionarDAO().CarregaTipos()
+
+        retorno.AppendFormat("<option value = ""{0}"" {1}> {2}</Option>", 0, IIf(parametros.Tipo = 0, selected, ""), "Todos")
+
+        For Each tipo In tipos
+            retorno.AppendFormat("<option value = ""{0}"" {1}> {2}</Option>", tipo.ID, IIf(parametros.Tipo = tipo.ID, selected, ""), tipo.DESCRICAO)
+        Next
+        Return retorno.ToString
+
+    End Function
+
 End Class

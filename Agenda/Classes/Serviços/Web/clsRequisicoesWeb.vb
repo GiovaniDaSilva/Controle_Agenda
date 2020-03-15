@@ -277,7 +277,7 @@ Public Class clsRequisicoesWeb
     Private Function funRetornaPaginaHome(pReqWeb As clsReqWeb) As String
 
         Dim post() As String
-        Dim locParametros As New clsHomeParametros
+        Dim locParametros As New clsParametrosFiltroWeb
         Dim ParametrosIni = New clsIni().funCarregaIni()
         Dim retorno As String = ""
 

@@ -2,6 +2,14 @@
 
 Public Class clsImpressaoWeb
 
+    Public Enum enuEstiloImpressao
+        Data = 1
+        Titulo = 2
+        Titulo_Destaque = 3
+        Informacao = 4
+        Informacao_Destaque = 5
+    End Enum
+
     Private Property html As New StringBuilder
 
     Public Function RetornaPagina(pFiltro As clsAtividade) As String
@@ -14,6 +22,8 @@ Public Class clsImpressaoWeb
         html = My.Resources.Impressao
 
         html = html.Replace("{p_dados_impresso}", funRetornaSolicitacos(pFiltro))
+        html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(parametros))
+
         Return html
     End Function
 
@@ -21,7 +31,6 @@ Public Class clsImpressaoWeb
         Dim listaAtividades As New List(Of clsConsultaAtividades)
 
         listaAtividades = New clsAdicionarDAO().carregarAtividades(pFiltro)
-
         subListaSolicitacoes(listaAtividades)
 
         Return html.ToString
@@ -44,11 +53,17 @@ Public Class clsImpressaoWeb
             If locdata = vbNullString OrElse locdata <> item.Data Then
                 Dim data As String
                 data = item.Data & " - " & Strings.StrConv(String.Format("{0:dddd}", item.Data), VbStrConv.ProperCase)
-                html.AppendLine(clsHTMLTools.Imprime(data))
+
+                clsHTMLTools.PulaLinha(html, 2)
+                clsHTMLTools.Imprime(html, data, clsHTMLTools.enuEstiloImpressao.Data, True)
+                clsHTMLTools.PulaLinha(html, 3)
                 locdata = item.Data
             End If
 
             objeto.subImprimeAtividade(item, html, New clsIni().funCarregaIni())
+
+            'Espaço entre as atividades
+            clsHTMLTools.PulaLinha(html, 2)
         Next
     End Sub
 
@@ -65,22 +80,20 @@ Public Class clsListaSolicitacaoWeb
     Public Sub subImprimeAtividade(pAtividade As clsConsultaAtividades, ByRef html As StringBuilder, ini As clsParametrosIni) Implements IListaAtividadesWeb.subImprimeAtividade
 
 
-        html.AppendLine(clsHTMLTools.Imprime(pAtividade.TIPO_DESCRICAO))
+        clsHTMLTools.Imprime(html, pAtividade.TIPO_DESCRICAO, clsHTMLTools.enuEstiloImpressao.Titulo_Destaque, True)
 
-        html.AppendLine(clsHTMLTools.Imprime(enuCamposImpressao.Horas))
-        html.Append(clsHTMLTools.Imprime(pAtividade.Horas))
+        clsHTMLTools.Imprime(html, "Código: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+        clsHTMLTools.Imprime(html, pAtividade.Codigo, clsHTMLTools.enuEstiloImpressao.Informacao)
 
-        html.AppendLine(clsHTMLTools.Imprime(enuCamposImpressao.Horas))
-        html.Append(clsHTMLTools.Imprime(pAtividade.Horas))
+        clsHTMLTools.Imprime(html, "Horas: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+        clsHTMLTools.Imprime(html, pAtividade.Horas, clsHTMLTools.enuEstiloImpressao.Informacao_Destaque)
 
         If ini.Horastrabalhadas = enuHorasTrabalhadas.Periodo And pAtividade.Periodos.Count > 0 Then
             'imprime periodos
         End If
 
-        html.AppendLine(clsHTMLTools.Imprime(enuCamposImpressao.Descricao))
-        html.Append(clsHTMLTools.Imprime(pAtividade.Descricao))
-
-        html.AppendLine("")
+        clsHTMLTools.Imprime(html, "Descrição: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+        clsHTMLTools.Imprime(html, pAtividade.Descricao, clsHTMLTools.enuEstiloImpressao.Informacao)
 
     End Sub
 End Class
@@ -95,22 +108,21 @@ Public Class clsListaDemaisAtividades
         '       Descrição: xxxxxxxxxxxx      
 
 
-        html.AppendLine(clsHTMLTools.Imprime(pAtividade.TIPO_DESCRICAO))
+        clsHTMLTools.Imprime(html, pAtividade.TIPO_DESCRICAO, clsHTMLTools.enuEstiloImpressao.Titulo_Destaque, True)
 
-        html.AppendLine(clsHTMLTools.Imprime(enuCamposImpressao.Horas))
-        html.Append(clsHTMLTools.Imprime(pAtividade.Horas))
+        If pAtividade.Codigo > 0 Then
+            clsHTMLTools.Imprime(html, "Código: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+            clsHTMLTools.Imprime(html, pAtividade.Codigo, clsHTMLTools.enuEstiloImpressao.Informacao)
+        End If
 
-        html.AppendLine(clsHTMLTools.Imprime(enuCamposImpressao.Horas))
-        html.Append(clsHTMLTools.Imprime(pAtividade.Horas))
+        clsHTMLTools.Imprime(html, "Horas: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+        clsHTMLTools.Imprime(html, pAtividade.Horas, clsHTMLTools.enuEstiloImpressao.Informacao_Destaque)
 
         If ini.Horastrabalhadas = enuHorasTrabalhadas.Periodo And pAtividade.Periodos.Count > 0 Then
             'imprime periodos
         End If
 
-        html.AppendLine(clsHTMLTools.Imprime(enuCamposImpressao.Descricao))
-        html.Append(clsHTMLTools.Imprime(pAtividade.Descricao))
-
-        html.AppendLine("")
-
+        clsHTMLTools.Imprime(html, "Descrição: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+        clsHTMLTools.Imprime(html, pAtividade.Descricao, clsHTMLTools.enuEstiloImpressao.Informacao)
     End Sub
 End Class

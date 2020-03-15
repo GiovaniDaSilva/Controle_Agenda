@@ -5,6 +5,42 @@
 
     <style>
         [p_style_comum_pagina]
+
+        .estiloTitulo {
+            color: black;
+            font-weight: bold;
+            font-size: 12px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .estiloTituloDestaque {
+            color: darkblue;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .estiloInformacao {
+            color: black;
+            font-size: 12px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .estiloInformacaoDestaque {
+            color: red;
+            font-size: 12px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .estiloData {
+            color: Green;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 16px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
     </style>
 
     {p_titulo_pagina}
@@ -14,14 +50,38 @@
 
 <body class="Fundo">
     <header>
-        {p_menu_pagina}  
+        {p_menu_pagina}
     </header>
 
     <h1 class="TituloPrincipal">Impressao</h1>
 
-    
-    {p_dados_impresso}
-    
+    <div class="container-fluid">
+        <form method="post" id="form_Filtro" style="margin-top: 10px; margin-bottom: 10px">
+            <div class="input-group mb-3 input-group-sm">
+                <div class="input-group-prepend">
+
+                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>A partir de:</b></span>
+                    <input type="date" class="form-control" id="data_ini" name="data_ini" form="form_Filtro">
+                    &nbsp;
+                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Tipo de Atividade:</b></span>
+                    <select class="custom-select" select id="cbTipo" name="tipoAtividade" form="form_Filtro">
+                        {p_tipos_atividades_filtro}
+                    </select>
+                    &nbsp;
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" form="form_Filtro">Aplicar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container-fluid">
+        <p style="line-height: 5px; ">
+            {p_dados_impresso}
+        </p>
+
+    </div>
 
 </body>
 
