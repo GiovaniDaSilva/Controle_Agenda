@@ -22,9 +22,19 @@ Public Class clsImpressaoWeb
         html = My.Resources.Impressao
 
         html = html.Replace("{p_dados_impresso}", funRetornaSolicitacos(pFiltro))
-        html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(parametros))
+        html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(pFiltro.ID_TIPO_ATIVIDADE))
+        html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(pFiltro.Data))
 
         Return html
+    End Function
+
+    Private Function RetornaInicializaCamposFiltro(pData As Date) As String
+        Dim texto As New StringBuilder(vbNullString)
+        texto.AppendFormat("
+            document.getElementById('data_ini').value = ""{0}"";                  
+        ", clsTools.funAjustaDataSQL(pData))
+        Return texto.ToString
+
     End Function
 
     Private Function funRetornaSolicitacos(pFiltro As clsAtividade) As String
