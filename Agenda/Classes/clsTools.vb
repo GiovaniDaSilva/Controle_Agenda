@@ -274,11 +274,20 @@ Public Class clsHTMLTools
         Return locPagRetorno
     End Function
 
-    Public Shared Sub Imprime(html As StringBuilder, dado As String, Optional estilo As enuEstiloImpressao = enuEstiloImpressao.Informacao, Optional PulaLinha As Boolean = False)
+    Public Shared Sub Imprime(html As StringBuilder, dado As String, Optional estilo As enuEstiloImpressao = enuEstiloImpressao.Informacao, Optional PulaLinha As Boolean = False, Optional Tab As Integer = 0)
         If PulaLinha Then html.Append("</br>")
-
+        If Tab > 0 Then html.Append(clsHTMLTools.retornaTabWeb(Tab))
         html.Append(funRetornaEstilo(estilo, dado))
     End Sub
+
+    Private Shared Function retornaTabWeb(tab As Integer) As String
+        Dim x As String
+        For i = 0 To tab
+            x &= "&nbsp "
+        Next
+
+        Return x
+    End Function
 
     Public Shared Sub PulaLinha(html As StringBuilder, linhas As Integer)
 

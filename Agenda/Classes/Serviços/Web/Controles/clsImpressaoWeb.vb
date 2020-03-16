@@ -82,6 +82,20 @@ Public Class clsImpressaoWeb
     End Sub
 
 
+
+
+    Public Shared Sub subImprimePeriodos(ByRef html As StringBuilder, periodos As List(Of clsPeriodo), Optional parTab As Integer = 0)
+        Dim i As Integer = 0
+        If periodos.Count = 0 Then Exit Sub
+
+        For Each item In periodos
+            i += 1
+
+            clsHTMLTools.Imprime(html, item.Hora_Inicial & " - " & item.Hora_Final, clsHTMLTools.enuEstiloImpressao.Informacao, i > 1, If(i > 1, parTab, 0))
+        Next
+
+
+    End Sub
 End Class
 
 Public Interface IListaAtividadesWeb
@@ -92,18 +106,36 @@ Public Class clsListaSolicitacaoWeb
     Implements IListaAtividadesWeb
 
     Public Sub subImprimeAtividade(pAtividade As clsConsultaAtividades, ByRef html As StringBuilder, ini As clsParametrosIni) Implements IListaAtividadesWeb.subImprimeAtividade
-
+        Dim locDetalhesBase = New clsSolicitacaoDAO().consultaSolicitacao(pAtividade.ID)
 
         clsHTMLTools.Imprime(html, pAtividade.TIPO_DESCRICAO, clsHTMLTools.enuEstiloImpressao.Titulo_Destaque, True)
 
         clsHTMLTools.Imprime(html, "Código: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
         clsHTMLTools.Imprime(html, pAtividade.Codigo, clsHTMLTools.enuEstiloImpressao.Informacao)
 
+        If locDetalhesBase IsNot Nothing Then
+            clsHTMLTools.Imprime(html, "Resumo: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+            clsHTMLTools.Imprime(html, locDetalhesBase.Resumo, clsHTMLTools.enuEstiloImpressao.Informacao)
+        End If
+
+
         clsHTMLTools.Imprime(html, "Horas: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
         clsHTMLTools.Imprime(html, pAtividade.Horas, clsHTMLTools.enuEstiloImpressao.Informacao_Destaque)
 
         If ini.Horastrabalhadas = enuHorasTrabalhadas.Periodo And pAtividade.Periodos.Count > 0 Then
-            'imprime periodos
+            clsHTMLTools.Imprime(html, "Período: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+            clsImpressaoWeb.subImprimePeriodos(html, pAtividade.Periodos, 7)
+        End If
+
+        If locDetalhesBase IsNot Nothing Then
+            clsHTMLTools.Imprime(html, "Subtipo: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+            clsHTMLTools.Imprime(html, locDetalhesBase.SubTipo, clsHTMLTools.enuEstiloImpressao.Informacao)
+
+            clsHTMLTools.Imprime(html, "Objeto: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+            clsHTMLTools.Imprime(html, locDetalhesBase.Objeto, clsHTMLTools.enuEstiloImpressao.Informacao)
+
+            clsHTMLTools.Imprime(html, "Situação: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+            clsHTMLTools.Imprime(html, locDetalhesBase.Situacao, clsHTMLTools.enuEstiloImpressao.Informacao)
         End If
 
         clsHTMLTools.Imprime(html, "Descrição: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
@@ -133,7 +165,9 @@ Public Class clsListaDemaisAtividades
         clsHTMLTools.Imprime(html, pAtividade.Horas, clsHTMLTools.enuEstiloImpressao.Informacao_Destaque)
 
         If ini.Horastrabalhadas = enuHorasTrabalhadas.Periodo And pAtividade.Periodos.Count > 0 Then
-            'imprime periodos
+            clsHTMLTools.Imprime(html, "Período: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
+            clsImpressaoWeb.subImprimePeriodos(html, pAtividade.Periodos, 7)
+
         End If
 
         clsHTMLTools.Imprime(html, "Descrição: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
