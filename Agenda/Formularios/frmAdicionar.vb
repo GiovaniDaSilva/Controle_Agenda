@@ -281,4 +281,12 @@
     Private Sub Calendario_Leave(sender As Object, e As EventArgs) Handles Calendario.Leave
         Calendario.Visible = False
     End Sub
+
+    Private Sub txtFinal_Leave(sender As Object, e As EventArgs) Handles txtFinal.Leave
+
+        If Trim(txtInicio.Text.Replace(":", "")) <> "" And Trim(txtFinal.Text.Replace(":", "")) <> "" Then
+            subAdicionaPeriodo()
+        End If
+
+    End Sub
 End Class
