@@ -120,8 +120,7 @@
                         <th>Tipo</th>
                         <th>Codigo</th>
                         <th>Horas</th>
-                        <th>Descrição</th>
-                        <th>Acao</th>
+                        <th>Descrição</th>                        
                         <th>Opções</th>
                     </tr>
                 </thead>
@@ -143,10 +142,7 @@
 
 
 
-        /* Formatting function for row details - modify as you need */
-
-
-
+        //Clique da coluna Opções
         $('#Dados tbody').on('click', 'td.details-control', function () {
 
             var tr = $(this).closest('tr');
@@ -162,28 +158,10 @@
                 row.child(format(row.data())).show();
                 tr.addClass('shown');
             }
-
-
-
         });
 
 
-        function format(d) {
-            var id;
-            $.each($(d), function (key, value) {
-                id = value[0];
-            });
-
-
-            alert(id);
-            // `d` is the original data object for the row
-            return '<table class="table nowrap table-hover table-info table-striped table-sm">' +
-                '<tr>' +                                
-                 '<td> <a href="/CadastroAtividade?id=' + id + '" class="btn btn-outline-success">Editar</a></td>' +
-                '</tr>' +
-                '</table>';
-
-        }
+      
         $(document).ready(function () {
 
 
@@ -225,20 +203,14 @@
                     {//coluna Descrição
                         targets: 5
                     },
-                    {//coluna Editar
-                        render: function (data, type, row) {
-                            var id = row[0];
-                            return "<a href='/CadastroAtividade?id=" + id + "' class='btn btn-outline-success'>Editar</a>"
-                        },
-                        targets: 6,
-                        width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
-                    },
+
                     {//coluna Extra
-                        targets: 7,
+                        targets: 6,
                         className: 'details-control',
                         orderable: false,
                         data: null,
-                        defaultContent: ''
+                        defaultContent: '<button class="btn btn-info btn-sm">Opções</button>',
+                        width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
                     },
                 ],
 
@@ -299,6 +271,20 @@
 
 
         });
+
+        //Retorna a Linha com opções da atividade
+        function format(d) {
+            var id;
+            $.each($(d), function (key, value) {
+                id = value[0];
+            });            
+            return '<table class="table-sm">' +
+                '<tr>' +                                
+                 '<td> <a href="/CadastroAtividade?id=' + id + '" class="btn btn-success btn-sm">Editar</a></td>' +
+                '</tr>' +
+                '</table>';
+
+        }
 
         //Ordenação da coluna data
         jQuery.extend(jQuery.fn.dataTableExt.oSort, {
