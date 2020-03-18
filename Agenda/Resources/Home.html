@@ -50,6 +50,13 @@
         .corVerdeVivo {
             color: #339933;
         }
+
+        td.details-control {
+            cursor: pointer;
+        }
+
+        tr.shown td.details-control {
+        }
     </style>
 
     {p_titulo_pagina}
@@ -113,8 +120,8 @@
                         <th>Tipo</th>
                         <th>Codigo</th>
                         <th>Horas</th>
-                        <th>Descrição</th>
-                        <th>Acao</th>
+                        <th>Descrição</th>                        
+                        <th>Opções</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -128,16 +135,43 @@
         </div>
     </div>
 
+
+
+
     <script>
 
 
+
+        //Clique da coluna Opções
+        $('#Dados tbody').on('click', 'td.details-control', function () {
+
+            var tr = $(this).closest('tr');
+            var row = tb.row(tr);
+         
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+        });
+
+
+      
         $(document).ready(function () {
-            
+
+
+
+
             [p_inicializa_campos_filtro]
 
             tb = $('#Dados').DataTable({
-                "scrollY": "400px", //Altura da grid com scroll
-                "scrollCollapse": true,
+                //"scrollY": "400px", //Altura da grid com scroll
+                //"scrollCollapse": true,
                 select: {
                     style: 'single' //permitir selecionar apenas uma linha
                 },
@@ -169,14 +203,15 @@
                     {//coluna Descrição
                         targets: 5
                     },
-                    {//coluna Editar
-                        render: function (data, type, row) {
-                            var id = row[0];
-                            return "<a href='/CadastroAtividade?id=" + id + "' class='btn btn-outline-success'>Editar</a>"
-                        },
+
+                    {//coluna Extra
                         targets: 6,
+                        className: 'details-control',
+                        orderable: false,
+                        data: null,
+                        defaultContent: '<button class="btn btn-info btn-sm">Opções</button>',
                         width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
-                    }
+                    },
                 ],
 
                 initComplete: function () {
@@ -186,6 +221,8 @@
                 },
 
             });
+
+
             $('.dataTables_length').addClass('bs-select');
 
             $.fn.dataTable.moment('DD/MM/YYYY');
@@ -225,7 +262,7 @@
                 } else {
 
                     //limpa o campo descricao
-                    document.getElementById('txtdescricao').value = "";         
+                    document.getElementById('txtdescricao').value = "";
                     document.getElementById("totalHorasDia").innerHTML = "00:00";
                     document.getElementById("totalHorasAtividade").innerHTML = "00:00";
 
@@ -234,6 +271,20 @@
 
 
         });
+
+        //Retorna a Linha com opções da atividade
+        function format(d) {
+            var id;
+            $.each($(d), function (key, value) {
+                id = value[0];
+            });            
+            return '<table class="table-sm">' +
+                '<tr>' +                                
+                 '<td> <a href="/CadastroAtividade?id=' + id + '" class="btn btn-success btn-sm">Editar</a></td>' +
+                '</tr>' +
+                '</table>';
+
+        }
 
         //Ordenação da coluna data
         jQuery.extend(jQuery.fn.dataTableExt.oSort, {
@@ -253,6 +304,7 @@
                 return ((a < b) ? 1 : ((a > b) ? -1 : 0));
             }
         });
+
 
 
     </script>
