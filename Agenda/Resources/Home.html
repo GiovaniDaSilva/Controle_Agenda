@@ -50,6 +50,13 @@
         .corVerdeVivo {
             color: #339933;
         }
+
+        td.details-control {
+            cursor: pointer;
+        }
+
+        tr.shown td.details-control {
+        }
     </style>
 
     {p_titulo_pagina}
@@ -115,6 +122,7 @@
                         <th>Horas</th>
                         <th>Descrição</th>
                         <th>Acao</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -128,16 +136,64 @@
         </div>
     </div>
 
+
+
+
     <script>
 
 
+
+        /* Formatting function for row details - modify as you need */
+
+
+
+        $('#Dados tbody').on('click', 'td.details-control', function () {
+
+            var tr = $(this).closest('tr');
+            var row = tb.row(tr);
+         
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+
+
+
+        });
+
+
+        function format(d) {
+            var id;
+            $.each($(d), function (key, value) {
+                id = value[0];
+            });
+
+
+            alert(id);
+            // `d` is the original data object for the row
+            return '<table class="table nowrap table-hover table-info table-striped table-sm">' +
+                '<tr>' +                                
+                 '<td> <a href="/CadastroAtividade?id=' + id + '" class="btn btn-outline-success">Editar</a></td>' +
+                '</tr>' +
+                '</table>';
+
+        }
         $(document).ready(function () {
-            
+
+
+
+
             [p_inicializa_campos_filtro]
 
             tb = $('#Dados').DataTable({
-                "scrollY": "400px", //Altura da grid com scroll
-                "scrollCollapse": true,
+                //"scrollY": "400px", //Altura da grid com scroll
+                //"scrollCollapse": true,
                 select: {
                     style: 'single' //permitir selecionar apenas uma linha
                 },
@@ -176,7 +232,14 @@
                         },
                         targets: 6,
                         width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
-                    }
+                    },
+                    {//coluna Extra
+                        targets: 7,
+                        className: 'details-control',
+                        orderable: false,
+                        data: null,
+                        defaultContent: ''
+                    },
                 ],
 
                 initComplete: function () {
@@ -186,6 +249,8 @@
                 },
 
             });
+
+
             $('.dataTables_length').addClass('bs-select');
 
             $.fn.dataTable.moment('DD/MM/YYYY');
@@ -225,7 +290,7 @@
                 } else {
 
                     //limpa o campo descricao
-                    document.getElementById('txtdescricao').value = "";         
+                    document.getElementById('txtdescricao').value = "";
                     document.getElementById("totalHorasDia").innerHTML = "00:00";
                     document.getElementById("totalHorasAtividade").innerHTML = "00:00";
 
@@ -253,6 +318,7 @@
                 return ((a < b) ? 1 : ((a > b) ? -1 : 0));
             }
         });
+
 
 
     </script>

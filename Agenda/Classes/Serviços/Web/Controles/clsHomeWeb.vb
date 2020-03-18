@@ -55,6 +55,7 @@ Public Class clsHomeWeb
             linha.Add(atividade.Horas)
             linha.Add(atividade.funRetornaDescricaoTratada)
             linha.Add("")
+            linha.Add("")
             locRetorno &= clsHTMLTools.funLinhaTabela(linha, "class=""descricao""")
         Next
 
