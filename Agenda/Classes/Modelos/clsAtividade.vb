@@ -33,6 +33,7 @@
     Public Property ID_TIPO_ATIVIDADE As Integer
     Public Property Periodos As List(Of clsPeriodo)
 
+
     Public Function funRetornaCodigoTratado() As String
         Return IIf(CInt(Codigo) > 0, Codigo, "")
     End Function

@@ -208,3 +208,130 @@ Public Class clsTools
         Return locResultado 
     End Function
 End Class
+
+
+
+''' <summary>
+''' Classe para tratar funções que auxiliar o preenchimento do html
+''' </summary>
+Public Class clsHTMLTools
+
+    Public Shared Function funLinhaTabela(ByVal pColunas As List(Of String), Optional ByVal classe As String = vbNullString, Optional ByVal estilo As String = vbNullString) As String
+        Dim retorno As String = vbNullString
+
+
+        retorno = "<tr>"
+        For Each col In pColunas
+            retorno &= "<td "
+
+            If classe <> vbNullString Then
+                retorno &= classe
+            End If
+
+            If estilo <> vbNullString Then
+                retorno &= estilo
+            End If
+
+            retorno &= " >" & col.ToString & "</td>"
+        Next
+        retorno &= "</tr>"
+
+        Return retorno
+    End Function
+
+    ''' <summary>
+    ''' Ajustar o campo dentro do array que venho do post, removendo o nome do campo e o sinal de igual
+    ''' </summary>
+    ''' <param name="campo"></param>
+    ''' <returns></returns>
+    Public Shared Function RetornaValorPostGet(ByVal campo As String) As String
+        Return campo.ToString.Replace(campo.ToString.Substring(0, campo.IndexOf("=") + 1), "")
+    End Function
+
+    ''' <summary>
+    ''' Converte o post dentro do request em array de string
+    ''' </summary>
+    ''' <param name="pContext"></param>
+    ''' <returns></returns>
+    Public Shared Function RetornaPostEmArray(pContext As HttpListenerContext) As String()
+        Return New StreamReader(pContext.Request.InputStream).ReadToEnd().Split(New Char() {"?", "&"})
+    End Function
+
+    ''' <summary>
+    ''' Converte o get dentro da url em array de string
+    ''' </summary>
+    ''' <param name="pContext"></param>
+    ''' <returns></returns>
+    Public Shared Function RetornaGetEmArray(pContext As HttpListenerContext) As String()
+        Return pContext.Request.Url.Query.ToString.Split(New Char() {"?", "&"})
+    End Function
+
+    Public Shared Function RetornaPaginaErro(pTitulo As String, pMensagem As String) As String
+        Dim locPagRetorno As String
+        locPagRetorno = My.Resources.Pagina_Não_Encontrada.Replace("{p_titulo}", pTitulo).Replace("{p_mensagem}", pMensagem)
+        clsHTMLComum.TrataParametrosComuns(locPagRetorno)
+
+        Return locPagRetorno
+    End Function
+
+    Public Shared Sub Imprime(html As StringBuilder, dado As String, Optional estilo As enuEstiloImpressao = enuEstiloImpressao.Informacao, Optional PulaLinha As Boolean = False, Optional Tab As Integer = 0)
+        If PulaLinha Then html.Append("</br>")
+        If Tab > 0 Then html.Append(clsHTMLTools.retornaTabWeb(Tab))
+        html.Append(funRetornaEstilo(estilo, dado))
+    End Sub
+
+    Private Shared Function retornaTabWeb(tab As Integer) As String
+        Dim x As String
+        For i = 0 To tab
+            x &= "&nbsp "
+        Next
+
+        Return x
+    End Function
+
+    Public Shared Sub PulaLinha(html As StringBuilder, linhas As Integer)
+
+        If linhas = 0 Then
+            Throw New Exception("Numero de linhas deve ser superior a zero.")
+        End If
+
+        For i = 0 To linhas
+            html.Append("</br>")
+        Next
+    End Sub
+
+    Private Shared Function funRetornaEstilo(estilo As enuEstiloImpressao, dado As String) As String
+        Select Case estilo
+            Case enuEstiloImpressao.Data
+                Return Paragrafo(dado, "estiloData")
+            Case enuEstiloImpressao.Titulo
+                Return Tab() & Paragrafo(dado, "estiloTitulo")
+            Case enuEstiloImpressao.Titulo_Destaque
+                Return Paragrafo(dado, "estiloTituloDestaque")
+            Case enuEstiloImpressao.Informacao
+                Return Paragrafo(dado, "estiloInformacao")
+            Case enuEstiloImpressao.Informacao_Destaque
+                Return Paragrafo(dado, "estiloInformacaoDestaque")
+            Case Else
+                Return ""
+        End Select
+    End Function
+
+    Public Shared Function Paragrafo(campo As String, classe As String) As String
+        Return String.Format("<label class = {0}> {1} </label>", classe, campo)
+    End Function
+
+
+    Public Shared Function Tab() As String
+        Return "&nbsp &nbsp"
+    End Function
+
+    Public Enum enuEstiloImpressao
+        Data = 1
+        Titulo = 2
+        Titulo_Destaque = 3
+        Informacao = 4
+        Informacao_Destaque = 5
+    End Enum
+
+End Class

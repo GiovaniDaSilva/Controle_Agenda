@@ -8,7 +8,8 @@ Public Class clsHTMLComum
         <nav class=""navbar navbar-dark bg-primary"">            
                 <div >
                     <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light ""><i class=""material-icons"">home</i>Home</a>
-                    <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">pie_chart</i>&nbsp;Grafico</a>
+                    <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">pie_chart</i>&nbsp;Gráfico</a>
+                    <a href=""Impressao"" id=""bt_impressao"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">print</i>&nbsp;Impressão</a>            
                     <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>            
                 </div>
                 <div class=""float-right"">
@@ -201,6 +202,67 @@ Public Class clsHTMLComum
                 return str_data;
             };
         ")
+        Return texto.ToString
+    End Function
+
+    Public Shared Function RetornaTiposAtividadesFiltro(pTipo As Integer) As String
+        Dim retorno As New StringBuilder(vbNullString)
+        Dim selected As String = "selected"
+        Dim tipos As List(Of clsTipo)
+
+        tipos = New clsAdicionarDAO().CarregaTipos()
+
+        retorno.AppendFormat("<option value = ""{0}"" {1}> {2}</Option>", 0, IIf(pTipo = 0, selected, ""), "Todos")
+
+        For Each tipo In tipos
+            retorno.AppendFormat("<option value = ""{0}"" {1}> {2}</Option>", tipo.ID, IIf(pTipo = tipo.ID, selected, ""), tipo.DESCRICAO)
+        Next
+        Return retorno.ToString
+
+    End Function
+
+    Public Shared Function RetornaTabelaPeriodosDia(pData As Date) As String
+        Const SEM_PERIODO = "<tr><td colspan=""4"">Sem período cadastrado</td></tr>"
+
+        Dim listaAtividadesPeriodos As New List(Of clsPeriodosAtividades)
+        Dim linhasPeriodo As String = vbNullString
+
+        listaAtividadesPeriodos = New clsAdicionarDAO().retornaPeriodoAtividades(pData)
+
+
+        For Each periodo In listaAtividadesPeriodos
+            Dim linha = New List(Of String)
+            linha.Add(periodo.descricao_tipo)
+            linha.Add(periodo.codigo_atividade)
+            linha.Add(periodo.hora_inicial)
+            linha.Add(periodo.hora_final)
+            linhasPeriodo &= clsHTMLTools.funLinhaTabela(linha)
+        Next
+
+        If linhasPeriodo = vbNullString Then
+            linhasPeriodo = SEM_PERIODO
+        End If
+
+        Return RetornaTabelaPeriodosDia(linhasPeriodo)
+    End Function
+
+    Public Shared Function RetornaTabelaPeriodosDia(pLinhas As String) As String
+        Dim texto As New StringBuilder(vbNullString)
+        texto.AppendFormat("
+                <table id=""tablePeriodosDia"" class=""table table-bordered table-sm table-hover table-primary table-striped"" cellspacing=""0"" name=""tablePeriodosDia"">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Código</th>
+                        <th>De</th>
+                        <th>Ate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {0}
+                </tbody>
+            </table>
+            ", pLinhas)
         Return texto.ToString
     End Function
 

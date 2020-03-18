@@ -170,6 +170,43 @@ Namespace My.Resources
         '''        {p_menu_pagina}  
         '''    &lt;/header&gt;
         '''
+        '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Impressao&lt;/h1&gt;
+        '''
+        '''    
+        '''
+        '''    
+        '''
+        '''&lt;/body&gt;
+        '''
+        '''
+        '''&lt;/html&gt;.
+        '''</summary>
+        Friend ReadOnly Property Impressao() As String
+            Get
+                Return ResourceManager.GetString("Impressao", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;html&gt;
+        '''&lt;head&gt;
+        '''
+        '''    {p_links_comum_pagina}
+        '''
+        '''    &lt;style&gt;
+        '''        [p_style_comum_pagina]
+        '''    &lt;/style&gt;
+        '''
+        '''    {p_titulo_pagina}
+        '''
+        '''&lt;/head&gt;
+        '''
+        '''
+        '''&lt;body class=&quot;Fundo&quot;&gt;
+        '''    &lt;header&gt;
+        '''        {p_menu_pagina}  
+        '''    &lt;/header&gt;
+        '''
         '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;{p_titulo}&lt;/h1&gt;
         '''
         '''    &lt;div class=&quot;container-fluid&quot;&gt;
@@ -212,12 +249,10 @@ Namespace My.Resources
         '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Atualizações&lt;/h1&gt;
         '''
         '''    &lt;div class=&quot;container-fluid&quot;&gt;
-        '''
-        '''        &lt;h2 class=&quot;Titulo&quot;&gt;v.1.2&lt;/h2&gt;
+        '''        &lt;h2 class=&quot;Titulo&quot;&gt;v.1.4&lt;/h2&gt;
         '''        &lt;p class=&quot;Atualizacao&quot;&gt;
         '''            &lt;ul&gt;
-        '''                &lt;li&gt;Adicionado funcionalidade para cadastro do Tipo de Atividade.&lt;/li&gt;&lt;/br&gt;
-        '''         [rest of string was truncated]&quot;;.
+        '''                &lt;li&gt;Adicionado rotina para realizar backup da base automaticamente uma vez ao dia, desd [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Versoes() As String
             Get

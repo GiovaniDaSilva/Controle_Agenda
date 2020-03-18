@@ -29,6 +29,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pReqWeb)
                 Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pReqWeb)
+                Case "/Impressao"
+                    locPagRetorno = funRetornaPaginaImpressao(pReqWeb)
                 Case "/Versoes"
                     locPagRetorno = My.Resources.Versoes
                 Case "/favicon.ico"
@@ -46,6 +48,55 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Sub
+
+    Private Function funRetornaPaginaImpressao(pReqWeb As clsReqWeb) As String
+
+        Dim filtro As New clsAtividade
+        Dim post() As String
+        Dim ParametrosIni = New clsIni().funCarregaIni()
+
+        'Por default pega do ini
+        If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
+            filtro.Data = Now
+        ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
+            filtro.Data = Now.AddDays(-7)
+        End If
+
+        If pReqWeb.Context.Request.HttpMethod = "POST" Then
+
+            post = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+            If post.Count = 0 Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("Parâmetros do POST não foram informados.")
+            End If
+
+            Dim data = clsHTMLTools.RetornaValorPostGet(post(0))
+            If data <> vbNullString Then
+                If Not IsDate(data) Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Data do POST inválida.")
+                End If
+                filtro.Data = CDate(data)
+            End If
+
+            Dim tipo = clsHTMLTools.RetornaValorPostGet(post(1))
+            If tipo < 0 Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("Tipo de Atividade do POST inválido.")
+            End If
+            filtro.ID_TIPO_ATIVIDADE = tipo
+        End If
+
+        Try
+            Return New clsImpressaoWeb().RetornaPagina(filtro)
+        Catch ex As Exception
+            pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+            Throw New Exception("Erro ao carregar a página Impressão.")
+        End Try
+
+
+
+    End Function
 
     Private Function funRetornaDetalhesAtividade(pReqWeb As clsReqWeb) As String
         Dim locDetalhes As New clsParametrosDetalhesAtividadeWeb
@@ -134,7 +185,7 @@ Public Class clsRequisicoesWeb
 
             Try
                 retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
-                retorno.descricao = New clsCadastroAtividadeWeb().RetornaTabelaPeriodosDia(data)
+                retorno.descricao = clsHTMLComum.RetornaTabelaPeriodosDia(data)
             Catch ex As Exception
                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
                 Throw New Exception("Erro ao carregar os períodos do dia.")
@@ -267,7 +318,7 @@ Public Class clsRequisicoesWeb
     Private Function funRetornaPaginaHome(pReqWeb As clsReqWeb) As String
 
         Dim post() As String
-        Dim locParametros As New clsHomeParametros
+        Dim locParametros As New clsParametrosFiltroWeb
         Dim ParametrosIni = New clsIni().funCarregaIni()
         Dim retorno As String = ""
 
