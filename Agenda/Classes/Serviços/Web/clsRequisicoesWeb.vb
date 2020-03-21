@@ -27,6 +27,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaCadastroAtividade_Excluir(pReqWeb)
                 Case "/CadastroAtividade_get_periodos_dia"
                     locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pReqWeb)
+                Case "/ControlePonto"
+                    locPagRetorno = funRetornaControlePonto(pReqWeb)
                 Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pReqWeb)
                 Case "/Impressao"
@@ -48,6 +50,10 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Sub
+
+    Private Function funRetornaControlePonto(pReqWeb As clsReqWeb) As String
+        Return My.Resources.ControlePonto
+    End Function
 
     Private Function funRetornaPaginaImpressao(pReqWeb As clsReqWeb) As String
 

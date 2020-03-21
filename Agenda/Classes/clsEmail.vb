@@ -4,15 +4,15 @@ Imports System.Net.Mime
 Imports System.Text
 
 Public Class clsEmail
-
-    Const EMAIL = ""
-    Const SENHA = ""
+    Const EMAIL = "controle.agenda.mail@gmail.com"
+    Const SENHA = "ControleAgenda2020"
 
     Public Property EmailDestino As String = "giovani.senior@gmail.com" 'vbNullString
 
     Public Property CaminhoAnexo As String = "C:\Projeto\Controle_Agenda\Agenda\bin\Debug\backups\BancoAgenda_11-03-2020-21-45-09.db" 'vbNullString
 
     Public Property Assunto As String = "Backup Agenda"
+
 
     Public Function EnviaEmail() As Boolean
         Dim mail As New MailMessage

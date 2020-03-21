@@ -91,6 +91,26 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to &lt;html lang=&quot;pr-bt&quot;&gt;
+        '''&lt;head&gt;
+        '''    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+        '''    {p_links_comum_pagina}
+        '''
+        '''
+        '''    &lt;!--Seleção da linha da tabela--&gt;
+        '''    &lt;script src=&quot;https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js&quot;&gt;&lt;/script&gt;
+        '''    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.datatables.net/select/1.3.1/css/select.bootstrap4.min.css&quot; /&gt;
+        '''
+        '''    &lt;!--Converte Tabela em Json--&gt;
+        '''    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property ControlePonto() As String
+            Get
+                Return ResourceManager.GetString("ControlePonto", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         '''
         '''&lt;html&gt;
@@ -158,28 +178,20 @@ Namespace My.Resources
         '''
         '''    &lt;style&gt;
         '''        [p_style_comum_pagina]
-        '''    &lt;/style&gt;
         '''
-        '''    {p_titulo_pagina}
+        '''        .estiloTitulo {
+        '''            color: black;
+        '''            font-weight: bold;
+        '''            font-size: 12px;
+        '''            font-family: &apos;Segoe UI&apos;, Tahoma, Geneva, Verdana, sans-serif;
+        '''        }
         '''
-        '''&lt;/head&gt;
-        '''
-        '''
-        '''&lt;body class=&quot;Fundo&quot;&gt;
-        '''    &lt;header&gt;
-        '''        {p_menu_pagina}  
-        '''    &lt;/header&gt;
-        '''
-        '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Impressao&lt;/h1&gt;
-        '''
-        '''    
-        '''
-        '''    
-        '''
-        '''&lt;/body&gt;
-        '''
-        '''
-        '''&lt;/html&gt;.
+        '''        .estiloTituloDestaque {
+        '''            color: darkblue;
+        '''            font-weight: bold;
+        '''            text-decoration: underline;
+        '''            font-size: 14px;
+        '''            font-family: &apos;Segoe UI&apos;, Tahoma, Gene [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Impressao() As String
             Get
@@ -249,10 +261,12 @@ Namespace My.Resources
         '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Atualizações&lt;/h1&gt;
         '''
         '''    &lt;div class=&quot;container-fluid&quot;&gt;
-        '''        &lt;h2 class=&quot;Titulo&quot;&gt;v.1.4&lt;/h2&gt;
+        '''
+        '''        &lt;h2 class=&quot;Titulo&quot;&gt;v.1.5&lt;/h2&gt;
         '''        &lt;p class=&quot;Atualizacao&quot;&gt;
         '''            &lt;ul&gt;
-        '''                &lt;li&gt;Adicionado rotina para realizar backup da base automaticamente uma vez ao dia, desd [rest of string was truncated]&quot;;.
+        '''                &lt;li&gt;Adicionado botão opções para a atividade cadastrada na Agenda Web.&lt;/li&gt;&lt;/br&gt;
+        '''    [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Versoes() As String
             Get
