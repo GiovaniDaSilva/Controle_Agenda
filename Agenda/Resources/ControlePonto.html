@@ -40,6 +40,25 @@
             background-color: cornflowerblue;
             border-color: cornflowerblue;
         }
+
+        
+        .labelSpan {
+            font-weight: bold;
+            color: black;
+            font-size: 12px;
+        }
+
+        .labelTotais {
+            font-weight: bold;
+            font-size: 14px;
+            border: none;
+        }
+
+        .corVerdeVivo {
+            color: #339933;
+        }
+
+
     </style>
 
     {p_titulo_pagina}
@@ -77,8 +96,13 @@
 
                         <!--Campo Horas Totais-->
                         <div class="form-group col-md-2">
-                            <label for="horaTotal" class="label">Total</label>
+                            <label for="horaTotal" class="label">Total do Dia</label>
                             <input readonly type="time" class="form-control" id="horaTotal" name="horaTotal" form="form_dados">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <span class="Fundo labelTotais">Faltam:</span>
+                            <span class="Fundo labelTotais corVerdeVivo" id="totalHorasFaltantes">00:00</span>
                         </div>
                     </div>
 
@@ -87,14 +111,14 @@
 
                         <!--Campo inicio-->
                         <div class="form-group col-md-2">
-                            <label for="horaInicio" class="label">De</label>
+                            <label for="horaInicio" class="label">Entrada</label>
                             <input type="time" class="form-control" id="horaInicio" name="horaInicio" form="form_dados">
                         </div>
                         &nbsp;
 
                         <!--Campo fim-->
                         <div class="form-group col-md-2">
-                            <label for="horaFinal" class="label">Até</label>
+                            <label for="horaFinal" class="label">Saída</label>
                             <input type="time" class="form-control" id="horaFinal" name="horaFinal" form="form_dados">
                         </div>
 
@@ -115,14 +139,14 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>De</th>
-                                        <th>Ate</th>
+                                        <th>Entrada</th>
+                                        <th>Saída</th>
                                         <th>Total</th>
                                         <th>Ação</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {p_linhas_tabela_periodo}
+                                    {p_linhas_tabela_periodo}                                    
                                 </tbody>
                             </table>
 
@@ -133,8 +157,8 @@
                 </form>
             </div>
             <div class="col-md-5" style="margin-top: 30px">
-                <label for="tablePeriodosDia" class="label">Períodos desta data</label>
-                {p_linhas_tabela_periodo_dia}
+                <!--  <label for="tablePeriodosDia" class="label">Períodos desta data</label>
+                      {p_linhas_tabela_periodo_dia}-->
             </div>
         </div>
     </div>
@@ -159,6 +183,8 @@
 
     <script>
 
+        var EscalaDia = "08:30";
+
         $(document).ready(function () {
             tb = $('#dados').DataTable({
                 "scrollY": "200px", //Altura da grid com scroll
@@ -169,6 +195,8 @@
                 select: {
                     style: 'single' //permitir selecionar apenas uma linha
                 },
+
+                order: [[1, 'asc']], //ordem padrão: coluna Data em ordem Decrescente
 
                 oLanguage: { sUrl: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json' },
 
@@ -188,18 +216,32 @@
                 ]
             });
 
+            CalculaHorasFaltantes();
 
             //Seleção da Atividade
             tb.on('select.dt deselect.dt', function () {
                 var rows = $('tr.selected');
-                var rowData = tb.rows(rows).data();
-                var id = 0;
-                var dados;
+                var rowData = tb.rows(rows).data();                          
 
-                $.each($(rowData), function (key, value) {
-                    id = value[0];
+                $.each($(rowData), function (key, value) {                    
+                    document.getElementById('horaInicio').value = value[1];
+                    document.getElementById('horaFinal').value = value[2];
                 });
 
+            });
+
+             //Evento de Seleção do Usuário - antes da seleção ter ocorrido
+            tb.on('user-select', function (e, dt, type, cell, originalEvent) {
+                var row = dt.row(cell.index().row).node();
+                if ($(row).hasClass('selected')) {
+                    // deselect
+                    //e.preventDefault(); //previnir tirar a seleção do item selecionado
+                    document.getElementById('horaInicio').value = "";
+                    document.getElementById('horaFinal').value = "";                    
+                }
+                else {
+                    // select
+                };
             });
 
 
@@ -285,7 +327,7 @@
         function excluiPeriodo() {
 
 
-            var tot
+            var tot = "00:00";
             var rowData = tb.rows('.selected').data();
             $.each($(rowData), function (key, value) {
                 tot = value[3];
@@ -295,12 +337,31 @@
             
             //Pega hora total, ou alimenta se ainda não tiver
             var hora = document.getElementById('horaTotal').value;
-            if (hora == '') { hora = '00:00'; }
+            var difHora = "00:00";
 
-            document.getElementById('horaTotal').value = subtraiHora(hora, tot);
+            if (hora == '') {
+                hora = '00:00';                
+            } else {
+                difHora = subtraiHora(hora, tot);
+            }
+                       
+            document.getElementById('horaTotal').value = difHora;
 
-
+            CalculaHorasFaltantes();
         };
+
+        function CalculaHorasFaltantes() {
+            var hora = document.getElementById('horaTotal').value;
+            var difHora = EscalaDia;
+            
+            if (hora == '') {
+                hora = '00:00';                
+            } else {
+                difHora = subtraiHora(EscalaDia, hora);
+            }
+            
+            document.getElementById('totalHorasFaltantes').innerHTML  = difHora;
+        }
 
         function CarregaGridPeriodosDia() {
 
@@ -333,16 +394,24 @@
         //inseri o periodo na grid
         function AdicionaPeiodoGrid(tb) {
 
-            var ini = document.getElementById('horaInicio').value
-            var fim = document.getElementById('horaFinal').value;
-            var tot = diff(ini, fim);
+            excluiPeriodo()
 
-            if (ini == '') {
+            var ini = document.getElementById('horaInicio').value;
+            var fim = document.getElementById('horaFinal').value;
+            var tot;
+            
+            if (ini == '' || ini == "00:00" ) {
                 alert('Informe a hora de inicio.')
                 return
             }
 
-            if (fim == '') {fim = "00:00"}
+            if (fim == '' || fim == "00:00")  {
+                fim = "00:00";
+                tot = "00:00"
+            }
+            else {
+                 tot = diff(ini, fim);
+            }
 
             tb.row.add([
                 0, //ID
@@ -356,11 +425,20 @@
             document.getElementById('horaInicio').value = "";
             document.getElementById('horaFinal').value = "";
 
+            //Se deixar a hora final em branco, usa a hora atual
+            if (fim == '' || fim == "00:00") {
+                var dNow = new Date();
+                var horaAtual = dNow.getHours() + ':' + dNow.getMinutes();
+                tot = diff(ini, horaAtual);
+            }
+
             //Pega hora total, ou alimenta se ainda não tiver
             var hora = document.getElementById('horaTotal').value;
             if (hora == '') { hora = '00:00'; }
 
             document.getElementById('horaTotal').value = somaHora(hora, tot, false);
+            CalculaHorasFaltantes();
+
         };
 
         //Evento de submit do formulario
