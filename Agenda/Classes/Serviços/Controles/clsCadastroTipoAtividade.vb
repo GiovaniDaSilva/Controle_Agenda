@@ -63,6 +63,11 @@
         If dao.TipoSendoUsado(pTipo) Then
             Throw New Exception(msg & "A mesma esta sendo utilizada por uma atividade cadastrada.")
         End If
+
+        If pTipo.CODIGO < 5 Or pTipo.DESCRICAO = "PBI" Or pTipo.DESCRICAO = "Solicitações" Then
+            Throw New Exception(msg & "Esse tipo de atividade não pode ser excluído.")
+        End If
+
         Return True
     End Function
 

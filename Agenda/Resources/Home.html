@@ -74,7 +74,8 @@
 
     <div class="form-row" style="margin-top: 10px; margin-left: 20px; margin-right: 20px">
         <div class="col-md-10">
-            <a href="CadastroAtividade" id="btnCadastroAtivdade" class=" btn btn-success btn-outline-light botaoSubMenu">Nova Atividade</a>
+            <a href="CadastroAtividade" id="btnCadastroAtivdade" class=" btn btn-success botaoSubMenu">Nova Atividade</a>
+            <a href="http://sah.govbr.com.br/default.asp?dtsem=" target="_blank" id="btnApontamentoHoras" class=" btn btn-info botaoSubMenu">Apontamento de Horas</a>
         </div>
 
         <div class="col-md-1 float-right">
@@ -120,7 +121,7 @@
                         <th>Tipo</th>
                         <th>Codigo</th>
                         <th>Horas</th>
-                        <th>Descrição</th>                        
+                        <th>Descrição</th>
                         <th>Opções</th>
                     </tr>
                 </thead>
@@ -147,7 +148,7 @@
 
             var tr = $(this).closest('tr');
             var row = tb.row(tr);
-         
+
             if (row.child.isShown()) {
                 // This row is already open - close it
                 row.child.hide();
@@ -161,7 +162,7 @@
         });
 
 
-      
+
         $(document).ready(function () {
 
 
@@ -170,8 +171,8 @@
             [p_inicializa_campos_filtro]
 
             tb = $('#Dados').DataTable({
-                //"scrollY": "400px", //Altura da grid com scroll
-                //"scrollCollapse": true,
+                "scrollY": "400px", //Altura da grid com scroll
+                "scrollCollapse": true,
                 select: {
                     style: 'single' //permitir selecionar apenas uma linha
                 },
@@ -193,9 +194,11 @@
                             var codigo = row[3];
                             //Alterar para o ID_TIPO
                             if (row[2] == 'PBI') {
-                                return '<a href="http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=' + codigo + '">' + codigo + '</a>';
+                                return '<a target="_blank" href="http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=' + codigo + '">' + codigo + '</a>';
+                            } else if (row[2] == 'Solicitação') {
+                                return '<a target="_blank" href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + codigo + '">' + codigo + '</a>';
                             } else {
-                                return '<a href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + codigo + '">' + codigo + '</a>';
+                                return codigo
                             }
 
                         }
@@ -209,7 +212,7 @@
                         className: 'details-control',
                         orderable: false,
                         data: null,
-                        defaultContent: '<button class="btn btn-info btn-sm">Opções</button>',
+                        defaultContent: '<button class="btn btn-warning btn-sm">Opções</button>',
                         width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
                     },
                 ],
@@ -269,20 +272,60 @@
                 }
             });
 
+            
+            //Evento de Seleção do Usuário - antes da seleção ter ocorrido
+            tb.on('user-select', function (e, dt, type, cell, originalEvent) {
+                var row = dt.row(cell.index().row).node();
+                if ($(row).hasClass('selected')) {
+                    // deselect
+                    e.preventDefault(); //previnir tirar a seleção do item selecionado
+                }
+                else {
+                    // select
+                };
+            });
+            
 
         });
 
         //Retorna a Linha com opções da atividade
         function format(d) {
             var id;
+            var codigo;
+            var tipo;
+            var abrir = '';
+
+            var carminhoSolControl = 'http://mtz-vconversor:8077/';
+            var solControl = '';
+
             $.each($(d), function (key, value) {
                 id = value[0];
-            });            
+                codigo = value[3];
+                tipo = value[2];
+            });
+
+            if (tipo == 'PBI') {
+                abrir = '<td> <a target="_blank" href="http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=' + codigo + '" class="btn btn-primary btn-sm">Abrir</a></td>';
+            } else if (tipo == 'Solicitação') {
+                abrir = '<td> <a target="_blank" href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + codigo + '" class="btn btn-primary btn-sm">Abrir</a></td>';
+
+                solControl = '<td> <a target="_blank" href="' + carminhoSolControl + 'set_demanda?id=' + codigo + '" class="btn btn-info btn-sm">Sol Control</a></td>';
+            } 
+
             return '<table class="table-sm">' +
-                '<tr>' +                                
-                 '<td> <a href="/CadastroAtividade?id=' + id + '" class="btn btn-success btn-sm">Editar</a></td>' +
+                '<tr>' +
+                //Botao Editar
+                '<td> <a href="/CadastroAtividade?id=' + id + '" class="btn btn-success btn-sm">Editar</a></td>' +
+
+                //Botão Abri Sol/PBI
+                abrir +
+
+                //Botão Abri Sol/PBI
+                solControl +
+
                 '</tr>' +
                 '</table>';
+
 
         }
 

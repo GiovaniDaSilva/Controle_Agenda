@@ -122,6 +122,7 @@
   <ItemGroup>
     <Compile Include="Classes\clsEmail.vb" />
     <Compile Include="Classes\clsVerificacoesTimerGeral.vb" />
+    <Compile Include="Classes\clsVersaoSistema.vb" />
     <Compile Include="Classes\DAO\clsCadastroTipoAtividadeDAO.vb" />
     <Compile Include="Classes\Modelos\clsAtividadesGrafico.vb" />
     <Compile Include="Classes\Modelos\clsDetalhesAtividadeWeb.vb" />
