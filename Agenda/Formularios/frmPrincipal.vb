@@ -12,7 +12,6 @@ Public Class frmPrincipal
     Const MODO_IMPRESSAO = "MODO_IMPRESSAO"
     Const MODO_NORMAL = ""
 
-    Public Const VERSAO_SISTEMA = "1.4"
 
     Private Enum enuPosicaoColunas
         DATA = 1
@@ -200,7 +199,7 @@ Public Class frmPrincipal
 
         glfServidorHTTP.InicializaServidor()
 
-        Me.Text = Me.Text & VERSAO_SISTEMA
+        Me.Text = Me.Text & clsVersaoSistema.Versao
 
         subCarregaIni()
         clsConexao.CaminhoBase = ParametrosIni.CaminhoBase

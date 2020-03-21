@@ -13,8 +13,8 @@ Public Class clsHTMLComum
                     <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>            
                 </div>
                 <div class=""float-right"">
-                    <span class=""agenda"">Agenda</span>              
-                    <img  src=""favicon.ico"""" width=""50"" height=""50""> </img>                               
+                    <span class=""agenda"">Agenda</span>  <span style=""color: White;"" >v. {p_versao_sistema}</span>                       
+                    <img  src=""favicon.ico"""" width=""50"" height=""50""> </img>                                         
                 </div>
         </nav>")
         Return locMenu.ToString
@@ -109,6 +109,9 @@ Public Class clsHTMLComum
         pagina = pagina.Replace("[p_funcao_calcula_diferencao_horas]", RetornaFuncaoCalculaDiferencaHoras)
         pagina = pagina.Replace("[p_funcao_calcula_soma_horas]", RetornaFuncaoCalculaSomaHoras)
         pagina = pagina.Replace("[p_funcao_retorna_data_atual]", RetornaFuncaoRetornaDataAtual)
+        pagina = pagina.Replace("{p_versao_sistema}", clsVersaoSistema.Versao)
+
+
 
     End Sub
 
