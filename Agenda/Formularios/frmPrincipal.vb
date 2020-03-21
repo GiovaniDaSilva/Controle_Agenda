@@ -191,6 +191,12 @@ Public Class frmPrincipal
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
+        If Not clsEmail.LoginValido() Then
+            MsgBox("Login e Senha do Email Controle Agenda não informado.", vbCritical)
+            End
+        End If
+
         glfServidorHTTP.InicializaServidor()
 
         Me.Text = Me.Text & clsVersaoSistema.Versao

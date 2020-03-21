@@ -5,8 +5,8 @@ Imports System.Text
 
 Public Class clsEmail
 
-    Const EMAIL = "controle.agenda.mail@gmail.com"
-    Const SENHA = "ControleAgenda2020"
+    Const EMAIL = ""
+    Const SENHA = ""
 
     Public Property EmailDestino As String = "giovani.senior@gmail.com" 'vbNullString
 
@@ -62,5 +62,10 @@ Public Class clsEmail
         texto.AppendFormat("Em anexo esta o backup da Agenda realizado em {0}", clsTools.funFormataData(Now))
 
         Return texto.ToString
+    End Function
+
+
+    Public Shared Function LoginValido() As Boolean
+        Return Not (EMAIL = "" Or SENHA = "")
     End Function
 End Class
