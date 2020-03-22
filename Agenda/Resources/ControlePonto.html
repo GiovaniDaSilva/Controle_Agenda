@@ -41,7 +41,7 @@
             border-color: cornflowerblue;
         }
 
-        
+
         .labelSpan {
             font-weight: bold;
             color: black;
@@ -57,8 +57,6 @@
         .corVerdeVivo {
             color: #339933;
         }
-
-
     </style>
 
     {p_titulo_pagina}
@@ -100,9 +98,10 @@
                             <input readonly type="time" class="form-control" id="horaTotal" name="horaTotal" form="form_dados">
                         </div>
 
-                        <div class="form-group col-md-2">
-                            <span class="Fundo labelTotais">Faltam:</span>
-                            <span class="Fundo labelTotais corVerdeVivo" id="totalHorasFaltantes">00:00</span>
+                        <!--Faltam-->
+                        <div class="form-group col-md-2">                            
+                            <label for="totalHorasFaltantes" class="label">Faltam</label>
+                            <input readonly type="time" class="form-control" id="totalHorasFaltantes" name="totalHorasFaltantes" form="form_dados">
                         </div>
                     </div>
 
@@ -133,7 +132,7 @@
 
                     <div class="form-row">
                         <!--Grid de Periodos-->
-                        <div id="dadosHome" class="col-md-10" style="margin-top: 20px;">
+                        <div id="dadosHome" class="col-md-8" style="margin-top: 20px;">
 
                             <table id="dados" class="table table-sm nowrap" cellspacing="0" form="form_dados" name="tabelaPeriodos">
                                 <thead>
@@ -142,11 +141,11 @@
                                         <th>Entrada</th>
                                         <th>Saída</th>
                                         <th>Total</th>
-                                        <th>Ação</th> 
+                                        <th>Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {p_linhas_tabela_periodo}                                    
+                                    {p_linhas_tabela_periodo}
                                 </tbody>
                             </table>
 
@@ -204,8 +203,8 @@
                     {//coluna ID
                         targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis'
                     }
-                                        
-                    ,{//coluna excluir
+
+                    , {//coluna excluir
                         render: function (data, type, row) {
                             //var id = row[0];
                             return "<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>"
@@ -221,23 +220,23 @@
             //Seleção da Atividade
             tb.on('select.dt deselect.dt', function () {
                 var rows = $('tr.selected');
-                var rowData = tb.rows(rows).data();                          
+                var rowData = tb.rows(rows).data();
 
-                $.each($(rowData), function (key, value) {                    
+                $.each($(rowData), function (key, value) {
                     document.getElementById('horaInicio').value = value[1];
                     document.getElementById('horaFinal').value = value[2];
                 });
 
             });
 
-             //Evento de Seleção do Usuário - antes da seleção ter ocorrido
+            //Evento de Seleção do Usuário - antes da seleção ter ocorrido
             tb.on('user-select', function (e, dt, type, cell, originalEvent) {
                 var row = dt.row(cell.index().row).node();
                 if ($(row).hasClass('selected')) {
                     // deselect
                     //e.preventDefault(); //previnir tirar a seleção do item selecionado
                     document.getElementById('horaInicio').value = "";
-                    document.getElementById('horaFinal').value = "";                    
+                    document.getElementById('horaFinal').value = "";
                 }
                 else {
                     // select
@@ -250,38 +249,13 @@
                 AdicionaPeiodoGrid(tb);
             });
 
-                       
+
             document.getElementById('dataAtividade').value = RetornaDataAtual();
-            
+
             [p_inicializa_campos_atividade]
 
             CarregaGridPeriodosDia();
-
-
-            //busca a descricao da atividade a ser editada, sem o ajax nao funcionava quando tinha quebra de linha
-            var id = [p_id_atividade];
-            if (id > 0) {
-                $.ajax({
-                    url: 'CadastroAtividade_get_descricao',
-                    type: 'POST',
-                    dataType: 'text',//'json',
-                    data: id + "", //Força a conversão para string
-
-                    success: function (objectJson) {
-                        var object = JSON.parse(objectJson);
-
-                        //sucesso
-                        if (object.codigo == 100) {
-                            document.getElementById('descricaoAtividade').value = object.descricao;
-                        }
-                        //ocorreu um erro
-                        else if (object.codigo == 200) {
-                            alert(object.descricao);
-                            window.location.href = "Home";
-                        }
-                    }
-                });
-            }
+                                 
 
             //click do botao de confirmação ao excluir
             $('#btn_delete').on('click', function () {
@@ -290,7 +264,7 @@
                 var id = [p_id_atividade];
                 if (id > 0) {
                     $.ajax({
-                        url: 'CadastroAtividade_excluir',
+                        url: 'ControlePonto_excluir',
                         type: 'POST',
                         dataType: 'text',
                         data: id + "", //Força a conversão para string
@@ -316,36 +290,21 @@
             });
 
 
-            //Evento de alteação da data da atividade
+            //Evento de alteação da data do ponto
             $('#dataAtividade').on('change', function () {
                 CarregaGridPeriodosDia();
             });
 
         });
 
+        function CarregaGridPeriodosDia() { }
+
         //Remove a linha do periodo
         function excluiPeriodo() {
 
-
-            var tot = "00:00";
-            var rowData = tb.rows('.selected').data();
-            $.each($(rowData), function (key, value) {
-                tot = value[3];
-            });
-            
             tb.row('.selected').remove().draw(false);
-            
-            //Pega hora total, ou alimenta se ainda não tiver
-            var hora = document.getElementById('horaTotal').value;
-            var difHora = "00:00";
 
-            if (hora == '') {
-                hora = '00:00';                
-            } else {
-                difHora = subtraiHora(hora, tot);
-            }
-                       
-            document.getElementById('horaTotal').value = difHora;
+            document.getElementById('horaTotal').value = calculaTotalHoras();
 
             CalculaHorasFaltantes();
         };
@@ -353,43 +312,16 @@
         function CalculaHorasFaltantes() {
             var hora = document.getElementById('horaTotal').value;
             var difHora = EscalaDia;
-            
+
             if (hora == '') {
-                hora = '00:00';                
+                hora = '00:00';
             } else {
                 difHora = subtraiHora(EscalaDia, hora);
             }
-            
-            document.getElementById('totalHorasFaltantes').innerHTML  = difHora;
+
+            document.getElementById('totalHorasFaltantes').value = difHora;
         }
 
-        function CarregaGridPeriodosDia() {
-
-            var data = document.getElementById('dataAtividade').value;
-
-            $.ajax({
-                cache: false,
-                url: 'CadastroAtividade_get_periodos_dia',
-                type: 'POST',
-                dataType: 'text',
-                data: data,
-
-                success: function (objectJson) {
-                    var object = JSON.parse(objectJson);
-
-                    //sucesso
-                    if (object.codigo == 100) {
-                        $("#tablePeriodosDia").html(object.descricao);
-                    }
-                    //ocorreu um erro
-                    else if (object.codigo == 200) {
-                        alert(object.descricao);
-                        window.location.href = "Home";
-                    }
-                }
-
-            });
-        }
 
         //inseri o periodo na grid
         function AdicionaPeiodoGrid(tb) {
@@ -399,18 +331,18 @@
             var ini = document.getElementById('horaInicio').value;
             var fim = document.getElementById('horaFinal').value;
             var tot;
-            
-            if (ini == '' || ini == "00:00" ) {
+
+            if (ini == '' || ini == "00:00") {
                 alert('Informe a hora de inicio.')
                 return
             }
 
-            if (fim == '' || fim == "00:00")  {
+            if (fim == '' || fim == "00:00") {
                 fim = "00:00";
                 tot = "00:00"
             }
             else {
-                 tot = diff(ini, fim);
+                tot = diff(ini, fim);
             }
 
             tb.row.add([
@@ -436,9 +368,10 @@
             var hora = document.getElementById('horaTotal').value;
             if (hora == '') { hora = '00:00'; }
 
-            document.getElementById('horaTotal').value = somaHora(hora, tot, false);
+            document.getElementById('horaTotal').value = calculaTotalHoras();
             CalculaHorasFaltantes();
 
+            calculaTotalHoras();
         };
 
         //Evento de submit do formulario
@@ -447,7 +380,7 @@
 
             var data = document.getElementById('dataAtividade').value;
             if (data == '') {
-                alert('Informe a data da atividade.');
+                alert('Informe a data do apontamento.');
                 return
             }
 
@@ -456,7 +389,7 @@
 
             $.ajax({
                 cache: false,
-                url: 'CadastroAtividade_salvar',
+                url: 'ControlePonto_salvar',
                 type: 'POST',
                 dataType: 'text',
                 data: json,
@@ -493,6 +426,42 @@
 
         [p_funcao_calcula_diferencao_horas]
 
+
+
+
+        function calculaTotalHoras() {
+            var data = tb.rows().data();
+            var total = "00:00";
+
+            data.each(function (value, index) {
+                var totAux = value[3];
+                if (value[2] == "" || value[2] == "00:00") {
+                    var dNow = new Date();
+                    var horaAtual = dNow.getHours() + ':' + dNow.getMinutes();
+
+                    if (compararHora(horaAtual, value[1])) {
+                        totAux = diff(value[1], horaAtual);
+                    }                        
+                }
+
+                total = somaHora(total, totAux, false);
+            });
+
+            return total;
+        };
+
+        //Referencia: encurtador.com.br/cNSZ4
+        // Verifica se hora1 é maior que hora2.
+        function compararHora(hora1, hora2) {
+            hora1 = hora1.split(":");
+            hora2 = hora2.split(":");
+
+            var d = new Date();
+            var data1 = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hora1[0], hora1[1]);
+            var data2 = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hora2[0], hora2[1]);
+
+            return data1 > data2;
+        };
 
         function subtraiHora(hrA, hrB) {
             if (hrA.length != 5 || hrB.length != 5) return "00:00";
