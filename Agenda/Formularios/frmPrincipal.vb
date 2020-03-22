@@ -197,15 +197,26 @@ Public Class frmPrincipal
             End
         End If
 
-        glfServidorHTTP.InicializaServidor()
-
-        Me.Text = Me.Text & clsVersaoSistema.Versao
-
         subCarregaIni()
+
         clsConexao.CaminhoBase = ParametrosIni.CaminhoBase
         If Not clsConexao.ExisteBase Then
             subChamaConfiguracoes()
         End If
+
+        Me.Cursor = Cursors.WaitCursor
+        Try
+            clsVersaoSistema.AtualizaSistema()
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+        End Try
+
+        Me.Cursor = Cursors.Default
+
+        glfServidorHTTP.InicializaServidor()
+
+        Me.Text = Me.Text & clsVersaoSistema.Versao
+
 
         subCarregaComboTipo(cbTipo)
 
