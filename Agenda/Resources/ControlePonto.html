@@ -86,8 +86,8 @@
                     <div class="form-row">
                         <!--Campo data-->
                         <div class="form-group col-md-3">
-                            <label for="dataAtividade" class="label">Data</label>
-                            <input type="date" class="form-control" id="dataAtividade" name="dataAtividade" form="form_dados">
+                            <label for="dataPonto" class="label">Data</label>
+                            <input type="date" class="form-control" id="dataPonto" name="dataPonto" form="form_dados">
                         </div>
                         &nbsp;
 
@@ -110,15 +110,15 @@
 
                         <!--Campo inicio-->
                         <div class="form-group col-md-2">
-                            <label for="horaInicio" class="label">Entrada</label>
-                            <input type="time" class="form-control" id="horaInicio" name="horaInicio" form="form_dados">
+                            <label for="horaEntrada" class="label">Entrada</label>
+                            <input type="time" class="form-control" id="horaEntrada" name="horaEntrada" form="form_dados">
                         </div>
                         &nbsp;
 
                         <!--Campo fim-->
                         <div class="form-group col-md-2">
-                            <label for="horaFinal" class="label">Saída</label>
-                            <input type="time" class="form-control" id="horaFinal" name="horaFinal" form="form_dados">
+                            <label for="horaSaida" class="label">Saída</label>
+                            <input type="time" class="form-control" id="horaSaida" name="horaSaida" form="form_dados">
                         </div>
 
                         <!--Botão Adicionar Periodo-->
@@ -139,7 +139,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Entrada</th>
-                                        <th>Saída</th>
+                                        <th>Saida</th>
                                         <th>Total</th>
                                         <th>Ação</th>
                                     </tr>
@@ -223,8 +223,8 @@
                 var rowData = tb.rows(rows).data();
 
                 $.each($(rowData), function (key, value) {
-                    document.getElementById('horaInicio').value = value[1];
-                    document.getElementById('horaFinal').value = value[2];
+                    document.getElementById('horaEntrada').value = value[1];
+                    document.getElementById('horaSaida').value = value[2];
                 });
 
             });
@@ -235,8 +235,8 @@
                 if ($(row).hasClass('selected')) {
                     // deselect
                     //e.preventDefault(); //previnir tirar a seleção do item selecionado
-                    document.getElementById('horaInicio').value = "";
-                    document.getElementById('horaFinal').value = "";
+                    document.getElementById('horaEntrada').value = "";
+                    document.getElementById('horaSaida').value = "";
                 }
                 else {
                     // select
@@ -250,7 +250,7 @@
             });
 
 
-            document.getElementById('dataAtividade').value = RetornaDataAtual();
+            document.getElementById('dataPonto').value = RetornaDataAtual();
 
             [p_inicializa_campos_atividade]
 
@@ -261,7 +261,7 @@
             $('#btn_delete').on('click', function () {
                 $('#confirmaExclusao').modal('hide');
 
-                var id = [p_id_atividade];
+                var id = [p_id_ponto];
                 if (id > 0) {
                     $.ajax({
                         url: 'ControlePonto_excluir',
@@ -291,7 +291,7 @@
 
 
             //Evento de alteação da data do ponto
-            $('#dataAtividade').on('change', function () {
+            $('#dataPonto').on('change', function () {
                 CarregaGridPeriodosDia();
             });
 
@@ -328,8 +328,8 @@
 
             excluiPeriodo()
 
-            var ini = document.getElementById('horaInicio').value;
-            var fim = document.getElementById('horaFinal').value;
+            var ini = document.getElementById('horaEntrada').value;
+            var fim = document.getElementById('horaSaida').value;
             var tot;
 
             if (ini == '' || ini == "00:00") {
@@ -354,8 +354,8 @@
             ]).draw(false);
 
             //Limpa os campos de horas
-            document.getElementById('horaInicio').value = "";
-            document.getElementById('horaFinal').value = "";
+            document.getElementById('horaEntrada').value = "";
+            document.getElementById('horaSaida').value = "";
 
             //Se deixar a hora final em branco, usa a hora atual
             if (fim == '' || fim == "00:00") {
@@ -378,7 +378,7 @@
         $("#form_dados").submit(function (e) {
             e.preventDefault();
 
-            var data = document.getElementById('dataAtividade').value;
+            var data = document.getElementById('dataPonto').value;
             if (data == '') {
                 alert('Informe a data do apontamento.');
                 return
@@ -507,7 +507,7 @@
                 json[this.name] = this.value || '';
             });
 
-            json['id_atividade'] = '[p_id_atividade]';
+            json['id_ponto'] = '[p_id_ponto]';
 
             //Adicionado a tabela ao json
             var table = $('#dados').tableToJSON();
