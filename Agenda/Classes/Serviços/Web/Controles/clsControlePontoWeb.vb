@@ -17,41 +17,22 @@
     Friend Function RetornaControlePonto_Salvar(json As String) As String
         RetornaControlePonto_Salvar = "Erro"
 
-        Dim controle As New clsAdicionar
+        Dim controle As New clsControlePonto
         Dim pontoJson = DeserializarNewtonsoft(json)
-        ' Dim atividade = funRetornaAtividade(atividadejson)
 
-        ' If controle.Gravar(atividade) Then
-        ' Return "Sucesso"
-        ' End If
+        controle.Gravar(pontoJson)
 
+        Return "Sucesso"
 
     End Function
 
 
 
-    Private Function DeserializarNewtonsoft(json As String) As clsPontoWeb
-        Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of clsPontoWeb)(json)
+    Private Function DeserializarNewtonsoft(json As String) As clsPonto
+        Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of clsPonto)(json)
     End Function
 
 
 End Class
 
-Public Class clsPontoWeb
-    Public Property id_Ponto As String
-    Public Property dataPonto As String
-    Public Property horaTotal As String
-    Public Property horaEntrada As String
-    Public Property horaSaida As String
-
-    Public Property Periodo As IEnumerable(Of clsPeriodoPontoWeb)
-
-End Class
-
-Public Class clsPeriodoPontoWeb
-    Public Property ID As String
-    Public Property Entrada As String
-    Public Property Saida As String
-    Public Property Total As String
-End Class
 
