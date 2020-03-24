@@ -38,14 +38,14 @@ Public Class clsSolicitacaoDAO
     End Function
 
 
-    Public Function consultaSolicitacao(iD As Long) As clsSolicitacao
+    Public Function consultaSolicitacao(pCodigo As Long) As clsSolicitacao
 
         Dim solicitacao As clsSolicitacao = Nothing
         Dim locSQL As String
 
 
         Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
-            locSQL = "SELECT  * FROM SOLICITACOES WHERE ID_ATIVIDADE = " & iD
+            locSQL = "SELECT  * FROM SOLICITACOES WHERE CODIGO = " & pCodigo
             locSQL &= " ORDER BY ID DESC"
             Comm.CommandText = locSQL
 

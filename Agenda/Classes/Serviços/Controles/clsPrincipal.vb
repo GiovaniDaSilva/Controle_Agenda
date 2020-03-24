@@ -223,7 +223,7 @@ Public Class clsListaSolictacao
         Dim locDAO As New clsSolicitacaoDAO
 
         locDetalhes = ListaSolicitacoes.Find(Function(X) X.Codigo = item.Codigo)
-        locDetalhesBase = locDAO.consultaSolicitacao(item.ID)
+        locDetalhesBase = locDAO.consultaSolicitacao(item.Codigo)
 
         If Not locDetalhes Is Nothing Then
             locDetalhes.ID_ATIVIDADE = item.ID
