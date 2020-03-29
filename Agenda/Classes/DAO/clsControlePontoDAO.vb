@@ -65,15 +65,15 @@ Public Class clsControlePontoDAO
 
 
         Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
-            locSQL.Append(" SELECT * FROM PONTO ")
+            locSQL.Append(" SELECT * FROM PONTO  WHERE (1 = 1)")
 
 
             If Not parPonto.dataPonto = Nothing Then
-                locSQL.Append(" AND DATA = '{0}'", clsTools.funAjustaDataSQL(parPonto.dataPonto))
+                locSQL.AppendFormat(" AND DATA = '{0}'", clsTools.funAjustaDataSQL(parPonto.dataPonto))
             End If
 
             If parPonto.id_Ponto > 0 Then
-                locSQL.Append(" AND ID = '{0}'", parPonto.id_Ponto)
+                locSQL.AppendFormat(" AND ID = '{0}'", parPonto.id_Ponto)
             End If
 
             Comm.CommandText = locSQL.ToString

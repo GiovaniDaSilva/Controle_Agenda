@@ -51,7 +51,7 @@ Public Class clsVersaoSistema
 	                   ID	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                        ENTRADA	TEXT,
 	                   SAIDA	TEXT,
-                       TOTAL	INTEGER,
+                       TOTAL	TEXT,
 	                   ID_PONTO	Integer Not NULL,
                        FOREIGN KEY(""ID_PONTO"") REFERENCES PONTO(""ID""))")
         clsSQL.ExecutaSQL(locSQL.ToString)
