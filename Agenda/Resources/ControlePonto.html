@@ -250,7 +250,7 @@
             });
 
 
-            document.getElementById('dataPonto').value = RetornaDataAtual();
+            //document.getElementById('dataPonto').value = RetornaDataAtual();
 
             [p_inicializa_campos_ponto]
 
@@ -303,32 +303,8 @@
         function CarregaPontoDia() {
             
             var data = document.getElementById('dataPonto').value;
+            window.location.href = "ControlePonto?data=" + data
 
-            $.ajax({
-                cache: false,
-                url: 'ControlePonto_CarregaData',
-                type: 'POST',
-                dataType: 'text',
-                data: data,
-
-                success: function (objectJson) {
-                    var object = JSON.parse(objectJson);
-
-                    //sucesso
-                    if (object.codigo == 100) {
-                       // $("#tablePeriodosDia").html(object.descricao);
-                        alert("teste");
-                        window.location.reload()
-                     
-                    }
-                    //ocorreu um erro
-                    else if (object.codigo == 200) {
-                        alert(object.descricao);
-                        window.location.href = "Home";
-                    }
-                }
-
-            });
         }
 
         //Remove a linha do periodo

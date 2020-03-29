@@ -31,8 +31,6 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaControlePonto(pReqWeb)
                 Case "/ControlePonto_salvar"
                     locPagRetorno = funRetornaControlePonto_Salvar(pReqWeb)
-                Case "/ControlePonto_CarregaData"
-                    locPagRetorno = funRetornaControlePonto_CarregaData(pReqWeb)
                 Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pReqWeb)
                 Case "/Impressao"
@@ -55,48 +53,7 @@ Public Class clsRequisicoesWeb
 
     End Sub
 
-    Private Function funRetornaControlePonto_CarregaData(pReqWeb As clsReqWeb) As String
-        Dim json As String = vbNullString
-        Dim retorno As New clsRetornoAjax
-        Dim locPonto As New clsPonto
-        Try
 
-            If pReqWeb.Context.Request.HttpMethod = "POST" Then
-
-                Dim post = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
-                If post.Count = 0 Then
-                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
-                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
-                End If
-
-
-                Dim data = post(0)
-                If data <> vbNullString Then
-                    If Not IsDate(data) Then
-                        pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
-                        Throw New Exception("Data do Ponto inválida.")
-                    End If
-                    locPonto.dataPonto = CDate(data)
-                End If
-
-            End If
-
-            Try
-                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
-                retorno.descricao = New clsControlePontoWeb().RetornaPagina(locPonto)
-            Catch ex As Exception
-                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
-                Throw
-            End Try
-
-
-        Catch ex As Exception
-            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
-            retorno.descricao = ex.Message
-        End Try
-
-        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
-    End Function
 
     Private Function funRetornaControlePonto_Salvar(pReqWeb As clsReqWeb) As String
         Dim json As String = vbNullString
@@ -133,10 +90,35 @@ Public Class clsRequisicoesWeb
     Private Function funRetornaControlePonto(pReqWeb As clsReqWeb) As String
         Dim locAtividade As New clsAtividade
         Dim locPonto As New clsPonto
+        Dim dataGet As Date
 
-        locPonto.dataPonto = Now
+        dataGet = Now
+
+        If pReqWeb.Context.Request.Url.Query <> vbNullString AndAlso pReqWeb.Context.Request.HttpMethod = "GET" Then
+
+            Dim arr = clsHTMLTools.RetornaGetEmArray(pReqWeb.Context)
+            If arr.Count = 0 Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("Parâmetros da Pagina estão inválidos.")
+            End If
+
+
+            Dim data = clsHTMLTools.RetornaValorPostGet(arr(1))
+            If data <> vbNullString Then
+                If Not IsDate(data) Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Data do POST inválida.")
+                End If
+                dataGet = CDate(data)
+
+            End If
+        End If
+        locPonto.dataPonto = dataGet
         locPonto = New clsControlePonto().CarregaPonto(locPonto)
 
+        If locPonto.id_Ponto = 0 Then
+            locPonto.dataPonto = dataGet
+        End If
         Try
             Return New clsControlePontoWeb().RetornaPagina(locPonto)
         Catch ex As Exception
