@@ -94,6 +94,11 @@ Public Class clsAdicionarDAO
     Public Function Excluir(iD As Long) As Boolean
 
         Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao())
+
+            Comm.CommandText = "DELETE FROM PERIODO WHERE ID_ATIVIDADE = " & iD
+            Comm.ExecuteNonQuery()
+
+
             Comm.CommandText = "DELETE FROM ATIVIDADES WHERE ID = " & iD
             Comm.ExecuteNonQuery()
         End Using

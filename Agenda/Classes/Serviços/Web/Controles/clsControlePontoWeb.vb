@@ -92,7 +92,9 @@ Public Class clsControlePontoWeb
         Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of clsPonto)(json)
     End Function
 
-
+    Friend Function funRetornaControlePonto_Excluir(id As Long) As String
+        Return New clsControlePontoDAO().Excluir(id)
+    End Function
 End Class
 
 

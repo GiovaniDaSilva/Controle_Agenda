@@ -31,6 +31,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaControlePonto(pReqWeb)
                 Case "/ControlePonto_salvar"
                     locPagRetorno = funRetornaControlePonto_Salvar(pReqWeb)
+                Case "/ControlePonto_excluir"
+                    locPagRetorno = funRetornaControlePonto_Excluir(pReqWeb)
                 Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pReqWeb)
                 Case "/Impressao"
@@ -53,7 +55,47 @@ Public Class clsRequisicoesWeb
 
     End Sub
 
+    Private Function funRetornaControlePonto_Excluir(pReqWeb As clsReqWeb) As String
+        Dim id As Long = 0
+        Dim retorno As New clsRetornoAjax
+        Try
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
 
+                If arr.Count = 0 Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                End If
+
+                If Not IsNumeric(arr(0)) Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("ID inválido.")
+                End If
+
+                id = arr(0)
+            End If
+
+            If id <= 0 Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("ID inválido.")
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsControlePontoWeb().funRetornaControlePonto_Excluir(id)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+    End Function
 
     Private Function funRetornaControlePonto_Salvar(pReqWeb As clsReqWeb) As String
         Dim json As String = vbNullString

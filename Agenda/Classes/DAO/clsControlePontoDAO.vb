@@ -120,4 +120,19 @@ Public Class clsControlePontoDAO
         Return lista
     End Function
 
+
+    Public Function Excluir(id As Integer) As Boolean
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao())
+
+            Comm.CommandText = "DELETE FROM PERIODO_PONTO WHERE ID_PONTO = " & id
+            Comm.ExecuteNonQuery()
+
+
+            Comm.CommandText = "DELETE FROM PONTO WHERE ID = " & id
+            Comm.ExecuteNonQuery()
+        End Using
+
+        Return True
+
+    End Function
 End Class
