@@ -1,4 +1,5 @@
 ﻿Imports System.Text
+Imports Microsoft.VisualBasic
 
 Public Class clsControlePontoWeb
     Public Function RetornaPagina(ByVal pPonto As clsPonto) As String
@@ -14,10 +15,18 @@ Public Class clsControlePontoWeb
         html = html.Replace("[p_inicializa_campos_ponto]", RetornaLinhasInicializacaoCampos(pPonto))
         html = html.Replace("{p_retorna_botao_excluir_atividade}", RetornaBotaoExcluir(pPonto))
         html = html.Replace("{p_linhas_tabela_periodo}", RetornaLinhasTabelaPeriodo(pPonto))
+        html = html.Replace("{p_dia_semana}", funRetornaDiaSemana(pPonto.dataPonto))
 
 
 
         Return html
+    End Function
+
+    Private Function funRetornaDiaSemana(dataPonto As String) As String
+        Dim data As String
+        data = Strings.StrConv(String.Format("{0:dddd}", CDate(dataPonto)), VbStrConv.ProperCase)
+
+        Return data
     End Function
 
     Private Function RetornaLinhasTabelaPeriodo(pPonto As clsPonto) As String

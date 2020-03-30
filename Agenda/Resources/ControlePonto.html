@@ -18,45 +18,15 @@
             border: none;
         }
 
-
-        /*
-
-        scroll sem um table comum
-        <div class="table-wrapper-scroll-y my-custom-scrollbar col-md-5"> table... </div>
-        .my-custom-scrollbar {
-            position: relative;
-            height: 200px;
-            overflow: auto;
-        }
-
-        .table-wrapper-scroll-y {
-            display: block;
-        }
-
-        */
-
-        .thead-blue {
-            color: black;
-            background-color: cornflowerblue;
-            border-color: cornflowerblue;
-        }
-
-
+        
         .labelSpan {
             font-weight: bold;
             color: black;
-            font-size: 12px;
+            font-size: 15px;
+            margin-top: 10px;
         }
 
-        .labelTotais {
-            font-weight: bold;
-            font-size: 14px;
-            border: none;
-        }
-
-        .corVerdeVivo {
-            color: #339933;
-        }
+        
     </style>
 
     {p_titulo_pagina}
@@ -90,7 +60,13 @@
                             <input type="date" class="form-control" id="dataPonto" name="dataPonto" form="form_dados">
                         </div>
                         &nbsp;
+                        <span style="border:none" class="input-group-text Fundo labelSpan">{p_dia_semana}</span>
 
+
+
+                    </div>
+
+                    <div class="form-row">
 
                         <!--Campo Horas Totais-->
                         <div class="form-group col-md-2">
@@ -99,9 +75,15 @@
                         </div>
 
                         <!--Faltam-->
-                        <div class="form-group col-md-2">                            
+                        <div class="form-group col-md-2">
                             <label for="totalHorasFaltantes" class="label">Faltam</label>
                             <input readonly type="time" class="form-control" id="totalHorasFaltantes" name="totalHorasFaltantes" form="form_dados">
+                        </div>
+
+                        <!--Excedidas-->
+                        <div class="form-group col-md-2">
+                            <label for="totalHorasExtras" class="label">Extra</label>
+                            <input readonly type="time" class="form-control" id="totalHorasExtras" name="totalHorasExtras" form="form_dados">
                         </div>
                     </div>
 
@@ -156,8 +138,22 @@
                 </form>
             </div>
             <div class="col-md-5" style="margin-top: 30px">
-                <!--  <label for="tablePeriodosDia" class="label">Períodos desta data</label>
-                      {p_linhas_tabela_periodo_dia}-->
+
+
+                <div class="form-row">                    
+                    <p>
+                        Informações gerais.....................                    ............................................                    ..............................................
+                        <br />
+                        Informações gerais.....................                    ............................................                        ..............................................
+                    </p>
+                </div>
+
+                <!--Campo Descrição-->
+                <div class="form-row">
+                    <label for="observacao" class="label">Observações:</label>
+                    <textarea class="form-control" rows="10" id="observacao" name="observacao" form="form_dados"></textarea>
+                </div>
+
             </div>
         </div>
     </div>
@@ -258,7 +254,7 @@
 
             document.getElementById('horaTotal').value = calculaTotalHoras();
             CalculaHorasFaltantes();
-                                 
+
 
             //click do botao de confirmação ao excluir
             $('#btn_delete').on('click', function () {
@@ -301,7 +297,7 @@
         });
 
         function CarregaPontoDia() {
-            
+
             var data = document.getElementById('dataPonto').value;
             window.location.href = "ControlePonto?data=" + data
 
@@ -449,7 +445,7 @@
 
                     if (compararHora(horaAtual, value[1])) {
                         totAux = diff(value[1], horaAtual);
-                    }                        
+                    }
                 }
 
                 total = somaHora(total, totAux, false);
