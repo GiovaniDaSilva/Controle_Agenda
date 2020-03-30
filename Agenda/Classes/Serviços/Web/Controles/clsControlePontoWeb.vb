@@ -16,6 +16,7 @@ Public Class clsControlePontoWeb
         html = html.Replace("{p_retorna_botao_excluir_atividade}", RetornaBotaoExcluir(pPonto))
         html = html.Replace("{p_linhas_tabela_periodo}", RetornaLinhasTabelaPeriodo(pPonto))
         html = html.Replace("{p_dia_semana}", funRetornaDiaSemana(pPonto.dataPonto))
+        html = html.Replace("{p_escala_dia}", """08:30""")
 
 
 
