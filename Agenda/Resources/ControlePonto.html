@@ -18,15 +18,13 @@
             border: none;
         }
 
-        
+
         .labelSpan {
             font-weight: bold;
             color: black;
             font-size: 15px;
             margin-top: 10px;
         }
-
-        
     </style>
 
     {p_titulo_pagina}
@@ -140,9 +138,9 @@
             <div class="col-md-5" style="margin-top: 30px">
 
 
-                <div class="form-row">                    
+                <div class="form-row">
                     <p>
-                        Informações gerais.....................                    ............................................                    ..............................................
+                        <span><b>Previsão de Saída: </b></span> &nbsp; <span id="previsaoSaida"></span>
                         <br />
                         Informações gerais.....................                    ............................................                        ..............................................
                     </p>
@@ -324,6 +322,12 @@
             }
 
             document.getElementById('totalHorasFaltantes').value = difHora;
+
+            var dNow = new Date();
+            var horaAtual = dNow.getHours() + ':' + dNow.getMinutes();
+            document.getElementById('previsaoSaida').innerHTML = somaHora(horaAtual, difHora);
+
+            
         }
 
 
