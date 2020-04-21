@@ -7,7 +7,7 @@
     Public Property horaSaida As String
     Public Property observacao As String
 
-    Public Property Periodo As IEnumerable(Of clsPeriodoPonto)
+    Public Property Periodo As List(Of clsPeriodoPonto)
 
 End Class
 

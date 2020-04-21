@@ -109,13 +109,38 @@ Public Class clsControlePontoWeb
         Dim controle As New clsControlePonto
         Dim pontoJson = DeserializarNewtonsoft(json)
 
+        subValidaPeriodos(pontoJson)
+
         controle.Gravar(pontoJson)
 
         Return "Sucesso"
 
     End Function
 
+    Private Sub subValidaPeriodos(pontoJson As clsPonto)
+        Dim PeriodosValidos As New List(Of clsPeriodoPonto)
 
+        For Each periodo In pontoJson.Periodo
+            If (funValidaHoraPeriodo(periodo.Total) AndAlso
+                funValidaHoraPeriodo(periodo.Entrada) AndAlso
+                funValidaHoraPeriodo(periodo.Saida)) Then
+
+                PeriodosValidos.Add(periodo)
+            End If
+        Next
+
+        pontoJson.Periodo.Clear()
+        pontoJson.Periodo = PeriodosValidos
+
+    End Sub
+
+    Private Function funValidaHoraPeriodo(hora As String) As Boolean
+        Try
+            Return clsTools.funValidaHora(hora)
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 
     Private Function DeserializarNewtonsoft(json As String) As clsPonto
         Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of clsPonto)(json)

@@ -146,7 +146,7 @@
                 </form>
             </div>
             <div class="col-md-5" style="margin-top: 30px">
-                
+
                 <div class="form-row">
                     <p>
                         <span><b>Previsão de Saída: </b></span> &nbsp; <span id="previsaoSaida"></span>
@@ -405,17 +405,19 @@
 
             var saidaAlmoco = document.getElementById('saidaAlmoco').checked;
             var almoco = "";
-            
-            if (SaiuParaAlmoco == true && RetornoAlmoco == false) {
+
+
+            if (RetornoAlmoco == true) {
                 almoco = "Retorno";
-                RetornoAlmoco = true
-            } else {
-                if (saidaAlmoco == true) {
-                    almoco = "Saída";
-                    SaiuParaAlmoco = true;
-                }
+                RetornoAlmoco = false;
             }
-            
+
+            if (saidaAlmoco == true || SaiuParaAlmoco == true) {
+                almoco = "Saída";
+                SaiuParaAlmoco = false;
+                RetornoAlmoco = true;
+            }
+ 
 
             tb.row.add([
                 0, //ID
