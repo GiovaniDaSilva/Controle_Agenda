@@ -33,10 +33,10 @@ Public Class clsControlePontoDAO
             locIdPonto = pPonto.id_Ponto
         End If
 
-        locSQL.Append("INSERT INTO PERIODO_PONTO (ENTRADA, SAIDA, TOTAL, ID_PONTO) VALUES ")
+        locSQL.Append("INSERT INTO PERIODO_PONTO (ENTRADA, SAIDA, TOTAL, ALMOCO,  ID_PONTO) VALUES ")
 
         For Each periodo In pPonto.Periodo
-            locSQL.AppendFormat("( '{0}', '{1}', '{2}', {3}),", periodo.Entrada, periodo.Saida, periodo.Total, locIdPonto)
+            locSQL.AppendFormat("( '{0}', '{1}', '{2}','{3}', {4}),", periodo.Entrada, periodo.Saida, periodo.Total, periodo.Almoco, locIdPonto)
         Next
 
         Return locSQL.ToString.Substring(0, locSQL.Length - 1)
@@ -133,6 +133,7 @@ Public Class clsControlePontoDAO
                     periodo.Entrada = Reader("ENTRADA")
                     periodo.Saida = Reader("SAIDA")
                     periodo.Total = Reader("TOTAL")
+                    periodo.Almoco = Reader("ALMOCO")
 
                     lista.Add(periodo)
                 End While

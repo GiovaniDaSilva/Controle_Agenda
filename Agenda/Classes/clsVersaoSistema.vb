@@ -53,6 +53,7 @@ Public Class clsVersaoSistema
                        ENTRADA	TEXT,
 	                   SAIDA	TEXT,
                        TOTAL	TEXT,
+                       ALMOCO	TEXT,
 	                   ID_PONTO	Integer Not NULL,
                        FOREIGN KEY(""ID_PONTO"") REFERENCES PONTO(""ID""))")
         clsSQL.ExecutaSQL(locSQL.ToString)

@@ -45,7 +45,7 @@ Public Class clsControlePontoWeb
             linha.Add(periodo.Saida)
             linha.Add(periodo.Total)
             'linha.Add("<i class=""material-icons"">live_help</i>")
-            linha.Add("Não")
+            linha.Add(periodo.Almoco)
             linha.Add("<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>")
 
             locRetorno &= clsHTMLTools.funLinhaTabela(linha)
@@ -107,7 +107,7 @@ Public Class clsControlePontoWeb
         RetornaControlePonto_Salvar = "Erro"
 
         Dim controle As New clsControlePonto
-        Dim pontoJson = DeserializarNewtonsoft(json)
+        Dim pontoJson = DeserializarNewtonsoft(funTrataJson(json))
 
         subValidaPeriodos(pontoJson)
 
@@ -115,6 +115,10 @@ Public Class clsControlePontoWeb
 
         Return "Sucesso"
 
+    End Function
+
+    Private Function funTrataJson(json As String) As String
+        Return json.Replace("""Almoço"":", """Almoco"":")
     End Function
 
     Private Sub subValidaPeriodos(pontoJson As clsPonto)

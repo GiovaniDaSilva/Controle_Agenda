@@ -16,5 +16,6 @@ Public Class clsPeriodoPonto
     Public Property Entrada As String
     Public Property Saida As String
     Public Property Total As String
+    Public Property Almoco As String
 
 End Class

@@ -57,13 +57,13 @@
         diferencao = totalEsperado.Subtract(TimeSpan.Parse(total))
 
 
-        Dim horas As String = (diferencao.Days * 24 + diferencao.Hours).ToString.Replace("-", "")
+        Dim horas As String = (diferencao.Days * 24 + diferencao.Hours)
         If horas.ToString.Length < 2 Then
             horas = "0" & horas
         End If
 
         Dim aux = horas & ":" & diferencao.Minutes.ToString("00")
-        Return If(totalEsperado.TotalMinutes > TimeSpan.Parse(total).TotalMinutes, "- ", "") & aux
+        Return If(totalEsperado.TotalMinutes > TimeSpan.Parse(total).TotalMinutes, "- ", "") & aux.Replace("-", "")
 
     End Function
 
