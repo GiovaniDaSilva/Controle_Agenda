@@ -43,7 +43,8 @@ Public Class clsVersaoSistema
         locSQL.Append("CREATE TABLE PONTO (
 	                   ID	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                        Data	TEXT NOT NULL,
-	                   TOTAL TEXT)")
+	                   TOTAL TEXT,
+                       OBSERVACAO TEXT)")
         clsSQL.ExecutaSQL(locSQL.ToString)
 
         locSQL.Clear()

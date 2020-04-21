@@ -5,6 +5,7 @@
     Public Property horaTotal As String
     Public Property horaEntrada As String
     Public Property horaSaida As String
+    Public Property observacao As String
 
     Public Property Periodo As IEnumerable(Of clsPeriodoPonto)
 

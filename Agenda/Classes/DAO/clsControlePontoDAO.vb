@@ -46,13 +46,13 @@ Public Class clsControlePontoDAO
         Dim locSQL As New StringBuilder(String.Empty)
 
         If pPonto.id_Ponto > 0 Then
-            locSQL.AppendFormat("UPDATE PONTO SET DATA = '{0}', TOTAL = '{1}'
-                                    WHERE ID = {2}",
-                                clsTools.funAjustaDataSQL(pPonto.dataPonto), pPonto.horaTotal, pPonto.id_Ponto)
+            locSQL.AppendFormat("UPDATE PONTO SET DATA = '{0}', TOTAL = '{1}', OBSERVACAO = '{2}'
+                                    WHERE ID = {3}",
+                                clsTools.funAjustaDataSQL(pPonto.dataPonto), pPonto.horaTotal, pPonto.observacao, pPonto.id_Ponto)
 
         Else
-            locSQL.Append("INSERT INTO PONTO (DATA, TOTAL) VALUES ")
-            locSQL.AppendFormat("('{0}','{1}')", clsTools.funAjustaDataSQL(pPonto.dataPonto), pPonto.horaTotal)
+            locSQL.Append("INSERT INTO PONTO (DATA, TOTAL, OBSERVACAO) VALUES ")
+            locSQL.AppendFormat("('{0}','{1}', '{2}')", clsTools.funAjustaDataSQL(pPonto.dataPonto), pPonto.horaTotal, pPonto.observacao)
         End If
 
         Return locSQL.ToString()
@@ -83,6 +83,7 @@ Public Class clsControlePontoDAO
                     ponto.id_Ponto = Reader("ID")
                     ponto.dataPonto = Reader("DATA")
                     ponto.horaTotal = Reader("TOTAL")
+                    ponto.observacao = Reader("OBSERVACAO")
 
                     ponto.Periodo = funRetornaPeriodoPonto(ponto.id_Ponto)
 

@@ -185,6 +185,14 @@
     <script>
 
         $(document).ready(function () {
+
+            
+            $('input').keypress(function (e) {
+                var code = null;
+                code = (e.keyCode ? e.keyCode : e.which);
+                return (code == 13) ? false : true;
+            });
+
             tb = $('#dados').DataTable({
                 "scrollY": "200px", //Altura da grid com scroll
                 "scrollCollapse": true,

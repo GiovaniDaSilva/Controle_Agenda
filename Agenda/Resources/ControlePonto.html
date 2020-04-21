@@ -49,7 +49,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <form method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
                     <div class="form-row">
                         <!--Campo data-->
@@ -108,11 +108,20 @@
                         </div>
                     </div>
 
-
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" value="">Saída para o Almoço
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
 
                     <div class="form-row">
                         <!--Grid de Periodos-->
-                        <div id="dadosHome" class="col-md-8" style="margin-top: 20px;">
+                        <div id="dadosHome" class="col-md-8" style="margin-top: 5px;">
 
                             <table id="dados" class="table table-sm nowrap" cellspacing="0" form="form_dados" name="tabelaPeriodos">
                                 <thead>
@@ -121,6 +130,7 @@
                                         <th>Entrada</th>
                                         <th>Saida</th>
                                         <th>Total</th>
+                                        <th>Almoço</th>
                                         <th>Ação</th>
                                     </tr>
                                 </thead>
@@ -135,7 +145,7 @@
 
                 </form>
             </div>
-            <div class="col-md-5" style="margin-top: 30px">
+            <div class="col-md-6" style="margin-top: 30px">
 
 
                 <div class="form-row">
@@ -176,9 +186,16 @@
 
     <script>
 
-        var EscalaDia = {p_escala_dia}; //"08:30"
+        var EscalaDia = [p_escala_dia]; //"08:30"
 
         $(document).ready(function () {
+
+            $('input').keypress(function (e) {
+                var code = null;
+                code = (e.keyCode ? e.keyCode : e.which);
+                return (code == 13) ? false : true;
+            });
+
             tb = $('#dados').DataTable({
                 "scrollY": "200px", //Altura da grid com scroll
                 "scrollCollapse": true,
@@ -203,7 +220,7 @@
                             //var id = row[0];
                             return "<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>"
                         },
-                        targets: 4,
+                        targets: 5,
                         width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
                     }
                 ]
@@ -315,20 +332,32 @@
             var hora = document.getElementById('horaTotal').value;
             var difHora = EscalaDia;
 
+            //Horas faltantes
             if (hora == '') {
                 hora = '00:00';
             } else {
                 difHora = subtraiHora(EscalaDia, hora);
             }
 
+            if (difHora == "00:00") difHora = "";
             document.getElementById('totalHorasFaltantes').value = difHora;
 
-            //var dNow = new Date();
-            var horaAtual = retornaHoraAtual();//dNow.getHours() + ':' + dNow.getMinutes();
-            alert(horaAtual);
-            document.getElementById('previsaoSaida').innerHTML = somaHora(horaAtual, difHora);
+            //Previsao de saida
+            var horaAtual = retornaHoraAtual();
+            if (difHora != "") {
+                document.getElementById('previsaoSaida').innerHTML = somaHora(horaAtual, difHora, true);
+            } else {
+                document.getElementById('previsaoSaida').innerHTML = "Dia Concluído.";
+            }
 
-            
+
+
+            //Calcula horas extras
+            document.getElementById('totalHorasExtras').value = ""
+            if (hora > EscalaDia) {
+                document.getElementById('totalHorasExtras').value = subtraiHora(hora, EscalaDia);
+            }
+
         }
 
 
@@ -380,7 +409,7 @@
             document.getElementById('horaTotal').value = calculaTotalHoras();
             CalculaHorasFaltantes();
 
-            calculaTotalHoras();
+            //calculaTotalHoras();
         };
 
         //Evento de submit do formulario
@@ -445,7 +474,7 @@
             data.each(function (value, index) {
                 var totAux = value[3];
                 if (value[2] == "" || value[2] == "00:00") {
-                   // var dNow = new Date();
+                    // var dNow = new Date();
                     var horaAtual = retornaHoraAtual();//dNow.getHours() + ':' + dNow.getMinutes();
 
                     if (compararHora(horaAtual, value[1])) {
@@ -453,7 +482,7 @@
                     }
                 }
 
-                total = somaHora(total, totAux, false);
+                total = somaHora(total, totAux, true);
             });
 
             return total;
@@ -481,13 +510,16 @@
             var hor = dNow.getHours()
 
             min = min.toString().length == 2 ? min : ("0" + min);
-            hor = hor.toString().length == 2 ? hor: ("0" + hor);
+            hor = hor.toString().length == 2 ? hor : ("0" + hor);
 
             return hor + ':' + min;
         }
 
         function subtraiHora(hrA, hrB) {
             if (hrA.length != 5 || hrB.length != 5) return "00:00";
+
+            //Não exibe horas negativas
+            if (hrA < hrB) return "00:00";
 
             temp = 0;
             nova_h = 0;
@@ -504,11 +536,7 @@
                 temp = temp + 60;
             }
             novo_m = temp.toString().length == 2 ? temp : ("0" + temp);
-
             temp = hora1 - hora2 - nova_h;
-            while (temp < 0) {
-                temp = temp + 24;
-            }
             nova_h = temp.toString().length == 2 ? temp : ("0" + temp);
 
             return nova_h + ':' + novo_m;

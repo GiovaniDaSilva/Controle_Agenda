@@ -16,7 +16,7 @@ Public Class clsControlePontoWeb
         html = html.Replace("{p_retorna_botao_excluir_atividade}", RetornaBotaoExcluir(pPonto))
         html = html.Replace("{p_linhas_tabela_periodo}", RetornaLinhasTabelaPeriodo(pPonto))
         html = html.Replace("{p_dia_semana}", funRetornaDiaSemana(pPonto.dataPonto))
-        html = html.Replace("{p_escala_dia}", """08:30""")
+        html = html.Replace("[p_escala_dia]", """08:30""")
 
 
 
@@ -42,6 +42,7 @@ Public Class clsControlePontoWeb
             linha.Add(periodo.Entrada)
             linha.Add(periodo.Saida)
             linha.Add(periodo.Total)
+            linha.Add("Não")
             linha.Add("<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>")
 
             locRetorno &= clsHTMLTools.funLinhaTabela(linha)
@@ -79,7 +80,8 @@ Public Class clsControlePontoWeb
         texto.AppendFormat("            
             document.getElementById('horaTotal').value = ""{0}"";  
             document.getElementById('dataPonto').value = ""{1}"";              
-        ", locHora, data)
+            document.getElementById('observacao').value = ""{2}"";         
+        ", locHora, data, pPonto.observacao)
 
         Return texto.ToString
     End Function
