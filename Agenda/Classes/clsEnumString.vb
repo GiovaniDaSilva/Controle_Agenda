@@ -26,6 +26,8 @@ Public MustInherit Class enuParametrosIni
     Public Shared Property CaminhoBase As String = "CaminhoBase"
     Public Shared Property TempoNotificacao As String = "TempoNotificacao"
     Public Shared Property Mail As String = "Mail"
+    Public Shared Property EscalaTrabalho As String = "Escalatrabalho"
+
 End Class
 
 Public MustInherit Class enuTempoNotificacao

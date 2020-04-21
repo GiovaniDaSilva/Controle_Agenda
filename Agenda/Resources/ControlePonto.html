@@ -49,7 +49,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <form method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
                     <div class="form-row">
                         <!--Campo data-->
@@ -109,15 +109,15 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" value="">Saída para o Almoço
+                                    <input type="checkbox" class="form-check-input" value="" id="saidaAlmoco" name="saidaAlmoco">Saída para o Almoço
                                 </label>
                             </div>
                         </div>
                     </div>
-                    
+
 
                     <div class="form-row">
                         <!--Grid de Periodos-->
@@ -145,14 +145,21 @@
 
                 </form>
             </div>
-            <div class="col-md-6" style="margin-top: 30px">
-
-
+            <div class="col-md-5" style="margin-top: 30px">
+                
                 <div class="form-row">
                     <p>
                         <span><b>Previsão de Saída: </b></span> &nbsp; <span id="previsaoSaida"></span>
+                        &nbsp;&nbsp;
+                        <span><b>Tempo de Almoço: </b></span> &nbsp; <span id="TempoAlmoco"></span>
+
                         <br />
-                        Informações gerais.....................                    ............................................                        ..............................................
+                        <b>Informações Gerais </b><br />
+
+                        <span>Saldo da Semana:</span> &nbsp; <span id="SaldoSemana"></span>
+                        <br />
+                        <span>Saldo do Mês:</span> &nbsp; <span id="SaldoGeral"></span>
+
                     </p>
                 </div>
 
@@ -187,6 +194,8 @@
     <script>
 
         var EscalaDia = [p_escala_dia]; //"08:30"
+        var SaiuParaAlmoco = false;
+        var RetornoAlmoco = false;
 
         $(document).ready(function () {
 
@@ -236,6 +245,16 @@
                 $.each($(rowData), function (key, value) {
                     document.getElementById('horaEntrada').value = value[1];
                     document.getElementById('horaSaida').value = value[2];
+
+                    if (value[4] == "Retorno") {
+                        RetornoAlmoco = true;
+                    }
+
+                    if (value[4] == "Saída") {
+                        SaiuParaAlmoco = true;
+                        document.getElementById('saidaAlmoco').checked = true;
+                    }
+
                 });
 
             });
@@ -248,6 +267,7 @@
                     //e.preventDefault(); //previnir tirar a seleção do item selecionado
                     document.getElementById('horaEntrada').value = "";
                     document.getElementById('horaSaida').value = "";
+                    document.getElementById('saidaAlmoco').checked = false;
                 }
                 else {
                     // select
@@ -383,17 +403,33 @@
                 tot = diff(ini, fim);
             }
 
+            var saidaAlmoco = document.getElementById('saidaAlmoco').checked;
+            var almoco = "";
+            
+            if (SaiuParaAlmoco == true && RetornoAlmoco == false) {
+                almoco = "Retorno";
+                RetornoAlmoco = true
+            } else {
+                if (saidaAlmoco == true) {
+                    almoco = "Saída";
+                    SaiuParaAlmoco = true;
+                }
+            }
+            
+
             tb.row.add([
                 0, //ID
                 ini, //Inicio
                 fim, //Final
                 tot, // Total
+                almoco, //Almoço
                 ""
             ]).draw(false);
 
             //Limpa os campos de horas
             document.getElementById('horaEntrada').value = "";
             document.getElementById('horaSaida').value = "";
+            document.getElementById('saidaAlmoco').checked = false;
 
             //Se deixar a hora final em branco, usa a hora atual
             if (fim == '' || fim == "00:00") {

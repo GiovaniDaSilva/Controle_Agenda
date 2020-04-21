@@ -9,6 +9,8 @@ Public Class clsControlePontoWeb
 
     Private Function RetornaHTML(ByVal pPonto As clsPonto) As String
         Dim html As String
+        Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
+
         html = My.Resources.ControlePonto
 
         html = html.Replace("[p_id_ponto]", pPonto.id_Ponto)
@@ -16,7 +18,7 @@ Public Class clsControlePontoWeb
         html = html.Replace("{p_retorna_botao_excluir_atividade}", RetornaBotaoExcluir(pPonto))
         html = html.Replace("{p_linhas_tabela_periodo}", RetornaLinhasTabelaPeriodo(pPonto))
         html = html.Replace("{p_dia_semana}", funRetornaDiaSemana(pPonto.dataPonto))
-        html = html.Replace("[p_escala_dia]", """08:30""")
+        html = html.Replace("[p_escala_dia]", """" & escala & """")
 
 
 
@@ -42,6 +44,7 @@ Public Class clsControlePontoWeb
             linha.Add(periodo.Entrada)
             linha.Add(periodo.Saida)
             linha.Add(periodo.Total)
+            'linha.Add("<i class=""material-icons"">live_help</i>")
             linha.Add("Não")
             linha.Add("<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>")
 
@@ -65,7 +68,8 @@ Public Class clsControlePontoWeb
 
     Private Function RetornaLinhasInicializacaoCampos(pPonto As clsPonto) As String
         Dim texto As New StringBuilder(vbNullString)
-
+        Dim SaldoSemana As String = "00:00"
+        Dim SaldoGeral As String = "00:00"
 
         Dim locHora As String = vbNullString
         If Not Trim(pPonto.horaTotal).Replace(":", "") = vbNullString Then
@@ -77,14 +81,27 @@ Public Class clsControlePontoWeb
             data = clsTools.funAjustaDataSQL(pPonto.dataPonto)
         End If
 
+
+        subCalculaSaldos(SaldoSemana, SaldoGeral, pPonto)
+
+
         texto.AppendFormat("            
             document.getElementById('horaTotal').value = ""{0}"";  
             document.getElementById('dataPonto').value = ""{1}"";              
-            document.getElementById('observacao').value = ""{2}"";         
-        ", locHora, data, pPonto.observacao)
+            document.getElementById('observacao').value = ""{2}"";        
+            document.getElementById('SaldoSemana').innerHTML = ""{3}""
+            document.getElementById('SaldoGeral').innerHTML = ""{4}""
+        ", locHora, data, pPonto.observacao, SaldoSemana, SaldoGeral)
 
         Return texto.ToString
     End Function
+
+    Private Sub subCalculaSaldos(ByRef saldoSemana As String, ByRef saldoGeral As String, pPonto As clsPonto)
+        Dim controle As New clsControlePonto
+
+        saldoSemana = controle.CalculaSaldoSemana(pPonto.dataPonto)
+        saldoGeral = controle.CalculaSaldoMes(pPonto.dataPonto)
+    End Sub
 
     Friend Function RetornaControlePonto_Salvar(json As String) As String
         RetornaControlePonto_Salvar = "Erro"

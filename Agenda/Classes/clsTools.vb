@@ -29,6 +29,17 @@ Public Class clsTools
         Return locData
     End Function
 
+    Friend Shared Function RetornaUltimoDiaSemana(data As Date) As Date
+        Dim diaSemana As Short
+        diaSemana = data.DayOfWeek
+        Return data.AddDays(6 - diaSemana)
+    End Function
+
+    Friend Shared Function RetornaPrimeiroDiaSemana(data As Date) As Date
+        Dim diaSemana As Short
+        diaSemana = data.DayOfWeek
+        Return data.AddDays(-diaSemana)
+    End Function
 
     ''' <summary>
     ''' Retorna os minutos de um timespan

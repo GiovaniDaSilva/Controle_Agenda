@@ -20,4 +20,63 @@
     Public Function CarregaPonto(pPonto As clsPonto) As clsPonto
         Return New clsControlePontoDAO().CarregaPonto(pPonto)
     End Function
+
+    Friend Function CalculaSaldoSemana(dataPonto As String) As String
+
+        Dim inicio As Date = clsTools.RetornaPrimeiroDiaSemana(CDate(dataPonto))
+        Dim final As Date = clsTools.RetornaUltimoDiaSemana(CDate(dataPonto))
+
+        Return CalculaSaldoperiodo(inicio, final)
+
+    End Function
+
+    Friend Function CalculaSaldoMes(dataPonto As String) As String
+        Dim inicio As Date = clsTools.RetornaPrimeiroDiaMes(CDate(dataPonto).Month)
+        Dim final As Date = clsTools.RetornaUltimoDiaMes(CDate(dataPonto).Month)
+
+        Return CalculaSaldoperiodo(inicio, final)
+
+    End Function
+
+    Private Function CalculaSaldoperiodo(Inicio As Date, final As Date) As String
+        Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
+        Dim total As String
+        Dim totalEsperado As TimeSpan
+        Dim diferencao As TimeSpan
+
+        total = RetornaTotalPeriodo(Inicio, final)
+
+        While (Inicio <= Now)
+            If Not (Inicio.DayOfWeek = DayOfWeek.Saturday Or Inicio.DayOfWeek = DayOfWeek.Sunday) Then
+                totalEsperado = totalEsperado.Add(TimeSpan.Parse(escala))
+            End If
+
+            Inicio = Inicio.AddDays(1)
+        End While
+
+        diferencao = totalEsperado.Subtract(TimeSpan.Parse(total))
+
+
+        Dim horas As String = (diferencao.Days * 24 + diferencao.Hours).ToString.Replace("-", "")
+        If horas.ToString.Length < 2 Then
+            horas = "0" & horas
+        End If
+
+        Dim aux = horas & ":" & diferencao.Minutes.ToString("00")
+        Return If(totalEsperado.TotalMinutes > TimeSpan.Parse(total).TotalMinutes, "- ", "") & aux
+
+    End Function
+
+    Private Function RetornaTotalPeriodo(ByVal dtInicio As Date, ByVal dtFinal As Date)
+        Dim listaTotais As List(Of String)
+        Dim total As TimeSpan
+
+        listaTotais = New clsControlePontoDAO().RetornaTotaisPeriodo(dtInicio, dtFinal)
+
+        For Each totalDia In listaTotais
+            total = total.Add(TimeSpan.Parse(totalDia))
+        Next
+
+        Return Mid(total.ToString, 1, 5)
+    End Function
 End Class

@@ -7,5 +7,6 @@
     Public Property CaminhoBase As String
     Public Property TempoNotificacao As String
     Public Property Email As String
+    Public Property EscalaTrabalho As String
 
 End Class

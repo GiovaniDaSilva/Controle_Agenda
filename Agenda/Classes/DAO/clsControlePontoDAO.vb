@@ -42,6 +42,27 @@ Public Class clsControlePontoDAO
         Return locSQL.ToString.Substring(0, locSQL.Length - 1)
     End Function
 
+    Friend Function RetornaTotaisPeriodo(dtInicio As Date, dtFinal As Date) As List(Of String)
+        Dim locSQL As New StringBuilder(String.Empty)
+        Dim lista As New List(Of String)
+
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
+            locSQL.AppendFormat(" SELECT TOTAL FROM PONTO WHERE DATA >= '{0}' AND DATA <= '{1}'", clsTools.funAjustaDataSQL(dtInicio), clsTools.funAjustaDataSQL(dtFinal))
+
+            Comm.CommandText = locSQL.ToString
+
+            Using Reader = Comm.ExecuteReader()
+                While Reader.Read()
+                    lista.Add(Reader("TOTAL"))
+                End While
+            End Using
+
+        End Using
+
+        Return lista
+
+    End Function
+
     Private Function funRetornaSQLInsertUpdatePonto(pPonto As clsPonto) As String
         Dim locSQL As New StringBuilder(String.Empty)
 
