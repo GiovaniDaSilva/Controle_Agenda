@@ -42,12 +42,16 @@ Public Class clsControlePontoDAO
         Return locSQL.ToString.Substring(0, locSQL.Length - 1)
     End Function
 
-    Friend Function RetornaTotaisPeriodo(dtInicio As Date, dtFinal As Date) As List(Of String)
+    Friend Function RetornaTotaisPeriodo(dtInicio As Date, dtFinal As Date, Optional ByVal ConsiderarDiaHoje As Boolean = False) As List(Of String)
         Dim locSQL As New StringBuilder(String.Empty)
         Dim lista As New List(Of String)
 
         Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
             locSQL.AppendFormat(" SELECT TOTAL FROM PONTO WHERE DATA >= '{0}' AND DATA <= '{1}'", clsTools.funAjustaDataSQL(dtInicio), clsTools.funAjustaDataSQL(dtFinal))
+
+            If Not ConsiderarDiaHoje Then
+                locSQL.AppendFormat(" AND DATA <> '{0}'", clsTools.funAjustaDataSQL(Now))
+            End If
 
             Comm.CommandText = locSQL.ToString
 
