@@ -40,13 +40,13 @@
 
     Private Function CalculaSaldoperiodo(Inicio As Date, final As Date) As String
         Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
-        Dim total As String
+        Dim total As TimeSpan
         Dim totalEsperado As TimeSpan
         Dim diferencao As TimeSpan
 
         total = RetornaTotalPeriodo(Inicio, final)
 
-        While (Inicio <= Now)
+        While (Inicio.Date < Now.Date)
             If Not (Inicio.DayOfWeek = DayOfWeek.Saturday Or Inicio.DayOfWeek = DayOfWeek.Sunday) Then
                 totalEsperado = totalEsperado.Add(TimeSpan.Parse(escala))
             End If
@@ -54,7 +54,7 @@
             Inicio = Inicio.AddDays(1)
         End While
 
-        diferencao = totalEsperado.Subtract(TimeSpan.Parse(total))
+        diferencao = totalEsperado.Subtract(total)
 
 
         Dim horas As String = (diferencao.Days * 24 + diferencao.Hours)
@@ -63,7 +63,7 @@
         End If
 
         Dim aux = horas & ":" & diferencao.Minutes.ToString("00")
-        Return If(totalEsperado.TotalMinutes > TimeSpan.Parse(total).TotalMinutes, "- ", "") & aux.Replace("-", "")
+        Return If(totalEsperado.TotalMinutes > total.TotalMinutes, "- ", "") & aux.Replace("-", "")
 
     End Function
 
@@ -77,6 +77,6 @@
             total = total.Add(TimeSpan.Parse(totalDia))
         Next
 
-        Return Mid(total.ToString, 1, 5)
+        Return total
     End Function
 End Class

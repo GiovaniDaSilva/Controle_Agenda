@@ -165,7 +165,7 @@ Public Class clsRequisicoesWeb
             Return New clsControlePontoWeb().RetornaPagina(locPonto)
         Catch ex As Exception
             pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
-            Throw New Exception("Erro ao carregar a página Cadastro de Atividade.")
+            Throw New Exception("Erro ao carregar a página Controle de Ponto.")
         End Try
     End Function
 
