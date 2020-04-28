@@ -19,10 +19,17 @@ Public Class clsControlePontoWeb
         html = html.Replace("{p_linhas_tabela_periodo}", RetornaLinhasTabelaPeriodo(pPonto))
         html = html.Replace("{p_dia_semana}", funRetornaDiaSemana(pPonto.dataPonto))
         html = html.Replace("[p_escala_dia]", """" & escala & """")
+        html = html.Replace("[p_retorno_almoco]", funRetornaEhRetornoAlmoco(pPonto))
 
 
 
         Return html
+    End Function
+
+    Private Function funRetornaEhRetornoAlmoco(pPonto As clsPonto) As String
+        Dim controle As New clsControlePonto
+
+        Return If(controle.ExisteSaidaParaAlmoco(pPonto.id_Ponto, False), "true", "false")
     End Function
 
     Private Function funRetornaDiaSemana(dataPonto As String) As String

@@ -67,6 +67,35 @@
 
     End Function
 
+    Public Function ExisteSaidaParaAlmoco(id_Ponto As Integer, pComRetornoAlmoco As Boolean) As Boolean
+
+        If id_Ponto = 0 Then Return False
+
+        Dim ponto = New clsControlePontoDAO().CarregaPonto(id_Ponto)
+        Dim saiuParaAlmoco As Boolean = False
+        Dim retornouAlmoco As Boolean = False
+
+
+        For Each periodo In ponto.Periodo
+            If periodo.Almoco = "" Then Continue For
+
+            If periodo.Almoco = "Saída" Then
+                saiuParaAlmoco = True
+            End If
+
+            If periodo.Almoco = "Retorno" Then
+                retornouAlmoco = True
+            End If
+        Next
+
+        If pComRetornoAlmoco Then
+            Return (saiuParaAlmoco And retornouAlmoco)
+        Else
+            Return saiuParaAlmoco
+        End If
+
+    End Function
+
     Private Function RetornaTotalPeriodo(ByVal dtInicio As Date, ByVal dtFinal As Date)
         Dim listaTotais As List(Of String)
         Dim total As TimeSpan

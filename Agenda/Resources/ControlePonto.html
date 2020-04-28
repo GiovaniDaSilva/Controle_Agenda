@@ -193,10 +193,9 @@
 
     <script>
 
-        var EscalaDia = [p_escala_dia]; //"08:30"
-        var SaiuParaAlmoco = false;
-        var RetornoAlmoco = false;
-
+        var EscalaDia = [p_escala_dia]; //"08:30"        
+        var RetornoAlmoco = [p_retorno_almoco];
+       
         $(document).ready(function () {
 
             $('input').keypress(function (e) {
@@ -250,8 +249,7 @@
                         RetornoAlmoco = true;
                     }
 
-                    if (value[4] == "Saída") {
-                        SaiuParaAlmoco = true;
+                    if (value[4] == "Saída") {                        
                         document.getElementById('saidaAlmoco').checked = true;
                     }
 
@@ -412,9 +410,8 @@
                 RetornoAlmoco = false;
             }
 
-            if (saidaAlmoco == true || SaiuParaAlmoco == true) {
-                almoco = "Saída";
-                SaiuParaAlmoco = false;
+            if (saidaAlmoco == true) {
+                almoco = "Saída";                
                 RetornoAlmoco = true;
             }
  

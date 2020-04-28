@@ -84,6 +84,13 @@ Public Class clsControlePontoDAO
     End Function
 
 
+    Public Function CarregaPonto(ByVal id As Integer) As clsPonto
+        Dim ponto As New clsPonto
+
+        ponto.id_Ponto = id
+        Return CarregaPonto(ponto)
+    End Function
+
     Public Function CarregaPonto(ByVal parPonto As clsPonto) As clsPonto
         Dim ponto As New clsPonto
         Dim locSQL As New StringBuilder(String.Empty)
