@@ -235,6 +235,7 @@
             });
 
             CalculaHorasFaltantes();
+            CalculaTempoAlmoco();
 
             //Seleção da Atividade
             tb.on('select.dt deselect.dt', function () {
@@ -344,6 +345,7 @@
             document.getElementById('horaTotal').value = calculaTotalHoras();
 
             CalculaHorasFaltantes();
+            CalculaTempoAlmoco();
         };
 
         function CalculaHorasFaltantes() {
@@ -442,9 +444,37 @@
             if (hora == '') { hora = '00:00'; }
 
             document.getElementById('horaTotal').value = calculaTotalHoras();
-            CalculaHorasFaltantes();
+            CalculaHorasFaltantes();   
+            CalculaTempoAlmoco();
+        };
 
-            //calculaTotalHoras();
+
+
+        function CalculaTempoAlmoco() {
+
+            var data = tb.rows().data();            
+            var inicio = "00:00";
+            var final = "00:00";
+            var total;
+
+            data.each(function (value, index) {
+
+                if (value[4] == "Saída") {
+                    inicio = value[2]                    
+                }
+
+                if (value[4] == "Retorno") {
+                    final = value[1]                    
+                }
+
+                //Se tiver a hora que saiu para o almoco, pega a hora atual caso nao tenha o retorno
+                if (final == "00:00" &&  inicio != "00:00") {                    
+                    final = retornaHoraAtual();
+                }                
+            });
+
+            total = subtraiHora(final, inicio);
+            document.getElementById('TempoAlmoco').innerHTML = total
         };
 
         //Evento de submit do formulario
