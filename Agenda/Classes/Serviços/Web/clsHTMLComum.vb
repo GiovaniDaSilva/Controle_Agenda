@@ -9,7 +9,18 @@ Public Class clsHTMLComum
                 <div >
                     <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light ""><i class=""material-icons"">home</i>Home</a>
                     <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">pie_chart</i>&nbsp;Gráfico</a>
-                    <a href=""Impressao"" id=""bt_impressao"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">print</i>&nbsp;Impressão</a>            
+                    
+
+                     <div class=""btn-group"">
+			          <button type=""button"" class=""btn btn-primary btn-outline-light my-2 my-sm-0 dropdown-toggle"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">
+				        <i class=""material-icons"">print</i>&nbsp;Impressão 
+			          </button>
+			          <div class=""dropdown-menu"">
+				        <a class=""dropdown-item"" href=""ImpressaoAtividade"">Atividades</a>
+				        <a class=""dropdown-item"" href=""ImpressaoPonto"">Ponto</a>				
+			          </div>
+			        </div>
+
                     <a href=""ControlePonto"" id=""bt_controlePonto"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">query_builder</i>&nbsp;Ponto</a>            
                     <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>            
                 </div>

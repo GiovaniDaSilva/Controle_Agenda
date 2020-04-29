@@ -35,7 +35,9 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaControlePonto_Excluir(pReqWeb)
                 Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pReqWeb)
-                Case "/Impressao"
+                Case "/ImpressaoAtividade"
+                    locPagRetorno = funRetornaPaginaImpressao(pReqWeb)
+                Case "/ImpressaoPonto"
                     locPagRetorno = funRetornaPaginaImpressao(pReqWeb)
                 Case "/Versoes"
                     locPagRetorno = My.Resources.Versoes
