@@ -38,7 +38,7 @@ Public Class clsRequisicoesWeb
                 Case "/ImpressaoAtividade"
                     locPagRetorno = funRetornaPaginaImpressao(pReqWeb)
                 Case "/ImpressaoPonto"
-                    locPagRetorno = funRetornaPaginaImpressao(pReqWeb)
+                    locPagRetorno = funRetornaPaginaImpressaoPonto(pReqWeb)
                 Case "/Versoes"
                     locPagRetorno = My.Resources.Versoes
                 Case "/favicon.ico"
@@ -210,10 +210,28 @@ Public Class clsRequisicoesWeb
         End If
 
         Try
-            Return New clsImpressaoWeb().RetornaPagina(filtro)
+            Return New clsImpressaoAtividadeWeb().RetornaPagina(filtro)
         Catch ex As Exception
             pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
-            Throw New Exception("Erro ao carregar a página Impressão.")
+            Throw New Exception("Erro ao carregar a página Impressão de Atividades.")
+        End Try
+
+
+
+    End Function
+
+    Private Function funRetornaPaginaImpressaoPonto(pReqWeb As clsReqWeb) As String
+
+        Dim filtro As New clsAtividade
+        Dim post() As String
+        Dim ParametrosIni = New clsIni().funCarregaIni()
+
+
+        Try
+            Return New clsImpressaoPontoWeb().RetornaPagina(filtro)
+        Catch ex As Exception
+            pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+            Throw New Exception("Erro ao carregar a página Impressão de Ponto.")
         End Try
 
 

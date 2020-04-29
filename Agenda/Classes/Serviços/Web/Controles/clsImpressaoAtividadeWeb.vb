@@ -1,6 +1,6 @@
 ﻿Imports System.Text
 
-Public Class clsImpressaoWeb
+Public Class clsImpressaoAtividadeWeb
 
     Public Enum enuEstiloImpressao
         Data = 1
@@ -124,7 +124,7 @@ Public Class clsListaSolicitacaoWeb
 
         If ini.Horastrabalhadas = enuHorasTrabalhadas.Periodo And pAtividade.Periodos.Count > 0 Then
             clsHTMLTools.Imprime(html, "Período: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
-            clsImpressaoWeb.subImprimePeriodos(html, pAtividade.Periodos, 7)
+            clsImpressaoAtividadeWeb.subImprimePeriodos(html, pAtividade.Periodos, 7)
         End If
 
         If locDetalhesBase IsNot Nothing Then
@@ -166,7 +166,7 @@ Public Class clsListaDemaisAtividades
 
         If ini.Horastrabalhadas = enuHorasTrabalhadas.Periodo And pAtividade.Periodos.Count > 0 Then
             clsHTMLTools.Imprime(html, "Período: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
-            clsImpressaoWeb.subImprimePeriodos(html, pAtividade.Periodos, 7)
+            clsImpressaoAtividadeWeb.subImprimePeriodos(html, pAtividade.Periodos, 7)
 
         End If
 
