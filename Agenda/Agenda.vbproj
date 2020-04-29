@@ -267,10 +267,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Impressao.html" />
+    <None Include="Resources\ControlePonto.html" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ControlePonto.html" />
+    <None Include="Resources\ImpressaoAtividade.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImpressaoPonto.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

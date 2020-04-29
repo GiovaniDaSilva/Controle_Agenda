@@ -56,6 +56,7 @@ Public Class clsHTMLComum
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             border-radius: 4px;
+            font-size: 25px; 
         }
 
         .Atualizacao {

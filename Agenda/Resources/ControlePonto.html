@@ -33,8 +33,14 @@
 
 
 <body class="Fundo">
+    
+    
+
     <header>
+
         {p_menu_pagina}
+
+        <h1 class="TituloPrincipal">Cadastro de Ponto</h1>
 
         <!--Sub Menu-->
         <nav class="navbar navbar-light Fundo">
@@ -46,7 +52,7 @@
         </nav>
 
     </header>
-
+    
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-7">
@@ -193,9 +199,9 @@
 
     <script>
 
-        var EscalaDia = [p_escala_dia]; //"08:30"        
+        var EscalaDia = [p_escala_dia]; //"08:30"
         var RetornoAlmoco = [p_retorno_almoco];
-       
+
         $(document).ready(function () {
 
             $('input').keypress(function (e) {
@@ -250,7 +256,7 @@
                         RetornoAlmoco = true;
                     }
 
-                    if (value[4] == "Saída") {                        
+                    if (value[4] == "Saída") {
                         document.getElementById('saidaAlmoco').checked = true;
                     }
 
@@ -413,10 +419,10 @@
             }
 
             if (saidaAlmoco == true) {
-                almoco = "Saída";                
+                almoco = "Saída";
                 RetornoAlmoco = true;
             }
- 
+
 
             tb.row.add([
                 0, //ID
@@ -444,7 +450,7 @@
             if (hora == '') { hora = '00:00'; }
 
             document.getElementById('horaTotal').value = calculaTotalHoras();
-            CalculaHorasFaltantes();   
+            CalculaHorasFaltantes();
             CalculaTempoAlmoco();
         };
 
@@ -452,7 +458,7 @@
 
         function CalculaTempoAlmoco() {
 
-            var data = tb.rows().data();            
+            var data = tb.rows().data();
             var inicio = "00:00";
             var final = "00:00";
             var total;
@@ -460,17 +466,17 @@
             data.each(function (value, index) {
 
                 if (value[4] == "Saída") {
-                    inicio = value[2]                    
+                    inicio = value[2]
                 }
 
                 if (value[4] == "Retorno") {
-                    final = value[1]                    
+                    final = value[1]
                 }
 
                 //Se tiver a hora que saiu para o almoco, pega a hora atual caso nao tenha o retorno
-                if (final == "00:00" &&  inicio != "00:00") {                    
+                if (final == "00:00" && inicio != "00:00") {
                     final = retornaHoraAtual();
-                }                
+                }
             });
 
             total = subtraiHora(final, inicio);

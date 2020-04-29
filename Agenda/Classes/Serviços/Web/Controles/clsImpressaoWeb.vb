@@ -19,7 +19,7 @@ Public Class clsImpressaoWeb
     Private Function RetornaHTML(pFiltro As clsAtividade) As String
 
         Dim html As String
-        html = My.Resources.Impressao
+        html = My.Resources.ImpressaoAtividade
 
         html = html.Replace("{p_dados_impresso}", funRetornaSolicitacos(pFiltro))
         html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(pFiltro.ID_TIPO_ATIVIDADE))

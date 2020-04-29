@@ -193,9 +193,38 @@ Namespace My.Resources
         '''            font-size: 14px;
         '''            font-family: &apos;Segoe UI&apos;, Tahoma, Gene [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend ReadOnly Property Impressao() As String
+        Friend ReadOnly Property ImpressaoAtividade() As String
             Get
-                Return ResourceManager.GetString("Impressao", resourceCulture)
+                Return ResourceManager.GetString("ImpressaoAtividade", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;html&gt;
+        '''&lt;head&gt;
+        '''
+        '''    {p_links_comum_pagina}
+        '''
+        '''    &lt;style&gt;
+        '''        [p_style_comum_pagina]
+        '''
+        '''        .estiloTitulo {
+        '''            color: black;
+        '''            font-weight: bold;
+        '''            font-size: 12px;
+        '''            font-family: &apos;Segoe UI&apos;, Tahoma, Geneva, Verdana, sans-serif;
+        '''        }
+        '''
+        '''        .estiloTituloDestaque {
+        '''            color: darkblue;
+        '''            font-weight: bold;
+        '''            text-decoration: underline;
+        '''            font-size: 14px;
+        '''            font-family: &apos;Segoe UI&apos;, Tahoma, Gene [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property ImpressaoPonto() As String
+            Get
+                Return ResourceManager.GetString("ImpressaoPonto", resourceCulture)
             End Get
         End Property
         
