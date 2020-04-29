@@ -12,14 +12,18 @@ Public Class clsImpressaoPontoWeb
 
     Private Property html As New StringBuilder
 
-    Public Function RetornaPagina(pFiltro As clsAtividade) As String
-        Return RetornaHTML(pFiltro)
+    Public Function RetornaPagina(pDataInicial As Date, pDataFinal As Date) As String
+        Return RetornaHTML(pDataInicial, pDataFinal)
     End Function
 
-    Private Function RetornaHTML(pFiltro As clsAtividade) As String
+    Private Function RetornaHTML(pDataInicial As Date, pDataFinal As Date) As String
 
         Dim html As String
         html = My.Resources.ImpressaoPonto
+        html = html.Replace("{p_meses_combo}", clsHTMLComum.RetornaMesesCombo(Month(pDataInicial)))
+        html = html.Replace("{p_data_inicio}", clsTools.funFormataData(pDataInicial))
+        html = html.Replace("{p_data_final}", clsTools.funFormataData(pDataFinal))
+
 
 
 

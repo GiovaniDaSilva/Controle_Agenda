@@ -222,13 +222,28 @@ Public Class clsRequisicoesWeb
 
     Private Function funRetornaPaginaImpressaoPonto(pReqWeb As clsReqWeb) As String
 
-        Dim filtro As New clsAtividade
-        Dim post() As String
-        Dim ParametrosIni = New clsIni().funCarregaIni()
+        Dim locDataInicial = clsTools.RetornaPrimeiroDiaMes()
+        Dim locDataFinal = clsTools.RetornaUltimoDiaMes()
 
+        If pReqWeb.Context.Request.Url.Query <> vbNullString Then
+            Dim arr = clsHTMLTools.RetornaGetEmArray(pReqWeb.Context)
+            If arr.Count = 0 Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("Parâmetros da Pagina estão inválidos.")
+            End If
+
+            Dim mesGeracao = clsHTMLTools.RetornaValorPostGet(arr(1))
+            If mesGeracao = vbNullString Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("Mês informado não é válido.")
+            End If
+
+            locDataInicial = clsTools.RetornaPrimeiroDiaMes(mesGeracao)
+            locDataFinal = clsTools.RetornaUltimoDiaMes(mesGeracao)
+        End If
 
         Try
-            Return New clsImpressaoPontoWeb().RetornaPagina(filtro)
+            Return New clsImpressaoPontoWeb().RetornaPagina(locDataInicial, locDataFinal)
         Catch ex As Exception
             pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
             Throw New Exception("Erro ao carregar a página Impressão de Ponto.")

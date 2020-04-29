@@ -282,4 +282,25 @@ Public Class clsHTMLComum
         Return texto.ToString
     End Function
 
+    Public Shared Function RetornaMesesCombo(pMesFiltro As Integer) As String
+        Dim retorno As New StringBuilder(vbNullString)
+        Dim selected As String = "selected"
+
+        retorno.AppendFormat("<option value = ""1"" {0}> Janeiro</Option>", IIf(pMesFiltro = 1, selected, ""))
+        retorno.AppendFormat("<option value = ""2"" {0}> Fevereiro</Option>", IIf(pMesFiltro = 2, selected, ""))
+        retorno.AppendFormat("<option value = ""3"" {0}> Março</Option>", IIf(pMesFiltro = 3, selected, ""))
+        retorno.AppendFormat("<option value = ""4"" {0}> Abril</Option>", IIf(pMesFiltro = 4, selected, ""))
+        retorno.AppendFormat("<option value = ""5"" {0}> Maio</Option>", IIf(pMesFiltro = 5, selected, ""))
+        retorno.AppendFormat("<option value = ""6"" {0}> Junho</Option>", IIf(pMesFiltro = 6, selected, ""))
+        retorno.AppendFormat("<option value = ""7"" {0}> Julho</Option>", IIf(pMesFiltro = 7, selected, ""))
+        retorno.AppendFormat("<option value = ""8"" {0}> Agosto</Option>", IIf(pMesFiltro = 8, selected, ""))
+        retorno.AppendFormat("<option value = ""9"" {0}> Setembro</Option>", IIf(pMesFiltro = 9, selected, ""))
+        retorno.AppendFormat("<option value = ""10"" {0}> Outubro</Option>", IIf(pMesFiltro = 10, selected, ""))
+        retorno.AppendFormat("<option value = ""11"" {0}> Novembro</Option>", IIf(pMesFiltro = 11, selected, ""))
+        retorno.AppendFormat("<option value = ""12"" {0}> Dezembro</Option>", IIf(pMesFiltro = 12, selected, ""))
+
+        Return retorno.ToString
+
+    End Function
+
 End Class

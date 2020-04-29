@@ -57,56 +57,59 @@
     </header>
 
     <h1 class="TituloPrincipal">Impressão do Ponto</h1>
-
-    <div class="container-fluid">
-        <form method="post" id="form_Filtro" style="margin-top: 10px; margin-bottom: 10px">
-            <div class="input-group mb-3 input-group-sm">
-                <div class="input-group-prepend">
-
-                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>A partir de:</b></span>
-                    <input type="date" class="form-control" id="data_ini" name="data_ini" form="form_Filtro">
-                    &nbsp;
-                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Tipo de Atividade:</b></span>
-                    <select class="custom-select" select id="cbTipo" name="tipoAtividade" form="form_Filtro">
-                        {p_tipos_atividades_filtro}
-                    </select>
-                    &nbsp;
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" form="form_Filtro">Aplicar</button>
+  
+    <div class="container-fluid" style="margin-top:10px">
+        <div class="FormMes">
+            <div class="container-fluid ">
+                <div class=" row justify-content-center">
+                    <div class="col-3">
+                        <form method="get" id="form_mes">
+                            <div class="input-group">
+                                <select class="custom-select" select id="cbmes" name="meseslista" form="form_mes">
+                                    {p_meses_combo}
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit" form="form_mes">Aplicar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-3 ">
+                        <p class="Titulo"><b>Período:</b> {p_data_inicio} - {p_data_final}</p>
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
 
-    <div class="container-fluid">
-        
 
-        <div class="row">
-            <div class="col-md-7">
-                <p style="line-height: 5px; ">
-                    {p_dados_impresso}
-                </p>
-            </div>
-            <div class="col-md-5" style="margin-top: 30px">
-                <label for="tablePeriodosDia" class="label">Períodos de hoje ({data_atual}) </label>
-                {p_linhas_tabela_periodo_dia}
+        <div class="container-fluid">
+
+
+            <div class="row">
+                <div class="col-md-7">
+                    <p style="line-height: 5px; ">
+                        {p_dados_impresso}
+                    </p>
+                </div>
+                <div class="col-md-5" style="margin-top: 30px">
+                    <label for="tablePeriodosDia" class="label">Períodos de hoje ({data_atual}) </label>
+                    {p_linhas_tabela_periodo_dia}
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <script>
+        <script>
 
 
-        $(document).ready(function () {
+            $(document).ready(function () {
 
-            [p_inicializa_campos_filtro]
+                [p_inicializa_campos_filtro]
 
-        });
+            });
 
 
-    </script>
+        </script>
 </body>
 
 
