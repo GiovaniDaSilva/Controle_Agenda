@@ -103,6 +103,18 @@ Public Class clsTools
     End Sub
 
     ''' <summary>
+    ''' Retorna o dia da semana por extenso
+    ''' </summary>
+    ''' <param name="pData"></param>
+    ''' <returns></returns>
+    Public Shared Function funRetornaDiaSemana(pData As String, Optional abreviado As Boolean = False) As String
+        Dim data As String
+        data = Strings.StrConv(String.Format("{0:dddd}", CDate(pData)), VbStrConv.ProperCase)
+
+        Return If(abreviado, Mid(data, 1, 3), data)
+    End Function
+
+    ''' <summary>
     ''' Valida o campo hora
     ''' hora valida, minuto valido
     ''' </summary>
@@ -227,7 +239,8 @@ End Class
 ''' </summary>
 Public Class clsHTMLTools
 
-    Public Shared Function funLinhaTabela(ByVal pColunas As List(Of String), Optional ByVal classe As String = vbNullString, Optional ByVal estilo As String = vbNullString) As String
+
+    Public Shared Function funLinhaTabela(ByVal pColunas As List(Of clsColunasTabela)) As String
         Dim retorno As String = vbNullString
 
 
@@ -235,15 +248,15 @@ Public Class clsHTMLTools
         For Each col In pColunas
             retorno &= "<td "
 
-            If classe <> vbNullString Then
-                retorno &= classe
+            If col.classe <> vbNullString Then
+                retorno &= col.classe
             End If
 
-            If estilo <> vbNullString Then
-                retorno &= estilo
+            If col.estilo <> vbNullString Then
+                retorno &= col.estilo
             End If
 
-            retorno &= " >" & col.ToString & "</td>"
+            retorno &= " >" & col.dado & "</td>"
         Next
         retorno &= "</tr>"
 
@@ -292,7 +305,7 @@ Public Class clsHTMLTools
     End Sub
 
     Private Shared Function retornaTabWeb(tab As Integer) As String
-        Dim x As String
+        Dim x As String = ""
         For i = 0 To tab
             x &= "&nbsp "
         Next

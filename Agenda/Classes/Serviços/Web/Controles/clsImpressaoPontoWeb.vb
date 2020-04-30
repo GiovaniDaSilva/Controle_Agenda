@@ -44,11 +44,11 @@ Public Class clsImpressaoPontoWeb
 
 
         For Each ponto In listaPonto
-            Dim linha = New List(Of String)
-            linha.Add(ponto.dataPonto)
-            linha.Add(ponto.horaTotal)
-            linha.Add("[08:00 - 10:00] [13:30 - 18:00] [08:00 - 10:00] [13:30 - 18:00] [08:00 - 10:00]")
-            linha.Add("-02:00")
+            Dim linha = New List(Of clsColunasTabela)
+            linha.Add(New clsColunasTabela(funRetornaData(ponto)))
+            linha.Add(New clsColunasTabela(ponto.horaTotal))
+            linha.Add(New clsColunasTabela(funRetornaPeriodo(ponto.Periodo)))
+            linha.Add(New clsColunasTabela(funRetornaSaldoDia(ponto)))
             dados &= clsHTMLTools.funLinhaTabela(linha)
         Next
 
@@ -56,6 +56,26 @@ Public Class clsImpressaoPontoWeb
         html.Append(dados)
 
     End Sub
+
+    Private Function funRetornaSaldoDia(ponto As clsPonto) As String
+        Dim controle As New clsControlePonto
+
+        Return controle.CalculaSaldoDia(ponto.dataPonto)
+    End Function
+
+    Private Function funRetornaPeriodo(periodo As List(Of clsPeriodoPonto)) As String
+        Dim retorno As String = vbNullString
+
+        For Each ponto In periodo
+            retorno &= "[" & ponto.Entrada & "-" & ponto.Saida & "]  "
+        Next
+
+        Return retorno
+    End Function
+
+    Private Shared Function funRetornaData(ponto As clsPonto) As String
+        Return clsTools.funFormataData(ponto.dataPonto) & "   " & clsTools.funRetornaDiaSemana(ponto.dataPonto, True)
+    End Function
 
     Private Sub subImprimePonto(ponto As clsPonto)
 

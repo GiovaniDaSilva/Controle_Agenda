@@ -17,7 +17,7 @@ Public Class clsControlePontoWeb
         html = html.Replace("[p_inicializa_campos_ponto]", RetornaLinhasInicializacaoCampos(pPonto))
         html = html.Replace("{p_retorna_botao_excluir_atividade}", RetornaBotaoExcluir(pPonto))
         html = html.Replace("{p_linhas_tabela_periodo}", RetornaLinhasTabelaPeriodo(pPonto))
-        html = html.Replace("{p_dia_semana}", funRetornaDiaSemana(pPonto.dataPonto))
+        html = html.Replace("{p_dia_semana}", clsTools.funRetornaDiaSemana(pPonto.dataPonto))
         html = html.Replace("[p_escala_dia]", """" & escala & """")
         html = html.Replace("[p_retorno_almoco]", funRetornaEhRetornoAlmoco(pPonto))
 
@@ -32,12 +32,7 @@ Public Class clsControlePontoWeb
         Return If(controle.ExisteSaidaParaAlmoco(pPonto.id_Ponto, False), "true", "false")
     End Function
 
-    Private Function funRetornaDiaSemana(dataPonto As String) As String
-        Dim data As String
-        data = Strings.StrConv(String.Format("{0:dddd}", CDate(dataPonto)), VbStrConv.ProperCase)
 
-        Return data
-    End Function
 
     Private Function RetornaLinhasTabelaPeriodo(pPonto As clsPonto) As String
         Dim locRetorno As String = vbNullString
@@ -46,14 +41,14 @@ Public Class clsControlePontoWeb
         If pPonto.Periodo.Count = 0 Then Return ""
 
         For Each periodo In pPonto.Periodo
-            Dim linha = New List(Of String)
-            linha.Add(periodo.ID)
-            linha.Add(periodo.Entrada)
-            linha.Add(periodo.Saida)
-            linha.Add(periodo.Total)
+            Dim linha = New List(Of clsColunasTabela)
+            linha.Add(New clsColunasTabela(periodo.ID))
+            linha.Add(New clsColunasTabela(periodo.Entrada))
+            linha.Add(New clsColunasTabela(periodo.Saida))
+            linha.Add(New clsColunasTabela(periodo.Total))
             'linha.Add("<i class=""material-icons"">live_help</i>")
-            linha.Add(periodo.Almoco)
-            linha.Add("<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>")
+            linha.Add(New clsColunasTabela(periodo.Almoco))
+            linha.Add(New clsColunasTabela("<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>"))
 
             locRetorno &= clsHTMLTools.funLinhaTabela(linha)
         Next

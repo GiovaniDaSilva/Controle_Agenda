@@ -151,6 +151,7 @@
     <Compile Include="Classes\DAO\clsSolicitacaoDAO.vb" />
     <Compile Include="Classes\Modelos\clsTipo.vb" />
     <Compile Include="Classes\clsTools.vb" />
+    <Compile Include="Classes\Serviços\Web\clsColunasTabela.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsCadastroAtividadeWeb.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsControlePontoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsHomeWeb.vb" />

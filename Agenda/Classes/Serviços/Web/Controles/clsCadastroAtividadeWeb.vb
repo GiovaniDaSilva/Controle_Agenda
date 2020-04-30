@@ -57,7 +57,7 @@ Public Class clsCadastroAtividadeWeb
     ''' <summary>
     ''' Retorna a descrição da atividade da pagina hora atraves de ajax
     ''' </summary>
-    ''' <param name="pContext"></param>
+    ''' <param name="pId"></param>
     ''' <returns></returns>
     Private Function funRetornaDescricaoAtividade(pId As Long) As String
         Dim DAO As New clsAdicionarDAO
@@ -153,13 +153,12 @@ Public Class clsCadastroAtividadeWeb
         If pAtividade.Periodos.Count = 0 Then Return ""
 
         For Each periodo In pAtividade.Periodos
-            Dim linha = New List(Of String)
-            linha.Add(periodo.ID)
-            linha.Add(periodo.Hora_Inicial)
-            linha.Add(periodo.Hora_Final)
-            linha.Add(periodo.Total)
-            'linha.Add("")
-            linha.Add("<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>")
+            Dim linha = New List(Of clsColunasTabela)
+            linha.Add(New clsColunasTabela(periodo.ID))
+            linha.Add(New clsColunasTabela(periodo.Hora_Inicial))
+            linha.Add(New clsColunasTabela(periodo.Hora_Final))
+            linha.Add(New clsColunasTabela(periodo.Total))
+            linha.Add(New clsColunasTabela("<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>"))
 
             locRetorno &= clsHTMLTools.funLinhaTabela(linha)
         Next

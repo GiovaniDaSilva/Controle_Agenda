@@ -59,9 +59,9 @@ Public Class clsGraficoWeb
         Dim locRetorno As String = vbNullString
 
         For i = 0 To locTipoAtividades.Count - 1
-            Dim linha = New List(Of String)
-            linha.Add(locTipoAtividades(i).ToString)
-            linha.Add(locValores(i).ToString & " %")
+            Dim linha = New List(Of clsColunasTabela)
+            linha.Add(New clsColunasTabela(locTipoAtividades(i).ToString))
+            linha.Add(New clsColunasTabela(locValores(i).ToString & " %"))
             locRetorno &= clsHTMLTools.funLinhaTabela(linha)
         Next
 

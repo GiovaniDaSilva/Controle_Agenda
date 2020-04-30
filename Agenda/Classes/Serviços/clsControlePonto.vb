@@ -38,11 +38,27 @@
 
     End Function
 
+    Public Function CalculaSaldoDia(data As Date) As String
+        Dim total As TimeSpan
+        Dim totalEsperado As TimeSpan
+        Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
+
+        total = RetornaTotalPeriodo(data, data)
+
+        If Not (data.DayOfWeek = DayOfWeek.Saturday Or data.DayOfWeek = DayOfWeek.Sunday) Then
+            totalEsperado = totalEsperado.Add(TimeSpan.Parse(escala))
+        End If
+
+        Return RetornaSaldo(total, totalEsperado)
+
+    End Function
+
+
+
     Private Function CalculaSaldoperiodo(Inicio As Date, final As Date) As String
         Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
         Dim total As TimeSpan
         Dim totalEsperado As TimeSpan
-        Dim diferencao As TimeSpan
 
         total = RetornaTotalPeriodo(Inicio, final)
 
@@ -54,6 +70,12 @@
             Inicio = Inicio.AddDays(1)
         End While
 
+        Return RetornaSaldo(total, totalEsperado)
+    End Function
+
+    Private Shared Function RetornaSaldo(total As TimeSpan, totalEsperado As TimeSpan) As String
+        Dim diferencao As TimeSpan
+
         diferencao = totalEsperado.Subtract(total)
 
 
@@ -64,7 +86,6 @@
 
         Dim aux = horas & ":" & diferencao.Minutes.ToString("00")
         Return If(totalEsperado.TotalMinutes > total.TotalMinutes, "- ", "") & aux.Replace("-", "")
-
     End Function
 
     Public Function ExisteSaidaParaAlmoco(id_Ponto As Integer, pComRetornoAlmoco As Boolean) As Boolean

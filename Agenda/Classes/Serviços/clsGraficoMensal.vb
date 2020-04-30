@@ -4,10 +4,8 @@
 
     Public Function subGeraDadosGrafico2(ByVal parDataInicial As Date, ByVal parDataFinal As Date) As clsAtividadesGraficoPrincipal
 
-
         Dim locListaAtividades = New clsAdicionarDAO().carregarAtividades(parDataInicial, parDataFinal)
         Dim locTotais As New clsAtividadesGraficoPrincipal
-        Dim TimeTotal As TimeSpan
 
         If locListaAtividades.Count = 0 Then Return locTotais
 

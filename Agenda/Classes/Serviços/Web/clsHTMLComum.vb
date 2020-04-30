@@ -247,11 +247,11 @@ Public Class clsHTMLComum
 
 
         For Each periodo In listaAtividadesPeriodos
-            Dim linha = New List(Of String)
-            linha.Add(periodo.descricao_tipo)
-            linha.Add(periodo.codigo_atividade)
-            linha.Add(periodo.hora_inicial)
-            linha.Add(periodo.hora_final)
+            Dim linha = New List(Of clsColunasTabela)
+            linha.Add(New clsColunasTabela(periodo.descricao_tipo))
+            linha.Add(New clsColunasTabela(periodo.codigo_atividade))
+            linha.Add(New clsColunasTabela(periodo.hora_inicial))
+            linha.Add(New clsColunasTabela(periodo.hora_final))
             linhasPeriodo &= clsHTMLTools.funLinhaTabela(linha)
         Next
 

@@ -47,16 +47,16 @@ Public Class clsHomeWeb
         Dim locRetorno As String = vbNullString
 
         For Each atividade In listaAtividades
-            Dim linha = New List(Of String)
-            linha.Add(atividade.ID)
-            linha.Add(atividade.Data)
-            linha.Add(atividade.TIPO_DESCRICAO)
-            linha.Add(atividade.funRetornaCodigoTratado)
-            linha.Add(atividade.Horas)
-            linha.Add(atividade.funRetornaDescricaoTratada)
-            linha.Add("")
+            Dim linha = New List(Of clsColunasTabela)
+            linha.Add(New clsColunasTabela(atividade.ID))
+            linha.Add(New clsColunasTabela(atividade.Data))
+            linha.Add(New clsColunasTabela(atividade.TIPO_DESCRICAO))
+            linha.Add(New clsColunasTabela(atividade.funRetornaCodigoTratado, ))
+            linha.Add(New clsColunasTabela(atividade.Horas))
+            linha.Add(New clsColunasTabela(atividade.funRetornaDescricaoTratada, "class=""descricao"""))
+            linha.Add(New clsColunasTabela(""))
 
-            locRetorno &= clsHTMLTools.funLinhaTabela(linha, "class=""descricao""")
+            locRetorno &= clsHTMLTools.funLinhaTabela(linha)
         Next
 
         Return locRetorno
