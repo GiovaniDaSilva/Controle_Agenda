@@ -84,6 +84,36 @@ Public Class clsControlePontoDAO
     End Function
 
 
+
+    Public Function RetornaPontoPeriodo(pdataInicio As Date, pdataFinal As Date) As List(Of clsPonto)
+        Dim lista As New List(Of clsPonto)
+        Dim locSQL As New StringBuilder(String.Empty)
+
+
+        Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
+            locSQL.Append(" SELECT * FROM PONTO  WHERE (1 = 1)")
+            locSQL.AppendFormat(" AND DATA >= '{0}'", clsTools.funAjustaDataSQL(pdataInicio))
+            locSQL.AppendFormat(" AND DATA <= '{0}'", clsTools.funAjustaDataSQL(pdataFinal))
+            Comm.CommandText = locSQL.ToString
+
+            Using Reader = Comm.ExecuteReader()
+                While Reader.Read()
+                    Dim ponto As New clsPonto
+                    ponto.id_Ponto = Reader("ID")
+                    ponto.dataPonto = Reader("DATA")
+                    ponto.horaTotal = Reader("TOTAL")
+                    ponto.observacao = Reader("OBSERVACAO")
+                    ponto.Periodo = funRetornaPeriodoPonto(ponto.id_Ponto)
+
+                    lista.Add(ponto)
+                End While
+            End Using
+        End Using
+
+        Return lista
+
+    End Function
+
     Public Function CarregaPonto(ByVal id As Integer) As clsPonto
         Dim ponto As New clsPonto
 
@@ -98,8 +128,6 @@ Public Class clsControlePontoDAO
 
         Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
             locSQL.Append(" SELECT * FROM PONTO  WHERE (1 = 1)")
-
-
             If Not parPonto.dataPonto = Nothing Then
                 locSQL.AppendFormat(" AND DATA = '{0}'", clsTools.funAjustaDataSQL(parPonto.dataPonto))
             End If

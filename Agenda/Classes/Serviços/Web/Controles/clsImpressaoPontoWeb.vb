@@ -23,11 +23,44 @@ Public Class clsImpressaoPontoWeb
         html = html.Replace("{p_meses_combo}", clsHTMLComum.RetornaMesesCombo(Month(pDataInicial)))
         html = html.Replace("{p_data_inicio}", clsTools.funFormataData(pDataInicial))
         html = html.Replace("{p_data_final}", clsTools.funFormataData(pDataFinal))
-
-
-
+        html = html.Replace("{p_dados_impresso}", funRetornaDadosImpresso(pDataInicial, pDataFinal))
 
         Return html
     End Function
 
+    Private Function funRetornaDadosImpresso(pDataInicial As Date, pDataFinal As Date) As String
+        Dim listaPonto As New List(Of clsPonto)
+
+        listaPonto = New clsControlePontoDAO().RetornaPontoPeriodo(pDataInicial, pDataFinal)
+
+        subListaPontos(listaPonto)
+
+        Return html.ToString
+    End Function
+
+    Private Sub subListaPontos(listaPonto As List(Of clsPonto))
+
+        Dim dados As String = ""
+
+
+        For Each ponto In listaPonto
+            Dim linha = New List(Of String)
+            linha.Add(ponto.dataPonto)
+            linha.Add(ponto.horaTotal)
+            linha.Add("[08:00 - 10:00] [13:30 - 18:00] [08:00 - 10:00] [13:30 - 18:00] [08:00 - 10:00]")
+            linha.Add("-02:00")
+            dados &= clsHTMLTools.funLinhaTabela(linha)
+        Next
+
+
+        html.Append(dados)
+
+    End Sub
+
+    Private Sub subImprimePonto(ponto As clsPonto)
+
+
+
+
+    End Sub
 End Class
