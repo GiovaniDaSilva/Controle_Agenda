@@ -48,7 +48,7 @@ Public Class clsImpressaoPontoWeb
             linha.Add(New clsColunasTabela(funRetornaData(ponto)))
             linha.Add(New clsColunasTabela(ponto.horaTotal))
             linha.Add(New clsColunasTabela(funRetornaPeriodo(ponto.Periodo)))
-            linha.Add(New clsColunasTabela(funRetornaSaldoDia(ponto)))
+            linha.Add(New clsColunasTabela(funRetornaSaldoDia(ponto), "class='text-right'"))
             dados &= clsHTMLTools.funLinhaTabela(linha)
         Next
 
