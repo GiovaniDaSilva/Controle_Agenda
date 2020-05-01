@@ -112,7 +112,7 @@ Partial Class frmPrincipal
         Me.btnVersaoWeb.Name = "btnVersaoWeb"
         Me.btnVersaoWeb.Size = New System.Drawing.Size(95, 50)
         Me.btnVersaoWeb.TabIndex = 11
-        Me.btnVersaoWeb.Text = "Versão Web    Em Construção"
+        Me.btnVersaoWeb.Text = "Versão Web"
         Me.ToolTip1.SetToolTip(Me.btnVersaoWeb, "Versão web em desenvolvimento, se encontrar problemas reporte. Obrigado.")
         Me.btnVersaoWeb.UseVisualStyleBackColor = False
         '

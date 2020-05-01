@@ -233,6 +233,11 @@ Public Class frmPrincipal
         TimerControleGeral.Interval = 120 * 60000 '120 minutos x 1 minuto do timer
         TimerControleGeral.Start()
 
+        Me.Show()
+
+        MsgBox("Esta aplicação roda internamente um servidor HTTP que responde as requisições da porta 8484." & vbNewLine _
+               & "Portanto, você pode aproveitar a versão da Agenda Web, deixado esta aplicação desktop aberta na bandeja do windows.", vbInformation)
+
     End Sub
 
     Private Sub subCarregaIni()
