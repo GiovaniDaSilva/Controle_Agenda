@@ -68,15 +68,20 @@
 
         total = RetornaTotalPeriodo(Inicio, final, ConsiderarDiaHoje)
 
-        If Not ConsiderarDiaHoje Then
-            dataFim = Now.Date.AddDays(-1)
-        Else
-            dataFim = Now.Date
-        End If
+        While (Inicio.Date <= final)
 
-        While (Inicio.Date <= dataFim)
-            If Not (Inicio.DayOfWeek = DayOfWeek.Saturday Or Inicio.DayOfWeek = DayOfWeek.Sunday) Then
-                totalEsperado = totalEsperado.Add(TimeSpan.Parse(escala))
+            'Se nao considerar a data de hoje, não soma as horas que faltam de hoje
+            If Not ConsiderarDiaHoje Then
+                If Inicio.Date = Now.Date Then
+                    Inicio = Inicio.AddDays(1)
+                End If
+            End If
+
+            'Apenas calcula o esperado do mesmo mes
+            If Inicio.Date.Month < Now.Date.Month Then
+                If Not (Inicio.DayOfWeek = DayOfWeek.Saturday Or Inicio.DayOfWeek = DayOfWeek.Sunday) Then
+                    totalEsperado = totalEsperado.Add(TimeSpan.Parse(escala))
+                End If
             End If
 
             Inicio = Inicio.AddDays(1)
