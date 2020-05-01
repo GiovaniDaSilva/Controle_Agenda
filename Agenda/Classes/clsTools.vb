@@ -4,6 +4,12 @@ Imports System.Text
 
 Public Class clsTools
 
+
+    Public Shared Function ehSabadoDomingo(data As String) As Boolean
+        Return (CDate(data).DayOfWeek = DayOfWeek.Saturday Or CDate(data).DayOfWeek = DayOfWeek.Sunday)
+    End Function
+
+
     ''' <summary>
     ''' Converte o conteudo do campo texto em um date
     ''' </summary>

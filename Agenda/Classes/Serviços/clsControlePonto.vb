@@ -78,7 +78,7 @@
             End If
 
             'Apenas calcula o esperado do mesmo mes
-            If Inicio.Date.Month < Now.Date.Month Then
+            If Inicio.Date <= Now.Date Then
                 If Not (Inicio.DayOfWeek = DayOfWeek.Saturday Or Inicio.DayOfWeek = DayOfWeek.Sunday) Then
                     totalEsperado = totalEsperado.Add(TimeSpan.Parse(escala))
                 End If

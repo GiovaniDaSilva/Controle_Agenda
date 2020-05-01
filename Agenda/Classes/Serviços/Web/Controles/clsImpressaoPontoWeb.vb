@@ -48,6 +48,8 @@ Public Class clsImpressaoPontoWeb
 
         listaPonto = New clsControlePontoDAO().RetornaPontoPeriodo(pDataInicial, pDataFinal)
 
+        listaPonto = listaPonto.OrderBy(Function(x) x.dataPonto).ToList()
+
         subListaPontos(listaPonto)
 
         Return html.ToString
@@ -59,20 +61,52 @@ Public Class clsImpressaoPontoWeb
 
 
         For Each ponto In listaPonto
+
+            If CDate(ponto.dataPonto).DayOfWeek = DayOfWeek.Monday Then
+                subAdicionadoLinhaDivisao(dados, ponto)
+            End If
+
             Dim linha = New List(Of clsColunasTabela)
             linha.Add(New clsColunasTabela(funRetornaData(ponto)))
             linha.Add(New clsColunasTabela(funRetornaHoraTotal(ponto)))
             linha.Add(New clsColunasTabela(funRetornaPeriodo(ponto.Periodo)))
             linha.Add(New clsColunasTabela(funRetornaSaldoDia(ponto), "class='text-right'"))
-
-
             linha.Add(New clsColunasTabela(funRetornaBotao(ponto.dataPonto), "class='text-right'"))
-
             dados &= clsHTMLTools.funLinhaTabela(linha)
         Next
 
 
         html.Append(dados)
+
+    End Sub
+
+    Private Sub subAdicionadoLinhaDivisao(ByRef dados As String, ponto As clsPonto)
+
+        Dim controle As New clsControlePonto
+        Dim saldoSemana As String
+
+        saldoSemana = controle.CalculaSaldoSemana(CDate(ponto.dataPonto).AddDays(-2))
+
+        If Mid(saldoSemana, 1, 1) = "-" Then
+            saldoSemana = clsHTMLTools.pintaDadoColunaTable(saldoSemana, Color.Red)
+        Else
+            saldoSemana = clsHTMLTools.pintaDadoColunaTable(saldoSemana, Color.Green)
+        End If
+
+        ''Para não começar a grid com a linha em branco
+        If dados = "" Then Exit Sub
+        Dim linha1 = New List(Of clsColunasTabela)
+
+        linha1.Add(New clsColunasTabela("<b>Saldo da Semana:</b>"))
+        linha1.Add(New clsColunasTabela(saldoSemana, "COLSPAN = ""4"""))
+
+        dados &= clsHTMLTools.funLinhaTabela(linha1)
+
+        Dim linha2 = New List(Of clsColunasTabela)
+
+        linha2.Add(New clsColunasTabela("-", " COLSPAN = ""5"" class='text-right'"))
+        dados &= clsHTMLTools.funLinhaTabela(linha2)
+
 
     End Sub
 
@@ -87,11 +121,14 @@ Public Class clsImpressaoPontoWeb
         Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
         Dim total As String
 
+        'Adicionado um tab, para fazer o alinhamento com o saldo da semana
         If ehHoraTotalNegativa(ponto, escala) Then
-            total = clsHTMLTools.pintaDadoColunaTable(ponto.horaTotal, Color.Red)
+            total = clsHTMLTools.pintaDadoColunaTable(clsHTMLTools.Tab() & ponto.horaTotal, Color.Red)
         Else
-            total = clsHTMLTools.pintaDadoColunaTable(ponto.horaTotal, Color.Green)
+            total = clsHTMLTools.pintaDadoColunaTable(clsHTMLTools.Tab() & ponto.horaTotal, Color.Green)
         End If
+
+
 
         Return total
     End Function
@@ -99,7 +136,7 @@ Public Class clsImpressaoPontoWeb
     Private Shared Function ehHoraTotalNegativa(ponto As clsPonto, escala As String) As Boolean
 
 
-        If (CDate(ponto.dataPonto).DayOfWeek = DayOfWeek.Saturday Or CDate(ponto.dataPonto).DayOfWeek = DayOfWeek.Sunday) Then
+        If clsTools.ehSabadoDomingo(ponto.dataPonto) Then
             Return False
         End If
 
@@ -109,6 +146,8 @@ Public Class clsImpressaoPontoWeb
 
         Return False
     End Function
+
+
 
     Private Function funRetornaSaldoDia(ponto As clsPonto) As String
         Dim controle As New clsControlePonto
@@ -134,9 +173,25 @@ Public Class clsImpressaoPontoWeb
 
     Private Function funRetornaPeriodo(periodo As List(Of clsPeriodoPonto)) As String
         Dim retorno As String = vbNullString
+        Dim entrada As String
+        Dim saida As String
 
         For Each ponto In periodo
-            retorno &= "[" & ponto.Entrada & "-" & ponto.Saida & "]  "
+
+
+            entrada = ponto.Entrada
+            If ponto.Almoco = "Retorno" Then
+                entrada = clsHTMLTools.pintaDadoColunaTable(entrada, Color.Brown)
+            End If
+
+
+            saida = ponto.Saida
+            If ponto.Almoco = "Saída" Then
+                saida = clsHTMLTools.pintaDadoColunaTable(saida, Color.Brown)
+            End If
+
+
+            retorno &= "[" & entrada & "-" & saida & "]  "
         Next
 
         Return retorno
