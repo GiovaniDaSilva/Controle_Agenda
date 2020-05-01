@@ -50,6 +50,7 @@ Public Class clsHTMLComum
             color: darkblue;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight: bold; 
+            font-size: 20px; 
         }
 
         .TituloPrincipal {
@@ -57,7 +58,7 @@ Public Class clsHTMLComum
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             border-radius: 4px;
-            font-size: 25px; 
+            font-size: 20px; 
         }
 
         .Atualizacao {
