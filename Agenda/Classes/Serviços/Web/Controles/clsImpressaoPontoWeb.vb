@@ -64,6 +64,10 @@ Public Class clsImpressaoPontoWeb
             linha.Add(New clsColunasTabela(funRetornaHoraTotal(ponto)))
             linha.Add(New clsColunasTabela(funRetornaPeriodo(ponto.Periodo)))
             linha.Add(New clsColunasTabela(funRetornaSaldoDia(ponto), "class='text-right'"))
+
+
+            linha.Add(New clsColunasTabela(funRetornaBotao(ponto.dataPonto), "class='text-right'"))
+
             dados &= clsHTMLTools.funLinhaTabela(linha)
         Next
 
@@ -71,6 +75,13 @@ Public Class clsImpressaoPontoWeb
         html.Append(dados)
 
     End Sub
+
+    Private Function funRetornaBotao(data As String) As String
+        Dim icone_edit = "<i class=""material-icons"">edit</i>"
+        Dim botao = "<a target=""_blank"" href=""ControlePonto?dataponto=" + data + """>" + icone_edit + "</a>"
+
+        Return botao
+    End Function
 
     Private Function funRetornaHoraTotal(ponto As clsPonto) As String
         Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
