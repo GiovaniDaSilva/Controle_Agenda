@@ -75,7 +75,7 @@
                         </form>
                     </div>
                     <div class="col-3 ">
-                        <p class="Titulo"><b>Período:</b> {p_data_inicio} - {p_data_final}</p>
+                        <p class="label">Período: {p_data_inicio} - {p_data_final}</p>
                     </div>
                 </div>
             </div>
@@ -85,6 +85,14 @@
         <div class="container-fluid">
 
             <div class="row">
+                <div class="col-md-12">                    
+                    <span class="Titulo">Saldo do Mês:</span> &nbsp; <span id="SaldoGeral"></span> 
+                </div>
+            </div>
+
+
+
+            <div class="row" style="margin-top:20px">
                 <div class="col-md-12">
                     <p style="line-height: 5px; ">
 
@@ -103,10 +111,6 @@
                         </table>
                     </p>
                 </div>
-                <!--<div class="col-md-5" style="margin-top: 30px">
-                    <label for="tablePeriodosDia" class="label">Períodos de hoje ({data_atual}) </label>
-                    {p_linhas_tabela_periodo_dia}
-                </div>-->
             </div>
         </div>
     </div>
@@ -117,7 +121,7 @@
 
         $(document).ready(function () {
 
-            [p_inicializa_campos_filtro]
+            [p_inicializa_campos]
 
         });
 

@@ -14,6 +14,11 @@
             Throw New Exception("Data Inválida.")
         End If
 
+        If DateDiff("d", Now.Date, pPonto.dataPonto) > 0 Then
+            Throw New Exception("Data informada não pode ser superior a data atual.")
+        End If
+
+
     End Sub
 
 
@@ -30,11 +35,11 @@
 
     End Function
 
-    Friend Function CalculaSaldoMes(dataPonto As String) As String
+    Friend Function CalculaSaldoMes(dataPonto As String, Optional ByVal ConsiderarDiaHoje As Boolean = False) As String
         Dim inicio As Date = clsTools.RetornaPrimeiroDiaMes(CDate(dataPonto).Month)
         Dim final As Date = clsTools.RetornaUltimoDiaMes(CDate(dataPonto).Month)
 
-        Return CalculaSaldoperiodo(inicio, final)
+        Return CalculaSaldoperiodo(inicio, final, ConsiderarDiaHoje)
 
     End Function
 
@@ -43,7 +48,7 @@
         Dim totalEsperado As TimeSpan
         Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
 
-        total = RetornaTotalPeriodo(data, data)
+        total = RetornaTotalPeriodo(data, data, True)
 
         If Not (data.DayOfWeek = DayOfWeek.Saturday Or data.DayOfWeek = DayOfWeek.Sunday) Then
             totalEsperado = totalEsperado.Add(TimeSpan.Parse(escala))
@@ -55,14 +60,21 @@
 
 
 
-    Private Function CalculaSaldoperiodo(Inicio As Date, final As Date) As String
+    Private Function CalculaSaldoperiodo(Inicio As Date, final As Date, Optional ByVal ConsiderarDiaHoje As Boolean = False) As String
         Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
         Dim total As TimeSpan
         Dim totalEsperado As TimeSpan
+        Dim dataFim As Date
 
-        total = RetornaTotalPeriodo(Inicio, final)
+        total = RetornaTotalPeriodo(Inicio, final, ConsiderarDiaHoje)
 
-        While (Inicio.Date < Now.Date)
+        If Not ConsiderarDiaHoje Then
+            dataFim = Now.Date.AddDays(-1)
+        Else
+            dataFim = Now.Date
+        End If
+
+        While (Inicio.Date <= dataFim)
             If Not (Inicio.DayOfWeek = DayOfWeek.Saturday Or Inicio.DayOfWeek = DayOfWeek.Sunday) Then
                 totalEsperado = totalEsperado.Add(TimeSpan.Parse(escala))
             End If
@@ -117,11 +129,11 @@
 
     End Function
 
-    Private Function RetornaTotalPeriodo(ByVal dtInicio As Date, ByVal dtFinal As Date)
+    Private Function RetornaTotalPeriodo(ByVal dtInicio As Date, ByVal dtFinal As Date, Optional ByVal ConsiderarDiaHoje As Boolean = False)
         Dim listaTotais As List(Of String)
         Dim total As TimeSpan
 
-        listaTotais = New clsControlePontoDAO().RetornaTotaisPeriodo(dtInicio, dtFinal)
+        listaTotais = New clsControlePontoDAO().RetornaTotaisPeriodo(dtInicio, dtFinal, ConsiderarDiaHoje)
 
         For Each totalDia In listaTotais
             total = total.Add(TimeSpan.Parse(totalDia))

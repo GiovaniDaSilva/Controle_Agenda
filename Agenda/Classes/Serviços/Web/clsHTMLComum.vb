@@ -49,6 +49,7 @@ Public Class clsHTMLComum
         .Titulo {
             color: darkblue;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold; 
         }
 
         .TituloPrincipal {
