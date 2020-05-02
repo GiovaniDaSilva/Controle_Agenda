@@ -364,8 +364,8 @@ Public Class clsHTMLTools
         Informacao_Destaque = 5
     End Enum
 
-    Public Shared Function pintaDadoColunaTable(dado As String, cor As Color) As String
-        Return "<span style=""color:" & cor.Name & ";"">" & dado & "</span>"
+    Public Shared Function pintaDadoColunaTable(dado As String, cor As Color, Optional tag As String = "span") As String
+        Return "<" & tag & " style= color:" & cor.Name & ";>" & dado & "</" & tag & ">"
 
     End Function
 

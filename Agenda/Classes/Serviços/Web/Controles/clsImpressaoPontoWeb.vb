@@ -34,7 +34,9 @@ Public Class clsImpressaoPontoWeb
         Dim texto As New StringBuilder(String.Empty)
         Dim saldoGeral As String
 
-        saldoGeral = controle.CalculaSaldoMes(pDataInicial, True)
+        saldoGeral = RetornaSaldoGeral(pDataInicial)
+
+        'saldoGeral = "<span style=color:red>" & saldoGeral & "</span>"
 
         texto.AppendFormat("                    
             document.getElementById('SaldoGeral').innerHTML = ""{0}""
@@ -43,17 +45,53 @@ Public Class clsImpressaoPontoWeb
         Return texto.ToString
     End Function
 
+    Private Shared Function RetornaSaldoGeral(pDataInicial As Date) As String
+        Dim controle As New clsControlePonto
+        Dim saldo As String
+
+        saldo = controle.CalculaSaldoMes(pDataInicial, True)
+
+        If Mid(saldo, 1, 1) = "-" Then
+            saldo = clsHTMLTools.pintaDadoColunaTable(saldo, Color.Red, "b")
+        Else
+            saldo = clsHTMLTools.pintaDadoColunaTable(saldo, Color.Green, "b")
+        End If
+
+        Return saldo
+    End Function
+
     Private Function funRetornaDadosImpresso(pDataInicial As Date, pDataFinal As Date) As String
         Dim listaPonto As New List(Of clsPonto)
 
         listaPonto = New clsControlePontoDAO().RetornaPontoPeriodo(pDataInicial, pDataFinal)
 
-        listaPonto = listaPonto.OrderBy(Function(x) x.dataPonto).ToList()
+        subAdicionaDiasSemApontamento(listaPonto, pDataInicial, pDataFinal)
+
+        listaPonto = listaPonto.OrderBy(Function(x) CDate(x.dataPonto)).ToList()
 
         subListaPontos(listaPonto)
 
         Return html.ToString
     End Function
+
+    ''' <summary>
+    ''' Adiciona as datas que não foram gravado o ponto, para aparecer o mes completo na impressao
+    ''' </summary>
+    ''' <param name="listaPonto"></param>
+    Private Sub subAdicionaDiasSemApontamento(ByRef listaPonto As List(Of clsPonto), ByVal pDataInicial As Date, ByVal pDataFinal As Date)
+
+
+        While (pDataInicial <= pDataFinal)
+            If listaPonto.Find(Function(x) CDate(x.dataPonto) = pDataInicial) Is Nothing Then
+                Dim ponto As New clsPonto
+                ponto.dataPonto = pDataInicial
+                ponto.horaTotal = 0
+                listaPonto.Add(ponto)
+            End If
+
+            pDataInicial = pDataInicial.AddDays(1)
+        End While
+    End Sub
 
     Private Sub subListaPontos(listaPonto As List(Of clsPonto))
 
@@ -62,10 +100,6 @@ Public Class clsImpressaoPontoWeb
 
         For Each ponto In listaPonto
 
-            If CDate(ponto.dataPonto).DayOfWeek = DayOfWeek.Monday Then
-                subAdicionadoLinhaDivisao(dados, ponto)
-            End If
-
             Dim linha = New List(Of clsColunasTabela)
             linha.Add(New clsColunasTabela(funRetornaData(ponto)))
             linha.Add(New clsColunasTabela(funRetornaHoraTotal(ponto)))
@@ -73,6 +107,11 @@ Public Class clsImpressaoPontoWeb
             linha.Add(New clsColunasTabela(funRetornaSaldoDia(ponto), "class='text-right'"))
             linha.Add(New clsColunasTabela(funRetornaBotao(ponto.dataPonto), "class='text-right'"))
             dados &= clsHTMLTools.funLinhaTabela(linha)
+
+            If CDate(ponto.dataPonto).DayOfWeek = DayOfWeek.Saturday Then
+                subAdicionadoLinhaDivisao(dados, ponto)
+            End If
+
         Next
 
 
@@ -85,12 +124,12 @@ Public Class clsImpressaoPontoWeb
         Dim controle As New clsControlePonto
         Dim saldoSemana As String
 
-        saldoSemana = controle.CalculaSaldoSemana(CDate(ponto.dataPonto).AddDays(-2))
+        saldoSemana = controle.CalculaSaldoSemana(CDate(ponto.dataPonto))
 
         If Mid(saldoSemana, 1, 1) = "-" Then
             saldoSemana = clsHTMLTools.pintaDadoColunaTable(saldoSemana, Color.Red)
         Else
-            saldoSemana = clsHTMLTools.pintaDadoColunaTable(saldoSemana, Color.Green)
+            saldoSemana = clsHTMLTools.Tab & clsHTMLTools.pintaDadoColunaTable(saldoSemana, Color.Green)
         End If
 
         ''Para não começar a grid com a linha em branco
@@ -119,7 +158,11 @@ Public Class clsImpressaoPontoWeb
 
     Private Function funRetornaHoraTotal(ponto As clsPonto) As String
         Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
-        Dim total As String
+        Dim total As String = vbNullString
+
+        If ponto.horaTotal = "0" Then
+            ponto.horaTotal = "00:00"
+        End If
 
         'Adicionado um tab, para fazer o alinhamento com o saldo da semana
         If ehHoraTotalNegativa(ponto, escala) Then
@@ -127,8 +170,6 @@ Public Class clsImpressaoPontoWeb
         Else
             total = clsHTMLTools.pintaDadoColunaTable(clsHTMLTools.Tab() & ponto.horaTotal, Color.Green)
         End If
-
-
 
         Return total
     End Function
@@ -173,8 +214,12 @@ Public Class clsImpressaoPontoWeb
 
     Private Function funRetornaPeriodo(periodo As List(Of clsPeriodoPonto)) As String
         Dim retorno As String = vbNullString
-        Dim entrada As String
-        Dim saida As String
+        Dim entrada As String = vbNullString
+        Dim saida As String = vbNullString
+
+        If periodo Is Nothing Then
+            Return "[" & entrada & "-" & saida & "]  "
+        End If
 
         For Each ponto In periodo
 
@@ -198,7 +243,14 @@ Public Class clsImpressaoPontoWeb
     End Function
 
     Private Shared Function funRetornaData(ponto As clsPonto) As String
-        Return clsTools.funFormataData(ponto.dataPonto) & "   " & clsTools.funRetornaDiaSemana(ponto.dataPonto, True)
+
+        Dim data As String
+
+        data = clsTools.funFormataData(ponto.dataPonto)
+        data &= "   "
+        data &= clsHTMLTools.pintaDadoColunaTable(clsTools.funRetornaDiaSemana(ponto.dataPonto, True), Color.DarkBlue)
+
+        Return data
     End Function
 
 End Class
