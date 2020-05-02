@@ -129,7 +129,7 @@
         If pComRetornoAlmoco Then
             Return (saiuParaAlmoco And retornouAlmoco)
         Else
-            Return saiuParaAlmoco
+            Return saiuParaAlmoco And Not retornouAlmoco
         End If
 
     End Function
