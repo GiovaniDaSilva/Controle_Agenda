@@ -106,7 +106,7 @@ Public Class clsListaSolicitacaoWeb
     Implements IListaAtividadesWeb
 
     Public Sub subImprimeAtividade(pAtividade As clsConsultaAtividades, ByRef html As StringBuilder, ini As clsParametrosIni) Implements IListaAtividadesWeb.subImprimeAtividade
-        Dim locDetalhesBase = New clsSolicitacaoDAO().consultaSolicitacao(pAtividade.ID)
+        Dim locDetalhesBase = New clsSolicitacaoDAO().consultaSolicitacao(pAtividade.Codigo)
 
         clsHTMLTools.Imprime(html, pAtividade.TIPO_DESCRICAO, clsHTMLTools.enuEstiloImpressao.Titulo_Destaque, True)
 
