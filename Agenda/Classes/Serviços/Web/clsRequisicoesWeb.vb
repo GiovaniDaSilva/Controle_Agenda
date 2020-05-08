@@ -27,10 +27,18 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaCadastroAtividade_Excluir(pReqWeb)
                 Case "/CadastroAtividade_get_periodos_dia"
                     locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pReqWeb)
+                Case "/ControlePonto"
+                    locPagRetorno = funRetornaControlePonto(pReqWeb)
+                Case "/ControlePonto_salvar"
+                    locPagRetorno = funRetornaControlePonto_Salvar(pReqWeb)
+                Case "/ControlePonto_excluir"
+                    locPagRetorno = funRetornaControlePonto_Excluir(pReqWeb)
                 Case "/Grafico"
                     locPagRetorno = funRetornaPaginaGrafico(pReqWeb)
-                Case "/Impressao"
+                Case "/ImpressaoAtividade"
                     locPagRetorno = funRetornaPaginaImpressao(pReqWeb)
+                Case "/ImpressaoPonto"
+                    locPagRetorno = funRetornaPaginaImpressaoPonto(pReqWeb)
                 Case "/Versoes"
                     locPagRetorno = My.Resources.Versoes
                 Case "/favicon.ico"
@@ -48,6 +56,120 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Sub
+
+    Private Function funRetornaControlePonto_Excluir(pReqWeb As clsReqWeb) As String
+        Dim id As Long = 0
+        Dim retorno As New clsRetornoAjax
+        Try
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+
+                If arr.Count = 0 Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                End If
+
+                If Not IsNumeric(arr(0)) Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("ID inválido.")
+                End If
+
+                id = arr(0)
+            End If
+
+            If id <= 0 Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("ID inválido.")
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsControlePontoWeb().funRetornaControlePonto_Excluir(id)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+    End Function
+
+    Private Function funRetornaControlePonto_Salvar(pReqWeb As clsReqWeb) As String
+        Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
+
+        Try
+
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                json = New StreamReader(pReqWeb.Context.Request.InputStream).ReadToEnd()
+
+                If json = vbNullString Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                End If
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsControlePontoWeb().RetornaControlePonto_Salvar(json)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+    End Function
+
+    Private Function funRetornaControlePonto(pReqWeb As clsReqWeb) As String
+        Dim locAtividade As New clsAtividade
+        Dim locPonto As New clsPonto
+        Dim dataGet As Date
+
+        dataGet = Now
+
+        If pReqWeb.Context.Request.Url.Query <> vbNullString AndAlso pReqWeb.Context.Request.HttpMethod = "GET" Then
+
+            Dim arr = clsHTMLTools.RetornaGetEmArray(pReqWeb.Context)
+            If arr.Count = 0 Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("Parâmetros da Pagina estão inválidos.")
+            End If
+
+
+            Dim data = clsHTMLTools.RetornaValorPostGet(arr(1))
+            If data <> vbNullString Then
+                If Not IsDate(data) Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Data do POST inválida.")
+                End If
+                dataGet = CDate(data)
+
+            End If
+        End If
+        locPonto.dataPonto = dataGet
+        locPonto = New clsControlePonto().CarregaPonto(locPonto)
+
+        If locPonto.id_Ponto = 0 Then
+            locPonto.dataPonto = dataGet
+        End If
+        Try
+            Return New clsControlePontoWeb().RetornaPagina(locPonto)
+        Catch ex As Exception
+            pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+            Throw New Exception("Erro ao carregar a página Controle de Ponto.")
+        End Try
+    End Function
 
     Private Function funRetornaPaginaImpressao(pReqWeb As clsReqWeb) As String
 
@@ -88,10 +210,43 @@ Public Class clsRequisicoesWeb
         End If
 
         Try
-            Return New clsImpressaoWeb().RetornaPagina(filtro)
+            Return New clsImpressaoAtividadeWeb().RetornaPagina(filtro)
         Catch ex As Exception
             pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
-            Throw New Exception("Erro ao carregar a página Impressão.")
+            Throw New Exception("Erro ao carregar a página Impressão de Atividades.")
+        End Try
+
+
+
+    End Function
+
+    Private Function funRetornaPaginaImpressaoPonto(pReqWeb As clsReqWeb) As String
+
+        Dim locDataInicial = clsTools.RetornaPrimeiroDiaMes()
+        Dim locDataFinal = clsTools.RetornaUltimoDiaMes()
+
+        If pReqWeb.Context.Request.Url.Query <> vbNullString Then
+            Dim arr = clsHTMLTools.RetornaGetEmArray(pReqWeb.Context)
+            If arr.Count = 0 Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("Parâmetros da Pagina estão inválidos.")
+            End If
+
+            Dim mesGeracao = clsHTMLTools.RetornaValorPostGet(arr(1))
+            If mesGeracao = vbNullString Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("Mês informado não é válido.")
+            End If
+
+            locDataInicial = clsTools.RetornaPrimeiroDiaMes(mesGeracao)
+            locDataFinal = clsTools.RetornaUltimoDiaMes(mesGeracao)
+        End If
+
+        Try
+            Return New clsImpressaoPontoWeb().RetornaPagina(locDataInicial, locDataFinal)
+        Catch ex As Exception
+            pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+            Throw New Exception("Erro ao carregar a página Impressão de Ponto.")
         End Try
 
 

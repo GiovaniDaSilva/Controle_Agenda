@@ -1,0 +1,647 @@
+<html lang="pr-bt">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {p_links_comum_pagina}
+
+
+    <!--Seleção da linha da tabela-->
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.bootstrap4.min.css" />
+
+    <!--Converte Tabela em Json-->
+    <script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js" integrity="sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=" crossorigin="anonymous"></script>
+
+    <style>
+        [p_style_comum_pagina]
+
+        .botaoSubMenu {
+            border: none;
+        }
+
+
+        .labelSpan {
+            font-weight: bold;
+            color: black;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+    </style>
+
+    {p_titulo_pagina}
+
+</head>
+
+
+<body class="Fundo">
+    
+    
+
+    <header>
+
+        {p_menu_pagina}
+
+        <h1 class="TituloPrincipal">Cadastro de Ponto</h1>
+
+        <!--Sub Menu-->
+        <nav class="navbar navbar-light Fundo">
+            <div>
+                <button class="btn btn-success" type="submit" form="form_dados">Salvar</button>
+                <input id="btnLimpa" type="reset" value="Limpar" form="form_dados" class=" btn btn-warning" />
+                {p_retorna_botao_excluir_atividade}
+            </div>
+        </nav>
+
+    </header>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <form method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
+                    <div class="form-row">
+                        <!--Campo data-->
+                        <div class="form-group col-md-3">
+                            <label for="dataPonto" class="label">Data</label>
+                            <input type="date" class="form-control" id="dataPonto" name="dataPonto" form="form_dados">
+                        </div>
+                        &nbsp;
+                        <span style="border:none" class="input-group-text Fundo labelSpan">{p_dia_semana}</span>
+
+
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <!--Campo Horas Totais-->
+                        <div class="form-group col-md-2">
+                            <label for="horaTotal" class="label">Total do Dia</label>
+                            <input readonly type="time" class="form-control" id="horaTotal" name="horaTotal" form="form_dados">
+                        </div>
+
+                        <!--Faltam-->
+                        <div class="form-group col-md-2">
+                            <label for="totalHorasFaltantes" class="label">Faltam</label>
+                            <input readonly type="time" class="form-control" id="totalHorasFaltantes" name="totalHorasFaltantes" form="form_dados">
+                        </div>
+
+                        <!--Excedidas-->
+                        <div class="form-group col-md-2">
+                            <label for="totalHorasExtras" class="label">Extra</label>
+                            <input readonly type="time" class="form-control" id="totalHorasExtras" name="totalHorasExtras" form="form_dados">
+                        </div>
+                    </div>
+
+                    <!--Hora inicial - Final-->
+                    <div class="form-row">
+
+                        <!--Campo inicio-->
+                        <div class="form-group col-md-2">
+                            <label for="horaEntrada" class="label">Entrada</label>
+                            <input type="time" class="form-control" id="horaEntrada" name="horaEntrada" form="form_dados">
+                        </div>
+                        &nbsp;
+
+                        <!--Campo fim-->
+                        <div class="form-group col-md-2">
+                            <label for="horaSaida" class="label">Saída</label>
+                            <input type="time" class="form-control" id="horaSaida" name="horaSaida" form="form_dados">
+                        </div>
+
+                        <!--Botão Adicionar Periodo-->
+                        <div class="form-group col-md-1">
+                            <label for="btnAdicionarPeriodo" class="label">&nbsp; </label>
+                            <button style="vertical-align:5px" id="btnAdicionarPeriodo" class="btn btn-info" type="button" form="form_dados">Adicionar</button>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" value="" id="saidaAlmoco" name="saidaAlmoco">Saída para o Almoço
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <!--Grid de Periodos-->
+                        <div id="dadosHome" class="col-md-8" style="margin-top: 5px;">
+
+                            <table id="dados" class="table table-sm nowrap" cellspacing="0" form="form_dados" name="tabelaPeriodos">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Entrada</th>
+                                        <th>Saida</th>
+                                        <th>Total</th>
+                                        <th>Almoço</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {p_linhas_tabela_periodo}
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="col-md-5" style="margin-top: 30px">
+
+                <div class="form-row">
+                    <p>
+                        <span><b>Previsão de Saída: </b></span> &nbsp; <span id="previsaoSaida"></span>
+                        &nbsp;&nbsp;
+                        <span><b>Tempo de Almoço: </b></span> &nbsp; <span id="TempoAlmoco"></span>
+
+                        <br />
+                        <b>Informações Gerais </b><br />
+
+                        <span>Saldo da Semana:</span> &nbsp; <span id="SaldoSemana"></span>
+                        <br />
+                        <span>Saldo do Mês:</span> &nbsp; <span id="SaldoGeral"></span>
+
+                    </p>
+                </div>
+
+                <!--Campo Descrição-->
+                <div class="form-row">
+                    <label for="observacao" class="label">Observações:</label>
+                    <textarea class="form-control" rows="10" id="observacao" name="observacao" form="form_dados"></textarea>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--Mensagem modal de confirmação de exclusão-->
+    <div class="modal fade" id="confirmaExclusao" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p> Deseja excluir a atividade?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btn_delete">Apagar Registo</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+
+        var EscalaDia = [p_escala_dia]; //"08:30"
+        var RetornoAlmoco = [p_retorno_almoco];
+
+        $(document).ready(function () {
+
+            $('input').keypress(function (e) {
+                var code = null;
+                code = (e.keyCode ? e.keyCode : e.which);
+                return (code == 13) ? false : true;
+            });
+
+            tb = $('#dados').DataTable({
+                "scrollY": "200px", //Altura da grid com scroll
+                "scrollCollapse": true,
+                paging: false,
+                searching: false,
+                info: false,
+                select: {
+                    style: 'single' //permitir selecionar apenas uma linha
+                },
+
+                order: [[1, 'asc']], //ordem padrão: coluna Data em ordem Decrescente
+
+                oLanguage: { sUrl: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json' },
+
+                columnDefs: [
+                    {//coluna ID
+                        targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis'
+                    }
+
+                    , {//coluna excluir
+                        render: function (data, type, row) {
+                            //var id = row[0];
+                            return "<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>"
+                        },
+                        targets: 5,
+                        width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
+                    }
+                ]
+            });
+
+            CalculaHorasFaltantes();
+            CalculaTempoAlmoco();
+
+            //Seleção da Atividade
+            tb.on('select.dt deselect.dt', function () {
+                var rows = $('tr.selected');
+                var rowData = tb.rows(rows).data();
+
+                $.each($(rowData), function (key, value) {
+                    document.getElementById('horaEntrada').value = value[1];
+                    document.getElementById('horaSaida').value = value[2];
+
+                    if (value[4] == "Retorno") {
+                        RetornoAlmoco = true;
+                    }
+
+                    if (value[4] == "Saída") {
+                        document.getElementById('saidaAlmoco').checked = true;
+                    }
+
+                });
+
+            });
+
+            //Evento de Seleção do Usuário - antes da seleção ter ocorrido
+            tb.on('user-select', function (e, dt, type, cell, originalEvent) {
+                var row = dt.row(cell.index().row).node();
+                if ($(row).hasClass('selected')) {
+                    // deselect
+                    //e.preventDefault(); //previnir tirar a seleção do item selecionado
+                    document.getElementById('horaEntrada').value = "";
+                    document.getElementById('horaSaida').value = "";
+                    document.getElementById('saidaAlmoco').checked = false;
+                }
+                else {
+                    // select
+                };
+            });
+
+
+            //Click do botao adicionar periodo
+            $('#btnAdicionarPeriodo').on('click', function () {
+                AdicionaPeiodoGrid(tb);
+            });
+
+
+            //document.getElementById('dataPonto').value = RetornaDataAtual();
+
+            [p_inicializa_campos_ponto]
+
+            //CarregaGridPeriodosDia();
+
+            document.getElementById('horaTotal').value = calculaTotalHoras();
+            CalculaHorasFaltantes();
+
+
+            //click do botao de confirmação ao excluir
+            $('#btn_delete').on('click', function () {
+                $('#confirmaExclusao').modal('hide');
+
+                var id = [p_id_ponto];
+                if (id > 0) {
+                    $.ajax({
+                        url: 'ControlePonto_excluir',
+                        type: 'POST',
+                        dataType: 'text',
+                        data: id + "", //Força a conversão para string
+
+                        success: function (objectJson) {
+                            var object = JSON.parse(objectJson);
+
+                            //sucesso
+                            if (object.codigo == 100) {
+                                alert("Registro Excluido.");
+                                window.location.href = "Home";
+                            }
+
+                            //ocorreu um erro
+                            else if (object.codigo == 200) {
+                                alert(object.descricao);
+                            }
+
+                        }
+                    });
+                }
+
+            });
+
+
+            //Evento de alteação da data do ponto
+            $('#dataPonto').on('change', function () {
+                CarregaPontoDia();
+            });
+
+        });
+
+        function CarregaPontoDia() {
+
+            var data = document.getElementById('dataPonto').value;
+            window.location.href = "ControlePonto?data=" + data
+
+        }
+
+        //Remove a linha do periodo
+        function excluiPeriodo() {
+
+            tb.row('.selected').remove().draw(false);
+
+            document.getElementById('horaTotal').value = calculaTotalHoras();
+
+            CalculaHorasFaltantes();
+            CalculaTempoAlmoco();
+        };
+
+        function CalculaHorasFaltantes() {
+            var hora = document.getElementById('horaTotal').value;
+            var difHora = EscalaDia;
+
+            //Horas faltantes
+            if (hora == '') {
+                hora = '00:00';
+            } else {
+                difHora = subtraiHora(EscalaDia, hora);
+            }
+
+            if (difHora == "00:00") difHora = "";
+            document.getElementById('totalHorasFaltantes').value = difHora;
+
+            //Previsao de saida
+            var horaAtual = retornaHoraAtual();
+            if (difHora != "") {
+                document.getElementById('previsaoSaida').innerHTML = somaHora(horaAtual, difHora, true);
+            } else {
+                document.getElementById('previsaoSaida').innerHTML = "Dia Concluído.";
+            }
+
+
+
+            //Calcula horas extras
+            document.getElementById('totalHorasExtras').value = ""
+            if (hora > EscalaDia) {
+                document.getElementById('totalHorasExtras').value = subtraiHora(hora, EscalaDia);
+            }
+
+        }
+
+
+        //inseri o periodo na grid
+        function AdicionaPeiodoGrid(tb) {
+
+            excluiPeriodo()
+
+            var ini = document.getElementById('horaEntrada').value;
+            var fim = document.getElementById('horaSaida').value;
+            var tot;
+
+            if (ini == '' || ini == "00:00") {
+                alert('Informe a hora de inicio.')
+                return
+            }
+
+            if (fim == '' || fim == "00:00") {
+                fim = "00:00";
+                tot = "00:00"
+            }
+            else {
+                tot = diff(ini, fim);
+            }
+
+            var saidaAlmoco = document.getElementById('saidaAlmoco').checked;
+            var almoco = "";
+
+
+            if (RetornoAlmoco == true) {
+                almoco = "Retorno";
+                RetornoAlmoco = false;
+            }
+
+            if (saidaAlmoco == true) {
+                almoco = "Saída";
+                RetornoAlmoco = true;
+            }
+
+
+            tb.row.add([
+                0, //ID
+                ini, //Inicio
+                fim, //Final
+                tot, // Total
+                almoco, //Almoço
+                ""
+            ]).draw(false);
+
+            //Limpa os campos de horas
+            document.getElementById('horaEntrada').value = "";
+            document.getElementById('horaSaida').value = "";
+            document.getElementById('saidaAlmoco').checked = false;
+
+            //Se deixar a hora final em branco, usa a hora atual
+            if (fim == '' || fim == "00:00") {
+                //var dNow = new Date();
+                var horaAtual = retornaHoraAtual();//dNow.getHours() + ':' + dNow.getMinutes();
+                tot = diff(ini, horaAtual);
+            }
+
+            //Pega hora total, ou alimenta se ainda não tiver
+            var hora = document.getElementById('horaTotal').value;
+            if (hora == '') { hora = '00:00'; }
+
+            document.getElementById('horaTotal').value = calculaTotalHoras();
+            CalculaHorasFaltantes();
+            CalculaTempoAlmoco();
+        };
+
+
+
+        function CalculaTempoAlmoco() {
+
+            var data = tb.rows().data();
+            var inicio = "00:00";
+            var final = "00:00";
+            var total;
+
+            data.each(function (value, index) {
+
+                if (value[4] == "Saída") {
+                    inicio = value[2]
+                }
+
+                if (value[4] == "Retorno") {
+                    final = value[1]
+                }
+
+                //Se tiver a hora que saiu para o almoco, pega a hora atual caso nao tenha o retorno
+                if (final == "00:00" && inicio != "00:00") {
+                    final = retornaHoraAtual();
+                }
+            });
+
+            total = subtraiHora(final, inicio);
+            document.getElementById('TempoAlmoco').innerHTML = total
+        };
+
+        //Evento de submit do formulario
+        $("#form_dados").submit(function (e) {
+            e.preventDefault();
+
+            var data = document.getElementById('dataPonto').value;
+            if (data == '') {
+                alert('Informe a data do apontamento.');
+                return
+            }
+
+
+            var json = ConvertFormToJSON("#form_dados");
+
+            $.ajax({
+                cache: false,
+                url: 'ControlePonto_salvar',
+                type: 'POST',
+                dataType: 'text',
+                data: json,
+
+                success: function (objectJson) {
+
+                    var object = JSON.parse(objectJson);
+
+                    //sucesso
+                    if (object.codigo == 100) {
+                        alert("Gravado com sucesso!");
+                        window.location.href = "Home";
+                    }
+
+                    //ocorreu um erro
+                    else if (object.codigo == 200) {
+                        alert(object.descricao);
+                    }
+
+
+                },
+
+                error: function (descricao) {
+                    alert("Ocorreu um erro: " + descricao);
+                }
+
+            });
+
+        });
+
+        [p_funcao_retorna_data_atual]
+
+        [p_funcao_calcula_soma_horas]
+
+        [p_funcao_calcula_diferencao_horas]
+
+
+
+
+        function calculaTotalHoras() {
+            var data = tb.rows().data();
+            var total = "00:00";
+
+            data.each(function (value, index) {
+                var totAux = value[3];
+                if (value[2] == "" || value[2] == "00:00") {
+                    // var dNow = new Date();
+                    var horaAtual = retornaHoraAtual();//dNow.getHours() + ':' + dNow.getMinutes();
+
+                    if (compararHora(horaAtual, value[1])) {
+                        totAux = diff(value[1], horaAtual);
+                    }
+                }
+
+                total = somaHora(total, totAux, true);
+            });
+
+            return total;
+        };
+
+        //Referencia: encurtador.com.br/cNSZ4
+        // Verifica se hora1 é maior que hora2.
+        function compararHora(hora1, hora2) {
+            hora1 = hora1.split(":");
+            hora2 = hora2.split(":");
+
+            var d = new Date();
+            var data1 = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hora1[0], hora1[1]);
+            var data2 = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hora2[0], hora2[1]);
+
+            return data1 > data2;
+        };
+
+
+        function retornaHoraAtual() {
+
+            var dNow = new Date();
+
+            var min = dNow.getMinutes()
+            var hor = dNow.getHours()
+
+            min = min.toString().length == 2 ? min : ("0" + min);
+            hor = hor.toString().length == 2 ? hor : ("0" + hor);
+
+            return hor + ':' + min;
+        }
+
+        function subtraiHora(hrA, hrB) {
+            if (hrA.length != 5 || hrB.length != 5) return "00:00";
+
+            //Não exibe horas negativas
+            if (hrA < hrB) return "00:00";
+
+            temp = 0;
+            nova_h = 0;
+            novo_m = 0;
+
+            hora1 = hrA.substr(0, 2) * 1;
+            hora2 = hrB.substr(0, 2) * 1;
+            minu1 = hrA.substr(3, 2) * 1;
+            minu2 = hrB.substr(3, 2) * 1;
+
+            temp = minu1 - minu2;
+            while (temp < 0) {
+                nova_h++;
+                temp = temp + 60;
+            }
+            novo_m = temp.toString().length == 2 ? temp : ("0" + temp);
+            temp = hora1 - hora2 - nova_h;
+            nova_h = temp.toString().length == 2 ? temp : ("0" + temp);
+
+            return nova_h + ':' + novo_m;
+        }
+
+
+        //Converte a tabela em json
+        //Tenho que ver como referenciar esse projeto no meu projeto do github
+        //https://github.com/lightswitch05/table-to-json
+
+        //Metodo para montar o json
+        function ConvertFormToJSON(form) {
+
+            var array = jQuery(form).serializeArray();
+            var json = {};
+
+            //monta o json com id dos campos e conteudo
+            jQuery.each(array, function () {
+                json[this.name] = this.value || '';
+            });
+
+            json['id_ponto'] = '[p_id_ponto]';
+
+            //Adicionado a tabela ao json
+            var table = $('#dados').tableToJSON();
+            json['Periodo'] = table;
+
+            return JSON.stringify(json);
+        };
+
+    </script>
+
+
+</body>
+
+
+</html>

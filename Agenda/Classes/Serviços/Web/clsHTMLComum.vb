@@ -9,7 +9,19 @@ Public Class clsHTMLComum
                 <div >
                     <a href=""Home"" id=""btn_home"" class=""btn btn-primary btn-outline-light ""><i class=""material-icons"">home</i>Home</a>
                     <a href=""Grafico"" id=""btn_grafico"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">pie_chart</i>&nbsp;Gráfico</a>
-                    <a href=""Impressao"" id=""bt_impressao"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">print</i>&nbsp;Impressão</a>            
+                    
+
+                     <div class=""btn-group"">
+			          <button type=""button"" class=""btn btn-primary btn-outline-light my-2 my-sm-0 dropdown-toggle"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">
+				        <i class=""material-icons"">print</i>&nbsp;Impressão 
+			          </button>
+			          <div class=""dropdown-menu"">
+				        <a class=""dropdown-item"" href=""ImpressaoAtividade"">Atividades</a>
+				        <a class=""dropdown-item"" href=""ImpressaoPonto"">Ponto</a>				
+			          </div>
+			        </div>
+
+                    <a href=""ControlePonto"" id=""bt_controlePonto"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">query_builder</i>&nbsp;Ponto</a>            
                     <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>            
                 </div>
                 <div class=""float-right"">
@@ -37,6 +49,8 @@ Public Class clsHTMLComum
         .Titulo {
             color: darkblue;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold; 
+            font-size: 20px; 
         }
 
         .TituloPrincipal {
@@ -44,6 +58,7 @@ Public Class clsHTMLComum
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             border-radius: 4px;
+            font-size: 20px; 
         }
 
         .Atualizacao {
@@ -161,7 +176,7 @@ Public Class clsHTMLComum
             //https://stackoverflow.com/questions/10804042/calculate-time-difference-with-javascript
             function diff(start, end) {
                 start = start.split("":"");
-                end = end.split("":"");
+                end = end.split("":"");                
                 var startDate = new Date(0, 0, 0, start[0], start[1], 0);
                 var endDate = new Date(0, 0, 0, end[0], end[1], 0);
                 var diff = endDate.getTime() - startDate.getTime();
@@ -234,11 +249,11 @@ Public Class clsHTMLComum
 
 
         For Each periodo In listaAtividadesPeriodos
-            Dim linha = New List(Of String)
-            linha.Add(periodo.descricao_tipo)
-            linha.Add(periodo.codigo_atividade)
-            linha.Add(periodo.hora_inicial)
-            linha.Add(periodo.hora_final)
+            Dim linha = New List(Of clsColunasTabela)
+            linha.Add(New clsColunasTabela(periodo.descricao_tipo))
+            linha.Add(New clsColunasTabela(periodo.codigo_atividade))
+            linha.Add(New clsColunasTabela(periodo.hora_inicial))
+            linha.Add(New clsColunasTabela(periodo.hora_final))
             linhasPeriodo &= clsHTMLTools.funLinhaTabela(linha)
         Next
 
@@ -267,6 +282,27 @@ Public Class clsHTMLComum
             </table>
             ", pLinhas)
         Return texto.ToString
+    End Function
+
+    Public Shared Function RetornaMesesCombo(pMesFiltro As Integer) As String
+        Dim retorno As New StringBuilder(vbNullString)
+        Dim selected As String = "selected"
+
+        retorno.AppendFormat("<option value = ""1"" {0}> Janeiro</Option>", IIf(pMesFiltro = 1, selected, ""))
+        retorno.AppendFormat("<option value = ""2"" {0}> Fevereiro</Option>", IIf(pMesFiltro = 2, selected, ""))
+        retorno.AppendFormat("<option value = ""3"" {0}> Março</Option>", IIf(pMesFiltro = 3, selected, ""))
+        retorno.AppendFormat("<option value = ""4"" {0}> Abril</Option>", IIf(pMesFiltro = 4, selected, ""))
+        retorno.AppendFormat("<option value = ""5"" {0}> Maio</Option>", IIf(pMesFiltro = 5, selected, ""))
+        retorno.AppendFormat("<option value = ""6"" {0}> Junho</Option>", IIf(pMesFiltro = 6, selected, ""))
+        retorno.AppendFormat("<option value = ""7"" {0}> Julho</Option>", IIf(pMesFiltro = 7, selected, ""))
+        retorno.AppendFormat("<option value = ""8"" {0}> Agosto</Option>", IIf(pMesFiltro = 8, selected, ""))
+        retorno.AppendFormat("<option value = ""9"" {0}> Setembro</Option>", IIf(pMesFiltro = 9, selected, ""))
+        retorno.AppendFormat("<option value = ""10"" {0}> Outubro</Option>", IIf(pMesFiltro = 10, selected, ""))
+        retorno.AppendFormat("<option value = ""11"" {0}> Novembro</Option>", IIf(pMesFiltro = 11, selected, ""))
+        retorno.AppendFormat("<option value = ""12"" {0}> Dezembro</Option>", IIf(pMesFiltro = 12, selected, ""))
+
+        Return retorno.ToString
+
     End Function
 
 End Class

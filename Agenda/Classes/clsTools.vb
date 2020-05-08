@@ -4,6 +4,12 @@ Imports System.Text
 
 Public Class clsTools
 
+
+    Public Shared Function ehSabadoDomingo(data As String) As Boolean
+        Return (CDate(data).DayOfWeek = DayOfWeek.Saturday Or CDate(data).DayOfWeek = DayOfWeek.Sunday)
+    End Function
+
+
     ''' <summary>
     ''' Converte o conteudo do campo texto em um date
     ''' </summary>
@@ -29,6 +35,17 @@ Public Class clsTools
         Return locData
     End Function
 
+    Friend Shared Function RetornaUltimoDiaSemana(data As Date) As Date
+        Dim diaSemana As Short
+        diaSemana = data.DayOfWeek
+        Return data.AddDays(6 - diaSemana)
+    End Function
+
+    Friend Shared Function RetornaPrimeiroDiaSemana(data As Date) As Date
+        Dim diaSemana As Short
+        diaSemana = data.DayOfWeek
+        Return data.AddDays(-diaSemana)
+    End Function
 
     ''' <summary>
     ''' Retorna os minutos de um timespan
@@ -90,6 +107,18 @@ Public Class clsTools
     Public Shared Sub subTrataExcessao(e As Exception)
         MsgBox("Ocorreu o seguinte erro: " & e.Message)
     End Sub
+
+    ''' <summary>
+    ''' Retorna o dia da semana por extenso
+    ''' </summary>
+    ''' <param name="pData"></param>
+    ''' <returns></returns>
+    Public Shared Function funRetornaDiaSemana(pData As String, Optional abreviado As Boolean = False) As String
+        Dim data As String
+        data = Strings.StrConv(String.Format("{0:dddd}", CDate(pData)), VbStrConv.ProperCase)
+
+        Return If(abreviado, Mid(data, 1, 3), data)
+    End Function
 
     ''' <summary>
     ''' Valida o campo hora
@@ -216,7 +245,8 @@ End Class
 ''' </summary>
 Public Class clsHTMLTools
 
-    Public Shared Function funLinhaTabela(ByVal pColunas As List(Of String), Optional ByVal classe As String = vbNullString, Optional ByVal estilo As String = vbNullString) As String
+
+    Public Shared Function funLinhaTabela(ByVal pColunas As List(Of clsColunasTabela)) As String
         Dim retorno As String = vbNullString
 
 
@@ -224,15 +254,15 @@ Public Class clsHTMLTools
         For Each col In pColunas
             retorno &= "<td "
 
-            If classe <> vbNullString Then
-                retorno &= classe
+            If col.classe <> vbNullString Then
+                retorno &= col.classe
             End If
 
-            If estilo <> vbNullString Then
-                retorno &= estilo
+            If col.estilo <> vbNullString Then
+                retorno &= col.estilo
             End If
 
-            retorno &= " >" & col.ToString & "</td>"
+            retorno &= " >" & col.dado & "</td>"
         Next
         retorno &= "</tr>"
 
@@ -281,7 +311,7 @@ Public Class clsHTMLTools
     End Sub
 
     Private Shared Function retornaTabWeb(tab As Integer) As String
-        Dim x As String
+        Dim x As String = ""
         For i = 0 To tab
             x &= "&nbsp "
         Next
@@ -333,5 +363,12 @@ Public Class clsHTMLTools
         Informacao = 4
         Informacao_Destaque = 5
     End Enum
+
+    Public Shared Function pintaDadoColunaTable(dado As String, cor As Color, Optional tag As String = "span") As String
+        Return "<" & tag & " style= color:" & cor.Name & ";>" & dado & "</" & tag & ">"
+
+    End Function
+
+
 
 End Class

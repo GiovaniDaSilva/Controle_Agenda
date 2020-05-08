@@ -197,15 +197,26 @@ Public Class frmPrincipal
             End
         End If
 
-        glfServidorHTTP.InicializaServidor()
-
-        Me.Text = Me.Text & clsVersaoSistema.Versao
-
         subCarregaIni()
+
         clsConexao.CaminhoBase = ParametrosIni.CaminhoBase
         If Not clsConexao.ExisteBase Then
             subChamaConfiguracoes()
         End If
+
+        Me.Cursor = Cursors.WaitCursor
+        Try
+            clsVersaoSistema.AtualizaSistema()
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
+        End Try
+
+        Me.Cursor = Cursors.Default
+
+        glfServidorHTTP.InicializaServidor()
+
+        Me.Text = Me.Text & clsVersaoSistema.Versao
+
 
         subCarregaComboTipo(cbTipo)
 
@@ -221,6 +232,11 @@ Public Class frmPrincipal
 
         TimerControleGeral.Interval = 120 * 60000 '120 minutos x 1 minuto do timer
         TimerControleGeral.Start()
+
+        Me.Show()
+
+        MsgBox("Esta aplicação roda internamente um servidor HTTP que responde as requisições da porta 8484." & vbNewLine _
+               & "Portanto, você pode aproveitar a versão da Agenda Web, deixado esta aplicação desktop aberta na bandeja do windows.", vbInformation)
 
     End Sub
 
@@ -413,7 +429,7 @@ Public Class frmPrincipal
         If (e.ColumnIndex = enuIndexColunas.HORA) Then
             If Trim(e.Value) = ":" Then Exit Sub
             If ParametrosIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo Then
-                gridAtividades.Rows(e.RowIndex).Cells(enuIndexColunas.HORA).ToolTipText = "Períodos:" & vbNewLine & controle.funRetornaToolTipoPeriodo(lista(e.RowIndex).Periodos)
+                gridAtividades.Rows(e.RowIndex).Cells(enuIndexColunas.HORA).ToolTipText = "Períodos:" & vbNewLine & clsPrincipal.funRetornaToolTipoPeriodo(lista(e.RowIndex).Periodos)
             End If
         ElseIf (e.ColumnIndex = enuIndexColunas.CODIGO) Then
             If e.Value = 0 Then

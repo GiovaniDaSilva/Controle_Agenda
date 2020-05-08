@@ -1,6 +1,6 @@
 ﻿Imports System.Text
 
-Public Class clsImpressaoWeb
+Public Class clsImpressaoAtividadeWeb
 
     Public Enum enuEstiloImpressao
         Data = 1
@@ -19,7 +19,7 @@ Public Class clsImpressaoWeb
     Private Function RetornaHTML(pFiltro As clsAtividade) As String
 
         Dim html As String
-        html = My.Resources.Impressao
+        html = My.Resources.ImpressaoAtividade
 
         html = html.Replace("{p_dados_impresso}", funRetornaSolicitacos(pFiltro))
         html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(pFiltro.ID_TIPO_ATIVIDADE))
@@ -124,7 +124,7 @@ Public Class clsListaSolicitacaoWeb
 
         If ini.Horastrabalhadas = enuHorasTrabalhadas.Periodo And pAtividade.Periodos.Count > 0 Then
             clsHTMLTools.Imprime(html, "Período: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
-            clsImpressaoWeb.subImprimePeriodos(html, pAtividade.Periodos, 7)
+            clsImpressaoAtividadeWeb.subImprimePeriodos(html, pAtividade.Periodos, 7)
         End If
 
         If locDetalhesBase IsNot Nothing Then
@@ -166,7 +166,7 @@ Public Class clsListaDemaisAtividades
 
         If ini.Horastrabalhadas = enuHorasTrabalhadas.Periodo And pAtividade.Periodos.Count > 0 Then
             clsHTMLTools.Imprime(html, "Período: &nbsp", clsHTMLTools.enuEstiloImpressao.Titulo, True)
-            clsImpressaoWeb.subImprimePeriodos(html, pAtividade.Periodos, 7)
+            clsImpressaoAtividadeWeb.subImprimePeriodos(html, pAtividade.Periodos, 7)
 
         End If
 

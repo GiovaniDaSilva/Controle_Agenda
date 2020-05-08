@@ -121,35 +121,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\clsEmail.vb" />
+    <Compile Include="Classes\clsSQL.vb" />
     <Compile Include="Classes\clsVerificacoesTimerGeral.vb" />
     <Compile Include="Classes\clsVersaoSistema.vb" />
     <Compile Include="Classes\DAO\clsCadastroTipoAtividadeDAO.vb" />
+    <Compile Include="Classes\DAO\clsControlePontoDAO.vb" />
+    <Compile Include="Classes\DAO\clsVersaoSistemaDAO.vb" />
     <Compile Include="Classes\Modelos\clsAtividadesGrafico.vb" />
     <Compile Include="Classes\Modelos\clsDetalhesAtividadeWeb.vb" />
     <Compile Include="Classes\Modelos\clsParametrosFiltroWeb.vb" />
     <Compile Include="Classes\Modelos\clsPeriodosAtividades.vb" />
     <Compile Include="Classes\clsConexao.vb" />
+    <Compile Include="Classes\Modelos\clsPonto.vb" />
     <Compile Include="Classes\modEnumerador.vb" />
-    <Compile Include="Classes\Serviços\Controles\clsAdicionar.vb" />
+    <Compile Include="Classes\Serviços\clsAdicionar.vb" />
     <Compile Include="Classes\DAO\clsAdicionarDAO.vb" />
     <Compile Include="Classes\Modelos\clsAtividade.vb" />
     <Compile Include="Classes\clsEnumString.vb" />
     <Compile Include="Classes\clsHTML.vb" />
+    <Compile Include="Classes\Serviços\clsControlePonto.vb" />
     <Compile Include="Classes\Serviços\clsGraficoMensal.vb" />
     <Compile Include="Classes\clsIni.vb" />
     <Compile Include="Classes\Modelos\clsParametrosIni.vb" />
     <Compile Include="Classes\Modelos\clsPeriodo.vb" />
-    <Compile Include="Classes\Serviços\Controles\clsCadastroTipoAtividade.vb" />
-    <Compile Include="Classes\Serviços\Controles\clsPrincipal.vb" />
+    <Compile Include="Classes\Serviços\clsCadastroTipoAtividade.vb" />
+    <Compile Include="Classes\Serviços\clsPrincipal.vb" />
     <Compile Include="Classes\clsRegistro.vb" />
     <Compile Include="Classes\Modelos\clsSolicitacao.vb" />
     <Compile Include="Classes\DAO\clsSolicitacaoDAO.vb" />
     <Compile Include="Classes\Modelos\clsTipo.vb" />
     <Compile Include="Classes\clsTools.vb" />
+    <Compile Include="Classes\Serviços\Web\clsColunasTabela.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsCadastroAtividadeWeb.vb" />
+    <Compile Include="Classes\Serviços\Web\Controles\clsControlePontoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsHomeWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsHTMLComum.vb" />
-    <Compile Include="Classes\Serviços\Web\Controles\clsImpressaoWeb.vb" />
+    <Compile Include="Classes\Serviços\Web\Controles\clsImpressaoAtividadeWeb.vb" />
+    <Compile Include="Classes\Serviços\Web\Controles\clsImpressaoPontoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\Servidor\clsReqWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsRetornoAjax.vb" />
     <Compile Include="Classes\Serviços\Web\Servidor\clsServidorHTTP.vb" />
@@ -261,7 +269,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Impressao.html" />
+    <None Include="Resources\ControlePonto.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImpressaoAtividade.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImpressaoPonto.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
