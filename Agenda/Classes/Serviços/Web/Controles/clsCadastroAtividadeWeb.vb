@@ -2,8 +2,10 @@
 Imports System.Text
 
 Public Class clsCadastroAtividadeWeb
+    Dim glfDuplicarAtividade As Boolean
 
-    Public Function RetornaPaginaCadastroAtividade(pAtividade As clsAtividade) As String
+    Public Function RetornaPaginaCadastroAtividade(pAtividade As clsAtividade, pDuplicarAtividade As Boolean) As String
+        glfDuplicarAtividade = pDuplicarAtividade
         Return RetornaHTML(pAtividade)
     End Function
 
@@ -17,6 +19,7 @@ Public Class clsCadastroAtividadeWeb
         html = html.Replace("{p_linhas_tabela_periodo}", RetornaLinhasTabelaPeriodo(pAtividade))
         html = html.Replace("{p_retorna_botao_excluir_atividade}", RetornaBotaoExcluirAtividade(pAtividade))
         html = html.Replace("{p_linhas_tabela_periodo_dia}", clsHTMLComum.RetornaTabelaPeriodosDia(vbNullString))
+        html = html.Replace("[p_duplicar_atividade]", If(glfDuplicarAtividade, "true", "false"))
 
         Return html
     End Function
@@ -32,6 +35,11 @@ Public Class clsCadastroAtividadeWeb
 
         If Not Trim(pAtividade.Horas).Replace(":", "") = vbNullString Then
             locHora = pAtividade.Horas
+        End If
+
+        If glfDuplicarAtividade Then
+            locHora = vbNullString
+            pAtividade.Data = Now
         End If
 
         texto.AppendFormat("
@@ -151,6 +159,7 @@ Public Class clsCadastroAtividadeWeb
 
         If pAtividade.ID = 0 Then Return ""
         If pAtividade.Periodos.Count = 0 Then Return ""
+        If glfDuplicarAtividade Then Return ""
 
         For Each periodo In pAtividade.Periodos
             Dim linha = New List(Of clsColunasTabela)
@@ -171,6 +180,7 @@ Public Class clsCadastroAtividadeWeb
         Dim texto As New StringBuilder(vbNullString)
 
         If pAtividade.ID = 0 Then Return ""
+        If glfDuplicarAtividade Then Return ""
 
         texto.AppendFormat("
             <input id=""btnExcluir"" type=""button"" value=""Excluir"" form=""form_dados"" class="" btn btn-danger"" data-toggle=""modal"" data-target=""#confirmaExclusao"" />        

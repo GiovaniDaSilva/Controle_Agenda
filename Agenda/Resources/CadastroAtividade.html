@@ -188,6 +188,8 @@
 
     <script>
 
+        var duplicarAtividade = [p_duplicar_atividade];
+
         $(document).ready(function () {
 
 
@@ -500,8 +502,12 @@
                 json[this.name] = this.value || '';
             });
 
-            json['id_atividade'] = '[p_id_atividade]';
-
+            if (duplicarAtividade) {
+                json['id_atividade'] = '0';
+            } else {
+                json['id_atividade'] = '[p_id_atividade]';
+            }
+            
             //Adicionado a tabela ao json
             var table = $('#dados').tableToJSON();
             json['Periodo'] = table;
