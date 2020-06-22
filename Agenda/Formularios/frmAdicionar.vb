@@ -95,10 +95,13 @@
             End If
 
             gridPeriodo.Refresh()
-            btnExcluir.Visible = True
+
+            If glfAtividade.ID > 0 Then
+                btnExcluir.Visible = True
+            End If
         End If
 
-        subConfiguraForm()
+            subConfiguraForm()
 
         Me.ShowDialog()
     End Sub
