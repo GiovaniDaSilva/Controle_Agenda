@@ -396,7 +396,7 @@ Public Class clsRequisicoesWeb
     ''' <returns></returns>
     Private Function funRetornaCadastroAtividade(pReqWeb As clsReqWeb) As String
         Dim locAtividade As New clsAtividade
-
+        Dim locDuplicarAtividade As Boolean = False
 
         If pReqWeb.Context.Request.Url.Query <> vbNullString AndAlso pReqWeb.Context.Request.HttpMethod = "GET" Then
 
@@ -414,10 +414,15 @@ Public Class clsRequisicoesWeb
             End If
 
             locAtividade = New clsAtividade(id)
+
+            If arr.Count = 3 Then
+                locDuplicarAtividade = CBool(clsHTMLTools.RetornaValorPostGet(arr(2)))
+            End If
+
         End If
 
         Try
-            Return New clsCadastroAtividadeWeb().RetornaPaginaCadastroAtividade(locAtividade)
+            Return New clsCadastroAtividadeWeb().RetornaPaginaCadastroAtividade(locAtividade, locDuplicarAtividade)
         Catch ex As Exception
             pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
             Throw New Exception("Erro ao carregar a página Cadastro de Atividade.")
