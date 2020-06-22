@@ -184,8 +184,20 @@ Public Class frmPrincipal
 
 
 
-    Private Sub subChamaFormularioAdicionarEdicao(i As Integer)
-        controle.Adicionar(ParametrosIni, New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE, lista(i).Periodos))
+    Private Sub subChamaFormularioAdicionarEdicao(i As Integer, Optional duplicarAtividade As Boolean = False)
+
+        Dim locAtividade As clsAtividade
+        locAtividade = New clsAtividade(lista(i).ID, lista(i).Data, lista(i).Codigo, lista(i).Horas, lista(i).Descricao, lista(i).ID_TIPO_ATIVIDADE, lista(i).Periodos)
+
+        If duplicarAtividade Then
+            locAtividade.ID = 0
+            locAtividade.Data = Now
+            locAtividade.Periodos.Clear()
+            locAtividade.Horas = ""
+        End If
+
+
+        controle.Adicionar(ParametrosIni, locAtividade)
         subAtualizaLista()
     End Sub
 
@@ -563,6 +575,13 @@ Public Class frmPrincipal
         controle.ExecutaValidacoesTimerGeral()
 
         Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub DuplicarAtividadeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicarAtividadeToolStripMenuItem.Click
+        Dim index As Integer
+        index = gridAtividades.CurrentCell.RowIndex
+
+        subChamaFormularioAdicionarEdicao(index, True)
     End Sub
 End Class
 

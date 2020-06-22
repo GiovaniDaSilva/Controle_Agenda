@@ -69,6 +69,8 @@ Partial Class frmPrincipal
         Me.ImprimirAividadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AbrirSolPBIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TimerControleGeral = New System.Windows.Forms.Timer(Me.components)
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.DuplicarAtividadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pMenu.SuspendLayout()
         Me.pHorasAtividade.SuspendLayout()
         Me.pHorasDia.SuspendLayout()
@@ -583,9 +585,9 @@ Partial Class frmPrincipal
         '
         'menuGrid
         '
-        Me.menuGrid.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImprimirPeriodosDoDiaToolStripMenuItem, Me.ImprimirAividadeToolStripMenuItem, Me.AbrirSolPBIToolStripMenuItem})
+        Me.menuGrid.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImprimirPeriodosDoDiaToolStripMenuItem, Me.ImprimirAividadeToolStripMenuItem, Me.AbrirSolPBIToolStripMenuItem, Me.ToolStripMenuItem2, Me.DuplicarAtividadeToolStripMenuItem})
         Me.menuGrid.Name = "menuGrid"
-        Me.menuGrid.Size = New System.Drawing.Size(240, 70)
+        Me.menuGrid.Size = New System.Drawing.Size(240, 120)
         '
         'ImprimirPeriodosDoDiaToolStripMenuItem
         '
@@ -608,6 +610,17 @@ Partial Class frmPrincipal
         'TimerControleGeral
         '
         Me.TimerControleGeral.Interval = 7200000
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(236, 6)
+        '
+        'DuplicarAtividadeToolStripMenuItem
+        '
+        Me.DuplicarAtividadeToolStripMenuItem.Name = "DuplicarAtividadeToolStripMenuItem"
+        Me.DuplicarAtividadeToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
+        Me.DuplicarAtividadeToolStripMenuItem.Text = "Duplicar Atividade"
         '
         'frmPrincipal
         '
@@ -681,4 +694,6 @@ End Sub
     Friend WithEvents AbrirSolPBIToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents btnVersaoWeb As Button
     Friend WithEvents TimerControleGeral As Timer
+    Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
+    Friend WithEvents DuplicarAtividadeToolStripMenuItem As ToolStripMenuItem
 End Class
