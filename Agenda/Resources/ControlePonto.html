@@ -350,6 +350,10 @@
 
             document.getElementById('horaTotal').value = calculaTotalHoras();
 
+            //Limpa os campos de horas
+            document.getElementById('horaEntrada').value = "";
+            document.getElementById('horaSaida').value = "";
+
             CalculaHorasFaltantes();
             CalculaTempoAlmoco();
         };
@@ -389,12 +393,13 @@
 
         //inseri o periodo na grid
         function AdicionaPeiodoGrid(tb) {
-
-            excluiPeriodo()
-
+                       
             var ini = document.getElementById('horaEntrada').value;
             var fim = document.getElementById('horaSaida').value;
             var tot;
+
+            excluiPeriodo()
+
 
             if (ini == '' || ini == "00:00") {
                 alert('Informe a hora de inicio.')
@@ -529,6 +534,8 @@
 
         });
 
+        [p_funcao_retorna_hora_atual]
+
         [p_funcao_retorna_data_atual]
 
         [p_funcao_calcula_soma_horas]
@@ -571,20 +578,7 @@
 
             return data1 > data2;
         };
-
-
-        function retornaHoraAtual() {
-
-            var dNow = new Date();
-
-            var min = dNow.getMinutes()
-            var hor = dNow.getHours()
-
-            min = min.toString().length == 2 ? min : ("0" + min);
-            hor = hor.toString().length == 2 ? hor : ("0" + hor);
-
-            return hor + ':' + min;
-        }
+               
 
         function subtraiHora(hrA, hrB) {
             if (hrA.length != 5 || hrB.length != 5) return "00:00";

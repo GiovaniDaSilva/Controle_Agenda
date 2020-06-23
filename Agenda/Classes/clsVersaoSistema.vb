@@ -2,7 +2,7 @@
 Imports System.Text
 
 Public Class clsVersaoSistema
-    Public Shared Property Versao As String = "2.1"
+    Public Shared Property Versao As String = "2.2"
 
     Public Shared Function VerificaVersao() As String
         Return New clsVersaoSistemaDAO().RetornaVersao()
@@ -24,7 +24,11 @@ Public Class clsVersaoSistema
             End If
 
             If versao < 21 Then
-                atualizaVersao21()
+                funMudaVersaoSistema(21)
+            End If
+
+            If versao < 22 Then
+                funMudaVersaoSistema(22)
             End If
 
             versao = VerificaVersao()
@@ -32,9 +36,12 @@ Public Class clsVersaoSistema
 
     End Sub
 
-    Private Shared Sub atualizaVersao21()
-        clsSQL.ExecutaSQL(String.Format("INSERT INTO VERSAO_SISTEMA  (NUMERO_VERSAO, DATA_ATUALIZACAO) VALUES ({0},'{1}')", 21, clsTools.funAjustaDataSQL(Now)))
+
+
+    Private Shared Sub funMudaVersaoSistema(pVersao As Integer)
+        clsSQL.ExecutaSQL(String.Format("INSERT INTO VERSAO_SISTEMA  (NUMERO_VERSAO, DATA_ATUALIZACAO) VALUES ({0},'{1}')", pVersao, clsTools.funAjustaDataSQL(Now)))
     End Sub
+
 
     Private Shared Sub atualizaVersao20()
         Dim locSQL As New StringBuilder(String.Empty)

@@ -171,9 +171,6 @@
         gridPeriodo.SelectionMode = DataGridViewSelectionMode.FullRowSelect
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        subAdicionaPeriodo()
-    End Sub
 
     Private Sub subAdicionaPeriodo()
         If Not subValidaHoraInicio() Then Exit Sub

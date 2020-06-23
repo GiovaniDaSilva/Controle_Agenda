@@ -34,7 +34,6 @@ Partial Class frmAdicionar
         Me.Label3 = New System.Windows.Forms.Label()
         Me.gbPeriodo = New System.Windows.Forms.GroupBox()
         Me.imgHistorico = New System.Windows.Forms.PictureBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtFinal = New System.Windows.Forms.MaskedTextBox()
@@ -135,7 +134,6 @@ Partial Class frmAdicionar
         'gbPeriodo
         '
         Me.gbPeriodo.Controls.Add(Me.imgHistorico)
-        Me.gbPeriodo.Controls.Add(Me.Button1)
         Me.gbPeriodo.Controls.Add(Me.Label5)
         Me.gbPeriodo.Controls.Add(Me.Label4)
         Me.gbPeriodo.Controls.Add(Me.txtFinal)
@@ -157,18 +155,6 @@ Partial Class frmAdicionar
         Me.imgHistorico.TabIndex = 5
         Me.imgHistorico.TabStop = False
         Me.imgHistorico.Visible = False
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.SystemColors.Control
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(88, 77)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(57, 50)
-        Me.Button1.TabIndex = 4
-        Me.ToolTip1.SetToolTip(Me.Button1, "Inserir Período")
-        Me.Button1.UseVisualStyleBackColor = False
         '
         'Label5
         '
@@ -379,7 +365,6 @@ End Sub
     Friend WithEvents Label4 As Label
     Friend WithEvents txtFinal As MaskedTextBox
     Friend WithEvents txtInicio As MaskedTextBox
-    Friend WithEvents Button1 As Button
     Friend WithEvents pCamposMoveis As Panel
     Friend WithEvents btnExcluir As Button
     Friend WithEvents txtDescrição As RichTextBox

@@ -65,7 +65,7 @@
         </nav>
 
     </header>
-      
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-7">
@@ -232,13 +232,26 @@
             tb.on('select.dt deselect.dt', function () {
                 var rows = $('tr.selected');
                 var rowData = tb.rows(rows).data();
-                var id = 0;
-                var dados;
 
                 $.each($(rowData), function (key, value) {
-                    id = value[0];
+                    document.getElementById('horaInicio').value = value[1];
+                    document.getElementById('horaFinal').value = value[2];
                 });
 
+            });
+
+             //Evento de Seleção do Usuário - antes da seleção ter ocorrido
+            tb.on('user-select', function (e, dt, type, cell, originalEvent) {
+                var row = dt.row(cell.index().row).node();
+                if ($(row).hasClass('selected')) {
+                    // deselect
+                    //e.preventDefault(); //previnir tirar a seleção do item selecionado
+                    document.getElementById('horaInicio').value = "";
+                    document.getElementById('horaFinal').value = "";                    
+                }
+                else {
+                    // select
+                };
             });
 
 
@@ -323,23 +336,46 @@
         //Remove a linha do periodo
         function excluiPeriodo() {
 
-
-            var tot
-            var rowData = tb.rows('.selected').data();
-            $.each($(rowData), function (key, value) {
-                tot = value[3];
-            });
-
             tb.row('.selected').remove().draw(false);
+            document.getElementById('horaTotal').value = calculaTotalHoras();
 
-            //Pega hora total, ou alimenta se ainda não tiver
-            var hora = document.getElementById('horaTotal').value;
-            if (hora == '') { hora = '00:00'; }
-
-            document.getElementById('horaTotal').value = subtraiHora(hora, tot);
-
-
+            //Limpa os campos de horas
+            document.getElementById('horaInicio').value = "";
+            document.getElementById('horaFinal').value = "";
         };
+
+
+        function calculaTotalHoras() {
+            var data = tb.rows().data();
+            var total = "00:00";
+
+            data.each(function (value, index) {
+                var totAux = value[3];
+                if (value[2] == "" || value[2] == "00:00") {
+                    var horaAtual = retornaHoraAtual();
+
+                    if (compararHora(horaAtual, value[1])) {
+                        totAux = diff(value[1], horaAtual);
+                    }
+                }
+
+                total = somaHora(total, totAux, true);
+            });
+                        
+            return total;
+        };
+
+        function compararHora(hora1, hora2) {
+            hora1 = hora1.split(":");
+            hora2 = hora2.split(":");
+
+            var d = new Date();
+            var data1 = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hora1[0], hora1[1]);
+            var data2 = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hora2[0], hora2[1]);
+
+            return data1 > data2;
+        };
+
 
         function CarregaGridPeriodosDia() {
 
@@ -374,16 +410,23 @@
 
             var ini = document.getElementById('horaInicio').value
             var fim = document.getElementById('horaFinal').value;
-            var tot = diff(ini, fim);
+            var tot;
 
-            if (ini == '') {
+            excluiPeriodo()
+
+            
+
+            if (ini == '' || ini == "00:00") {
                 alert('Informe a hora de inicio.')
                 return
             }
 
-            if (fim == '') {
-                alert('Informe a hora de final.')
-                return
+            if (fim == '' || fim == "00:00") {
+                fim = "00:00";
+                tot = "00:00"
+            }
+            else {
+                tot = diff(ini, fim);
             }
 
             tb.row.add([
@@ -398,11 +441,17 @@
             document.getElementById('horaInicio').value = "";
             document.getElementById('horaFinal').value = "";
 
+            //Se deixar a hora final em branco, usa a hora atual
+            if (fim == '' || fim == "00:00") {
+                var horaAtual = retornaHoraAtual();
+                tot = diff(ini, horaAtual);
+            }
+
             //Pega hora total, ou alimenta se ainda não tiver
             var hora = document.getElementById('horaTotal').value;
             if (hora == '') { hora = '00:00'; }
 
-            document.getElementById('horaTotal').value = somaHora(hora, tot, false);
+            document.getElementById('horaTotal').value = calculaTotalHoras();
         };
 
         //Evento de submit do formulario
@@ -450,6 +499,10 @@
             });
 
         });
+               
+       
+
+        [p_funcao_retorna_hora_atual]
 
         [p_funcao_retorna_data_atual]
 
@@ -457,36 +510,7 @@
 
         [p_funcao_calcula_diferencao_horas]
 
-
-        function subtraiHora(hrA, hrB) {
-            if (hrA.length != 5 || hrB.length != 5) return "00:00";
-
-            temp = 0;
-            nova_h = 0;
-            novo_m = 0;
-
-            hora1 = hrA.substr(0, 2) * 1;
-            hora2 = hrB.substr(0, 2) * 1;
-            minu1 = hrA.substr(3, 2) * 1;
-            minu2 = hrB.substr(3, 2) * 1;
-
-            temp = minu1 - minu2;
-            while (temp < 0) {
-                nova_h++;
-                temp = temp + 60;
-            }
-            novo_m = temp.toString().length == 2 ? temp : ("0" + temp);
-
-            temp = hora1 - hora2 - nova_h;
-            while (temp < 0) {
-                temp = temp + 24;
-            }
-            nova_h = temp.toString().length == 2 ? temp : ("0" + temp);
-
-            return nova_h + ':' + novo_m;
-        }
-
-
+        
         //Converte a tabela em json
         //Tenho que ver como referenciar esse projeto no meu projeto do github
         //https://github.com/lightswitch05/table-to-json
@@ -507,7 +531,7 @@
             } else {
                 json['id_atividade'] = '[p_id_atividade]';
             }
-            
+
             //Adicionado a tabela ao json
             var table = $('#dados').tableToJSON();
             json['Periodo'] = table;
