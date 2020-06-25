@@ -15,7 +15,9 @@
     Private Sub frmAdicionar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If txtData.Text = vbNullString Then txtData.Text = Now
         subValidaComboTipo()
-        ToolTip2.SetToolTip(imgHistorico, controle.RetornaToolTipPeriodosDia(clsTools.funRetornaData(txtData)))        
+        ToolTip2.SetToolTip(imgHistorico, controle.RetornaToolTipPeriodosDia(clsTools.funRetornaData(txtData)))
+
+        funRemoveSelecao()
     End Sub
 
     Private Sub subValidaComboTipo()
@@ -314,8 +316,10 @@
         If Not subValidaHoraInicio() Then Exit Sub
         If Not subValidaHoraFinal() Then Exit Sub
 
+        Dim Total = controle.RetornaTotalHoras(txtInicio.Text, txtFinal.Text)
         locPeriodos(index).Hora_Inicial = txtInicio.Text
         locPeriodos(index).Hora_Final = txtFinal.Text
+        locPeriodos(index).Total = Total
 
         subAtualizaGrid()
         SubAtualizaHorasTotais()
