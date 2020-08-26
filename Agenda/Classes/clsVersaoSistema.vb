@@ -2,7 +2,7 @@
 Imports System.Text
 
 Public Class clsVersaoSistema
-    Public Shared Property Versao As String = "2.2"
+    Public Shared Property Versao As String = "2.3"
 
     Public Shared Function VerificaVersao() As String
         Return New clsVersaoSistemaDAO().RetornaVersao()
@@ -29,6 +29,10 @@ Public Class clsVersaoSistema
 
             If versao < 22 Then
                 funMudaVersaoSistema(22)
+            End If
+
+            If versao < 23 Then
+                funMudaVersaoSistema(23)
             End If
 
             versao = VerificaVersao()
