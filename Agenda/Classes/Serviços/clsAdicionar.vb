@@ -22,7 +22,9 @@ Public Class clsAdicionar
         End If
 
         If ini.Horastrabalhadas = enuHorasTrabalhadas.Periodo Then
-            If Trim(parAtividade.Horas) <> ":" And parAtividade.Periodos.Count = 0 Then
+            If Trim(parAtividade.Horas) <> ":" And
+               Trim(parAtividade.Horas) <> "00:00" And
+                parAtividade.Periodos.Count = 0 Then
                 Throw New Exception("Não é permitido horas trabalhadas sem período informado.")
             End If
 
@@ -75,16 +77,16 @@ Public Class clsAdicionar
 
             For Each atividade In listaAtividadesPeriodos
                 'linha = Space(26)
-                linha = StrDup(26,".")
+                linha = StrDup(26, ".")
                 If locAtividade <> (atividade.descricao_tipo & " " & atividade.codigo_atividade) Then
                     locAtividade = (atividade.descricao_tipo & " " & atividade.codigo_atividade)
 
-                    linha = locAtividade & strdup(Mid(linha, locAtividade.Length, linha.Length).Length,".")
+                    linha = locAtividade & StrDup(Mid(linha, locAtividade.Length, linha.Length).Length, ".")
 
-     
+
                     linha = linha & atividade.hora_inicial & " - " & atividade.hora_final
                 Else
-                    linha = Space(locAtividade.Length) & strDup(Mid(linha, locAtividade.Length, linha.Length).Length,".")
+                    linha = Space(locAtividade.Length) & StrDup(Mid(linha, locAtividade.Length, linha.Length).Length, ".")
                     linha = linha & atividade.hora_inicial & " - " & atividade.hora_final
                 End If
 

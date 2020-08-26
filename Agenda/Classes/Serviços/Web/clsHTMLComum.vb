@@ -124,11 +124,31 @@ Public Class clsHTMLComum
         pagina = pagina.Replace("[p_funcao_calcula_diferencao_horas]", RetornaFuncaoCalculaDiferencaHoras)
         pagina = pagina.Replace("[p_funcao_calcula_soma_horas]", RetornaFuncaoCalculaSomaHoras)
         pagina = pagina.Replace("[p_funcao_retorna_data_atual]", RetornaFuncaoRetornaDataAtual)
+        pagina = pagina.Replace("[p_funcao_retorna_hora_atual]", RetornaFuncaoRetornaHoraAtual)
         pagina = pagina.Replace("{p_versao_sistema}", clsVersaoSistema.Versao)
 
-
-
     End Sub
+
+    Public Shared Function RetornaFuncaoRetornaHoraAtual() As String
+        Dim texto As New StringBuilder(vbNullString)
+
+
+        texto.Append("
+                 function retornaHoraAtual() {
+
+                            var dNow = new Date();
+
+                            var min = dNow.getMinutes()
+                            var hor = dNow.getHours()
+
+                            min = min.toString().length == 2 ? min : (""0"" + min);
+                            hor = hor.toString().length == 2 ? hor : (""0"" + hor);
+
+                            return hor + ':' + min;
+                        }
+                ")
+        Return texto.ToString()
+    End Function
 
     Public Shared Function RetornaFuncaoCalculaSomaHoras() As String
         Dim texto As New StringBuilder(vbNullString)

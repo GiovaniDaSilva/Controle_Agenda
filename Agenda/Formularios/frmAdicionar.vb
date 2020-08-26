@@ -15,7 +15,9 @@
     Private Sub frmAdicionar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If txtData.Text = vbNullString Then txtData.Text = Now
         subValidaComboTipo()
-        ToolTip2.SetToolTip(imgHistorico, controle.RetornaToolTipPeriodosDia(clsTools.funRetornaData(txtData)))        
+        ToolTip2.SetToolTip(imgHistorico, controle.RetornaToolTipPeriodosDia(clsTools.funRetornaData(txtData)))
+
+        funRemoveSelecao()
     End Sub
 
     Private Sub subValidaComboTipo()
@@ -171,18 +173,23 @@
         gridPeriodo.SelectionMode = DataGridViewSelectionMode.FullRowSelect
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        subAdicionaPeriodo()
-    End Sub
 
     Private Sub subAdicionaPeriodo()
+        Dim locAux As String
+
         If Not subValidaHoraInicio() Then Exit Sub
         If Not subValidaHoraFinal() Then Exit Sub
 
-        Dim Total = controle.RetornaTotalHoras(txtInicio.Text, txtFinal.Text)
+        locAux = txtFinal.Text
+        If locAux = "00:00" Then
+            locAux = Format(Now, "HH:mm")
+        End If
+
+        Dim Total = controle.RetornaTotalHoras(txtInicio.Text, locAux)
         locPeriodos.Add(New clsPeriodo(0, txtInicio.Text, txtFinal.Text, Total))
         subAtualizaGrid()
         SubAtualizaHorasTotais()
+
     End Sub
 
     Private Sub SubAtualizaHorasTotais()
@@ -200,6 +207,7 @@
         txtInicio.Clear()
         txtFinal.Clear()
         subConfiguraGrid()
+        funRemoveSelecao()
     End Sub
 
     Private Sub gridPeriodo_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridPeriodo.CellClick
@@ -208,9 +216,17 @@
             locPeriodos.RemoveAt(e.RowIndex)
             subAtualizaGrid()
             SubAtualizaHorasTotais()
+        Else
+            AlteraPeriodo(e.RowIndex)
+
         End If
     End Sub
 
+    Private Sub AlteraPeriodo(index As Integer)
+        txtInicio.Text = locPeriodos(index).Hora_Inicial
+        txtFinal.Text = locPeriodos(index).Hora_Final
+
+    End Sub
 
     Private Function subValidaHoraInicio() As Boolean
         Try
@@ -235,9 +251,9 @@
                 txtInicio.Focus()
             End If
 
-            If TimeSpan.Parse(txtFinal.Text) < TimeSpan.Parse(txtInicio.Text) Then
-                Throw New Exception("Hora final deve ser maior que hora inícial.")
-            End If
+            'If TimeSpan.Parse(txtFinal.Text) < TimeSpan.Parse(txtInicio.Text) Then
+            ' Throw New Exception("Hora final deve ser maior que hora inícial.")
+            ' End If
             Return True
         Catch ex As Exception
             clsTools.subTrataExcessao(ex)
@@ -287,9 +303,49 @@
 
     Private Sub txtFinal_Leave(sender As Object, e As EventArgs) Handles txtFinal.Leave
 
-        If Trim(txtInicio.Text.Replace(":", "")) <> "" And Trim(txtFinal.Text.Replace(":", "")) <> "" Then
-            subAdicionaPeriodo()
+        If Trim(txtInicio.Text.Replace(":", "")) <> "" Then
+
+            If Trim(txtFinal.Text.Replace(":", "")) = "" Then
+                txtFinal.Text = "00:00"
+            End If
+
+            If Not funPossuiPeriodoSelecionado() Then
+                subAdicionaPeriodo()
+            Else
+                subAtualizaPeriodo()
+            End If
+        End If
+    End Sub
+
+    Private Function funPossuiPeriodoSelecionado() As Boolean
+        Return gridPeriodo.Rows.Count > 0 AndAlso gridPeriodo.CurrentRow.Selected
+    End Function
+
+    Private Sub subAtualizaPeriodo()
+        Dim index As Integer
+        Dim locAux As String
+        index = gridPeriodo.CurrentCell.RowIndex
+
+        If Not subValidaHoraInicio() Then Exit Sub
+        If Not subValidaHoraFinal() Then Exit Sub
+
+        locAux = txtFinal.Text
+        If locAux = "00:00" Then
+            locAux = Format(Now, "HH:mm")
         End If
 
+        Dim Total = controle.RetornaTotalHoras(txtInicio.Text, locAux)
+        locPeriodos(index).Hora_Inicial = txtInicio.Text
+        locPeriodos(index).Hora_Final = txtFinal.Text
+        locPeriodos(index).Total = Total
+
+        subAtualizaGrid()
+        SubAtualizaHorasTotais()
+    End Sub
+
+    Private Sub funRemoveSelecao()
+        If Not gridPeriodo.CurrentRow Is Nothing Then
+            gridPeriodo.CurrentRow.Selected = False
+        End If
     End Sub
 End Class
