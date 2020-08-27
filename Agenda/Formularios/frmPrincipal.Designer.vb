@@ -68,9 +68,9 @@ Partial Class frmPrincipal
         Me.ImprimirPeriodosDoDiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImprimirAividadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AbrirSolPBIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TimerControleGeral = New System.Windows.Forms.Timer(Me.components)
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.DuplicarAtividadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TimerControleGeral = New System.Windows.Forms.Timer(Me.components)
         Me.pMenu.SuspendLayout()
         Me.pHorasAtividade.SuspendLayout()
         Me.pHorasDia.SuspendLayout()
@@ -115,7 +115,8 @@ Partial Class frmPrincipal
         Me.btnVersaoWeb.Size = New System.Drawing.Size(95, 50)
         Me.btnVersaoWeb.TabIndex = 11
         Me.btnVersaoWeb.Text = "Versão Web"
-        Me.ToolTip1.SetToolTip(Me.btnVersaoWeb, "Versão web em desenvolvimento, se encontrar problemas reporte. Obrigado.")
+        Me.ToolTip1.SetToolTip(Me.btnVersaoWeb, "A versão WEB contem todas as funcionalidades da Desktop e mais o controle de pont" &
+        "o.")
         Me.btnVersaoWeb.UseVisualStyleBackColor = False
         '
         'btnGraficoMensal
@@ -587,7 +588,7 @@ Partial Class frmPrincipal
         '
         Me.menuGrid.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImprimirPeriodosDoDiaToolStripMenuItem, Me.ImprimirAividadeToolStripMenuItem, Me.AbrirSolPBIToolStripMenuItem, Me.ToolStripMenuItem2, Me.DuplicarAtividadeToolStripMenuItem})
         Me.menuGrid.Name = "menuGrid"
-        Me.menuGrid.Size = New System.Drawing.Size(240, 120)
+        Me.menuGrid.Size = New System.Drawing.Size(240, 98)
         '
         'ImprimirPeriodosDoDiaToolStripMenuItem
         '
@@ -607,10 +608,6 @@ Partial Class frmPrincipal
         Me.AbrirSolPBIToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
         Me.AbrirSolPBIToolStripMenuItem.Text = "Abrir Sol/PBI (Ctrl + Click)"
         '
-        'TimerControleGeral
-        '
-        Me.TimerControleGeral.Interval = 7200000
-        '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
@@ -621,6 +618,10 @@ Partial Class frmPrincipal
         Me.DuplicarAtividadeToolStripMenuItem.Name = "DuplicarAtividadeToolStripMenuItem"
         Me.DuplicarAtividadeToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
         Me.DuplicarAtividadeToolStripMenuItem.Text = "Duplicar Atividade"
+        '
+        'TimerControleGeral
+        '
+        Me.TimerControleGeral.Interval = 7200000
         '
         'frmPrincipal
         '

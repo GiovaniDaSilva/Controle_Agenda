@@ -60,7 +60,7 @@
 
 
 
-    Private Function CalculaSaldoperiodo(Inicio As Date, final As Date, Optional ByVal ConsiderarDiaHoje As Boolean = False) As String
+    Public Function CalculaSaldoperiodo(Inicio As Date, final As Date, Optional ByVal ConsiderarDiaHoje As Boolean = False) As String
         Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
         Dim total As TimeSpan
         Dim totalEsperado As TimeSpan

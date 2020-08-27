@@ -33,14 +33,16 @@ Public Class clsImpressaoPontoWeb
         Dim controle As New clsControlePonto
         Dim texto As New StringBuilder(String.Empty)
         Dim saldoGeral As String
+        Dim saldoGeralAcumulado As String
 
         saldoGeral = RetornaSaldoGeral(pDataInicial)
 
-        'saldoGeral = "<span style=color:red>" & saldoGeral & "</span>"
+        saldoGeralAcumulado = RetornaSaldoAcumulado(pDataInicial)
 
         texto.AppendFormat("                    
-            document.getElementById('SaldoGeral').innerHTML = ""{0}""
-        ", saldoGeral)
+            document.getElementById('SaldoGeral').innerHTML = ""{0};""
+            document.getElementById('SaldoGeralAcumulado').innerHTML = ""{1};""
+        ", saldoGeral, saldoGeralAcumulado)
 
         Return texto.ToString
     End Function
@@ -49,8 +51,22 @@ Public Class clsImpressaoPontoWeb
         Dim controle As New clsControlePonto
         Dim saldo As String
 
-        saldo = controle.CalculaSaldoMes(pDataInicial, True)
+        saldo = controle.CalculaSaldoMes(pDataInicial, False)
+        Return funColoriSaldo(saldo)
+    End Function
 
+    Private Shared Function RetornaSaldoAcumulado(pDataInicial As Date) As String
+        Dim controle As New clsControlePonto
+        Dim saldo As String
+
+        Dim inicial = clsTools.RetornaPrimeiroDiaMes(pDataInicial.Month - 1)
+        Dim final = clsTools.RetornaUltimoDiaMes(pDataInicial.Month)
+
+        saldo = controle.CalculaSaldoperiodo(inicial, final, False)
+        Return funColoriSaldo(saldo)
+    End Function
+
+    Private Shared Function funColoriSaldo(saldo As String) As String
         If Mid(saldo, 1, 1) = "-" Then
             saldo = clsHTMLTools.pintaDadoColunaTable(saldo, Color.Red, "b")
         Else
@@ -195,17 +211,23 @@ Public Class clsImpressaoPontoWeb
 
         Dim saldo = controle.CalculaSaldoDia(ponto.dataPonto)
         Dim icone_OK = "<i class=""material-icons"">thumb_up_alt</i>"
+        Dim icone_futuro = "<i class=""material-icons"">remove</i>"
 
+        If (ponto.dataPonto > Now) Then
+            Return icone_futuro
+        End If
 
         If (saldo = "00:00") Then
-            saldo = icone_OK
-        Else
-            If Mid(saldo, 1, 1) = "-" Then
-                saldo = clsHTMLTools.pintaDadoColunaTable(saldo, Color.Red)
-            Else
-                saldo = clsHTMLTools.pintaDadoColunaTable(saldo, Color.Green)
-            End If
+            Return icone_OK
         End If
+
+
+        If Mid(saldo, 1, 1) = "-" Then
+            saldo = clsHTMLTools.pintaDadoColunaTable(saldo, Color.Red)
+        Else
+            saldo = clsHTMLTools.pintaDadoColunaTable(saldo, Color.Green)
+        End If
+
 
         Return saldo
     End Function
