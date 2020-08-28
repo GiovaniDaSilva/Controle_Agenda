@@ -55,9 +55,7 @@
     Private Sub btnGravar_Click(sender As Object, e As EventArgs) Handles btnGravar.Click
 
         Try
-            If controle.Gravar(funRetornaAtividade) Then
-                MsgBox("Atividade gravada com sucesso.", MsgBoxStyle.Information)
-            End If
+            controle.Gravar(funRetornaAtividade)
 
             Me.Close()
 
@@ -114,9 +112,7 @@
     End Sub
 
     Private Sub btnExcluir_Click(sender As Object, e As EventArgs) Handles btnExcluir.Click
-        If controle.excluir(glfAtividade.ID) Then
-            MsgBox("Excluido com sucesso.", MsgBoxStyle.Information)
-        End If
+        controle.excluir(glfAtividade.ID)
         Me.Close()
     End Sub
 

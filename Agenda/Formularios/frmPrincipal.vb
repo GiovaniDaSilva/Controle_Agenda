@@ -279,6 +279,7 @@ Public Class frmPrincipal
 
     Private Sub btnSubirFiltro_Click(sender As Object, e As EventArgs) Handles btnSubirFiltro.Click
         subOcultaFiltro()
+        subAtualizaLista()
     End Sub
 
     Private Sub subOcultaFiltro()
