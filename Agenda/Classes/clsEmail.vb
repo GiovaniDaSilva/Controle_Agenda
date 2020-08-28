@@ -1,15 +1,16 @@
 ﻿
 Imports System.Net.Mail
 Imports System.Net.Mime
+Imports System.Security.Cryptography
 Imports System.Text
 
 Public Class clsEmail
-    Const EMAIL = "controle.agenda.mail@gmail.com"
-    Const SENHA = ""
+    Const EMAIL As String = "controle.agenda.mail@gmail.com"
+    Const SENHA As String = ""
 
-    Public Property EmailDestino As String = "giovani.senior@gmail.com" 'vbNullString
+    Public Property EmailDestino As String = vbNullString
 
-    Public Property CaminhoAnexo As String = "C:\Projeto\Controle_Agenda\Agenda\bin\Debug\backups\BancoAgenda_11-03-2020-21-45-09.db" 'vbNullString
+    Public Property CaminhoAnexo As String = vbNullString
 
     Public Property Assunto As String = "Backup Agenda"
 
@@ -20,6 +21,12 @@ Public Class clsEmail
         If Trim(EmailDestino) = vbNullString Then
             Throw New Exception("E-mail de destino não foi informado.")
         End If
+
+
+        If Trim(SENHA) = vbNullString Then
+            Throw New Exception("Não será possível enviar o backup por e-mail. Reporte ao admistrador.")
+        End If
+
 
         mail.Subject = Assunto
         mail.To.Add(EmailDestino)
