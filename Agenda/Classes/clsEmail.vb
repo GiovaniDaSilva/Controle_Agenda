@@ -5,7 +5,7 @@ Imports System.Text
 
 Public Class clsEmail
     Const EMAIL = "controle.agenda.mail@gmail.com"
-    Const SENHA = "ControleAgenda2020"
+    Const SENHA = ""
 
     Public Property EmailDestino As String = "giovani.senior@gmail.com" 'vbNullString
 
