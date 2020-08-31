@@ -80,4 +80,38 @@ Public Class clsVersaoSistema
         clsSQL.ExecutaSQL(String.Format("INSERT INTO VERSAO_SISTEMA  (NUMERO_VERSAO, DATA_ATUALIZACAO) VALUES ({0},'{1}')", 20, clsTools.funAjustaDataSQL(Now)))
 
     End Sub
+
+    Friend Shared Sub ExisteVersaoSuperiorDisponivel()
+
+        Dim locDiretorioExe As String = "\\GOVBR8484\Publico\Agenda"
+
+        If Not IO.Directory.Exists(locDiretorioExe) Then
+            Throw New Exception("Diretorio não existe ou sem permissão de acesso")
+        End If
+
+        For Each foundFile As String In IO.Directory.GetFiles(locDiretorioExe)
+
+            If IO.File.GetCreationTime(foundFile) > IO.File.GetLastWriteTime(Application.StartupPath) Then
+
+                Dim locMsg As String
+                locMsg = "Existe uma nova versão da Agenda disponivel no diretorio: " & vbNewLine & foundFile & vbNewLine
+                locMsg &= "Deseja atualizar?"
+
+                If MsgBox(locMsg, vbYesNo + vbExclamation + vbDefaultButton2, "Nova Versão") = Windows.Forms.DialogResult.Yes Then
+                    ExecutaBackupBase()
+                    Process.Start(foundFile)
+                    End
+                End If
+
+                Return
+            End If
+
+        Next
+
+    End Sub
+
+    Private Shared Sub ExecutaBackupBase()
+        Dim ini = New clsIni().funCarregaIni(False)
+        clsConexao.ExecutaBackupBase(ini.CaminhoBase, True)
+    End Sub
 End Class
