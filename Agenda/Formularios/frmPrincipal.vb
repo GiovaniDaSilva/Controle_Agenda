@@ -253,8 +253,8 @@ Public Class frmPrincipal
         End Try
 
         Me.Show()
-        subExibiFormulario(False)
-        Process.Start("http://localhost:8484/Home")
+        'subExibiFormulario(False)
+        'Process.Start("http://localhost:8484/Home")
 
     End Sub
 

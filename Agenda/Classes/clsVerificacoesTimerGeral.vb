@@ -16,7 +16,7 @@ Public Class clsVerificacoesTimerGeral
         Dim ini As New clsParametrosIni
         Dim nomeBackup As String
 
-        ini = New clsIni().funCarregaIni(False)
+        ini = New clsIni().funCarregaIni()
 
         If ini.Email = vbNullString Then Exit Sub
 

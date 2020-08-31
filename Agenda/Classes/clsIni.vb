@@ -12,13 +12,9 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
 
 
 
-    Public Function funCarregaIni(Optional pExibiMensagem As Boolean = True) As clsParametrosIni
+    Public Function funCarregaIni() As clsParametrosIni
         Dim nome_arquivo_ini As String = nomeArquivoINI()
         Dim locParametros As New clsParametrosIni
-
-        If Not File.Exists(nome_arquivo_ini) AndAlso pExibiMensagem Then
-            MsgBox("Será carregado os valores padrão do sistema.")
-        End If
 
         locParametros.InicializarCampoApartirDe = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.CampoAPartirDe, enuApartirDe.Dias7)
         locParametros.Horastrabalhadas = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.HorasTrabalhadas, enuHorasTrabalhadas.Total)
@@ -31,7 +27,9 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
 
         locParametros.Email = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Email, enuParametrosIni.Mail, vbNullString)
 
-
+        If Not File.Exists(nome_arquivo_ini) Then
+            gravaArquivoini(locParametros)
+        End If
 
         Return locParametros
     End Function
