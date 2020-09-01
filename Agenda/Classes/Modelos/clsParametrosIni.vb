@@ -8,5 +8,8 @@
     Public Property TempoNotificacao As String
     Public Property Email As String
     Public Property EscalaTrabalho As String
+    Public Property ConsideraTipoAusenteTotal As Boolean
+    Public Property AcumuladoPontoApartirDe As String
+
 
 End Class

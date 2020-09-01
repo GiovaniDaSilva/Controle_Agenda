@@ -27,6 +27,8 @@ Public MustInherit Class enuParametrosIni
     Public Shared Property TempoNotificacao As String = "TempoNotificacao"
     Public Shared Property Mail As String = "Mail"
     Public Shared Property EscalaTrabalho As String = "Escalatrabalho"
+    Public Shared Property ConsideraAusenteTotal As String = "SomaAusente"
+    Public Shared Property AcumuladoPontoApartirDe As String = "PontoAPartirDe"
 
 End Class
 

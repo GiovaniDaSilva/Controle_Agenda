@@ -50,6 +50,11 @@
 
         txtEmail.Text = glfParametros.Email
 
+        rbdiasim.Checked = glfParametros.ConsideraTipoAusenteTotal
+        rbdianao.Checked = Not rbdiasim.Checked
+
+        dtpPonto.Value = CDate(glfParametros.AcumuladoPontoApartirDe)
+
     End Sub
 
     Private Sub subPreenheParametros()
@@ -75,6 +80,9 @@
         End Select
 
         glfParametros.Email = txtEmail.Text
+
+        glfParametros.ConsideraTipoAusenteTotal = IIf(rbdiasim.Checked, True, False)
+        glfParametros.AcumuladoPontoApartirDe = dtpPonto.Value
 
     End Sub
 

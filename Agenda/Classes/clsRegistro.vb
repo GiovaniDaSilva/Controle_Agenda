@@ -6,7 +6,7 @@ Public Class clsRegistro
 
 
     Public Shared Sub subRegistrarAplicacaoInicializacaoWindows()
-       ' dim caminho As String = "C:\_vbn\Consulta_Cep\Consulta_Cep\bin\Debug\Consulta_Cep.exe"
+        ' dim caminho As String = "C:\_vbn\Consulta_Cep\Consulta_Cep\bin\Debug\Consulta_Cep.exe"
 
         Using key As RegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True)
             key.SetValue("Controle Agenda", """" + Application.ExecutablePath + """")
