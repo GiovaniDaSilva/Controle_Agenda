@@ -33,7 +33,7 @@ Partial Class frmPrincipal
         Me.Label5 = New System.Windows.Forms.Label()
         Me.pHorasDia = New System.Windows.Forms.Panel()
         Me.lblHorasDia = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblTotalDia = New System.Windows.Forms.Label()
         Me.btnVersao = New System.Windows.Forms.Button()
         Me.btnApontarHoras = New System.Windows.Forms.Button()
         Me.btnConfiguracao = New System.Windows.Forms.Button()
@@ -181,7 +181,7 @@ Partial Class frmPrincipal
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.DodgerBlue
-        Me.Label5.Location = New System.Drawing.Point(6, 16)
+        Me.Label5.Location = New System.Drawing.Point(6, 12)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(111, 13)
         Me.Label5.TabIndex = 0
@@ -192,7 +192,7 @@ Partial Class frmPrincipal
         Me.pHorasDia.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pHorasDia.Controls.Add(Me.lblHorasDia)
-        Me.pHorasDia.Controls.Add(Me.Label3)
+        Me.pHorasDia.Controls.Add(Me.lblTotalDia)
         Me.pHorasDia.Location = New System.Drawing.Point(201, 12)
         Me.pHorasDia.Name = "pHorasDia"
         Me.pHorasDia.Size = New System.Drawing.Size(92, 58)
@@ -209,16 +209,16 @@ Partial Class frmPrincipal
         Me.lblHorasDia.TabIndex = 1
         Me.lblHorasDia.Text = "00:00"
         '
-        'Label3
+        'lblTotalDia
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.DodgerBlue
-        Me.Label3.Location = New System.Drawing.Point(8, 16)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(77, 13)
-        Me.Label3.TabIndex = 0
-        Me.Label3.Text = "Total do Dia"
+        Me.lblTotalDia.AutoSize = True
+        Me.lblTotalDia.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalDia.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.lblTotalDia.Location = New System.Drawing.Point(8, 12)
+        Me.lblTotalDia.Name = "lblTotalDia"
+        Me.lblTotalDia.Size = New System.Drawing.Size(77, 13)
+        Me.lblTotalDia.TabIndex = 0
+        Me.lblTotalDia.Text = "Total do Dia"
         '
         'btnVersao
         '
@@ -671,7 +671,7 @@ End Sub
     Friend WithEvents btnVersao As Button
     Friend WithEvents pHorasDia As Panel
     Friend WithEvents lblHorasDia As Label
-    Friend WithEvents Label3 As Label
+    Friend WithEvents lblTotalDia As Label
     Friend WithEvents NotifyIcon1 As NotifyIcon
     Friend WithEvents menuIconeBandeja As ContextMenuStrip
     Friend WithEvents AbrirToolStripMenuItem As ToolStripMenuItem

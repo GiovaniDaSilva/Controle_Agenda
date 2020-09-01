@@ -173,13 +173,12 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub subAtualizaHorasAtividade(e As DataGridViewCellEventArgs)
-        If Val(lista(e.RowIndex).Codigo) <= 0 Then
-            pHorasAtividade.Visible = False
-            Exit Sub
-        End If
-
         pHorasAtividade.Visible = True
-        lblHorasAtividade.Text = controle.funRetornaTotalHorasAtividade(lista(e.RowIndex).Codigo)
+        If Val(lista(e.RowIndex).Codigo) <= 0 Then
+            lblHorasAtividade.Text = lista(e.RowIndex).Horas
+        Else
+            lblHorasAtividade.Text = controle.funRetornaTotalHorasAtividade(lista(e.RowIndex).Codigo)
+        End If
     End Sub
 
 
@@ -202,21 +201,35 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-
-        If Not clsEmail.LoginValido() Then
-            MsgBox("Login e Senha do Email Controle Agenda não informado.", vbCritical)
-            End
-        End If
+        subVerificaSenhaEmail()
 
         subCarregaIni()
 
-        clsConexao.CaminhoBase = ParametrosIni.CaminhoBase
-        If Not clsConexao.ExisteBase Then
-            subChamaConfiguracoes()
-        End If
+        subAjustaBaseZerada()
 
+        subAtualizaSistema()
 
+        glfServidorHTTP.InicializaServidor()
+
+        subConfiguraTela()
+
+        subAtualizaLista()
+
+        subVerificaNovaVersao()
+
+        Me.Show()
+
+    End Sub
+
+    Private Shared Sub subVerificaNovaVersao()
+        Try
+            clsVersaoSistema.ExisteVersaoSuperiorDisponivel()
+        Catch ex As Exception
+            'Se der erro, não avisa nada sobre nova versao
+        End Try
+    End Sub
+
+    Private Sub subAtualizaSistema()
         Me.Cursor = Cursors.WaitCursor
         Try
             clsVersaoSistema.AtualizaSistema()
@@ -224,12 +237,24 @@ Public Class frmPrincipal
             clsTools.subTrataExcessao(ex)
         End Try
         Me.Cursor = Cursors.Default
+    End Sub
 
-        glfServidorHTTP.InicializaServidor()
+    Private Sub subAjustaBaseZerada()
+        clsConexao.CaminhoBase = ParametrosIni.CaminhoBase
+        If Not clsConexao.ExisteBase Then
+            subChamaConfiguracoes()
+        End If
+    End Sub
 
+    Private Shared Sub subVerificaSenhaEmail()
+        If Not clsEmail.LoginValido() Then
+            MsgBox("Login e Senha do Email Controle Agenda não informado.", vbCritical)
+            End
+        End If
+    End Sub
+
+    Private Sub subConfiguraTela()
         Me.Text = Me.Text & clsVersaoSistema.Versao
-
-
         subCarregaComboTipo(cbTipo)
 
         If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
@@ -238,23 +263,11 @@ Public Class frmPrincipal
             txtApartirDe.Text = Now.AddDays(-7)
         End If
 
-        subAtualizaLista()
         controle.subConfiguraTimer(TimerNotificacao, ParametrosIni)
         TimerNotificacao.Start()
 
         TimerControleGeral.Interval = 120 * 60000 '120 minutos x 1 minuto do timer
         TimerControleGeral.Start()
-
-
-        Try
-            clsVersaoSistema.ExisteVersaoSuperiorDisponivel()
-        Catch ex As Exception
-            'Se der erro, não avisa nada sobre nova versao
-        End Try
-
-        Me.Show()
-        'subExibiFormulario(False)
-        'Process.Start("http://localhost:8484/Home")
 
     End Sub
 

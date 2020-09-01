@@ -100,10 +100,16 @@ Public Class clsPrincipal
     Public Function funRetornaTotalHorasDia(atividades As List(Of clsConsultaAtividades), pData As Date) As String
         Dim locDia As New List(Of clsConsultaAtividades)
         Dim locTime As TimeSpan
+        Dim somaAusente As Boolean = funCarregaArquivoIni.ConsideraTipoAusenteTotal
 
         locDia = atividades.FindAll(Function(X) X.Data = pData)
 
         For Each item In locDia
+
+            If Not somaAusente And item.ID_TIPO_ATIVIDADE = enuTipoAtividades.AUSENTE Then
+                Continue For
+            End If
+
             If Trim(item.Horas) <> ":" AndAlso Trim(item.Horas) <> vbNullString Then
                 locTime = locTime.Add(TimeSpan.Parse(item.Horas))
             End If
