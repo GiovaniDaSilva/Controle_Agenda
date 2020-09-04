@@ -55,6 +55,8 @@
 
         dtpPonto.Value = CDate(glfParametros.AcumuladoPontoApartirDe)
 
+        rbWeb.Checked = glfParametros.UtilizarVersaoWeb
+
     End Sub
 
     Private Sub subPreenheParametros()
@@ -83,10 +85,10 @@
 
         glfParametros.ConsideraTipoAusenteTotal = IIf(rbdiasim.Checked, True, False)
         glfParametros.AcumuladoPontoApartirDe = dtpPonto.Value
-
+        glfParametros.UtilizarVersaoWeb = rbWeb.Checked
     End Sub
 
-    Private Sub cbInicializarWindows_CheckedChanged(sender As Object, e As EventArgs) Handles cbInicializarWindows.CheckedChanged
+    Private Sub cbInicializarWindows_CheckedChanged(sender As Object, e As EventArgs)
         If cbInicializarWindows.Checked Then
             clsRegistro.subRegistrarAplicacaoInicializacaoWindows()
         Else

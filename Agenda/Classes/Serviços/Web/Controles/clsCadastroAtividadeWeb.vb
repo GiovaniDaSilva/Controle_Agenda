@@ -20,6 +20,7 @@ Public Class clsCadastroAtividadeWeb
         html = html.Replace("{p_retorna_botao_excluir_atividade}", RetornaBotaoExcluirAtividade(pAtividade))
         html = html.Replace("{p_linhas_tabela_periodo_dia}", clsHTMLComum.RetornaTabelaPeriodosDia(vbNullString))
         html = html.Replace("[p_duplicar_atividade]", If(glfDuplicarAtividade, "true", "false"))
+        html = html.Replace("[p_pagina]", clsPaginasWeb.CadastroAtividade)
 
         Return html
     End Function

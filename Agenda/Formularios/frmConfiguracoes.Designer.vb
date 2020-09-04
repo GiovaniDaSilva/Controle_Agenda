@@ -25,6 +25,9 @@ Partial Class frmConfiguracoes
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmConfiguracoes))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.rbdianao = New System.Windows.Forms.RadioButton()
+        Me.rbdiasim = New System.Windows.Forms.RadioButton()
         Me.cbTempoNotificacao = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
@@ -34,8 +37,9 @@ Partial Class frmConfiguracoes
         Me.rbSeteDias = New System.Windows.Forms.RadioButton()
         Me.rbDataAtual = New System.Windows.Forms.RadioButton()
         Me.rbEmbranco = New System.Windows.Forms.RadioButton()
-        Me.cbInicializarWindows = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.dtpPonto = New System.Windows.Forms.DateTimePicker()
+        Me.lblAcumuloPonto = New System.Windows.Forms.Label()
         Me.txtCaminhoBase = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -52,12 +56,12 @@ Partial Class frmConfiguracoes
         Me.TipoDeAtividadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.txtEmail = New System.Windows.Forms.TextBox()
-        Me.lblAcumuloPonto = New System.Windows.Forms.Label()
-        Me.dtpPonto = New System.Windows.Forms.DateTimePicker()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.rbdianao = New System.Windows.Forms.RadioButton()
-        Me.rbdiasim = New System.Windows.Forms.RadioButton()
+        Me.cbInicializarWindows = New System.Windows.Forms.CheckBox()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.rbDesktop = New System.Windows.Forms.RadioButton()
+        Me.rbWeb = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -66,23 +70,61 @@ Partial Class frmConfiguracoes
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
-        Me.GroupBox8.SuspendLayout()
+        Me.GroupBox9.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.GroupBox9)
+        Me.GroupBox1.Controls.Add(Me.cbInicializarWindows)
         Me.GroupBox1.Controls.Add(Me.GroupBox8)
         Me.GroupBox1.Controls.Add(Me.cbTempoNotificacao)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.GroupBox6)
         Me.GroupBox1.Controls.Add(Me.GroupBox4)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 61)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 27)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(557, 141)
+        Me.GroupBox1.Size = New System.Drawing.Size(557, 175)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Geral"
+        '
+        'GroupBox8
+        '
+        Me.GroupBox8.Controls.Add(Me.rbdianao)
+        Me.GroupBox8.Controls.Add(Me.rbdiasim)
+        Me.GroupBox8.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.GroupBox8.Location = New System.Drawing.Point(17, 81)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(219, 43)
+        Me.GroupBox8.TabIndex = 5
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "Considerar Tipo Ausente no Total do Dia:"
+        '
+        'rbdianao
+        '
+        Me.rbdianao.AutoSize = True
+        Me.rbdianao.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.rbdianao.Location = New System.Drawing.Point(153, 19)
+        Me.rbdianao.Name = "rbdianao"
+        Me.rbdianao.Size = New System.Drawing.Size(44, 17)
+        Me.rbdianao.TabIndex = 2
+        Me.rbdianao.Text = "Não"
+        Me.rbdianao.UseVisualStyleBackColor = True
+        '
+        'rbdiasim
+        '
+        Me.rbdiasim.AutoSize = True
+        Me.rbdiasim.Checked = True
+        Me.rbdiasim.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.rbdiasim.Location = New System.Drawing.Point(78, 19)
+        Me.rbdiasim.Name = "rbdiasim"
+        Me.rbdiasim.Size = New System.Drawing.Size(41, 17)
+        Me.rbdiasim.TabIndex = 1
+        Me.rbdiasim.TabStop = True
+        Me.rbdiasim.Text = "Sim"
+        Me.rbdiasim.UseVisualStyleBackColor = True
         '
         'cbTempoNotificacao
         '
@@ -90,7 +132,7 @@ Partial Class frmConfiguracoes
         Me.cbTempoNotificacao.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbTempoNotificacao.FormattingEnabled = True
         Me.cbTempoNotificacao.Items.AddRange(New Object() {"1 Hora", "2 Horas", "3 Horas", "4 Horas", "Não Usar"})
-        Me.cbTempoNotificacao.Location = New System.Drawing.Point(73, 34)
+        Me.cbTempoNotificacao.Location = New System.Drawing.Point(73, 27)
         Me.cbTempoNotificacao.Name = "cbTempoNotificacao"
         Me.cbTempoNotificacao.Size = New System.Drawing.Size(136, 21)
         Me.cbTempoNotificacao.TabIndex = 4
@@ -98,7 +140,7 @@ Partial Class frmConfiguracoes
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(70, 18)
+        Me.Label2.Location = New System.Drawing.Point(70, 12)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(144, 13)
         Me.Label2.TabIndex = 3
@@ -109,7 +151,7 @@ Partial Class frmConfiguracoes
         Me.GroupBox6.Controls.Add(Me.rbPeriodo)
         Me.GroupBox6.Controls.Add(Me.rbHorasTrabalhadas)
         Me.GroupBox6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.GroupBox6.Location = New System.Drawing.Point(256, 19)
+        Me.GroupBox6.Location = New System.Drawing.Point(256, 12)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(295, 43)
         Me.GroupBox6.TabIndex = 3
@@ -146,7 +188,7 @@ Partial Class frmConfiguracoes
         Me.GroupBox4.Controls.Add(Me.rbDataAtual)
         Me.GroupBox4.Controls.Add(Me.rbEmbranco)
         Me.GroupBox4.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.GroupBox4.Location = New System.Drawing.Point(256, 68)
+        Me.GroupBox4.Location = New System.Drawing.Point(256, 61)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(295, 56)
         Me.GroupBox4.TabIndex = 2
@@ -188,17 +230,6 @@ Partial Class frmConfiguracoes
         Me.rbEmbranco.Text = "Em Branco"
         Me.rbEmbranco.UseVisualStyleBackColor = True
         '
-        'cbInicializarWindows
-        '
-        Me.cbInicializarWindows.AutoSize = True
-        Me.cbInicializarWindows.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cbInicializarWindows.Location = New System.Drawing.Point(12, 38)
-        Me.cbInicializarWindows.Name = "cbInicializarWindows"
-        Me.cbInicializarWindows.Size = New System.Drawing.Size(192, 17)
-        Me.cbInicializarWindows.TabIndex = 1
-        Me.cbInicializarWindows.Text = "Inicializar aplicação com o windows"
-        Me.cbInicializarWindows.UseVisualStyleBackColor = True
-        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.dtpPonto)
@@ -214,6 +245,25 @@ Partial Class frmConfiguracoes
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Dados"
+        '
+        'dtpPonto
+        '
+        Me.dtpPonto.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpPonto.Location = New System.Drawing.Point(32, 53)
+        Me.dtpPonto.MaxDate = New Date(2050, 12, 31, 0, 0, 0, 0)
+        Me.dtpPonto.MinDate = New Date(2020, 1, 1, 0, 0, 0, 0)
+        Me.dtpPonto.Name = "dtpPonto"
+        Me.dtpPonto.Size = New System.Drawing.Size(104, 20)
+        Me.dtpPonto.TabIndex = 7
+        '
+        'lblAcumuloPonto
+        '
+        Me.lblAcumuloPonto.AutoSize = True
+        Me.lblAcumuloPonto.Location = New System.Drawing.Point(29, 31)
+        Me.lblAcumuloPonto.Name = "lblAcumuloPonto"
+        Me.lblAcumuloPonto.Size = New System.Drawing.Size(180, 13)
+        Me.lblAcumuloPonto.TabIndex = 6
+        Me.lblAcumuloPonto.Text = "Acumular Saldo do Ponto a partir de:"
         '
         'txtCaminhoBase
         '
@@ -306,7 +356,7 @@ Partial Class frmConfiguracoes
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(592, 61)
+        Me.PictureBox1.Location = New System.Drawing.Point(592, 46)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(135, 141)
         Me.PictureBox1.TabIndex = 3
@@ -366,60 +416,52 @@ Partial Class frmConfiguracoes
         Me.txtEmail.Size = New System.Drawing.Size(662, 20)
         Me.txtEmail.TabIndex = 6
         '
-        'lblAcumuloPonto
+        'cbInicializarWindows
         '
-        Me.lblAcumuloPonto.AutoSize = True
-        Me.lblAcumuloPonto.Location = New System.Drawing.Point(29, 31)
-        Me.lblAcumuloPonto.Name = "lblAcumuloPonto"
-        Me.lblAcumuloPonto.Size = New System.Drawing.Size(180, 13)
-        Me.lblAcumuloPonto.TabIndex = 6
-        Me.lblAcumuloPonto.Text = "Acumular Saldo do Ponto a partir de:"
+        Me.cbInicializarWindows.AutoSize = True
+        Me.cbInicializarWindows.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.cbInicializarWindows.Location = New System.Drawing.Point(17, 143)
+        Me.cbInicializarWindows.Name = "cbInicializarWindows"
+        Me.cbInicializarWindows.Size = New System.Drawing.Size(192, 17)
+        Me.cbInicializarWindows.TabIndex = 6
+        Me.cbInicializarWindows.Text = "Inicializar aplicação com o windows"
+        Me.cbInicializarWindows.UseVisualStyleBackColor = True
         '
-        'dtpPonto
+        'GroupBox9
         '
-        Me.dtpPonto.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpPonto.Location = New System.Drawing.Point(32, 53)
-        Me.dtpPonto.MaxDate = New Date(2050, 12, 31, 0, 0, 0, 0)
-        Me.dtpPonto.MinDate = New Date(2020, 1, 1, 0, 0, 0, 0)
-        Me.dtpPonto.Name = "dtpPonto"
-        Me.dtpPonto.Size = New System.Drawing.Size(104, 20)
-        Me.dtpPonto.TabIndex = 7
+        Me.GroupBox9.Controls.Add(Me.rbDesktop)
+        Me.GroupBox9.Controls.Add(Me.rbWeb)
+        Me.GroupBox9.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.GroupBox9.Location = New System.Drawing.Point(256, 123)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(295, 43)
+        Me.GroupBox9.TabIndex = 7
+        Me.GroupBox9.TabStop = False
+        Me.GroupBox9.Text = "Utilizar versão"
         '
-        'GroupBox8
+        'rbDesktop
         '
-        Me.GroupBox8.Controls.Add(Me.rbdianao)
-        Me.GroupBox8.Controls.Add(Me.rbdiasim)
-        Me.GroupBox8.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.GroupBox8.Location = New System.Drawing.Point(17, 81)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(219, 43)
-        Me.GroupBox8.TabIndex = 5
-        Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "Considerar Tipo Ausente no Total do Dia:"
+        Me.rbDesktop.AutoSize = True
+        Me.rbDesktop.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.rbDesktop.Location = New System.Drawing.Point(153, 19)
+        Me.rbDesktop.Name = "rbDesktop"
+        Me.rbDesktop.Size = New System.Drawing.Size(64, 17)
+        Me.rbDesktop.TabIndex = 2
+        Me.rbDesktop.Text = "Desktop"
+        Me.rbDesktop.UseVisualStyleBackColor = True
         '
-        'rbdianao
+        'rbWeb
         '
-        Me.rbdianao.AutoSize = True
-        Me.rbdianao.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbdianao.Location = New System.Drawing.Point(153, 19)
-        Me.rbdianao.Name = "rbdianao"
-        Me.rbdianao.Size = New System.Drawing.Size(44, 17)
-        Me.rbdianao.TabIndex = 2
-        Me.rbdianao.Text = "Não"
-        Me.rbdianao.UseVisualStyleBackColor = True
-        '
-        'rbdiasim
-        '
-        Me.rbdiasim.AutoSize = True
-        Me.rbdiasim.Checked = True
-        Me.rbdiasim.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbdiasim.Location = New System.Drawing.Point(78, 19)
-        Me.rbdiasim.Name = "rbdiasim"
-        Me.rbdiasim.Size = New System.Drawing.Size(41, 17)
-        Me.rbdiasim.TabIndex = 1
-        Me.rbdiasim.TabStop = True
-        Me.rbdiasim.Text = "Sim"
-        Me.rbdiasim.UseVisualStyleBackColor = True
+        Me.rbWeb.AutoSize = True
+        Me.rbWeb.Checked = True
+        Me.rbWeb.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.rbWeb.Location = New System.Drawing.Point(33, 19)
+        Me.rbWeb.Name = "rbWeb"
+        Me.rbWeb.Size = New System.Drawing.Size(49, 17)
+        Me.rbWeb.TabIndex = 1
+        Me.rbWeb.TabStop = True
+        Me.rbWeb.Text = "WEB"
+        Me.rbWeb.UseVisualStyleBackColor = True
         '
         'frmConfiguracoes
         '
@@ -432,7 +474,6 @@ Partial Class frmConfiguracoes
         Me.Controls.Add(Me.BtnExecutarBackup)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.cbInicializarWindows)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -443,6 +484,8 @@ Partial Class frmConfiguracoes
         Me.Text = "Configurações"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox8.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
@@ -458,15 +501,14 @@ Partial Class frmConfiguracoes
         Me.MenuStrip1.PerformLayout()
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents cbInicializarWindows As CheckBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents rbDecrescente As RadioButton
@@ -498,4 +540,8 @@ Partial Class frmConfiguracoes
     Friend WithEvents GroupBox8 As GroupBox
     Friend WithEvents rbdianao As RadioButton
     Friend WithEvents rbdiasim As RadioButton
+    Friend WithEvents GroupBox9 As GroupBox
+    Friend WithEvents rbDesktop As RadioButton
+    Friend WithEvents rbWeb As RadioButton
+    Friend WithEvents cbInicializarWindows As CheckBox
 End Class

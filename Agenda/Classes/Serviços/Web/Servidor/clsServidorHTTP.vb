@@ -6,6 +6,9 @@ Imports Newtonsoft.Json
 
 Public Class clsServidorHTTP
 
+
+    Public Shared ReadOnly Property local = "http://localhost:8484/"
+
     ' Configura o mumero maximo de requisições que 
     ' podem ser tratadas concorrentemente
     Private maxRequestHandlers As Integer = 50
@@ -31,7 +34,7 @@ Public Class clsServidorHTTP
 
         'Para acesso apartir de qualquer estação
         'listener.Prefixes.Add("http://*:8484/")
-        listener.Prefixes.Add("http://localhost:8484/")
+        listener.Prefixes.Add(local)
 
         listener.Start()
 

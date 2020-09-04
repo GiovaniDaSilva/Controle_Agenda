@@ -30,6 +30,7 @@ Public Class clsHomeWeb
         html = html.Replace("{p_linhas_tabela}", RetornaLinhasTabela(listaAtividades))
         html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(parametros))
         html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(parametros.Tipo))
+        html = html.Replace("[p_pagina]", clsPaginasWeb.Home)
 
         Return html
     End Function

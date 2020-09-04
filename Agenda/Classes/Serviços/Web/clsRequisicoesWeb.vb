@@ -12,36 +12,37 @@ Public Class clsRequisicoesWeb
     Public Sub trataRequisicoesWeb(pReqWeb As clsReqWeb)
         Dim locPagRetorno As String = clsHTMLTools.RetornaPaginaErro("Página não encontrada", "A página solicitada não foi encontrada.")
         Try
-            Select Case pReqWeb.Context.Request.Url.AbsolutePath
-                Case "/Home"
+            Dim path = pReqWeb.Context.Request.Url.AbsolutePath.Replace("/", "")
+            Select Case path
+                Case clsPaginasWeb.Home
                     locPagRetorno = funRetornaPaginaHome(pReqWeb)
-                Case "/home_get_detalhes"
+                Case clsPaginasWeb.Home & "_get_detalhes"
                     locPagRetorno = funRetornaDetalhesAtividade(pReqWeb)
-                Case "/CadastroAtividade"
+                Case clsPaginasWeb.CadastroAtividade
                     locPagRetorno = funRetornaCadastroAtividade(pReqWeb)
-                Case "/CadastroAtividade_get_descricao"
+                Case clsPaginasWeb.CadastroAtividade & "_get_descricao"
                     locPagRetorno = funRetornaDescricaoAtividade(pReqWeb)
-                Case "/CadastroAtividade_salvar"
+                Case clsPaginasWeb.CadastroAtividade & "_salvar"
                     locPagRetorno = funRetornaCadastroAtividade_Salvar(pReqWeb)
-                Case "/CadastroAtividade_excluir"
+                Case clsPaginasWeb.CadastroAtividade & "_excluir"
                     locPagRetorno = funRetornaCadastroAtividade_Excluir(pReqWeb)
-                Case "/CadastroAtividade_get_periodos_dia"
+                Case clsPaginasWeb.CadastroAtividade & "_get_periodos_dia"
                     locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pReqWeb)
-                Case "/ControlePonto"
+                Case clsPaginasWeb.ControlePonto
                     locPagRetorno = funRetornaControlePonto(pReqWeb)
-                Case "/ControlePonto_salvar"
+                Case clsPaginasWeb.ControlePonto & "_salvar"
                     locPagRetorno = funRetornaControlePonto_Salvar(pReqWeb)
-                Case "/ControlePonto_excluir"
+                Case clsPaginasWeb.ControlePonto & "_excluir"
                     locPagRetorno = funRetornaControlePonto_Excluir(pReqWeb)
-                Case "/Grafico"
+                Case clsPaginasWeb.Grafico
                     locPagRetorno = funRetornaPaginaGrafico(pReqWeb)
-                Case "/ImpressaoAtividade"
+                Case clsPaginasWeb.ImpressaoAtividade
                     locPagRetorno = funRetornaPaginaImpressao(pReqWeb)
-                Case "/ImpressaoPonto"
+                Case clsPaginasWeb.ImpressaoPonto
                     locPagRetorno = funRetornaPaginaImpressaoPonto(pReqWeb)
-                Case "/Versoes"
+                Case clsPaginasWeb.Versoes
                     locPagRetorno = My.Resources.Versoes
-                Case "/favicon.ico"
+                Case "favicon.ico"
                     pReqWeb.RetornaIcone = True
                     Exit Sub
             End Select
@@ -558,6 +559,23 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Function
+
+    Public Shared Sub ChamaPagina(pagina As String)
+        Process.Start(clsServidorHTTP.local & pagina)
+    End Sub
+
+    Public Shared Sub ChamaPaginaExterna(pagina As String)
+        Process.Start(pagina)
+    End Sub
+
 End Class
 
-
+Public Class clsPaginasWeb
+    Public Shared ReadOnly Property Home = "Home"
+    Public Shared ReadOnly Property CadastroAtividade = "CadastroAtividade"
+    Public Shared ReadOnly Property ControlePonto = "ControlePonto"
+    Public Shared ReadOnly Property Grafico = "Grafico"
+    Public Shared ReadOnly Property ImpressaoAtividade = "ImpressaoAtividade"
+    Public Shared ReadOnly Property ImpressaoPonto = "ImpressaoPonto"
+    Public Shared ReadOnly Property Versoes = "Versoes"
+End Class

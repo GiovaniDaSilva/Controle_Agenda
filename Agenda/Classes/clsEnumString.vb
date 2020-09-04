@@ -29,6 +29,7 @@ Public MustInherit Class enuParametrosIni
     Public Shared Property EscalaTrabalho As String = "Escalatrabalho"
     Public Shared Property ConsideraAusenteTotal As String = "SomaAusente"
     Public Shared Property AcumuladoPontoApartirDe As String = "PontoAPartirDe"
+    Public Shared Property VersaoWeb As String = "UtilizarVersaoWeb"
 
 End Class
 

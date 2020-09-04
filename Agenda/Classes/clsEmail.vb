@@ -6,7 +6,7 @@ Imports System.Text
 
 Public Class clsEmail
     Const EMAIL As String = "controle.agenda.mail@gmail.com"
-    Const SENHA As String = ""
+    Const SENHA As String = "ControleAgenda2020"
 
     Public Property EmailDestino As String = vbNullString
 

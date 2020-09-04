@@ -20,6 +20,7 @@ Public Class clsControlePontoWeb
         html = html.Replace("{p_dia_semana}", clsTools.funRetornaDiaSemana(pPonto.dataPonto))
         html = html.Replace("[p_escala_dia]", """" & escala & """")
         html = html.Replace("[p_retorno_almoco]", funRetornaEhRetornoAlmoco(pPonto))
+        html = html.Replace("[p_pagina]", clsPaginasWeb.ControlePonto)
 
 
 

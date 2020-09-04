@@ -166,9 +166,9 @@ Public Class frmPrincipal
 
     Private Sub AbreSolPBI(index As Integer)
         If lista(index).ID_TIPO_ATIVIDADE = 1 Then
-            Process.Start("http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?" & lista(index).Codigo)
+            clsRequisicoesWeb.ChamaPaginaExterna("http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?" & lista(index).Codigo)
         ElseIf lista(index).ID_TIPO_ATIVIDADE = 2 Then
-            Process.Start("http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=" & lista(index).Codigo)
+            clsRequisicoesWeb.ChamaPaginaExterna("http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=" & lista(index).Codigo)
         End If
     End Sub
 
@@ -217,7 +217,19 @@ Public Class frmPrincipal
 
         subVerificaNovaVersao()
 
-        Me.Show()
+        AbreFormulario()
+
+    End Sub
+
+    Private Sub AbreFormulario()
+
+        If Not ParametrosIni.UtilizarVersaoWeb Then
+            Me.Show()
+            Return
+        End If
+
+        subExibiFormulario(False)
+        clsRequisicoesWeb.ChamaPagina(clsPaginasWeb.Home)
 
     End Sub
 
@@ -446,7 +458,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles btnApontarHoras.Click
-        Process.Start("http://sah.govbr.com.br/default.asp?dtsem=")
+        clsRequisicoesWeb.ChamaPaginaExterna("http://sah.govbr.com.br/default.asp?dtsem=")
     End Sub
 
     Private Sub Button3_Click_2(sender As Object, e As EventArgs) Handles btnVersao.Click
@@ -517,19 +529,19 @@ Public Class frmPrincipal
 
 
         If lista Is Nothing Or Not gridAtividades.CurrentRow.Selected Then
-            Process.Start(caminho & Home)
+            clsRequisicoesWeb.ChamaPaginaExterna(caminho & Home)
         Else
             i = gridAtividades.CurrentCell.RowIndex
             If lista(i).ID_TIPO_ATIVIDADE = 1 Then
-                Process.Start(Edicao & lista(i).Codigo)
+                clsRequisicoesWeb.ChamaPaginaExterna(Edicao & lista(i).Codigo)
             Else
-                Process.Start(Home)
+                clsRequisicoesWeb.ChamaPaginaExterna(Home)
             End If
         End If
     End Sub
 
     Private Sub btnGraficoMensal_Click_1(sender As Object, e As EventArgs) Handles btnGraficoMensal.Click
-        Process.Start("http://localhost:8484/Grafico")
+        clsRequisicoesWeb.ChamaPagina(clsPaginasWeb.Grafico)
     End Sub
 
     Private Sub ImprimirPeriodosDoDiaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImprimirPeriodosDoDiaToolStripMenuItem.Click
@@ -586,7 +598,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub btnVersaoWeb_Click(sender As Object, e As EventArgs) Handles btnVersaoWeb.Click
-        Process.Start("http://localhost:8484/Home")
+        clsRequisicoesWeb.ChamaPagina(clsPaginasWeb.Home)
     End Sub
 
     Private Sub TimerControleGeral_Tick(sender As Object, e As EventArgs) Handles TimerControleGeral.Tick

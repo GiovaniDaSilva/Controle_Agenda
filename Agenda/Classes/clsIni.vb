@@ -21,6 +21,7 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
         locParametros.TempoNotificacao = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.TempoNotificacao, enuTempoNotificacao.Hora2)
         locParametros.EscalaTrabalho = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.EscalaTrabalho, "08:30")
         locParametros.ConsideraTipoAusenteTotal = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.ConsideraAusenteTotal, "true")
+        locParametros.UtilizarVersaoWeb = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.VersaoWeb, "true")
 
         locParametros.OrdenacaoDasAtividades = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Dados, enuParametrosIni.Ordenacao, enuOrdenacaoDasAtividades.Dec)
         locParametros.SolicitarHTML = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Dados, enuParametrosIni.SolicitarHTML, "true")
@@ -38,7 +39,6 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
 
 
     ' Usa a função GetPrivateProfileString para obter os valores
-
     Private Function LeArquivoINI(ByVal file_name As String, ByVal section_name As String, ByVal key_name As String, ByVal default_value As String) As String
         Const MAX_LENGTH As Integer = 500
 
@@ -55,7 +55,7 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
         WritePrivateProfileString(enuGrupoIni.Geral, enuParametrosIni.TempoNotificacao, parParametros.TempoNotificacao, nome_arquivo_ini)
         WritePrivateProfileString(enuGrupoIni.Geral, enuParametrosIni.EscalaTrabalho, parParametros.EscalaTrabalho, nome_arquivo_ini)
         WritePrivateProfileString(enuGrupoIni.Geral, enuParametrosIni.ConsideraAusenteTotal, parParametros.ConsideraTipoAusenteTotal, nome_arquivo_ini)
-
+        WritePrivateProfileString(enuGrupoIni.Geral, enuParametrosIni.VersaoWeb, parParametros.UtilizarVersaoWeb, nome_arquivo_ini)
 
         WritePrivateProfileString(enuGrupoIni.Dados, enuParametrosIni.Ordenacao, parParametros.OrdenacaoDasAtividades, nome_arquivo_ini)
         WritePrivateProfileString(enuGrupoIni.Dados, enuParametrosIni.SolicitarHTML, parParametros.SolicitarHTML, nome_arquivo_ini)
