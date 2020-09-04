@@ -91,7 +91,7 @@ Public Class clsVersaoSistema
 
         For Each foundFile As String In IO.Directory.GetFiles(locDiretorioExe)
 
-            If IO.File.GetCreationTime(foundFile) > IO.File.GetLastWriteTime(Application.StartupPath) Then
+            If IO.File.GetLastWriteTime(foundFile) > IO.File.GetLastWriteTime(Application.StartupPath) Then
 
                 Dim locMsg As String
                 locMsg = "Existe uma nova versão da Agenda disponivel no diretorio: " & vbNewLine & foundFile & vbNewLine
