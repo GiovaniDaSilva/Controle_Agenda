@@ -50,3 +50,9 @@ Public Class clsConsultaAtividades
 
     Public Property TIPO_DESCRICAO As String
 End Class
+
+Public Class clsFiltroAtividades
+    Inherits clsAtividade
+
+    Public Property DataFinal As Date
+End Class

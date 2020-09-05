@@ -301,6 +301,8 @@ Public Class frmPrincipal
         txtApartirDe.Clear()
         cbTipo.SelectedIndex = -1
         txtCodigo.Clear()
+        txtDtAte.Clear()
+        txtDescricaoFiltro.Clear()
     End Sub
 
 
@@ -349,19 +351,21 @@ Public Class frmPrincipal
         subLimpaFiltro()
     End Sub
 
-    Private Sub btnFiltrar_Click(sender As Object, e As EventArgs) Handles btnFiltrar.Click
+    Private Sub btnFiltrar_Click(sender As Object, e As EventArgs)
         subOcultaFiltro()
         subAtualizaLista()
     End Sub
 
     Private Function funMontaFiltro() As clsAtividade
-        Dim locAividade As New clsAtividade
+        Dim filtro As New clsFiltroAtividades
 
-        locAividade.Codigo = Val(txtCodigo.Text)
-        locAividade.Data = clsTools.funRetornaData(txtApartirDe)
-        locAividade.ID_TIPO_ATIVIDADE = cbTipo.SelectedValue()
+        filtro.Codigo = Val(txtCodigo.Text)
+        filtro.Data = clsTools.funRetornaData(txtApartirDe)
+        filtro.DataFinal = clsTools.funRetornaData(txtDtAte)
+        filtro.ID_TIPO_ATIVIDADE = cbTipo.SelectedValue()
+        filtro.Descricao = txtDescricaoFiltro.Text
 
-        Return locAividade
+        Return filtro
     End Function
 
     Private Sub subConfiguraDescricao(pTipo As String)
@@ -621,6 +625,8 @@ Public Class frmPrincipal
 
         subChamaFormularioAdicionarEdicao(index, True)
     End Sub
+
+
 End Class
 
 

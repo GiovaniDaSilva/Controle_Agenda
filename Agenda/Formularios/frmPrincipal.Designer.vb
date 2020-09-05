@@ -42,11 +42,14 @@ Partial Class frmPrincipal
         Me.btnAtualiza = New System.Windows.Forms.Button()
         Me.btnAdicinar = New System.Windows.Forms.Button()
         Me.pFiltro = New System.Windows.Forms.Panel()
+        Me.txtDescricaoFiltro = New System.Windows.Forms.MaskedTextBox()
+        Me.Descrição = New System.Windows.Forms.Label()
+        Me.txtDtAte = New System.Windows.Forms.MaskedTextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.cbTipo = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.lblcodigo = New System.Windows.Forms.Label()
-        Me.btnFiltrar = New System.Windows.Forms.Button()
         Me.btnSubirFiltro = New System.Windows.Forms.Button()
         Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -342,20 +345,68 @@ Partial Class frmPrincipal
         'pFiltro
         '
         Me.pFiltro.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.pFiltro.Controls.Add(Me.txtDescricaoFiltro)
+        Me.pFiltro.Controls.Add(Me.Descrição)
+        Me.pFiltro.Controls.Add(Me.txtDtAte)
+        Me.pFiltro.Controls.Add(Me.Label3)
         Me.pFiltro.Controls.Add(Me.cbTipo)
         Me.pFiltro.Controls.Add(Me.Label2)
         Me.pFiltro.Controls.Add(Me.txtCodigo)
         Me.pFiltro.Controls.Add(Me.lblcodigo)
-        Me.pFiltro.Controls.Add(Me.btnFiltrar)
         Me.pFiltro.Controls.Add(Me.btnSubirFiltro)
         Me.pFiltro.Controls.Add(Me.txtApartirDe)
         Me.pFiltro.Controls.Add(Me.Label1)
         Me.pFiltro.Controls.Add(Me.btnLimpar)
         Me.pFiltro.Location = New System.Drawing.Point(112, 83)
         Me.pFiltro.Name = "pFiltro"
-        Me.pFiltro.Size = New System.Drawing.Size(823, 77)
+        Me.pFiltro.Size = New System.Drawing.Size(823, 83)
         Me.pFiltro.TabIndex = 4
         Me.pFiltro.Visible = False
+        '
+        'txtDescricaoFiltro
+        '
+        Me.txtDescricaoFiltro.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtDescricaoFiltro.Location = New System.Drawing.Point(496, 37)
+        Me.txtDescricaoFiltro.Name = "txtDescricaoFiltro"
+        Me.txtDescricaoFiltro.Size = New System.Drawing.Size(252, 20)
+        Me.txtDescricaoFiltro.TabIndex = 6
+        Me.txtDescricaoFiltro.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
+        Me.txtDescricaoFiltro.ValidatingType = GetType(Integer)
+        '
+        'Descrição
+        '
+        Me.Descrição.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Descrição.AutoSize = True
+        Me.Descrição.Location = New System.Drawing.Point(493, 21)
+        Me.Descrição.Name = "Descrição"
+        Me.Descrição.Size = New System.Drawing.Size(55, 13)
+        Me.Descrição.TabIndex = 11
+        Me.Descrição.Text = "Descrição"
+        '
+        'txtDtAte
+        '
+        Me.txtDtAte.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtDtAte.Location = New System.Drawing.Point(180, 36)
+        Me.txtDtAte.Mask = "00/00/0000"
+        Me.txtDtAte.Name = "txtDtAte"
+        Me.txtDtAte.Size = New System.Drawing.Size(80, 20)
+        Me.txtDtAte.TabIndex = 3
+        Me.txtDtAte.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
+        Me.txtDtAte.ValidatingType = GetType(Date)
+        '
+        'Label3
+        '
+        Me.Label3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(177, 20)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(26, 13)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "Até:"
         '
         'cbTipo
         '
@@ -364,17 +415,17 @@ Partial Class frmPrincipal
         Me.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTipo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbTipo.FormattingEnabled = True
-        Me.cbTipo.Location = New System.Drawing.Point(355, 33)
+        Me.cbTipo.Location = New System.Drawing.Point(266, 35)
         Me.cbTipo.Name = "cbTipo"
         Me.cbTipo.Size = New System.Drawing.Size(136, 21)
-        Me.cbTipo.TabIndex = 6
+        Me.cbTipo.TabIndex = 4
         '
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(352, 17)
+        Me.Label2.Location = New System.Drawing.Point(263, 19)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(28, 13)
         Me.Label2.TabIndex = 5
@@ -384,11 +435,11 @@ Partial Class frmPrincipal
         '
         Me.txtCodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtCodigo.Location = New System.Drawing.Point(230, 33)
+        Me.txtCodigo.Location = New System.Drawing.Point(408, 37)
         Me.txtCodigo.Mask = "0000000"
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(82, 20)
-        Me.txtCodigo.TabIndex = 4
+        Me.txtCodigo.TabIndex = 5
         Me.txtCodigo.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.txtCodigo.ValidatingType = GetType(Integer)
         '
@@ -397,29 +448,11 @@ Partial Class frmPrincipal
         Me.lblcodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblcodigo.AutoSize = True
-        Me.lblcodigo.Location = New System.Drawing.Point(227, 17)
+        Me.lblcodigo.Location = New System.Drawing.Point(405, 21)
         Me.lblcodigo.Name = "lblcodigo"
         Me.lblcodigo.Size = New System.Drawing.Size(40, 13)
         Me.lblcodigo.TabIndex = 3
         Me.lblcodigo.Text = "Código"
-        '
-        'btnFiltrar
-        '
-        Me.btnFiltrar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnFiltrar.BackColor = System.Drawing.SystemColors.Control
-        Me.btnFiltrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnFiltrar.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise
-        Me.btnFiltrar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Teal
-        Me.btnFiltrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
-        Me.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnFiltrar.Image = CType(resources.GetObject("btnFiltrar.Image"), System.Drawing.Image)
-        Me.btnFiltrar.Location = New System.Drawing.Point(754, 17)
-        Me.btnFiltrar.Name = "btnFiltrar"
-        Me.btnFiltrar.Size = New System.Drawing.Size(57, 50)
-        Me.btnFiltrar.TabIndex = 8
-        Me.ToolTip1.SetToolTip(Me.btnFiltrar, "Aplicar Filtro")
-        Me.btnFiltrar.UseVisualStyleBackColor = False
         '
         'btnSubirFiltro
         '
@@ -431,9 +464,9 @@ Partial Class frmPrincipal
         Me.btnSubirFiltro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnSubirFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSubirFiltro.Image = CType(resources.GetObject("btnSubirFiltro.Image"), System.Drawing.Image)
-        Me.btnSubirFiltro.Location = New System.Drawing.Point(12, 17)
+        Me.btnSubirFiltro.Location = New System.Drawing.Point(13, 16)
         Me.btnSubirFiltro.Name = "btnSubirFiltro"
-        Me.btnSubirFiltro.Size = New System.Drawing.Size(57, 50)
+        Me.btnSubirFiltro.Size = New System.Drawing.Size(57, 56)
         Me.btnSubirFiltro.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.btnSubirFiltro, "Fechar Filtro")
         Me.btnSubirFiltro.UseVisualStyleBackColor = False
@@ -442,7 +475,7 @@ Partial Class frmPrincipal
         '
         Me.txtApartirDe.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtApartirDe.Location = New System.Drawing.Point(101, 33)
+        Me.txtApartirDe.Location = New System.Drawing.Point(94, 37)
         Me.txtApartirDe.Mask = "00/00/0000"
         Me.txtApartirDe.Name = "txtApartirDe"
         Me.txtApartirDe.Size = New System.Drawing.Size(80, 20)
@@ -455,11 +488,11 @@ Partial Class frmPrincipal
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(98, 17)
+        Me.Label1.Location = New System.Drawing.Point(91, 21)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(58, 13)
+        Me.Label1.Size = New System.Drawing.Size(24, 13)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "A partir de:"
+        Me.Label1.Text = "De:"
         '
         'btnLimpar
         '
@@ -472,9 +505,9 @@ Partial Class frmPrincipal
         Me.btnLimpar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLimpar.Image = CType(resources.GetObject("btnLimpar.Image"), System.Drawing.Image)
-        Me.btnLimpar.Location = New System.Drawing.Point(681, 17)
+        Me.btnLimpar.Location = New System.Drawing.Point(754, 16)
         Me.btnLimpar.Name = "btnLimpar"
-        Me.btnLimpar.Size = New System.Drawing.Size(57, 50)
+        Me.btnLimpar.Size = New System.Drawing.Size(57, 56)
         Me.btnLimpar.TabIndex = 7
         Me.ToolTip1.SetToolTip(Me.btnLimpar, "Limpar Filtro")
         Me.btnLimpar.UseVisualStyleBackColor = False
@@ -660,7 +693,6 @@ End Sub
     Friend WithEvents Label1 As Label
     Friend WithEvents btnLimpar As Button
     Friend WithEvents btnSubirFiltro As Button
-    Friend WithEvents btnFiltrar As Button
     Friend WithEvents lblcodigo As Label
     Friend WithEvents txtCodigo As MaskedTextBox
     Friend WithEvents Label2 As Label
@@ -697,4 +729,8 @@ End Sub
     Friend WithEvents TimerControleGeral As Timer
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
     Friend WithEvents DuplicarAtividadeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents txtDtAte As MaskedTextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtDescricaoFiltro As MaskedTextBox
+    Friend WithEvents Descrição As Label
 End Class

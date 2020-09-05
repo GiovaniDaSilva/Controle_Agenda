@@ -174,7 +174,7 @@ Public Class clsRequisicoesWeb
 
     Private Function funRetornaPaginaImpressao(pReqWeb As clsReqWeb) As String
 
-        Dim filtro As New clsAtividade
+        Dim filtro As New clsFiltroAtividades
         Dim post() As String
         Dim ParametrosIni = New clsIni().funCarregaIni()
 

@@ -41,7 +41,7 @@ Public Class clsImpressaoAtividadeWeb
 
     End Function
 
-    Private Function funRetornaSolicitacos(pFiltro As clsAtividade) As String
+    Private Function funRetornaSolicitacos(pFiltro As clsFiltroAtividades) As String
         Dim listaAtividades As New List(Of clsConsultaAtividades)
 
         listaAtividades = New clsAdicionarDAO().carregarAtividades(pFiltro)

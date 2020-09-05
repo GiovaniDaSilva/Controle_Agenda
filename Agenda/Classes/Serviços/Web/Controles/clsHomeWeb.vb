@@ -12,7 +12,7 @@ Public Class clsHomeWeb
 
         Dim locAtividades As New List(Of clsConsultaAtividades)
         Dim DAO As New clsAdicionarDAO
-        Dim Filtro As New clsAtividade
+        Dim Filtro As New clsFiltroAtividades
 
         Filtro.Data = parametros.Data
         Filtro.ID_TIPO_ATIVIDADE = parametros.Tipo

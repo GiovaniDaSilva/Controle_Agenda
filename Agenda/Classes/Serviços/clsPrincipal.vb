@@ -12,7 +12,7 @@ Public Class clsPrincipal
         locFormAdicionar.ChamaFormulario(parIni, parAtividade)
     End Sub
 
-    Public Function funCarregarAtividades(ByVal parFiltro As clsAtividade, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
+    Public Function funCarregarAtividades(ByVal parFiltro As clsFiltroAtividades, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
         Dim DAO As New clsAdicionarDAO
         Return DAO.carregarAtividades(parFiltro, parParametrosIni)
     End Function
