@@ -11,8 +11,10 @@ Public Class clsImpressaoPontoWeb
     End Enum
 
     Private Property html As New StringBuilder
+    Private acumuloPonto As Date
 
     Public Function RetornaPagina(pDataInicial As Date, pDataFinal As Date) As String
+        acumuloPonto = New clsIni().funCarregaIni.AcumuladoPontoApartirDe
         Return RetornaHTML(pDataInicial, pDataFinal)
     End Function
 
@@ -25,6 +27,7 @@ Public Class clsImpressaoPontoWeb
         html = html.Replace("{p_data_final}", clsTools.funFormataData(pDataFinal))
         html = html.Replace("{p_dados_impresso}", funRetornaDadosImpresso(pDataInicial, pDataFinal))
         html = html.Replace("[p_inicializa_campos]", funRetornaInicializaCampos(pDataInicial, pDataFinal))
+        html = html.Replace("{p_inicio_ponto}", acumuloPonto)
 
         Return html
     End Function
@@ -47,7 +50,7 @@ Public Class clsImpressaoPontoWeb
         Return texto.ToString
     End Function
 
-    Private Shared Function RetornaSaldoGeral(pDataInicial As Date) As String
+    Private Function RetornaSaldoGeral(pDataInicial As Date) As String
         Dim controle As New clsControlePonto
         Dim saldo As String
 
@@ -55,11 +58,11 @@ Public Class clsImpressaoPontoWeb
         Return funColoriSaldo(saldo)
     End Function
 
-    Private Shared Function RetornaSaldoAcumulado(pDataInicial As Date) As String
+    Private Function RetornaSaldoAcumulado(pDataInicial As Date) As String
         Dim controle As New clsControlePonto
         Dim saldo As String
 
-        Dim inicial = clsTools.RetornaPrimeiroDiaMes(pDataInicial.Month - 1)
+        Dim inicial = acumuloPonto
         Dim final = clsTools.RetornaUltimoDiaMes(pDataInicial.Month)
 
         saldo = controle.CalculaSaldoperiodo(inicial, final, False)

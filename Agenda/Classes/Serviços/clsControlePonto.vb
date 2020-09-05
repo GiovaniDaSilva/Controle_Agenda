@@ -64,7 +64,6 @@
         Dim escala = New clsIni().funCarregaIni().EscalaTrabalho
         Dim total As TimeSpan
         Dim totalEsperado As TimeSpan
-        Dim dataFim As Date
 
         total = RetornaTotalPeriodo(Inicio, final, ConsiderarDiaHoje)
 
