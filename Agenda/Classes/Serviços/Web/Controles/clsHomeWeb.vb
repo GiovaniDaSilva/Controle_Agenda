@@ -15,6 +15,7 @@ Public Class clsHomeWeb
         Dim Filtro As New clsFiltroAtividades
 
         Filtro.Data = parametros.Data
+        Filtro.DataFinal = parametros.DataAte
         Filtro.ID_TIPO_ATIVIDADE = parametros.Tipo
 
         locAtividades = DAO.carregarAtividades(Filtro)
@@ -39,7 +40,8 @@ Public Class clsHomeWeb
         Dim texto As New StringBuilder(vbNullString)
         texto.AppendFormat("
             document.getElementById('data_ini').value = ""{0}"";                  
-        ", clsTools.funAjustaDataSQL(parametros.Data))
+            document.getElementById('data_ate').value = ""{1}"";  
+        ", clsTools.funAjustaDataSQL(parametros.Data), If(parametros.DataAte = CDate("01/01/0001"), "", clsTools.funAjustaDataSQL(parametros.DataAte)))
         Return texto.ToString
 
     End Function

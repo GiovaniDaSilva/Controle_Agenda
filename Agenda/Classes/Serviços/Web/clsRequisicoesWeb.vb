@@ -516,7 +516,16 @@ Public Class clsRequisicoesWeb
                 locParametros.Data = CDate(data)
             End If
 
-            Dim tipo = clsHTMLTools.RetornaValorPostGet(post(1))
+            Dim dataAte = clsHTMLTools.RetornaValorPostGet(post(1))
+            If dataAte <> vbNullString Then
+                If Not IsDate(dataAte) Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Data do POST inválida.")
+                End If
+                locParametros.DataAte = CDate(dataAte)
+            End If
+
+            Dim tipo = clsHTMLTools.RetornaValorPostGet(post(2))
             If tipo < 0 Then
                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
                 Throw New Exception("Tipo de Atividade do POST inválido.")
