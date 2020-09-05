@@ -19,21 +19,12 @@ Public Class clsVersaoSistema
 
         Do While versao < RetornaVersao()
 
-            If versao < 20 Then
-                atualizaVersao20()
-            End If
+            If versao < 20 Then atualizaVersao20()
 
-            If versao < 21 Then
-                funMudaVersaoSistema(21)
-            End If
-
-            If versao < 22 Then
-                funMudaVersaoSistema(22)
-            End If
-
-            If versao < 23 Then
-                funMudaVersaoSistema(23)
-            End If
+            If versao < 21 Then funMudaVersaoSistema(21)
+            If versao < 22 Then funMudaVersaoSistema(22)
+            If versao < 23 Then funMudaVersaoSistema(23)
+            If versao < 24 Then funMudaVersaoSistema(23)
 
             versao = VerificaVersao()
         Loop

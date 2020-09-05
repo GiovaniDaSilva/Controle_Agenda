@@ -201,6 +201,13 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If Process.GetProcessesByName(Process.GetCurrentProcess.ProcessName).Length > 1 Then
+            MsgBox("Agenda já esta em execução. Verifique a bandeja do Windows.", vbExclamation)
+            End
+        End If
+
+
         subVerificaSenhaEmail()
 
         subCarregaIni()
@@ -228,7 +235,7 @@ Public Class frmPrincipal
             Return
         End If
 
-        subExibiFormulario(False)
+        subExibeFormulario(False)
         clsRequisicoesWeb.ChamaPagina(clsPaginasWeb.Home)
 
     End Sub
@@ -482,7 +489,7 @@ Public Class frmPrincipal
     End Sub
 
 
-    Private Sub subExibiFormulario(ByVal parValor As Boolean)
+    Public Sub subExibeFormulario(ByVal parValor As Boolean)
 
         If parValor Then
             Me.ShowIcon = True
@@ -502,13 +509,13 @@ Public Class frmPrincipal
     Private Sub frmPrincipal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If ParametrosIni.TempoNotificacao <> enuTempoNotificacao.NaoUsar Or ParametrosIni.UtilizarVersaoWeb Then
             e.Cancel = True
-            subExibiFormulario(False)
+            subExibeFormulario(False)
         End If
         'glfServidorHTTP.EncerraServidorHTTP 
     End Sub
 
     Private Sub AbrirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirToolStripMenuItem.Click
-        subExibiFormulario(True)
+        subExibeFormulario(True)
     End Sub
 
     Private Sub SairToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SairToolStripMenuItem.Click
