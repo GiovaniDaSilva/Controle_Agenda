@@ -157,6 +157,8 @@ Public Class clsPrincipal
             Case enuTempoNotificacao.Hora2 : pTimer.Interval = (120 * minutoTimer)
             Case enuTempoNotificacao.Hora3 : pTimer.Interval = (180 * minutoTimer)
             Case enuTempoNotificacao.Hora4 : pTimer.Interval = (240 * minutoTimer)
+            Case Else
+                Return
         End Select
         pTimer.Start()
     End Sub

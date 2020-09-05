@@ -276,7 +276,6 @@ Public Class frmPrincipal
         End If
 
         controle.subConfiguraTimer(TimerNotificacao, ParametrosIni)
-        TimerNotificacao.Start()
 
         TimerControleGeral.Interval = 120 * 60000 '120 minutos x 1 minuto do timer
         TimerControleGeral.Start()
@@ -501,7 +500,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub frmPrincipal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If ParametrosIni.TempoNotificacao <> enuTempoNotificacao.NaoUsar Then
+        If ParametrosIni.TempoNotificacao <> enuTempoNotificacao.NaoUsar Or ParametrosIni.UtilizarVersaoWeb Then
             e.Cancel = True
             subExibiFormulario(False)
         End If

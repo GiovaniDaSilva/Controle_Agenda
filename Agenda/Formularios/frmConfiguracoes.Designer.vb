@@ -25,6 +25,10 @@ Partial Class frmConfiguracoes
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmConfiguracoes))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.rbDesktop = New System.Windows.Forms.RadioButton()
+        Me.rbWeb = New System.Windows.Forms.RadioButton()
+        Me.cbInicializarWindows = New System.Windows.Forms.CheckBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.rbdianao = New System.Windows.Forms.RadioButton()
         Me.rbdiasim = New System.Windows.Forms.RadioButton()
@@ -56,11 +60,8 @@ Partial Class frmConfiguracoes
         Me.TipoDeAtividadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.txtEmail = New System.Windows.Forms.TextBox()
-        Me.cbInicializarWindows = New System.Windows.Forms.CheckBox()
-        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
-        Me.rbDesktop = New System.Windows.Forms.RadioButton()
-        Me.rbWeb = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox9.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -70,7 +71,6 @@ Partial Class frmConfiguracoes
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
-        Me.GroupBox9.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -89,6 +89,53 @@ Partial Class frmConfiguracoes
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Geral"
+        '
+        'GroupBox9
+        '
+        Me.GroupBox9.Controls.Add(Me.rbDesktop)
+        Me.GroupBox9.Controls.Add(Me.rbWeb)
+        Me.GroupBox9.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.GroupBox9.Location = New System.Drawing.Point(256, 123)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(295, 43)
+        Me.GroupBox9.TabIndex = 7
+        Me.GroupBox9.TabStop = False
+        Me.GroupBox9.Text = "Utilizar versão"
+        '
+        'rbDesktop
+        '
+        Me.rbDesktop.AutoSize = True
+        Me.rbDesktop.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.rbDesktop.Location = New System.Drawing.Point(153, 19)
+        Me.rbDesktop.Name = "rbDesktop"
+        Me.rbDesktop.Size = New System.Drawing.Size(64, 17)
+        Me.rbDesktop.TabIndex = 2
+        Me.rbDesktop.Text = "Desktop"
+        Me.rbDesktop.UseVisualStyleBackColor = True
+        '
+        'rbWeb
+        '
+        Me.rbWeb.AutoSize = True
+        Me.rbWeb.Checked = True
+        Me.rbWeb.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.rbWeb.Location = New System.Drawing.Point(33, 19)
+        Me.rbWeb.Name = "rbWeb"
+        Me.rbWeb.Size = New System.Drawing.Size(49, 17)
+        Me.rbWeb.TabIndex = 1
+        Me.rbWeb.TabStop = True
+        Me.rbWeb.Text = "WEB"
+        Me.rbWeb.UseVisualStyleBackColor = True
+        '
+        'cbInicializarWindows
+        '
+        Me.cbInicializarWindows.AutoSize = True
+        Me.cbInicializarWindows.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.cbInicializarWindows.Location = New System.Drawing.Point(17, 143)
+        Me.cbInicializarWindows.Name = "cbInicializarWindows"
+        Me.cbInicializarWindows.Size = New System.Drawing.Size(192, 17)
+        Me.cbInicializarWindows.TabIndex = 6
+        Me.cbInicializarWindows.Text = "Inicializar aplicação com o windows"
+        Me.cbInicializarWindows.UseVisualStyleBackColor = True
         '
         'GroupBox8
         '
@@ -416,53 +463,6 @@ Partial Class frmConfiguracoes
         Me.txtEmail.Size = New System.Drawing.Size(662, 20)
         Me.txtEmail.TabIndex = 6
         '
-        'cbInicializarWindows
-        '
-        Me.cbInicializarWindows.AutoSize = True
-        Me.cbInicializarWindows.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cbInicializarWindows.Location = New System.Drawing.Point(17, 143)
-        Me.cbInicializarWindows.Name = "cbInicializarWindows"
-        Me.cbInicializarWindows.Size = New System.Drawing.Size(192, 17)
-        Me.cbInicializarWindows.TabIndex = 6
-        Me.cbInicializarWindows.Text = "Inicializar aplicação com o windows"
-        Me.cbInicializarWindows.UseVisualStyleBackColor = True
-        '
-        'GroupBox9
-        '
-        Me.GroupBox9.Controls.Add(Me.rbDesktop)
-        Me.GroupBox9.Controls.Add(Me.rbWeb)
-        Me.GroupBox9.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.GroupBox9.Location = New System.Drawing.Point(256, 123)
-        Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.Size = New System.Drawing.Size(295, 43)
-        Me.GroupBox9.TabIndex = 7
-        Me.GroupBox9.TabStop = False
-        Me.GroupBox9.Text = "Utilizar versão"
-        '
-        'rbDesktop
-        '
-        Me.rbDesktop.AutoSize = True
-        Me.rbDesktop.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbDesktop.Location = New System.Drawing.Point(153, 19)
-        Me.rbDesktop.Name = "rbDesktop"
-        Me.rbDesktop.Size = New System.Drawing.Size(64, 17)
-        Me.rbDesktop.TabIndex = 2
-        Me.rbDesktop.Text = "Desktop"
-        Me.rbDesktop.UseVisualStyleBackColor = True
-        '
-        'rbWeb
-        '
-        Me.rbWeb.AutoSize = True
-        Me.rbWeb.Checked = True
-        Me.rbWeb.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rbWeb.Location = New System.Drawing.Point(33, 19)
-        Me.rbWeb.Name = "rbWeb"
-        Me.rbWeb.Size = New System.Drawing.Size(49, 17)
-        Me.rbWeb.TabIndex = 1
-        Me.rbWeb.TabStop = True
-        Me.rbWeb.Text = "WEB"
-        Me.rbWeb.UseVisualStyleBackColor = True
-        '
         'frmConfiguracoes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -484,6 +484,8 @@ Partial Class frmConfiguracoes
         Me.Text = "Configurações"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
@@ -501,8 +503,6 @@ Partial Class frmConfiguracoes
         Me.MenuStrip1.PerformLayout()
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
-        Me.GroupBox9.ResumeLayout(False)
-        Me.GroupBox9.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

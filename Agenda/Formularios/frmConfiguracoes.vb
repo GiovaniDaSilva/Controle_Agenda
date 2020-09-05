@@ -56,6 +56,7 @@
         dtpPonto.Value = CDate(glfParametros.AcumuladoPontoApartirDe)
 
         rbWeb.Checked = glfParametros.UtilizarVersaoWeb
+        rbDesktop.Checked = Not rbWeb.Checked
 
     End Sub
 
