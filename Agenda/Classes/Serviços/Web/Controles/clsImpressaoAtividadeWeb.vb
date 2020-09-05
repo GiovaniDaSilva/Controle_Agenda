@@ -12,18 +12,18 @@ Public Class clsImpressaoAtividadeWeb
 
     Private Property html As New StringBuilder
 
-    Public Function RetornaPagina(pFiltro As clsAtividade) As String
+    Public Function RetornaPagina(pFiltro As clsFiltroAtividades) As String
         Return RetornaHTML(pFiltro)
     End Function
 
-    Private Function RetornaHTML(pFiltro As clsAtividade) As String
+    Private Function RetornaHTML(pFiltro As clsFiltroAtividades) As String
 
         Dim html As String
         html = My.Resources.ImpressaoAtividade
 
         html = html.Replace("{p_dados_impresso}", funRetornaSolicitacos(pFiltro))
         html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(pFiltro.ID_TIPO_ATIVIDADE))
-        html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(pFiltro.Data))
+        html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(pFiltro.Data, pFiltro.DataFinal))
         html = html.Replace("{p_linhas_tabela_periodo_dia}", clsHTMLComum.RetornaTabelaPeriodosDia(Now))
         html = html.Replace("{data_atual}", clsTools.funFormataData(Now))
 
@@ -32,11 +32,14 @@ Public Class clsImpressaoAtividadeWeb
         Return html
     End Function
 
-    Private Function RetornaInicializaCamposFiltro(pData As Date) As String
+    Private Function RetornaInicializaCamposFiltro(pData As Date, pDateAte As Date) As String
         Dim texto As New StringBuilder(vbNullString)
+
+
         texto.AppendFormat("
             document.getElementById('data_ini').value = ""{0}"";                  
-        ", clsTools.funAjustaDataSQL(pData))
+            document.getElementById('data_ate').value = ""{1}"";
+        ", clsTools.funAjustaDataSQL(pData), If(pDateAte = CDate("01/01/0001"), "", clsTools.funAjustaDataSQL(pDateAte)))
         Return texto.ToString
 
     End Function
