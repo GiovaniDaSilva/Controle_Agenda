@@ -91,6 +91,42 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to &lt;html&gt;
+        '''&lt;head&gt;
+        '''
+        '''    {p_links_comum_pagina}
+        '''
+        '''    &lt;style&gt;
+        '''        [p_style_comum_pagina]
+        '''    &lt;/style&gt;
+        '''
+        '''    {p_titulo_pagina}
+        '''&lt;/head&gt;
+        '''
+        '''
+        '''&lt;body class=&quot;Fundo&quot;&gt;
+        '''    &lt;header&gt;
+        '''        {p_menu_pagina}        
+        '''    &lt;/header&gt;
+        '''
+        '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Configurações&lt;/h1&gt;
+        '''
+        '''    &lt;div class=&quot;container-fluid&quot;&gt;
+        '''
+        '''
+        '''    &lt;/div&gt;
+        '''&lt;/body&gt;
+        '''
+        '''
+        '''&lt;/html&gt;.
+        '''</summary>
+        Friend ReadOnly Property Configuracao() As String
+            Get
+                Return ResourceManager.GetString("Configuracao", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &lt;html lang=&quot;pr-bt&quot;&gt;
         '''&lt;head&gt;
         '''    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
@@ -291,11 +327,12 @@ Namespace My.Resources
         '''
         '''    &lt;div class=&quot;container-fluid&quot;&gt;
         '''
-        '''        &lt;h2 class=&quot;Titulo&quot;&gt;v.1.5&lt;/h2&gt;
+        '''        &lt;h2 class=&quot;Titulo&quot;&gt;v.2.4&lt;/h2&gt;
         '''        &lt;p class=&quot;Atualizacao&quot;&gt;
         '''            &lt;ul&gt;
-        '''                &lt;li&gt;Adicionado botão opções para a atividade cadastrada na Agenda Web.&lt;/li&gt;&lt;/br&gt;
-        '''    [rest of string was truncated]&quot;;.
+        '''                &lt;li&gt;Adicionado novos parametros no sistema.&lt;/li&gt;
+        '''                &lt;ul&gt;
+        '''              [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Versoes() As String
             Get

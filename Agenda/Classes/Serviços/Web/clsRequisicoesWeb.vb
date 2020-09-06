@@ -42,6 +42,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaPaginaImpressaoPonto(pReqWeb)
                 Case clsPaginasWeb.Versoes
                     locPagRetorno = My.Resources.Versoes
+                Case clsPaginasWeb.Configuracao
+                    locPagRetorno = My.Resources.Configuracao
                 Case "favicon.ico"
                     pReqWeb.RetornaIcone = True
                     Exit Sub
@@ -604,4 +606,5 @@ Public Class clsPaginasWeb
     Public Shared ReadOnly Property ImpressaoAtividade = "ImpressaoAtividade"
     Public Shared ReadOnly Property ImpressaoPonto = "ImpressaoPonto"
     Public Shared ReadOnly Property Versoes = "Versoes"
+    Public Shared ReadOnly Property Configuracao = "Configuracao"
 End Class

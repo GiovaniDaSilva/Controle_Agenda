@@ -22,7 +22,8 @@ Public Class clsHTMLComum
 			        </div>
 
                     <a href=""ControlePonto"" id=""bt_controlePonto"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">query_builder</i>&nbsp;Ponto</a>            
-                    <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>            
+                    <a href=""Configuracao"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">build</i>&nbsp;Configuração</a>                                
+                    <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>                                
                 </div>
                 <div class=""float-right"">
                     <span class=""agenda"">Agenda</span>  <span style=""color: White;"" >v. {p_versao_sistema}</span>                       
