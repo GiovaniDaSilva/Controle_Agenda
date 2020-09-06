@@ -97,7 +97,7 @@ Public Class clsRequisicoesWeb
 
             Try
                 retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
-                retorno.descricao = "Sucesso" 'New clsControlePontoWeb().RetornaControlePonto_Salvar(json)
+                retorno.descricao = New clsConfiguracaoWeb().RetornaConfiguracaoSalvar(json)
             Catch ex As Exception
                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
                 Throw

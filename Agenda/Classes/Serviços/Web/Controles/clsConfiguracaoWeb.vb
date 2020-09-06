@@ -87,4 +87,43 @@ Public Class clsConfiguracaoWeb
         Public Property descricao As String
         Public Property valor As String
     End Class
+
+    Friend Function RetornaConfiguracaoSalvar(json As String) As String
+        RetornaConfiguracaoSalvar = "Erro"
+
+        Dim ini As New clsIni
+        Dim IniJson = DeserializarNewtonsoft(funTrataJson(json))
+
+        'subValidaPeriodos(pontoJson)
+
+        ini.gravaArquivoini(funRetornaParametrosIni(IniJson))
+
+        Return "Sucesso"
+    End Function
+
+    Private Function funRetornaParametrosIni(iniJson As clsIniWeb) As clsParametrosIni
+        Throw New NotImplementedException()
+    End Function
+
+    Private Function DeserializarNewtonsoft(json As String) As clsIniWeb
+        Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of clsIniWeb)(json)
+    End Function
+
+    Private Function funTrataJson(json As String) As String
+        Return json
+    End Function
+
+
+    Private Class clsIniWeb
+        Public Property tipoAtividade As String
+        Public Property opAtividadePor As Integer
+        Public Property opAusenteTtDia As Integer
+        Public Property opDataAtual As Integer
+        Public Property opWeb As Integer
+        Public Property dataSaldoPonto As Date
+        Public Property opDecrescente As Integer
+        Public Property caminhoBase As String
+        Public Property emailBackup As String
+
+    End Class
 End Class
