@@ -106,19 +106,15 @@ Namespace My.Resources
         '''
         '''&lt;body class=&quot;Fundo&quot;&gt;
         '''    &lt;header&gt;
-        '''        {p_menu_pagina}        
-        '''    &lt;/header&gt;
+        '''        {p_menu_pagina}
         '''
-        '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Configurações&lt;/h1&gt;
+        '''        &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Configurações&lt;/h1&gt;
         '''
-        '''    &lt;div class=&quot;container-fluid&quot;&gt;
-        '''
-        '''
-        '''    &lt;/div&gt;
-        '''&lt;/body&gt;
-        '''
-        '''
-        '''&lt;/html&gt;.
+        '''        &lt;!--Sub Menu--&gt;
+        '''        &lt;nav class=&quot;navbar navbar-light Fundo&quot;&gt;
+        '''            &lt;div&gt;
+        '''                &lt;button class=&quot;btn btn-success&quot; type=&quot;submit&quot; form=&quot;form_dados&quot;&gt;Salvar&lt;/button&gt;
+        '''                &lt;input id=&quot;btnLimpa&quot; type=&quot;reset&quot; value= [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Configuracao() As String
             Get
@@ -143,6 +139,16 @@ Namespace My.Resources
         Friend ReadOnly Property ControlePonto() As String
             Get
                 Return ResourceManager.GetString("ControlePonto", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Engrenagem() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Engrenagem", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         

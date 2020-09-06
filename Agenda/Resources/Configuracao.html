@@ -13,14 +13,162 @@
 
 <body class="Fundo">
     <header>
-        {p_menu_pagina}        
+        {p_menu_pagina}
+
+        <h1 class="TituloPrincipal">Configurações</h1>
+
+        <!--Sub Menu-->
+        <nav class="navbar navbar-light Fundo">
+            <div>
+                <button class="btn btn-success" type="submit" form="form_dados">Salvar</button>
+                <input id="btnLimpa" type="reset" value="Limpar" form="form_dados" class=" btn btn-warning" />
+            </div>
+        </nav>
     </header>
 
-    <h1 class="TituloPrincipal">Configurações</h1>
+
 
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                <form method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
+
+                    <!--Geral-->
+                    <label for="basic-url" class="label">Geral</label>
+                    <div class="input-group mb-12">
+
+                        <!--Campo Tempo Entre as Notificações-->
+                        <div class="form-group col-md-3">
+                            <label for="tipoAtividade">Tempo entre as notificações</label>
+                            <select class="custom-select" select id="tipoAtividade" name="tipoAtividade" form="form_dados">
+                                {p_lista_tempo_notificacao}
+                            </select>
+                        </div>
 
 
+                        <!--Horas da Atividade por-->
+                        <div class="form-group col-md-4">
+                            <label for="opAtividadePor">Atividades por:</label>
+                            </br>
+                            <div name="rbAtividadePor" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="opAtividadePor" id="opHorasTrabalhadas" value="1" {p_hrTrab_checked}>Horas Trabalhadas
+                                </label>
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="opAtividadePor" id="opPediodo" value="2" {p_Perio_checked}>Período
+                                </label>
+                            </div>
+                        </div>
+
+                        <!--Considerar Ausente no Total do dia-->
+                        <div class="form-group col-md-4">
+                            <label for="rbAusenteTtDia">Considerar Ausente no total do dia:</label>
+                            </br>
+                            <div name="rbAusenteTtDia" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="opAusenteTtDia" id="opAusTtDiaSim" value="1" {p_hrTrab_checked}>Sim
+                                </label>
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="opAusenteTtDia" id="opAusTtDiaNao" value="2" {p_Perio_checked}>Não
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-12">
+
+                        <!--Campo a partir de-->
+                        <div class="form-group col-md-5">
+                            <label for="rbAPartirDe">Inicializar campo a partir de:</label>
+                            </br>
+                            <div name="rbAPartirDe" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="opEmBranco" id="opEmBranco" value="1" {p_EmBranco_checked}>Em Branco
+                                </label>
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="opDataAtual" id="opDataAtual" value="2" {p_DataAtual_checked}>Data Atual
+                                </label>
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="op7dias" id="op7dias" value="3" {p_7dias_checked}>Últimos 7 dias
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <!--Utilizar versão WEB-->
+                        <div class="form-group col-md-4">
+                            <label for="rbVersao">Inicializar versão:</label>
+                            </br>
+                            <div name="rbVersao" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="opWeb" id="opWeb" value="1" {p_web_checked}>Web
+                                </label>
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="opDesktop" id="opDesktop" value="2" {p_desktop_checked}>Desktop
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--Geral-->
+                    <label for="basic-url" class="label">Dados</label>
+                    <div class="input-group mb-12">
+
+                        <!--Acumular Saldo do Ponto-->
+                        <div class="form-group col-md-3">
+                            <label for="dataSaldoPonto">Saldo do Ponto a partir de:</label>
+                            <input type="date" class="form-control" id="dataSaldoPonto" name="dataSaldoPonto" form="form_dados">
+                        </div>
+
+
+                        <!--Ordenação das atividades-->
+                        <div class="form-group col-md-4">
+                            <label for="rbOrdenacao">Ordenação das atividades por data:</label>
+                            </br>
+                            <div name="rbOrdenacao" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="opCrescente" id="opCrescente" value="1" {p_Crescente_checked}>Crescente
+                                </label>
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="opDecrescente" id="opDecrescente" value="2" {p_Decrescente_checked}>Decrescente
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-12">
+                        <div class="form-group col-md-9">
+                            <label for="caminhoBase">Caminho da base:</label>
+                            <input type="text" class="form-control" id="caminhoBase" name="caminhoBase" form="form_dados">
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-12">
+                        <div class="form-group col-md-9">
+                            <label for="emailBackup">E-mail para backup:</label>
+                            <input type="email" class="form-control" id="emailBackup" name="emailBackup" form="form_dados">
+                        </div>
+                    </div>
+
+
+                    <!--Backup-->
+                    <nav class="navbar navbar-light Fundo">
+                        <div>
+                            <button type="button" class="btn btn-warning" onclick="">Backup da Base</button>          
+                        </div>
+                    </nav>
+
+                </form>
+            </div>
+
+            <div class="col-md-3">
+                 <div class=""float-right"">                    
+                    <img  src="Engrenagem.gif" width="200" height="200"> </img>                                         
+                </div>
+            </div>
+
+        </div>
     </div>
 </body>
 

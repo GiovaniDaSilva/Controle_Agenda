@@ -47,6 +47,9 @@ Public Class clsRequisicoesWeb
                 Case "favicon.ico"
                     pReqWeb.RetornaIcone = True
                     Exit Sub
+                Case "Engrenagem.gif"
+                    pReqWeb.RetornaEngrenagem = True
+                    Exit Sub
             End Select
 
             clsHTMLComum.TrataParametrosComuns(locPagRetorno)
