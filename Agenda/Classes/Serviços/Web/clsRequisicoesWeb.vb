@@ -43,7 +43,9 @@ Public Class clsRequisicoesWeb
                 Case clsPaginasWeb.Versoes
                     locPagRetorno = My.Resources.Versoes
                 Case clsPaginasWeb.Configuracao
-                    locPagRetorno = My.Resources.Configuracao
+                    locPagRetorno = funRetornaPaginaConfiguracao(pReqWeb)
+                Case clsPaginasWeb.Configuracao & "_Salvar"
+                    locPagRetorno = funRetornaPaginaConfiguracao_Salvar(pReqWeb)
                 Case "favicon.ico"
                     pReqWeb.RetornaIcone = True
                     Exit Sub
@@ -62,6 +64,54 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Sub
+
+    Private Function funRetornaPaginaConfiguracao(pReqWeb As clsReqWeb) As String
+        Try
+
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+
+            End If
+
+            Return New clsConfiguracaoWeb().RetornaPagina()
+        Catch ex As Exception
+            pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+            Throw New Exception("Erro ao carregar a página Configurações.")
+        End Try
+    End Function
+
+    Private Function funRetornaPaginaConfiguracao_Salvar(pReqWeb As clsReqWeb) As String
+        Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
+
+        Try
+
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                json = New StreamReader(pReqWeb.Context.Request.InputStream).ReadToEnd()
+
+                If json = vbNullString Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                End If
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = "Sucesso" 'New clsControlePontoWeb().RetornaControlePonto_Salvar(json)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+    End Function
+
 
     Private Function funRetornaControlePonto_Excluir(pReqWeb As clsReqWeb) As String
         Dim id As Long = 0

@@ -2,10 +2,15 @@
 <head>
 
     {p_links_comum_pagina}
+    
+    <!--Converte Tabela em Json-->
+    <script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js" integrity="sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=" crossorigin="anonymous"></script>
+
 
     <style>
         [p_style_comum_pagina]
     </style>
+
 
     {p_titulo_pagina}
 </head>
@@ -66,10 +71,10 @@
                             </br>
                             <div name="rbAusenteTtDia" class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opAusenteTtDia" id="opAusTtDiaSim" value="1" {p_hrTrab_checked}>Sim
+                                    <input type="radio" name="opAusenteTtDia" id="opAusTtDiaSim" value="1" {pAusTtDiaSim_checked}>Sim
                                 </label>
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opAusenteTtDia" id="opAusTtDiaNao" value="2" {p_Perio_checked}>Não
+                                    <input type="radio" name="opAusenteTtDia" id="opAusTtDiaNao" value="2" {p_AusTtDiaNao_checked}>Não
                                 </label>
                             </div>
                         </div>
@@ -170,6 +175,72 @@
 
         </div>
     </div>
+
+    <script>
+
+        [p_inicializa_campos]
+        var pagina = '[p_pagina]'
+
+
+        //Evento de submit do formulario
+        $("#form_dados").submit(function (e) {
+            e.preventDefault();
+
+
+            var json = ConvertFormToJSON("#form_dados");
+
+            $.ajax({
+                cache: false,
+                url: pagina + '_Salvar',
+                type: 'POST',
+                dataType: 'text',
+                data: json,
+
+                success: function (objectJson) {
+
+                    var object = JSON.parse(objectJson);
+
+                    //sucesso
+                    if (object.codigo == 100) {
+                        //alert("Gravado com sucesso!");
+                        window.location.href = "Home";
+                    }
+
+                    //ocorreu um erro
+                    else if (object.codigo == 200) {
+                        alert(object.descricao);
+                    }
+
+
+                },
+
+                error: function (descricao) {
+                    alert("Ocorreu um erro: " + descricao);
+                }
+
+            });
+
+        });
+
+        //Converte a tabela em json
+        //Tenho que ver como referenciar esse projeto no meu projeto do github
+        //https://github.com/lightswitch05/table-to-json
+
+        //Metodo para montar o json
+        function ConvertFormToJSON(form) {
+
+            var array = jQuery(form).serializeArray();
+            var json = {};
+
+            //monta o json com id dos campos e conteudo
+            jQuery.each(array, function () {
+                json[this.name] = this.value || '';
+            });
+            
+            return JSON.stringify(json);
+        };
+
+    </script>
 </body>
 
 
