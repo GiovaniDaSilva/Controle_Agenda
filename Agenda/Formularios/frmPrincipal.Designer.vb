@@ -44,14 +44,12 @@ Partial Class frmPrincipal
         Me.pFiltro = New System.Windows.Forms.Panel()
         Me.txtDescricaoFiltro = New System.Windows.Forms.MaskedTextBox()
         Me.Descrição = New System.Windows.Forms.Label()
-        Me.txtDtAte = New System.Windows.Forms.MaskedTextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbTipo = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.lblcodigo = New System.Windows.Forms.Label()
         Me.btnSubirFiltro = New System.Windows.Forms.Button()
-        Me.txtApartirDe = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnLimpar = New System.Windows.Forms.Button()
         Me.TimerAnimacaoMenu = New System.Windows.Forms.Timer(Me.components)
@@ -74,6 +72,8 @@ Partial Class frmPrincipal
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.DuplicarAtividadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TimerControleGeral = New System.Windows.Forms.Timer(Me.components)
+        Me.txtApartirDe = New System.Windows.Forms.DateTimePicker()
+        Me.txtDtAte = New System.Windows.Forms.DateTimePicker()
         Me.pMenu.SuspendLayout()
         Me.pHorasAtividade.SuspendLayout()
         Me.pHorasDia.SuspendLayout()
@@ -345,21 +345,21 @@ Partial Class frmPrincipal
         'pFiltro
         '
         Me.pFiltro.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.pFiltro.Controls.Add(Me.txtDtAte)
+        Me.pFiltro.Controls.Add(Me.txtApartirDe)
         Me.pFiltro.Controls.Add(Me.txtDescricaoFiltro)
         Me.pFiltro.Controls.Add(Me.Descrição)
-        Me.pFiltro.Controls.Add(Me.txtDtAte)
         Me.pFiltro.Controls.Add(Me.Label3)
         Me.pFiltro.Controls.Add(Me.cbTipo)
         Me.pFiltro.Controls.Add(Me.Label2)
         Me.pFiltro.Controls.Add(Me.txtCodigo)
         Me.pFiltro.Controls.Add(Me.lblcodigo)
         Me.pFiltro.Controls.Add(Me.btnSubirFiltro)
-        Me.pFiltro.Controls.Add(Me.txtApartirDe)
         Me.pFiltro.Controls.Add(Me.Label1)
         Me.pFiltro.Controls.Add(Me.btnLimpar)
-        Me.pFiltro.Location = New System.Drawing.Point(112, 83)
+        Me.pFiltro.Location = New System.Drawing.Point(24, 83)
         Me.pFiltro.Name = "pFiltro"
-        Me.pFiltro.Size = New System.Drawing.Size(823, 83)
+        Me.pFiltro.Size = New System.Drawing.Size(951, 83)
         Me.pFiltro.TabIndex = 4
         Me.pFiltro.Visible = False
         '
@@ -367,7 +367,7 @@ Partial Class frmPrincipal
         '
         Me.txtDescricaoFiltro.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtDescricaoFiltro.Location = New System.Drawing.Point(496, 37)
+        Me.txtDescricaoFiltro.Location = New System.Drawing.Point(553, 38)
         Me.txtDescricaoFiltro.Name = "txtDescricaoFiltro"
         Me.txtDescricaoFiltro.Size = New System.Drawing.Size(252, 20)
         Me.txtDescricaoFiltro.TabIndex = 6
@@ -379,30 +379,18 @@ Partial Class frmPrincipal
         Me.Descrição.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Descrição.AutoSize = True
-        Me.Descrição.Location = New System.Drawing.Point(493, 21)
+        Me.Descrição.Location = New System.Drawing.Point(550, 22)
         Me.Descrição.Name = "Descrição"
         Me.Descrição.Size = New System.Drawing.Size(55, 13)
         Me.Descrição.TabIndex = 11
         Me.Descrição.Text = "Descrição"
-        '
-        'txtDtAte
-        '
-        Me.txtDtAte.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtDtAte.Location = New System.Drawing.Point(180, 36)
-        Me.txtDtAte.Mask = "00/00/0000"
-        Me.txtDtAte.Name = "txtDtAte"
-        Me.txtDtAte.Size = New System.Drawing.Size(80, 20)
-        Me.txtDtAte.TabIndex = 3
-        Me.txtDtAte.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
-        Me.txtDtAte.ValidatingType = GetType(Date)
         '
         'Label3
         '
         Me.Label3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(177, 20)
+        Me.Label3.Location = New System.Drawing.Point(194, 20)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(26, 13)
         Me.Label3.TabIndex = 9
@@ -415,7 +403,7 @@ Partial Class frmPrincipal
         Me.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTipo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbTipo.FormattingEnabled = True
-        Me.cbTipo.Location = New System.Drawing.Point(266, 35)
+        Me.cbTipo.Location = New System.Drawing.Point(323, 36)
         Me.cbTipo.Name = "cbTipo"
         Me.cbTipo.Size = New System.Drawing.Size(136, 21)
         Me.cbTipo.TabIndex = 4
@@ -425,7 +413,7 @@ Partial Class frmPrincipal
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(263, 19)
+        Me.Label2.Location = New System.Drawing.Point(320, 20)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(28, 13)
         Me.Label2.TabIndex = 5
@@ -435,7 +423,7 @@ Partial Class frmPrincipal
         '
         Me.txtCodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtCodigo.Location = New System.Drawing.Point(408, 37)
+        Me.txtCodigo.Location = New System.Drawing.Point(465, 38)
         Me.txtCodigo.Mask = "0000000"
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(82, 20)
@@ -448,7 +436,7 @@ Partial Class frmPrincipal
         Me.lblcodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblcodigo.AutoSize = True
-        Me.lblcodigo.Location = New System.Drawing.Point(405, 21)
+        Me.lblcodigo.Location = New System.Drawing.Point(462, 22)
         Me.lblcodigo.Name = "lblcodigo"
         Me.lblcodigo.Size = New System.Drawing.Size(40, 13)
         Me.lblcodigo.TabIndex = 3
@@ -471,24 +459,12 @@ Partial Class frmPrincipal
         Me.ToolTip1.SetToolTip(Me.btnSubirFiltro, "Fechar Filtro")
         Me.btnSubirFiltro.UseVisualStyleBackColor = False
         '
-        'txtApartirDe
-        '
-        Me.txtApartirDe.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtApartirDe.Location = New System.Drawing.Point(94, 37)
-        Me.txtApartirDe.Mask = "00/00/0000"
-        Me.txtApartirDe.Name = "txtApartirDe"
-        Me.txtApartirDe.Size = New System.Drawing.Size(80, 20)
-        Me.txtApartirDe.TabIndex = 2
-        Me.txtApartirDe.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
-        Me.txtApartirDe.ValidatingType = GetType(Date)
-        '
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(91, 21)
+        Me.Label1.Location = New System.Drawing.Point(73, 20)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(24, 13)
         Me.Label1.TabIndex = 1
@@ -505,7 +481,7 @@ Partial Class frmPrincipal
         Me.btnLimpar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLimpar.Image = CType(resources.GetObject("btnLimpar.Image"), System.Drawing.Image)
-        Me.btnLimpar.Location = New System.Drawing.Point(754, 16)
+        Me.btnLimpar.Location = New System.Drawing.Point(882, 16)
         Me.btnLimpar.Name = "btnLimpar"
         Me.btnLimpar.Size = New System.Drawing.Size(57, 56)
         Me.btnLimpar.TabIndex = 7
@@ -656,6 +632,28 @@ Partial Class frmPrincipal
         '
         Me.TimerControleGeral.Interval = 7200000
         '
+        'txtApartirDe
+        '
+        Me.txtApartirDe.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.txtApartirDe.Location = New System.Drawing.Point(76, 36)
+        Me.txtApartirDe.MaxDate = New Date(2050, 12, 31, 0, 0, 0, 0)
+        Me.txtApartirDe.MinDate = New Date(2020, 1, 1, 0, 0, 0, 0)
+        Me.txtApartirDe.Name = "txtApartirDe"
+        Me.txtApartirDe.ShowCheckBox = True
+        Me.txtApartirDe.Size = New System.Drawing.Size(115, 20)
+        Me.txtApartirDe.TabIndex = 12
+        '
+        'txtDtAte
+        '
+        Me.txtDtAte.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.txtDtAte.Location = New System.Drawing.Point(197, 37)
+        Me.txtDtAte.MaxDate = New Date(2050, 12, 31, 0, 0, 0, 0)
+        Me.txtDtAte.MinDate = New Date(2020, 1, 1, 0, 0, 0, 0)
+        Me.txtDtAte.Name = "txtDtAte"
+        Me.txtDtAte.ShowCheckBox = True
+        Me.txtDtAte.Size = New System.Drawing.Size(120, 20)
+        Me.txtDtAte.TabIndex = 13
+        '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -689,7 +687,6 @@ End Sub
     Friend WithEvents btnListar As Button
     Friend WithEvents pFiltro As Panel
     Friend WithEvents btnAbaixarFiltro As Button
-    Friend WithEvents txtApartirDe As MaskedTextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents btnLimpar As Button
     Friend WithEvents btnSubirFiltro As Button
@@ -729,8 +726,9 @@ End Sub
     Friend WithEvents TimerControleGeral As Timer
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
     Friend WithEvents DuplicarAtividadeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents txtDtAte As MaskedTextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents txtDescricaoFiltro As MaskedTextBox
     Friend WithEvents Descrição As Label
+    Friend WithEvents txtDtAte As DateTimePicker
+    Friend WithEvents txtApartirDe As DateTimePicker
 End Class

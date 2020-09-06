@@ -276,17 +276,21 @@ Public Class frmPrincipal
         Me.Text = Me.Text & clsVersaoSistema.Versao
         subCarregaComboTipo(cbTipo)
 
-        If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
-            txtApartirDe.Text = Now
-        ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
-            txtApartirDe.Text = Now.AddDays(-7)
-        End If
+        CarregaDataApertirDe()
 
         controle.subConfiguraTimer(TimerNotificacao, ParametrosIni)
 
         TimerControleGeral.Interval = 120 * 60000 '120 minutos x 1 minuto do timer
         TimerControleGeral.Start()
 
+    End Sub
+
+    Private Sub CarregaDataApertirDe()
+        If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
+            txtApartirDe.Value = Now
+        ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
+            txtApartirDe.Value = Now.AddDays(-7)
+        End If
     End Sub
 
     Private Sub subCarregaIni()
@@ -298,11 +302,14 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub subLimpaFiltro()
-        txtApartirDe.Clear()
+
+        CarregaDataApertirDe()
         cbTipo.SelectedIndex = -1
         txtCodigo.Clear()
-        txtDtAte.Clear()
         txtDescricaoFiltro.Clear()
+
+        txtDtAte.Checked = False
+        txtDtAte.ResetText()
     End Sub
 
 
@@ -340,6 +347,8 @@ Public Class frmPrincipal
         pFiltro.Visible = True
         locSobeDesce = True
         subMovimentaMenuFiltro()
+
+        txtApartirDe.Focus()
     End Sub
 
     Private Sub subCarregaComboTipo(pTipo As ComboBox)
@@ -360,8 +369,19 @@ Public Class frmPrincipal
         Dim filtro As New clsFiltroAtividades
 
         filtro.Codigo = Val(txtCodigo.Text)
-        filtro.Data = clsTools.funRetornaData(txtApartirDe)
-        filtro.DataFinal = clsTools.funRetornaData(txtDtAte)
+
+        If Not txtApartirDe.Checked Then
+            filtro.Data = txtApartirDe.MinDate
+        Else
+            filtro.Data = txtApartirDe.Value
+        End If
+
+        If Not txtDtAte.Checked Then
+            filtro.DataFinal = txtDtAte.MaxDate
+        Else
+            filtro.DataFinal = txtDtAte.Value
+        End If
+
         filtro.ID_TIPO_ATIVIDADE = cbTipo.SelectedValue()
         filtro.Descricao = txtDescricaoFiltro.Text
 
@@ -479,10 +499,11 @@ Public Class frmPrincipal
     Private Sub gridAtividades_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles gridAtividades.CellFormatting
 
         If gridAtividades.Rows.Count = 0 Then Exit Sub
+        If e.RowIndex > gridAtividades.Rows.Count Then Exit Sub
 
         If (e.ColumnIndex = enuIndexColunas.HORA) Then
             If Trim(e.Value) = ":" Then Exit Sub
-            If ParametrosIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo Then
+            If ParametrosIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And Not lista(e.RowIndex).Periodos Is Nothing Then
                 gridAtividades.Rows(e.RowIndex).Cells(enuIndexColunas.HORA).ToolTipText = "Períodos:" & vbNewLine & clsPrincipal.funRetornaToolTipoPeriodo(lista(e.RowIndex).Periodos)
             End If
         ElseIf (e.ColumnIndex = enuIndexColunas.CODIGO) Then
@@ -626,7 +647,28 @@ Public Class frmPrincipal
         subChamaFormularioAdicionarEdicao(index, True)
     End Sub
 
+    Private Sub txtDescricaoFiltro_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDescricaoFiltro.KeyPress
+        Dim delete() As Char
 
+        delete = {"'", "%"}
+
+        If KeyPressContains(delete, e.KeyChar) Then
+            e.Handled = True
+        End If
+
+    End Sub
+
+
+    Private Function KeyPressContains(delete As Char(), keychar As Char) As Boolean
+
+        For i = 0 To delete.Count - 1
+            If delete(i).ToString.Contains(keychar) Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
 End Class
 
 
