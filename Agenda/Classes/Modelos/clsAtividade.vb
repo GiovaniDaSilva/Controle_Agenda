@@ -54,5 +54,12 @@ End Class
 Public Class clsFiltroAtividades
     Inherits clsAtividade
 
+    Public Enum enuOrdenacao
+        Crescente = 1
+        Decrescente = 2
+    End Enum
+
     Public Property DataFinal As Date
+    Public Property Ordenacao As enuOrdenacao
+
 End Class

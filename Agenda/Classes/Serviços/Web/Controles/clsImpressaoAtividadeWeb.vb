@@ -26,10 +26,17 @@ Public Class clsImpressaoAtividadeWeb
         html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(pFiltro.Data, pFiltro.DataFinal))
         html = html.Replace("{p_linhas_tabela_periodo_dia}", clsHTMLComum.RetornaTabelaPeriodosDia(Now))
         html = html.Replace("{data_atual}", clsTools.funFormataData(Now))
+        html = html.Replace("{p_Dec_checked}", checkDecrescente(pFiltro))
+        html = html.Replace("{p_Cre_checked}", If(pFiltro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Crescente, "Checked", ""))
 
 
 
         Return html
+    End Function
+
+    Private Shared Function checkDecrescente(pFiltro As clsFiltroAtividades) As String
+        Return If((pFiltro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Decrescente Or
+                    pFiltro.Ordenacao = 0), "Checked", "")
     End Function
 
     Private Function RetornaInicializaCamposFiltro(pData As Date, pDateAte As Date) As String

@@ -212,11 +212,23 @@ Public Class clsAdicionarDAO
                 locSQL &= $" AND A.DESCRICAO LIKE '%{parFiltro.Descricao}%' "
             End If
 
-            If parParametrosIni.OrdenacaoDasAtividades = enuOrdenacaoDasAtividades.Dec Then
-                locSQL &= " ORDER BY A.DATA DESC, A.ID DESC"
+
+            Dim ordCre = " ORDER BY A.DATA ASC , A.ID ASC"
+            Dim ordDec = " ORDER BY A.DATA DESC, A.ID DESC"
+
+            If parFiltro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Decrescente Then
+                locSQL &= ordDec
+            ElseIf parFiltro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Crescente Then
+                locSQL &= ordCre
             Else
-                locSQL &= " ORDER BY A.DATA ASC , A.ID ASC"
+                If parParametrosIni.OrdenacaoDasAtividades = enuOrdenacaoDasAtividades.Dec Then
+                    locSQL &= ordDec
+                Else
+                    locSQL &= ordCre
+                End If
             End If
+
+
 
             Comm.CommandText = locSQL
 

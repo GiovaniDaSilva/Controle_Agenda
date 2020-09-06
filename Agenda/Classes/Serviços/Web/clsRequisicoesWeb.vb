@@ -217,6 +217,14 @@ Public Class clsRequisicoesWeb
                 Throw New Exception("Tipo de Atividade do POST inválido.")
             End If
             filtro.ID_TIPO_ATIVIDADE = tipo
+
+
+            Dim ordenacao = clsHTMLTools.RetornaValorPostGet(post(3))
+            If ordenacao = "C" Then
+                filtro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Crescente
+            Else
+                filtro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Decrescente
+            End If
         End If
 
         Try
