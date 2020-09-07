@@ -12,9 +12,13 @@
     <!-- JS dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
 
     <style>
         [p_style_comum_pagina]
+
     </style>
 
 
@@ -37,9 +41,10 @@
         </nav>
     </header>
 
-
+        
 
     <div class="container-fluid">
+
         <div class="row">
             <div class="col-md-9">
                 <form method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
@@ -166,7 +171,7 @@
                     <!--Backup-->
                     <nav class="navbar navbar-light Fundo">
                         <div>
-                            <button type="button" class="btn btn-warning" onclick="FazerBackupBase()">Backup da Base</button>
+                            <button type="button" class="btn btn-warning" onclick="FazerBackupBase()">Backup da Base</button>                            
                         </div>
                     </nav>
 
@@ -188,6 +193,13 @@
         [p_inicializa_campos]
         var pagina = '[p_pagina]'
         var enviar_backup_email = false
+        
+        $(document).ajaxStart(function () {
+			$.LoadingOverlay("show", { fade: false, background: '' });
+		});
+		$(document).ajaxStop(function () {
+			$.LoadingOverlay("hide");
+        });
 
         //Evento de submit do formulario
         $("#form_dados").submit(function (e) {
@@ -230,8 +242,6 @@
         });
 
         function FazerBackupBase() {
-
-        
             bootbox.confirm({
                 message: `Deseja enviar por o backup por e-mail?`,
                 buttons: {
@@ -245,19 +255,19 @@
                     }
                 },
                 callback: function (result) {
-                    if (result) {                        
+                    if (result) {
                         RequisicaoBackup(true);
                     } else {
                         RequisicaoBackup(false);
                     }
                 }
             });
-
         };
 
 
 
         function RequisicaoBackup(enviarEmail) {
+            
             $.ajax({
                 cache: false,
                 url: pagina + '_backup',
@@ -270,12 +280,12 @@
                     var object = JSON.parse(objectJson);
 
                     //sucesso
-                    if (object.codigo == 100) {
+                    if (object.codigo == 100) {                        
                         alert(object.descricao);
                     }
 
                     //ocorreu um erro
-                    else if (object.codigo == 200) {
+                    else if (object.codigo == 200) {                        
                         alert(object.descricao);
                     }
 
@@ -287,9 +297,10 @@
                 }
 
             });
-        }
 
+        };
 
+                
         //Converte a tabela em json
         //Tenho que ver como referenciar esse projeto no meu projeto do github
         //https://github.com/lightswitch05/table-to-json
@@ -307,6 +318,7 @@
 
             return JSON.stringify(json);
         };
+
 
 
     </script>
