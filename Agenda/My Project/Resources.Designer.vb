@@ -106,15 +106,42 @@ Namespace My.Resources
         '''
         '''&lt;body class=&quot;Fundo&quot;&gt;
         '''    &lt;header&gt;
-        '''        {p_menu_pagina}
+        '''        {p_menu_pagina}        
+        '''    &lt;/header&gt;
         '''
-        '''        &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Configurações&lt;/h1&gt;
+        '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Atualizações&lt;/h1&gt;
         '''
-        '''        &lt;!--Sub Menu--&gt;
-        '''        &lt;nav class=&quot;navbar navbar-light Fundo&quot;&gt;
-        '''            &lt;div&gt;
-        '''                &lt;button class=&quot;btn btn-success&quot; type=&quot;submit&quot; form=&quot;form_dados&quot;&gt;Salvar&lt;/button&gt;
-        '''                &lt;input id=&quot;btnLimpa&quot; type=&quot;reset&quot; value= [rest of string was truncated]&quot;;.
+        '''    &lt;div class=&quot;container-fluid&quot;&gt;
+        '''
+        '''       
+        '''
+        '''
+        '''    &lt;/div&gt;
+        '''&lt;/body&gt;
+        '''
+        '''
+        '''&lt;/html&gt;.
+        '''</summary>
+        Friend ReadOnly Property CadastroTipo() As String
+            Get
+                Return ResourceManager.GetString("CadastroTipo", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;html&gt;
+        '''&lt;head&gt;
+        '''
+        '''    {p_links_comum_pagina}
+        '''
+        '''    &lt;!--Converte Tabela em Json--&gt;
+        '''    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js&quot; integrity=&quot;sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+        '''
+        '''    &lt;!-- CSS dependencies --&gt;
+        '''    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;bootstrap.min.css&quot;&gt;
+        '''
+        '''    &lt;!-- JS dependencies --&gt;
+        '''    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js&quot;&gt;&lt;/script [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Configuracao() As String
             Get

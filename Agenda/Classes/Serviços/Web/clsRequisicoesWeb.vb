@@ -48,6 +48,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaPaginaConfiguracao_Salvar(pReqWeb)
                 Case clsPaginasWeb.Configuracao & "_backup"
                     locPagRetorno = funRetornaPaginaConfiguracao_BackupBase(pReqWeb)
+                Case clsPaginasWeb.CadastroTipo
+                    locPagRetorno = funRetornaPaginaCadastroTipo(pReqWeb)
                 Case "favicon.ico"
                     pReqWeb.RetornaIcone = True
                     Exit Sub
@@ -66,6 +68,22 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Sub
+
+    Private Function funRetornaPaginaCadastroTipo(pReqWeb As clsReqWeb) As String
+
+        Try
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+
+            End If
+
+            Return New clsCadastroTipoWeb().RetornaPagina()
+        Catch ex As Exception
+            pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+            Throw New Exception("Erro ao carregar a página Configurações.")
+        End Try
+
+    End Function
 
     Private Function funRetornaPaginaConfiguracao_BackupBase(pReqWeb As clsReqWeb) As String
         Dim json As String = vbNullString
@@ -689,4 +707,5 @@ Public Class clsPaginasWeb
     Public Shared ReadOnly Property ImpressaoPonto = "ImpressaoPonto"
     Public Shared ReadOnly Property Versoes = "Versoes"
     Public Shared ReadOnly Property Configuracao = "Configuracao"
+    Public Shared ReadOnly Property CadastroTipo = "CadastroTipo"
 End Class

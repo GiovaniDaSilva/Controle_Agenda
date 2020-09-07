@@ -153,6 +153,7 @@
     <Compile Include="Classes\clsTools.vb" />
     <Compile Include="Classes\Serviços\Web\clsColunasTabela.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsCadastroAtividadeWeb.vb" />
+    <Compile Include="Classes\Serviços\Web\Controles\clsCadastroTipoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsConfiguracaoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsControlePontoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsHomeWeb.vb" />
@@ -283,6 +284,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Engrenagem.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CadastroTipo.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

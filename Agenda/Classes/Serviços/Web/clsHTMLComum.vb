@@ -16,13 +16,24 @@ Public Class clsHTMLComum
 				        <i class=""material-icons"">print</i>&nbsp;Impressão 
 			          </button>
 			          <div class=""dropdown-menu"">
-				        <a class=""dropdown-item"" href=""ImpressaoAtividade"">Atividades</a>
-				        <a class=""dropdown-item"" href=""ImpressaoPonto"">Ponto</a>				
+				        <a class=""dropdown-item"" href=""ImpressaoAtividade""><i class=""material-icons"">format_paint</i>&nbsp;Atividades</a>
+				        <a class=""dropdown-item"" href=""ImpressaoPonto""><i class=""material-icons"">watch</i>&nbsp;Ponto</a>				
 			          </div>
 			        </div>
 
                     <a href=""ControlePonto"" id=""bt_controlePonto"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">query_builder</i>&nbsp;Ponto</a>            
-                    <a href=""Configuracao"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">build</i>&nbsp;Configuração</a>                                
+
+                   
+                     <div class=""btn-group"">
+			          <button type=""button"" class=""btn btn-primary btn-outline-light my-2 my-sm-0 dropdown-toggle"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">
+				        <i class=""material-icons"">build</i>&nbsp;Configurações 
+			          </button>
+			          <div class=""dropdown-menu"">
+				        <a class=""dropdown-item"" href=""Configuracao""><i class=""material-icons"">build_circle</i>&nbsp; Configuração do Sistema</a>
+				        <a class=""dropdown-item"" href=""CadastroTipo""><i class=""material-icons"">read_more</i>&nbsp; Cadastro Tipo de Atividade</a>				
+			          </div>
+			        </div>
+
                     <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>                                
                 </div>
                 <div class=""float-right"">

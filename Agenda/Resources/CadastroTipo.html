@@ -1,0 +1,137 @@
+<html>
+<head>
+
+    {p_links_comum_pagina}
+
+    <style>
+        [p_style_comum_pagina]
+    </style>
+
+    {p_titulo_pagina}
+</head>
+
+
+<body class="Fundo">
+    <header>
+        {p_menu_pagina}
+
+        <h1 class="TituloPrincipal">Cadastro de Tipo de Atividade</h1>
+
+        <!--Sub Menu-->
+        <nav class="navbar navbar-light Fundo">
+            <div>
+                <button class="btn btn-success" type="submit" form="form_dados">Salvar</button>
+                <input id="btnLimpa" type="reset" value="Limpar" form="form_dados" class=" btn btn-warning" />                
+            </div>
+        </nav>
+
+    </header>
+      
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-8">
+                <form method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
+
+                    <!--Hora inicial - Final-->
+                    <div class="form-row">
+                        <!--Campo codigo-->
+                        <div class="form-group col-md-2">
+                            <label for="codigo" class="label">Código</label>
+                            <input type="number" class="form-control" id="codigo" name="codigo" form="form_dados">
+                        </div>
+                        &nbsp;
+
+                        <!--Campo Descricao-->
+                        <div class="form-group col-md-4">
+                            <label for="descricao" class="label">Descrição</label>
+                            <input type="text" class="form-control" id="descricao" name="descricao" form="form_dados">
+                        </div>
+
+                        <!--Botão Adicionar Periodo-->
+                        <div class="form-group col-md-1">
+                            <label for="btnAdicionarTipo" class="label">&nbsp; </label>
+                            <button style="vertical-align:5px" id="btnAdicionarTipo" class="btn btn-info" type="button" form="form_dados">Adicionar</button>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row" >
+                        <!--Grid de Tipos-->
+                        <div id="dadosTipo" class="col-md-8" style="margin-top: 5px; display: none ">
+
+                            <table id="dados" class="table table-sm nowrap" cellspacing="0" form="form_dados" name="tabelaTipos">
+                                <thead>
+                                    <tr>
+                                        <th width="50px">ID</th>
+                                        <th width="50px">Código</th>
+                                        <th>Descrição</th>
+                                        <th width="50px">Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {p_linhas_tabela_tipos}
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+           
+        </div>
+
+
+    </div>
+
+    <script>
+        var pagina = '[p_pagina]'
+
+          tb = $('#dados').DataTable({                
+                "scrollCollapse": true,
+                paging: false,
+                searching: false,
+                info: false,
+                select: {
+                    style: 'single' //permitir selecionar apenas uma linha
+                },
+
+                order: [[1, 'asc']], //ordem padrão: coluna Data em ordem Decrescente
+
+                oLanguage: { sUrl: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json' },
+
+                columnDefs: [
+                    {//coluna ID
+                        targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis'
+                    }
+
+                    , {//coluna excluir
+                        render: function (data, type, row) {
+                            //var id = row[0];
+                            return "<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiPeriodo()' >Excluir</button>"
+                        },
+                        targets: 3,
+                        width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
+                    }
+                ],
+
+
+                initComplete: function () {
+                    //Exibir a diva somente após completar a carga
+                    $('#dadosTipo').show();
+                    tb.columns.adjust();
+              },
+
+            });
+
+
+    </script>
+
+
+
+</body>
+
+
+</html>
