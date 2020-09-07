@@ -112,7 +112,8 @@ Public Class clsHTMLComum
 
             <!--icone botao-->         
             <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
-    
+               
+            <script src=""https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js""></script>
         ")
 
         Return texto.ToString
@@ -126,9 +127,24 @@ Public Class clsHTMLComum
         pagina = pagina.Replace("[p_funcao_calcula_soma_horas]", RetornaFuncaoCalculaSomaHoras)
         pagina = pagina.Replace("[p_funcao_retorna_data_atual]", RetornaFuncaoRetornaDataAtual)
         pagina = pagina.Replace("[p_funcao_retorna_hora_atual]", RetornaFuncaoRetornaHoraAtual)
+        pagina = pagina.Replace("[p_funcao_ajax_loading]", RetornaFuncaoAjaxLoading)
         pagina = pagina.Replace("{p_versao_sistema}", clsVersaoSistema.Versao)
 
     End Sub
+
+    Private Shared Function RetornaFuncaoAjaxLoading() As String
+        Dim texto As New StringBuilder(vbNullString)
+
+        texto.Append("
+                    $(document).ajaxStart(function () {
+			            $.LoadingOverlay(""show"", { fade: false, background: '' });
+		            });
+		            $(document).ajaxStop(function () {
+			            $.LoadingOverlay(""hide"");
+                    }); ")
+
+        Return texto.ToString
+    End Function
 
     Public Shared Function RetornaFuncaoRetornaHoraAtual() As String
         Dim texto As New StringBuilder(vbNullString)

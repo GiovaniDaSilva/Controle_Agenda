@@ -14,8 +14,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
-
+    
     <style>
         [p_style_comum_pagina]
 
@@ -194,12 +193,7 @@
         var pagina = '[p_pagina]'
         var enviar_backup_email = false
         
-        $(document).ajaxStart(function () {
-			$.LoadingOverlay("show", { fade: false, background: '' });
-		});
-		$(document).ajaxStop(function () {
-			$.LoadingOverlay("hide");
-        });
+        
 
         //Evento de submit do formulario
         $("#form_dados").submit(function (e) {
@@ -319,7 +313,7 @@
             return JSON.stringify(json);
         };
 
-
+        [p_funcao_ajax_loading]
 
     </script>
 </body>
