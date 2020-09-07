@@ -27,6 +27,10 @@
     Public Shared Function ExisteBase() As Boolean
         Dim locRetorno As Boolean
 
+        If CaminhoBase = vbNullString Then
+            Throw New Exception("Caminho da base não informado.")
+        End If
+
         locRetorno = IO.File.Exists(CaminhoBase)
 
         If Not locRetorno then
@@ -85,6 +89,10 @@
 
         Return vbNullString
     End Function
+
+    Friend Shared Sub recriaConexao()
+        glfConexao = Nothing
+    End Sub
 End Class
 
 

@@ -36,8 +36,8 @@ Public Class clsConfiguracaoWeb
         html = html.Replace("{p_AusTtDiaNao_checked}", If(Not parametros.ConsideraTipoAusenteTotal, CHECK, ""))
 
         html = html.Replace("{p_EmBranco_checked}", If(parametros.InicializarCampoApartirDe = enuApartirDe.Branco, CHECK, ""))
-        html = html.Replace("{p_DataAtual_checked}", If(Not parametros.InicializarCampoApartirDe = enuApartirDe.Atual, CHECK, ""))
-        html = html.Replace("{p_7dias_checked}", If(Not parametros.InicializarCampoApartirDe = enuApartirDe.Dias7, CHECK, ""))
+        html = html.Replace("{p_DataAtual_checked}", If(parametros.InicializarCampoApartirDe = enuApartirDe.Atual, CHECK, ""))
+        html = html.Replace("{p_7dias_checked}", If(parametros.InicializarCampoApartirDe = enuApartirDe.Dias7, CHECK, ""))
 
         html = html.Replace("{p_web_checked}", If(parametros.UtilizarVersaoWeb, CHECK, ""))
         html = html.Replace("{p_desktop_checked}", If(Not parametros.UtilizarVersaoWeb, CHECK, ""))
@@ -94,15 +94,71 @@ Public Class clsConfiguracaoWeb
         Dim ini As New clsIni
         Dim IniJson = DeserializarNewtonsoft(funTrataJson(json))
 
-        'subValidaPeriodos(pontoJson)
+        subValidaconfiguracao(IniJson)
 
         ini.gravaArquivoini(funRetornaParametrosIni(IniJson))
 
         Return "Sucesso"
     End Function
 
+    Private Sub subValidaconfiguracao(pontoJson As clsIniWeb)
+
+        clsConexao.CaminhoBase = pontoJson.caminhoBase
+        If Not clsConexao.ExisteBase Then
+            Throw New Exception("Caminho Inválido." & vbNewLine & "Inferme o diretório do arquivo da base de dados." & vbNewLine & "Ex: C:\Agenda\BancoAgenda.db")
+        End If
+
+    End Sub
+
     Private Function funRetornaParametrosIni(iniJson As clsIniWeb) As clsParametrosIni
-        Throw New NotImplementedException()
+
+        Dim ini = New clsIni().funCarregaIni()
+
+        ini.TempoNotificacao = iniJson.tempoNotificacao
+
+        If iniJson.opAtividadePor = 1 Then
+            ini.Horastrabalhadas = enuHorasTrabalhadas.Total
+        Else
+            ini.Horastrabalhadas = enuHorasTrabalhadas.Periodo
+        End If
+
+
+        If iniJson.opAusenteTtDia = 1 Then
+            ini.ConsideraTipoAusenteTotal = True
+        Else
+            ini.ConsideraTipoAusenteTotal = False
+        End If
+
+
+
+        If iniJson.opAPartirDe = 1 Then
+            ini.InicializarCampoApartirDe = enuApartirDe.Branco
+        ElseIf iniJson.opAPartirDe = 2 Then
+            ini.InicializarCampoApartirDe = enuApartirDe.Atual
+        Else
+            ini.InicializarCampoApartirDe = enuApartirDe.Dias7
+        End If
+
+
+        If iniJson.opVersao = 1 Then
+            ini.UtilizarVersaoWeb = True
+        Else
+            ini.UtilizarVersaoWeb = False
+        End If
+
+        ini.AcumuladoPontoApartirDe = iniJson.dataSaldoPonto
+
+
+        If iniJson.opOrdenacao = 1 Then
+            ini.OrdenacaoDasAtividades = enuOrdenacaoDasAtividades.Cre
+        Else
+            ini.OrdenacaoDasAtividades = enuOrdenacaoDasAtividades.Dec
+        End If
+
+        ini.CaminhoBase = iniJson.caminhoBase
+        ini.Email = iniJson.emailBackup
+
+        Return ini
     End Function
 
     Private Function DeserializarNewtonsoft(json As String) As clsIniWeb
@@ -115,13 +171,13 @@ Public Class clsConfiguracaoWeb
 
 
     Private Class clsIniWeb
-        Public Property tipoAtividade As String
+        Public Property tempoNotificacao As String
         Public Property opAtividadePor As Integer
         Public Property opAusenteTtDia As Integer
-        Public Property opDataAtual As Integer
-        Public Property opWeb As Integer
+        Public Property opAPartirDe As Integer
+        Public Property opVersao As Integer
         Public Property dataSaldoPonto As Date
-        Public Property opDecrescente As Integer
+        Public Property opOrdenacao As Integer
         Public Property caminhoBase As String
         Public Property emailBackup As String
 

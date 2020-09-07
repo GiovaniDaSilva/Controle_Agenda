@@ -63,6 +63,9 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
         WritePrivateProfileString(enuGrupoIni.Dados, enuParametrosIni.AcumuladoPontoApartirDe, parParametros.AcumuladoPontoApartirDe, nome_arquivo_ini)
 
         WritePrivateProfileString(enuGrupoIni.Email, enuParametrosIni.Mail, parParametros.Email, nome_arquivo_ini)
+
+
+        clsConexao.recriaConexao()
     End Sub
 
     ' Retorna o nome do arquivo INI

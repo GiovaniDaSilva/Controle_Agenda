@@ -44,8 +44,8 @@
 
                         <!--Campo Tempo Entre as Notificações-->
                         <div class="form-group col-md-3">
-                            <label for="tipoAtividade">Tempo entre as notificações</label>
-                            <select class="custom-select" select id="tipoAtividade" name="tipoAtividade" form="form_dados">
+                            <label for="tempoNotificacao">Tempo entre as notificações</label>
+                            <select class="custom-select" select id="tempoNotificacao" name="tempoNotificacao" form="form_dados">
                                 {p_lista_tempo_notificacao}
                             </select>
                         </div>
@@ -88,13 +88,13 @@
                             </br>
                             <div name="rbAPartirDe" class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opEmBranco" id="opEmBranco" value="1" {p_EmBranco_checked}>Em Branco
+                                    <input type="radio" name="opAPartirDe" id="opEmBranco" value="1" {p_EmBranco_checked} >Em Branco
                                 </label>
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opDataAtual" id="opDataAtual" value="2" {p_DataAtual_checked}>Data Atual
+                                    <input type="radio" name="opAPartirDe" id="opDataAtual" value="2" {p_DataAtual_checked} >Data Atual
                                 </label>
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="op7dias" id="op7dias" value="3" {p_7dias_checked}>Últimos 7 dias
+                                    <input type="radio" name="opAPartirDe" id="op7dias" value="3" {p_7dias_checked} >Últimos 7 dias
                                 </label>
                             </div>
                         </div>
@@ -106,10 +106,10 @@
                             </br>
                             <div name="rbVersao" class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opWeb" id="opWeb" value="1" {p_web_checked}>Web
+                                    <input type="radio" name="opVersao" id="opWeb" value="1" {p_web_checked} >Web
                                 </label>
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opDesktop" id="opDesktop" value="2" {p_desktop_checked}>Desktop
+                                    <input type="radio" name="opVersao" id="opDesktop" value="2" {p_desktop_checked} >Desktop
                                 </label>
                             </div>
                         </div>
@@ -133,10 +133,10 @@
                             </br>
                             <div name="rbOrdenacao" class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opCrescente" id="opCrescente" value="1" {p_Crescente_checked}>Crescente
+                                    <input type="radio" name="opOrdenacao" id="opCrescente" value="1" {p_Crescente_checked}>Crescente
                                 </label>
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opDecrescente" id="opDecrescente" value="2" {p_Decrescente_checked}>Decrescente
+                                    <input type="radio" name="opOrdenacao" id="opDecrescente" value="2" {p_Decrescente_checked}>Decrescente
                                 </label>
                             </div>
                         </div>

@@ -73,16 +73,9 @@ Public Class clsPrincipal
         locAdicionar.CarregaComboTipo(pTipo)
     End Sub
 
-    Friend Sub Configurar(pParametros As clsParametrosIni)
+    Friend Sub Configurar()
         Dim locForm As New frmConfiguracoes
-        Dim locParametros = pParametros
-
-        pParametros = locForm.funChamaConfiguracao(pParametros)
-
-        If pParametros Is Nothing Then
-            pParametros = locParametros
-        End If
-
+        locForm.funChamaConfiguracao()
     End Sub
 
     Friend Function funCarregaArquivoIni() As clsParametrosIni

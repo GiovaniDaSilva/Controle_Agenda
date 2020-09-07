@@ -1,9 +1,9 @@
 ﻿Public Class frmConfiguracoes
     Private glfParametros As New clsParametrosIni
 
-    Public Function funChamaConfiguracao(ByVal parParametros As clsParametrosIni) As clsParametrosIni
+    Public Function funChamaConfiguracao() As Boolean
 
-        glfParametros = parParametros
+        glfParametros = New clsIni().funCarregaIni()
         subCarregaCampos()
         Me.ShowDialog()
 
@@ -11,14 +11,14 @@
             End
         End If
 
-
         If Not glfParametros Is Nothing Then
             subPreenheParametros()
             Dim ini As New clsIni
             ini.gravaArquivoini(glfParametros)
+            Return True
         End If
 
-        Return glfParametros
+        Return False
     End Function
 
     Private Sub subCarregaCampos()

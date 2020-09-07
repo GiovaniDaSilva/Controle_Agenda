@@ -288,8 +288,13 @@ Public Class frmPrincipal
     Private Sub CarregaDataApertirDe()
         If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
             txtApartirDe.Value = Now
+            txtApartirDe.Checked = True
         ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
             txtApartirDe.Value = Now.AddDays(-7)
+            txtApartirDe.Checked = True
+        Else
+            txtApartirDe.Value = txtApartirDe.MinDate
+            txtApartirDe.Checked = False
         End If
     End Sub
 
@@ -420,9 +425,10 @@ Public Class frmPrincipal
 
     Private Sub subChamaConfiguracoes()
         subRemoveSelecao()
-        controle.Configurar(ParametrosIni)
+        controle.Configurar()
         subCarregaIni()
-
+        subLimpaFiltro()
+        subAtualizaLista()
         controle.subConfiguraTimer(TimerNotificacao, ParametrosIni)
     End Sub
 
