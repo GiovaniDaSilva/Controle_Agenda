@@ -46,6 +46,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaPaginaConfiguracao(pReqWeb)
                 Case clsPaginasWeb.Configuracao & "_Salvar"
                     locPagRetorno = funRetornaPaginaConfiguracao_Salvar(pReqWeb)
+                Case clsPaginasWeb.Configuracao & "_backup"
+                    locPagRetorno = funRetornaPaginaConfiguracao_BackupBase(pReqWeb)
                 Case "favicon.ico"
                     pReqWeb.RetornaIcone = True
                     Exit Sub
@@ -64,6 +66,33 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Sub
+
+    Private Function funRetornaPaginaConfiguracao_BackupBase(pReqWeb As clsReqWeb) As String
+        Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
+        Dim enviarEmail As Boolean = False
+        Try
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+                enviarEmail = CBool(arr(0))
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsConfiguracaoWeb().RetornaConfiguracaoBackupBase(enviarEmail)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+    End Function
 
     Private Function funRetornaPaginaConfiguracao(pReqWeb As clsReqWeb) As String
         Try

@@ -88,6 +88,15 @@ Public Class clsConfiguracaoWeb
         Public Property valor As String
     End Class
 
+    Friend Function RetornaConfiguracaoBackupBase(enviarEmail As Boolean) As String
+        RetornaConfiguracaoBackupBase = "Erro"
+        Dim caminhoBackup As String
+        Dim ini = New clsIni().funCarregaIni()
+        caminhoBackup = clsConexao.ExecutaBackupBase(ini.Email, False, enviarEmail)
+
+        Return "Backup realizado com sucesso. Disponivel em: " & caminhoBackup
+    End Function
+
     Friend Function RetornaConfiguracaoSalvar(json As String) As String
         RetornaConfiguracaoSalvar = "Erro"
 

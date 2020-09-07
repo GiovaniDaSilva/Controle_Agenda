@@ -103,6 +103,6 @@ Public Class clsVersaoSistema
 
     Private Shared Sub ExecutaBackupBase()
         Dim ini = New clsIni().funCarregaIni()
-        clsConexao.ExecutaBackupBase(ini.CaminhoBase, True)
+        clsConexao.ExecutaBackupBase(ini.CaminhoBase, True, False)
     End Sub
 End Class

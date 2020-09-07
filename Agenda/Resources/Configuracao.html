@@ -2,9 +2,15 @@
 <head>
 
     {p_links_comum_pagina}
-    
+
     <!--Converte Tabela em Json-->
     <script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js" integrity="sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=" crossorigin="anonymous"></script>
+
+    <!-- CSS dependencies -->
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+
+    <!-- JS dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
 
 
     <style>
@@ -26,7 +32,7 @@
         <nav class="navbar navbar-light Fundo">
             <div>
                 <button class="btn btn-success" type="submit" form="form_dados">Salvar</button>
-                <input id="btnLimpa" type="reset" value="Limpar" form="form_dados" class=" btn btn-warning" />
+                <input onClick="window.location.reload()" id="btnLimpa" type="reset" value="Limpar" form="form_dados" class=" btn btn-warning" />
             </div>
         </nav>
     </header>
@@ -88,13 +94,13 @@
                             </br>
                             <div name="rbAPartirDe" class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opAPartirDe" id="opEmBranco" value="1" {p_EmBranco_checked} >Em Branco
+                                    <input type="radio" name="opAPartirDe" id="opEmBranco" value="1" {p_EmBranco_checked}>Em Branco
                                 </label>
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opAPartirDe" id="opDataAtual" value="2" {p_DataAtual_checked} >Data Atual
+                                    <input type="radio" name="opAPartirDe" id="opDataAtual" value="2" {p_DataAtual_checked}>Data Atual
                                 </label>
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opAPartirDe" id="op7dias" value="3" {p_7dias_checked} >Últimos 7 dias
+                                    <input type="radio" name="opAPartirDe" id="op7dias" value="3" {p_7dias_checked}>Últimos 7 dias
                                 </label>
                             </div>
                         </div>
@@ -106,10 +112,10 @@
                             </br>
                             <div name="rbVersao" class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opVersao" id="opWeb" value="1" {p_web_checked} >Web
+                                    <input type="radio" name="opVersao" id="opWeb" value="1" {p_web_checked}>Web
                                 </label>
                                 <label class="btn btn-outline-info">
-                                    <input type="radio" name="opVersao" id="opDesktop" value="2" {p_desktop_checked} >Desktop
+                                    <input type="radio" name="opVersao" id="opDesktop" value="2" {p_desktop_checked}>Desktop
                                 </label>
                             </div>
                         </div>
@@ -160,7 +166,7 @@
                     <!--Backup-->
                     <nav class="navbar navbar-light Fundo">
                         <div>
-                            <button type="button" class="btn btn-warning" onclick="">Backup da Base</button>          
+                            <button type="button" class="btn btn-warning" onclick="FazerBackupBase()">Backup da Base</button>
                         </div>
                     </nav>
 
@@ -168,19 +174,20 @@
             </div>
 
             <div class="col-md-3">
-                 <div class=""float-right"">                    
-                    <img  src="Engrenagem.gif" width="200" height="200"> </img>                                         
+                <div class="" float-right"">
+                    <img src="Engrenagem.gif" width="200" height="200"> </img>
                 </div>
             </div>
 
         </div>
     </div>
 
+
     <script>
 
         [p_inicializa_campos]
         var pagina = '[p_pagina]'
-
+        var enviar_backup_email = false
 
         //Evento de submit do formulario
         $("#form_dados").submit(function (e) {
@@ -222,6 +229,67 @@
 
         });
 
+        function FazerBackupBase() {
+
+        
+            bootbox.confirm({
+                message: `Deseja enviar por o backup por e-mail?`,
+                buttons: {
+                    confirm: {
+                        label: 'Sim',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'Não',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {                        
+                        RequisicaoBackup(true);
+                    } else {
+                        RequisicaoBackup(false);
+                    }
+                }
+            });
+
+        };
+
+
+
+        function RequisicaoBackup(enviarEmail) {
+            $.ajax({
+                cache: false,
+                url: pagina + '_backup',
+                type: 'POST',
+                dataType: 'text',
+                data: enviarEmail + "",
+
+                success: function (objectJson) {
+
+                    var object = JSON.parse(objectJson);
+
+                    //sucesso
+                    if (object.codigo == 100) {
+                        alert(object.descricao);
+                    }
+
+                    //ocorreu um erro
+                    else if (object.codigo == 200) {
+                        alert(object.descricao);
+                    }
+
+
+                },
+
+                error: function (descricao) {
+                    alert("Ocorreu um erro: " + descricao);
+                }
+
+            });
+        }
+
+
         //Converte a tabela em json
         //Tenho que ver como referenciar esse projeto no meu projeto do github
         //https://github.com/lightswitch05/table-to-json
@@ -236,9 +304,10 @@
             jQuery.each(array, function () {
                 json[this.name] = this.value || '';
             });
-            
+
             return JSON.stringify(json);
         };
+
 
     </script>
 </body>
