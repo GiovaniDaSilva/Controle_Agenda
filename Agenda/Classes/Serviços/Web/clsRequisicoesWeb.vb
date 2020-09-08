@@ -50,6 +50,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaPaginaConfiguracao_BackupBase(pReqWeb)
                 Case clsPaginasWeb.CadastroTipo
                     locPagRetorno = funRetornaPaginaCadastroTipo(pReqWeb)
+                Case clsPaginasWeb.CadastroTipo & "_ValidaCodigo"
+                    locPagRetorno = funRetornaPaginaCadastroTipo_ValidaCodigo(pReqWeb)
                 Case "favicon.ico"
                     pReqWeb.RetornaIcone = True
                     Exit Sub
@@ -68,6 +70,10 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Sub
+
+    Private Function funRetornaPaginaCadastroTipo_ValidaCodigo(pReqWeb As clsReqWeb) As String
+        Throw New NotImplementedException()
+    End Function
 
     Private Function funRetornaPaginaCadastroTipo(pReqWeb As clsReqWeb) As String
 
