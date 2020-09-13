@@ -8,6 +8,10 @@
     <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.bootstrap4.min.css" />
 
+    <!--Converte Tabela em Json-->
+    <script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js" integrity="sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=" crossorigin="anonymous"></script>
+
+
     <style>
         [p_style_comum_pagina]
     </style>
@@ -309,6 +313,59 @@
         };
 
 
+        //Evento de submit do formulario
+        $("#form_dados").submit(function (e) {
+            e.preventDefault();
+
+           
+            var json = ConvertFormToJSON("#form_dados");
+            
+            $.ajax({
+                cache: false,
+                url: pagina + '_salvar',
+                type: 'POST',
+                dataType: 'text',
+                data: json,
+
+                success: function (objectJson) {
+
+                    var object = JSON.parse(objectJson);
+
+                    //sucesso
+                    if (object.codigo == 100) {
+                        //alert("Gravado com sucesso!");
+                        window.location.href = "Home";
+                    }
+
+                    //ocorreu um erro
+                    else if (object.codigo == 200) {
+                        alert(object.descricao);
+                    }
+
+
+                },
+
+                error: function (descricao) {
+                    alert("Ocorreu um erro: " + descricao);
+                }
+
+            });
+
+        });
+
+        //Converte a tabela em json
+        //Tenho que ver como referenciar esse projeto no meu projeto do github
+        //https://github.com/lightswitch05/table-to-json
+
+        //Metodo para montar o json
+        function ConvertFormToJSON(form) {            
+            var json = {};
+            //Adicionado a tabela ao json
+            var table = $('#dados').tableToJSON();
+            json['Tipos'] = table;
+
+            return JSON.stringify(json);
+        };
 
     </script>
 

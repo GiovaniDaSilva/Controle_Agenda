@@ -54,6 +54,8 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaPaginaCadastroTipo_CodigoSendoUsado(pReqWeb)
                 Case clsPaginasWeb.CadastroTipo & "_PermiteExcluir"
                     locPagRetorno = funRetornaPaginaCadastroTipo_PermiteExcluir(pReqWeb)
+                Case clsPaginasWeb.CadastroTipo & "_salvar"
+                    locPagRetorno = funRetornaPaginaCadastroTipo_Salvar(pReqWeb)
                 Case "favicon.ico"
                     pReqWeb.RetornaIcone = True
                     Exit Sub
@@ -73,6 +75,39 @@ Public Class clsRequisicoesWeb
 
     End Sub
 
+    Private Function funRetornaPaginaCadastroTipo_Salvar(pReqWeb As clsReqWeb) As String
+        Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
+
+        Try
+
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                json = New StreamReader(pReqWeb.Context.Request.InputStream).ReadToEnd()
+
+                If json = vbNullString Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                End If
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsCadastroTipoWeb().Salvar(json)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+
+    End Function
+
     Private Function funRetornaPaginaCadastroTipo_PermiteExcluir(pReqWeb As clsReqWeb) As String
         Dim json As String = vbNullString
         Dim retorno As New clsRetornoAjax
@@ -86,7 +121,7 @@ Public Class clsRequisicoesWeb
 
             Try
                 retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
-                retorno.descricao = New clsCadastroAtividadeWeb().PermiteExcluir(idTipo)
+                retorno.descricao = New clsCadastroTipoWeb().PermiteExcluir(idTipo)
             Catch ex As Exception
                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
                 Throw
@@ -114,7 +149,7 @@ Public Class clsRequisicoesWeb
 
             Try
                 retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
-                retorno.descricao = New clsCadastroAtividadeWeb().CodigoSendoUsado(codigoTipo)
+                retorno.descricao = New clsCadastroTipoWeb().CodigoSendoUsado(codigoTipo)
             Catch ex As Exception
                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
                 Throw
