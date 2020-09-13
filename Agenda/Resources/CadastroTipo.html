@@ -93,6 +93,8 @@
 
     <script>
         var pagina = '[p_pagina]'
+        var novoTipo = true;
+        var idTipo = 0;
 
         tb = $('#dados').DataTable({
             "scrollCollapse": true,
@@ -115,7 +117,7 @@
                 , {//coluna excluir
                     render: function (data, type, row) {
                         //var id = row[0];
-                        return "<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiTipo()' >Excluir</button>"
+                        return "<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiTipo(true)' >Excluir</button>"
                     },
                     targets: 3,
                     width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
@@ -140,6 +142,8 @@
             $.each($(rowData), function (key, value) {
                 document.getElementById('codigo').value = value[1];
                 document.getElementById('descricao').value = value[2];
+                idTipo = value[0];
+                novoTipo = false;
             });
 
         });
@@ -152,6 +156,8 @@
                 //e.preventDefault(); //previnir tirar a seleção do item selecionado
                 document.getElementById('codigo').value = "";
                 document.getElementById('descricao').value = "";
+                idTipo = 0;
+                novoTipo = true;
             }
             else {
                 // select
@@ -160,13 +166,21 @@
 
 
         //Remove a linha do periodo
-        function excluiTipo() {
+        function excluiTipo(verifica) {
+
+            if (verifica) {
+                if (!PermiteExcluir(idTipo)) {
+                    return
+                }
+            }
 
             tb.row('.selected').remove().draw(false);
 
             //Limpa os campos de horas
             document.getElementById('codigo').value = "";
             document.getElementById('descricao').value = "";
+            novoTipo = true;
+            idTipo = 0;
         };
 
         function AdicionaTipoGrid() {
@@ -184,11 +198,18 @@
                 return
             }
 
-            if (CodigoSendoUtilizado(codigo)) {                
-                return
-            }
+            if (novoTipo) {                
+                if (CodigoExisteNaGrid()) {
+                    alert('Código já informado.')
+                    return
+                }
 
-            excluiTipo()
+                if (CodigoSendoUtilizado(codigo)) {                    
+                    return
+                }
+            }
+            
+            excluiTipo(false)
 
 
             tb.row.add([
@@ -198,13 +219,32 @@
                 ""
             ]).draw(false);
 
+            novoTipo = true;
+            idTipo = 0;
         }
 
+        function CodigoExisteNaGrid() {   
+            var data = tb.rows().data();
+            var codigo = document.getElementById('codigo').value + "";
+            var existe = false;
+            data.each(function (value, index) {    
+                var codigoGrid = value[1];
 
-        function CodigoSendoUtilizado(codigo){
-             $.ajax({
+                if (codigoGrid == codigo){
+                    existe = true;
+                }                
+            });
+
+            return existe;
+        };
+
+
+        function CodigoSendoUtilizado(codigo) {
+            var sendoUsado;
+            $.ajax({
                 cache: false,
-                url: pagina + '_ValidaCodigo',
+                url: pagina + '_CodigoSendoUsado',
+                async: false,
                 type: 'POST',
                 dataType: 'text',
                 data: codigo + "",
@@ -215,24 +255,60 @@
 
                     //sucesso
                     if (object.codigo == 100) {
-                        //alert("Gravado com sucesso!");
-                        //window.location.href = "Home";
-                        return true;
+                        sendoUsado = false;
                     }
 
                     //ocorreu um erro
                     else if (object.codigo == 200) {
                         alert(object.descricao);
-                        return false;
-                    }                    
+                        sendoUsado = true;
+                    }
                 },
 
                 error: function (descricao) {
                     alert("Ocorreu um erro: " + descricao);
                 }
-
             });
-        }
+
+            return sendoUsado;
+        };
+
+
+        function PermiteExcluir(id) {
+            var permiteExcluir;
+            $.ajax({
+                cache: false,
+                url: pagina + '_PermiteExcluir',
+                async: false,
+                type: 'POST',
+                dataType: 'text',
+                data: id + "",
+
+                success: function (objectJson) {
+
+                    var object = JSON.parse(objectJson);
+
+                    //sucesso
+                    if (object.codigo == 100) {
+                        permiteExcluir = true;
+                    }
+
+                    //ocorreu um erro
+                    else if (object.codigo == 200) {
+                        alert(object.descricao);
+                        permiteExcluir = false;
+                    }
+                },
+
+                error: function (descricao) {
+                    alert("Ocorreu um erro: " + descricao);
+                }
+            });
+
+            return permiteExcluir;
+        };
+
+
 
     </script>
 

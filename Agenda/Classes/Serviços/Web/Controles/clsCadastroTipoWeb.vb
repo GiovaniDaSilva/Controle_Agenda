@@ -33,7 +33,7 @@
             linha.Add(New clsColunasTabela(tipo.ID))
             linha.Add(New clsColunasTabela(tipo.CODIGO))
             linha.Add(New clsColunasTabela(tipo.DESCRICAO))
-            linha.Add(New clsColunasTabela("<button type='button' class='btn btn-outline-danger' id='btnExcluirTipo' onclick='excluiTipo()' >Excluir</button>"))
+            linha.Add(New clsColunasTabela("<button type='button' class='btn btn-outline-danger' id='btnExcluirTipo' onclick='excluiTipo(true)' >Excluir</button>"))
 
             locRetorno &= clsHTMLTools.funLinhaTabela(linha)
         Next

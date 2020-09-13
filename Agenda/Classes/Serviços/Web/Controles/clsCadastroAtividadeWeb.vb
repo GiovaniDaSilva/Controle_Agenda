@@ -129,6 +129,28 @@ Public Class clsCadastroAtividadeWeb
         Return locAtividade
     End Function
 
+    Friend Function PermiteExcluir(idTipo As Integer) As String
+        If idTipo <= 0 Then Return ""
+
+        Dim tipo As New clsTipo
+        tipo.InicializaPorID(idTipo)
+
+        Dim tipoAtividade As New clsCadastroTipoAtividade
+        tipoAtividade.ValidaExclusao(tipo)
+
+    End Function
+
+    Friend Function CodigoSendoUsado(codigoAtividade As Integer) As String
+        Dim tipoAtividade As New clsTipo
+        tipoAtividade.Inicializa(codigoAtividade)
+
+        If tipoAtividade.ID > 0 Then
+            Throw New Exception("Código do Tipo de Atividade está sendo utilizado.")
+        End If
+
+        Return "Sucesso"
+    End Function
+
     Private Function funValidaPeriodo(periodo As clsPeriodoWeb) As Boolean
         Try
             clsTools.funValidaHora(periodo.De)

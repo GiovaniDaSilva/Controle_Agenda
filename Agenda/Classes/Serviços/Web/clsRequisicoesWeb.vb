@@ -50,8 +50,10 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaPaginaConfiguracao_BackupBase(pReqWeb)
                 Case clsPaginasWeb.CadastroTipo
                     locPagRetorno = funRetornaPaginaCadastroTipo(pReqWeb)
-                Case clsPaginasWeb.CadastroTipo & "_ValidaCodigo"
-                    locPagRetorno = funRetornaPaginaCadastroTipo_ValidaCodigo(pReqWeb)
+                Case clsPaginasWeb.CadastroTipo & "_CodigoSendoUsado"
+                    locPagRetorno = funRetornaPaginaCadastroTipo_CodigoSendoUsado(pReqWeb)
+                Case clsPaginasWeb.CadastroTipo & "_PermiteExcluir"
+                    locPagRetorno = funRetornaPaginaCadastroTipo_PermiteExcluir(pReqWeb)
                 Case "favicon.ico"
                     pReqWeb.RetornaIcone = True
                     Exit Sub
@@ -71,8 +73,60 @@ Public Class clsRequisicoesWeb
 
     End Sub
 
-    Private Function funRetornaPaginaCadastroTipo_ValidaCodigo(pReqWeb As clsReqWeb) As String
-        Throw New NotImplementedException()
+    Private Function funRetornaPaginaCadastroTipo_PermiteExcluir(pReqWeb As clsReqWeb) As String
+        Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
+        Dim idTipo As Integer
+        Try
+
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+                idTipo = CInt(arr(0))
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsCadastroAtividadeWeb().PermiteExcluir(idTipo)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+    End Function
+
+    Private Function funRetornaPaginaCadastroTipo_CodigoSendoUsado(pReqWeb As clsReqWeb) As String
+        Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
+        Dim codigoTipo As Integer
+        Try
+
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+                codigoTipo = CInt(arr(0))
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsCadastroAtividadeWeb().CodigoSendoUsado(codigoTipo)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
     End Function
 
     Private Function funRetornaPaginaCadastroTipo(pReqWeb As clsReqWeb) As String
