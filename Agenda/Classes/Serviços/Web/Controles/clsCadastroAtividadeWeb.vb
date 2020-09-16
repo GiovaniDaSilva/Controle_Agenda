@@ -54,10 +54,12 @@ Public Class clsCadastroAtividadeWeb
 
     Friend Function funRetornaCadastroAtividade_Detalhes(Detalhes As clsParametrosDetalhesAtividadeWeb) As String
         Dim locDetalhes As New clsDetalhesAtividadeWeb
+        Dim atividade As New clsAtividade(Detalhes.id)
+
 
         locDetalhes.Descricao = funRetornaDescricaoAtividade(Detalhes.id)
         locDetalhes.TotalHoraDia = New clsPrincipal().funRetornaTotalHorasDia(Detalhes.data)
-        locDetalhes.TotalHorasAtividade = IIf(Val(Detalhes.codigo) <= 0, "00:00", New clsPrincipal().funRetornaTotalHorasAtividade(Detalhes.codigo))
+        locDetalhes.TotalHorasAtividade = IIf(Val(Detalhes.codigo) <= 0, atividade.Horas, New clsPrincipal().funRetornaTotalHorasAtividade(Detalhes.codigo))
 
         Return Newtonsoft.Json.JsonConvert.SerializeObject(locDetalhes)
 
