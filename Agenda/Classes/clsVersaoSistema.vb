@@ -2,7 +2,7 @@
 Imports System.Text
 
 Public Class clsVersaoSistema
-    Public Shared Property Versao As String = "2.3"
+    Public Shared Property Versao As String = "2.4"
 
     Public Shared Function VerificaVersao() As String
         Return New clsVersaoSistemaDAO().RetornaVersao()
@@ -19,21 +19,12 @@ Public Class clsVersaoSistema
 
         Do While versao < RetornaVersao()
 
-            If versao < 20 Then
-                atualizaVersao20()
-            End If
+            If versao < 20 Then atualizaVersao20()
 
-            If versao < 21 Then
-                funMudaVersaoSistema(21)
-            End If
-
-            If versao < 22 Then
-                funMudaVersaoSistema(22)
-            End If
-
-            If versao < 23 Then
-                funMudaVersaoSistema(23)
-            End If
+            If versao < 21 Then funMudaVersaoSistema(21)
+            If versao < 22 Then funMudaVersaoSistema(22)
+            If versao < 23 Then funMudaVersaoSistema(23)
+            If versao < 24 Then funMudaVersaoSistema(24)
 
             versao = VerificaVersao()
         Loop
@@ -112,6 +103,6 @@ Public Class clsVersaoSistema
 
     Private Shared Sub ExecutaBackupBase()
         Dim ini = New clsIni().funCarregaIni()
-        clsConexao.ExecutaBackupBase(ini.CaminhoBase, True)
+        clsConexao.ExecutaBackupBase(ini.CaminhoBase, True, False)
     End Sub
 End Class

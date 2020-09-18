@@ -201,6 +201,7 @@
 
         var EscalaDia = [p_escala_dia]; //"08:30"
         var RetornoAlmoco = [p_retorno_almoco];
+        var pagina = '[p_pagina]'
 
         $(document).ready(function () {
 
@@ -303,7 +304,7 @@
                 var id = [p_id_ponto];
                 if (id > 0) {
                     $.ajax({
-                        url: 'ControlePonto_excluir',
+                        url: pagina + '_excluir',
                         type: 'POST',
                         dataType: 'text',
                         data: id + "", //Força a conversão para string
@@ -503,7 +504,7 @@
 
             $.ajax({
                 cache: false,
-                url: 'ControlePonto_salvar',
+                url: pagina + '_salvar',
                 type: 'POST',
                 dataType: 'text',
                 data: json,

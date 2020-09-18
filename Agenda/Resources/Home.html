@@ -112,6 +112,9 @@
                     <span style="border:none" class="input-group-text Fundo labelSpan"><b>A partir de:</b></span>
                     <input type="date" class="form-control" id="data_ini" name="data_ini" form="form_Filtro">
                     &nbsp;
+                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Até:</b></span>
+                    <input type="date" class="form-control" id="data_ate" name="data_ate" form="form_Filtro">
+                    &nbsp;
                     <span style="border:none" class="input-group-text Fundo labelSpan"><b>Tipo de Atividade:</b></span>
                     <select class="custom-select" select id="cbTipo" name="tipoAtividade" form="form_Filtro">
                         {p_tipos_atividades_filtro}
@@ -180,7 +183,7 @@
 
         $(document).ready(function () {
 
-
+            var pagina = '[p_pagina]'
 
             [p_inicializa_campos_filtro]
 
@@ -265,7 +268,7 @@
 
                 if (id > 0) {
                     $.ajax({
-                        url: 'home_get_detalhes',
+                        url: pagina + '_get_detalhes',
                         type: 'POST',
                         dataType: 'text',//'json',
                         data: dados,
@@ -325,9 +328,9 @@
                 tipo = value[2];
             });
 
-            if (tipo == 'PBI') {
+            if (tipo == 'PBI' && codigo > 0) {
                 abrir = '<td> <a target="_blank" href="http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=' + codigo + '" class="btn btn-primary btn-sm">Abrir</a></td>';
-            } else if (tipo == 'Solicitação') {
+            } else if (tipo == 'Solicitação' && codigo > 0) {
                 abrir = '<td> <a target="_blank" href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + codigo + '" class="btn btn-primary btn-sm">Abrir</a></td>';
 
                 solControl = '<td> <a target="_blank" href="' + carminhoSolControl + 'set_demanda?id=' + codigo + '" class="btn btn-info btn-sm">Sol Control</a></td>';
@@ -371,7 +374,7 @@
             }
         });
 
-
+        
 
     </script>
 

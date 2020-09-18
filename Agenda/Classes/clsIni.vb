@@ -17,13 +17,16 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
         Dim locParametros As New clsParametrosIni
 
         locParametros.InicializarCampoApartirDe = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.CampoAPartirDe, enuApartirDe.Dias7)
-        locParametros.Horastrabalhadas = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.HorasTrabalhadas, enuHorasTrabalhadas.Total)
+        locParametros.Horastrabalhadas = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.HorasTrabalhadas, enuHorasTrabalhadas.Periodo)
         locParametros.TempoNotificacao = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.TempoNotificacao, enuTempoNotificacao.Hora2)
         locParametros.EscalaTrabalho = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.EscalaTrabalho, "08:30")
+        locParametros.ConsideraTipoAusenteTotal = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.ConsideraAusenteTotal, "true")
+        locParametros.UtilizarVersaoWeb = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Geral, enuParametrosIni.VersaoWeb, "true")
 
         locParametros.OrdenacaoDasAtividades = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Dados, enuParametrosIni.Ordenacao, enuOrdenacaoDasAtividades.Dec)
         locParametros.SolicitarHTML = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Dados, enuParametrosIni.SolicitarHTML, "true")
         locParametros.CaminhoBase = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Dados, enuParametrosIni.CaminhoBase, Application.StartupPath & "\BancoAgenda.db")
+        locParametros.AcumuladoPontoApartirDe = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Dados, enuParametrosIni.AcumuladoPontoApartirDe, clsTools.funFormataData(Now))
 
         locParametros.Email = LeArquivoINI(nome_arquivo_ini, enuGrupoIni.Email, enuParametrosIni.Mail, vbNullString)
 
@@ -36,7 +39,6 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
 
 
     ' Usa a função GetPrivateProfileString para obter os valores
-
     Private Function LeArquivoINI(ByVal file_name As String, ByVal section_name As String, ByVal key_name As String, ByVal default_value As String) As String
         Const MAX_LENGTH As Integer = 500
 
@@ -52,12 +54,18 @@ Private Declare Auto Function WritePrivateProfileString Lib "Kernel32" ( ByVal l
         WritePrivateProfileString(enuGrupoIni.Geral, enuParametrosIni.HorasTrabalhadas, parParametros.Horastrabalhadas, nome_arquivo_ini)
         WritePrivateProfileString(enuGrupoIni.Geral, enuParametrosIni.TempoNotificacao, parParametros.TempoNotificacao, nome_arquivo_ini)
         WritePrivateProfileString(enuGrupoIni.Geral, enuParametrosIni.EscalaTrabalho, parParametros.EscalaTrabalho, nome_arquivo_ini)
+        WritePrivateProfileString(enuGrupoIni.Geral, enuParametrosIni.ConsideraAusenteTotal, parParametros.ConsideraTipoAusenteTotal, nome_arquivo_ini)
+        WritePrivateProfileString(enuGrupoIni.Geral, enuParametrosIni.VersaoWeb, parParametros.UtilizarVersaoWeb, nome_arquivo_ini)
 
         WritePrivateProfileString(enuGrupoIni.Dados, enuParametrosIni.Ordenacao, parParametros.OrdenacaoDasAtividades, nome_arquivo_ini)
         WritePrivateProfileString(enuGrupoIni.Dados, enuParametrosIni.SolicitarHTML, parParametros.SolicitarHTML, nome_arquivo_ini)
         WritePrivateProfileString(enuGrupoIni.Dados, enuParametrosIni.CaminhoBase, parParametros.CaminhoBase, nome_arquivo_ini)
+        WritePrivateProfileString(enuGrupoIni.Dados, enuParametrosIni.AcumuladoPontoApartirDe, parParametros.AcumuladoPontoApartirDe, nome_arquivo_ini)
 
         WritePrivateProfileString(enuGrupoIni.Email, enuParametrosIni.Mail, parParametros.Email, nome_arquivo_ini)
+
+
+        clsConexao.recriaConexao()
     End Sub
 
     ' Retorna o nome do arquivo INI

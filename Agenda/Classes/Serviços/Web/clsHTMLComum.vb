@@ -16,13 +16,25 @@ Public Class clsHTMLComum
 				        <i class=""material-icons"">print</i>&nbsp;Impressão 
 			          </button>
 			          <div class=""dropdown-menu"">
-				        <a class=""dropdown-item"" href=""ImpressaoAtividade"">Atividades</a>
-				        <a class=""dropdown-item"" href=""ImpressaoPonto"">Ponto</a>				
+				        <a class=""dropdown-item"" href=""ImpressaoAtividade""><i class=""material-icons"">format_paint</i>&nbsp;Atividades</a>
+				        <a class=""dropdown-item"" href=""ImpressaoPonto""><i class=""material-icons"">watch</i>&nbsp;Ponto</a>				
 			          </div>
 			        </div>
 
                     <a href=""ControlePonto"" id=""bt_controlePonto"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">query_builder</i>&nbsp;Ponto</a>            
-                    <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>            
+
+                   
+                     <div class=""btn-group"">
+			          <button type=""button"" class=""btn btn-primary btn-outline-light my-2 my-sm-0 dropdown-toggle"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">
+				        <i class=""material-icons"">build</i>&nbsp;Configurações 
+			          </button>
+			          <div class=""dropdown-menu"">
+				        <a class=""dropdown-item"" href=""Configuracao""><i class=""material-icons"">build_circle</i>&nbsp; Configuração do Sistema</a>
+				        <a class=""dropdown-item"" href=""CadastroTipo""><i class=""material-icons"">read_more</i>&nbsp; Cadastro Tipo de Atividade</a>				
+			          </div>
+			        </div>
+
+                    <a href=""Versoes"" id=""bt_versoes"" class=""btn btn-primary btn-outline-light my-2 my-sm-0"" ><i class=""material-icons"">live_help</i>&nbsp;Versões</a>                                
                 </div>
                 <div class=""float-right"">
                     <span class=""agenda"">Agenda</span>  <span style=""color: White;"" >v. {p_versao_sistema}</span>                       
@@ -111,7 +123,8 @@ Public Class clsHTMLComum
 
             <!--icone botao-->         
             <link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons"">
-    
+               
+            <script src=""https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js""></script>
         ")
 
         Return texto.ToString
@@ -125,9 +138,24 @@ Public Class clsHTMLComum
         pagina = pagina.Replace("[p_funcao_calcula_soma_horas]", RetornaFuncaoCalculaSomaHoras)
         pagina = pagina.Replace("[p_funcao_retorna_data_atual]", RetornaFuncaoRetornaDataAtual)
         pagina = pagina.Replace("[p_funcao_retorna_hora_atual]", RetornaFuncaoRetornaHoraAtual)
+        pagina = pagina.Replace("[p_funcao_ajax_loading]", RetornaFuncaoAjaxLoading)
         pagina = pagina.Replace("{p_versao_sistema}", clsVersaoSistema.Versao)
 
     End Sub
+
+    Private Shared Function RetornaFuncaoAjaxLoading() As String
+        Dim texto As New StringBuilder(vbNullString)
+
+        texto.Append("
+                    $(document).ajaxStart(function () {
+			            $.LoadingOverlay(""show"", { fade: false, background: '' });
+		            });
+		            $(document).ajaxStop(function () {
+			            $.LoadingOverlay(""hide"");
+                    }); ")
+
+        Return texto.ToString
+    End Function
 
     Public Shared Function RetornaFuncaoRetornaHoraAtual() As String
         Dim texto As New StringBuilder(vbNullString)

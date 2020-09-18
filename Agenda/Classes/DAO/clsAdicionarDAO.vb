@@ -177,13 +177,13 @@ Public Class clsAdicionarDAO
         Return lista
     End Function
 
-    Public Function carregarAtividades(ByVal parFiltro As clsAtividade) As List(Of clsConsultaAtividades)
+    Public Function carregarAtividades(ByVal parFiltro As clsFiltroAtividades) As List(Of clsConsultaAtividades)
         Dim locIni As New clsParametrosIni
         locIni = New clsIni().funCarregaIni()
         Return carregarAtividades(parFiltro, locIni)
     End Function
 
-    Public Function carregarAtividades(ByVal parFiltro As clsAtividade, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
+    Public Function carregarAtividades(ByVal parFiltro As clsFiltroAtividades, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
         Dim lista As New List(Of clsConsultaAtividades)
         Dim locSQL As String
 
@@ -195,6 +195,11 @@ Public Class clsAdicionarDAO
                 locSQL &= " AND A.DATA >= '" & clsTools.funAjustaDataSQL(parFiltro.Data) & "'"
             End If
 
+            If parFiltro.DataFinal <> CDate("31/12/1900") And
+                parFiltro.DataFinal <> CDate("01/01/0001") Then
+                locSQL &= " AND A.DATA <= '" & clsTools.funAjustaDataSQL(parFiltro.DataFinal) & "'"
+            End If
+
             If parFiltro.Codigo > 0 Then
                 locSQL &= " AND A.CODIGO = " & parFiltro.Codigo
             End If
@@ -203,11 +208,27 @@ Public Class clsAdicionarDAO
                 locSQL &= " AND A.ID_TIPO_ATIVIDADE = " & parFiltro.ID_TIPO_ATIVIDADE
             End If
 
-            If parParametrosIni.OrdenacaoDasAtividades = enuOrdenacaoDasAtividades.Dec Then
-                locSQL &= " ORDER BY A.DATA DESC, A.ID DESC"
-            Else
-                locSQL &= " ORDER BY A.DATA ASC , A.ID ASC"
+            If parFiltro.Descricao <> String.Empty Then
+                locSQL &= $" AND A.DESCRICAO LIKE '%{parFiltro.Descricao}%' "
             End If
+
+
+            Dim ordCre = " ORDER BY A.DATA ASC , A.ID ASC"
+            Dim ordDec = " ORDER BY A.DATA DESC, A.ID DESC"
+
+            If parFiltro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Decrescente Then
+                locSQL &= ordDec
+            ElseIf parFiltro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Crescente Then
+                locSQL &= ordCre
+            Else
+                If parParametrosIni.OrdenacaoDasAtividades = enuOrdenacaoDasAtividades.Dec Then
+                    locSQL &= ordDec
+                Else
+                    locSQL &= ordCre
+                End If
+            End If
+
+
 
             Comm.CommandText = locSQL
 

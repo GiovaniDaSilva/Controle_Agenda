@@ -91,6 +91,65 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to &lt;html&gt;
+        '''&lt;head&gt;
+        '''
+        '''    {p_links_comum_pagina}
+        '''
+        '''    &lt;style&gt;
+        '''        [p_style_comum_pagina]
+        '''    &lt;/style&gt;
+        '''
+        '''    {p_titulo_pagina}
+        '''&lt;/head&gt;
+        '''
+        '''
+        '''&lt;body class=&quot;Fundo&quot;&gt;
+        '''    &lt;header&gt;
+        '''        {p_menu_pagina}        
+        '''    &lt;/header&gt;
+        '''
+        '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Atualizações&lt;/h1&gt;
+        '''
+        '''    &lt;div class=&quot;container-fluid&quot;&gt;
+        '''
+        '''       
+        '''
+        '''
+        '''    &lt;/div&gt;
+        '''&lt;/body&gt;
+        '''
+        '''
+        '''&lt;/html&gt;.
+        '''</summary>
+        Friend ReadOnly Property CadastroTipo() As String
+            Get
+                Return ResourceManager.GetString("CadastroTipo", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;html&gt;
+        '''&lt;head&gt;
+        '''
+        '''    {p_links_comum_pagina}
+        '''
+        '''    &lt;!--Converte Tabela em Json--&gt;
+        '''    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js&quot; integrity=&quot;sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+        '''
+        '''    &lt;!-- CSS dependencies --&gt;
+        '''    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;bootstrap.min.css&quot;&gt;
+        '''
+        '''    &lt;!-- JS dependencies --&gt;
+        '''    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js&quot;&gt;&lt;/script [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Configuracao() As String
+            Get
+                Return ResourceManager.GetString("Configuracao", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &lt;html lang=&quot;pr-bt&quot;&gt;
         '''&lt;head&gt;
         '''    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
@@ -107,6 +166,16 @@ Namespace My.Resources
         Friend ReadOnly Property ControlePonto() As String
             Get
                 Return ResourceManager.GetString("ControlePonto", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Engrenagem() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Engrenagem", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
@@ -291,11 +360,12 @@ Namespace My.Resources
         '''
         '''    &lt;div class=&quot;container-fluid&quot;&gt;
         '''
-        '''        &lt;h2 class=&quot;Titulo&quot;&gt;v.1.5&lt;/h2&gt;
+        '''        &lt;h2 class=&quot;Titulo&quot;&gt;v.2.4&lt;/h2&gt;
         '''        &lt;p class=&quot;Atualizacao&quot;&gt;
         '''            &lt;ul&gt;
-        '''                &lt;li&gt;Adicionado botão opções para a atividade cadastrada na Agenda Web.&lt;/li&gt;&lt;/br&gt;
-        '''    [rest of string was truncated]&quot;;.
+        '''                &lt;li&gt;Adicionado novos parametros no sistema.&lt;/li&gt;
+        '''                &lt;ul&gt;
+        '''              [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Versoes() As String
             Get

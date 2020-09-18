@@ -1,9 +1,9 @@
 ﻿Public Class frmConfiguracoes
     Private glfParametros As New clsParametrosIni
 
-    Public Function funChamaConfiguracao(ByVal parParametros As clsParametrosIni) As clsParametrosIni
+    Public Function funChamaConfiguracao() As Boolean
 
-        glfParametros = parParametros
+        glfParametros = New clsIni().funCarregaIni()
         subCarregaCampos()
         Me.ShowDialog()
 
@@ -11,14 +11,14 @@
             End
         End If
 
-
         If Not glfParametros Is Nothing Then
             subPreenheParametros()
             Dim ini As New clsIni
             ini.gravaArquivoini(glfParametros)
+            Return True
         End If
 
-        Return glfParametros
+        Return False
     End Function
 
     Private Sub subCarregaCampos()
@@ -50,6 +50,14 @@
 
         txtEmail.Text = glfParametros.Email
 
+        rbdiasim.Checked = glfParametros.ConsideraTipoAusenteTotal
+        rbdianao.Checked = Not rbdiasim.Checked
+
+        dtpPonto.Value = CDate(glfParametros.AcumuladoPontoApartirDe)
+
+        rbWeb.Checked = glfParametros.UtilizarVersaoWeb
+        rbDesktop.Checked = Not rbWeb.Checked
+
     End Sub
 
     Private Sub subPreenheParametros()
@@ -76,9 +84,12 @@
 
         glfParametros.Email = txtEmail.Text
 
+        glfParametros.ConsideraTipoAusenteTotal = IIf(rbdiasim.Checked, True, False)
+        glfParametros.AcumuladoPontoApartirDe = dtpPonto.Value
+        glfParametros.UtilizarVersaoWeb = rbWeb.Checked
     End Sub
 
-    Private Sub cbInicializarWindows_CheckedChanged(sender As Object, e As EventArgs) Handles cbInicializarWindows.CheckedChanged
+    Private Sub cbInicializarWindows_CheckedChanged(sender As Object, e As EventArgs)
         If cbInicializarWindows.Checked Then
             clsRegistro.subRegistrarAplicacaoInicializacaoWindows()
         Else
@@ -120,12 +131,15 @@
     Private Sub BtnExecutarBackup_Click(sender As Object, e As EventArgs) Handles BtnExecutarBackup.Click
         Try
             Dim caminhoBackup As String
+            Dim enviarBackup As Boolean = False
 
-            caminhoBackup = clsConexao.ExecutaBackupBase(txtCaminhoBase.Text)
-
-            If caminhoBackup <> vbNullString Then
-                funEnviaBackupEmail(caminhoBackup)
+            If MsgBox("Deseja enviar o backup por e-mail?", MsgBoxStyle.YesNo, "Questão") = Windows.Forms.DialogResult.Yes Then
+                enviarBackup = True
             End If
+
+            caminhoBackup = clsConexao.ExecutaBackupBase(txtCaminhoBase.Text, True, enviarBackup)
+
+
 
 
         Catch ex As Exception
@@ -134,29 +148,9 @@
 
     End Sub
 
-    Private Sub funEnviaBackupEmail(caminhoBackup As String)
 
-        If MsgBox("Deseja enviar o backup por e-mail?", MsgBoxStyle.YesNo, "Questão") = Windows.Forms.DialogResult.No Then
-            Exit Sub
-        End If
 
-        Me.Cursor = Cursors.WaitCursor
 
-        Dim email As New clsEmail
-        email.EmailDestino = txtEmail.Text
-        email.Assunto = "Agenda Backup da base"
-
-        If caminhoBackup = vbNullString Then
-            Throw New Exception("Caminho do backup não foi informado.")
-        End If
-        email.CaminhoAnexo = caminhoBackup
-
-        If email.EnviaEmail() Then
-            MsgBox("E- mail com o backup foi enviado com sucesso.", vbInformation)
-        End If
-
-        Me.Cursor = Cursors.Default
-    End Sub
 
     Private Sub TipoDeAtividadeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TipoDeAtividadeToolStripMenuItem.Click
         frmCadastroTipoAtividade.ShowDialog()

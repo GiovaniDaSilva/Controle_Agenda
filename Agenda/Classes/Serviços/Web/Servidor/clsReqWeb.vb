@@ -7,5 +7,6 @@ Public Class clsReqWeb
     Public Property Context As HttpListenerContext
 
     Public Property RetornaIcone As Boolean
+    Public Property RetornaEngrenagem As Boolean
 
 End Class

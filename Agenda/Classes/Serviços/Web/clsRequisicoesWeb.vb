@@ -12,37 +12,55 @@ Public Class clsRequisicoesWeb
     Public Sub trataRequisicoesWeb(pReqWeb As clsReqWeb)
         Dim locPagRetorno As String = clsHTMLTools.RetornaPaginaErro("Página não encontrada", "A página solicitada não foi encontrada.")
         Try
-            Select Case pReqWeb.Context.Request.Url.AbsolutePath
-                Case "/Home"
+            Dim path = pReqWeb.Context.Request.Url.AbsolutePath.Replace("/", "")
+            Select Case path
+                Case clsPaginasWeb.Home
                     locPagRetorno = funRetornaPaginaHome(pReqWeb)
-                Case "/home_get_detalhes"
+                Case clsPaginasWeb.Home & "_get_detalhes"
                     locPagRetorno = funRetornaDetalhesAtividade(pReqWeb)
-                Case "/CadastroAtividade"
+                Case clsPaginasWeb.CadastroAtividade
                     locPagRetorno = funRetornaCadastroAtividade(pReqWeb)
-                Case "/CadastroAtividade_get_descricao"
+                Case clsPaginasWeb.CadastroAtividade & "_get_descricao"
                     locPagRetorno = funRetornaDescricaoAtividade(pReqWeb)
-                Case "/CadastroAtividade_salvar"
+                Case clsPaginasWeb.CadastroAtividade & "_salvar"
                     locPagRetorno = funRetornaCadastroAtividade_Salvar(pReqWeb)
-                Case "/CadastroAtividade_excluir"
+                Case clsPaginasWeb.CadastroAtividade & "_excluir"
                     locPagRetorno = funRetornaCadastroAtividade_Excluir(pReqWeb)
-                Case "/CadastroAtividade_get_periodos_dia"
+                Case clsPaginasWeb.CadastroAtividade & "_get_periodos_dia"
                     locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pReqWeb)
-                Case "/ControlePonto"
+                Case clsPaginasWeb.ControlePonto
                     locPagRetorno = funRetornaControlePonto(pReqWeb)
-                Case "/ControlePonto_salvar"
+                Case clsPaginasWeb.ControlePonto & "_salvar"
                     locPagRetorno = funRetornaControlePonto_Salvar(pReqWeb)
-                Case "/ControlePonto_excluir"
+                Case clsPaginasWeb.ControlePonto & "_excluir"
                     locPagRetorno = funRetornaControlePonto_Excluir(pReqWeb)
-                Case "/Grafico"
+                Case clsPaginasWeb.Grafico
                     locPagRetorno = funRetornaPaginaGrafico(pReqWeb)
-                Case "/ImpressaoAtividade"
+                Case clsPaginasWeb.ImpressaoAtividade
                     locPagRetorno = funRetornaPaginaImpressao(pReqWeb)
-                Case "/ImpressaoPonto"
+                Case clsPaginasWeb.ImpressaoPonto
                     locPagRetorno = funRetornaPaginaImpressaoPonto(pReqWeb)
-                Case "/Versoes"
+                Case clsPaginasWeb.Versoes
                     locPagRetorno = My.Resources.Versoes
-                Case "/favicon.ico"
+                Case clsPaginasWeb.Configuracao
+                    locPagRetorno = funRetornaPaginaConfiguracao(pReqWeb)
+                Case clsPaginasWeb.Configuracao & "_Salvar"
+                    locPagRetorno = funRetornaPaginaConfiguracao_Salvar(pReqWeb)
+                Case clsPaginasWeb.Configuracao & "_backup"
+                    locPagRetorno = funRetornaPaginaConfiguracao_BackupBase(pReqWeb)
+                Case clsPaginasWeb.CadastroTipo
+                    locPagRetorno = funRetornaPaginaCadastroTipo(pReqWeb)
+                Case clsPaginasWeb.CadastroTipo & "_CodigoSendoUsado"
+                    locPagRetorno = funRetornaPaginaCadastroTipo_CodigoSendoUsado(pReqWeb)
+                Case clsPaginasWeb.CadastroTipo & "_PermiteExcluir"
+                    locPagRetorno = funRetornaPaginaCadastroTipo_PermiteExcluir(pReqWeb)
+                Case clsPaginasWeb.CadastroTipo & "_salvar"
+                    locPagRetorno = funRetornaPaginaCadastroTipo_Salvar(pReqWeb)
+                Case "favicon.ico"
                     pReqWeb.RetornaIcone = True
+                    Exit Sub
+                Case "Engrenagem.gif"
+                    pReqWeb.RetornaEngrenagem = True
                     Exit Sub
             End Select
 
@@ -56,6 +74,186 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Sub
+
+    Private Function funRetornaPaginaCadastroTipo_Salvar(pReqWeb As clsReqWeb) As String
+        Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
+
+        Try
+
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                json = New StreamReader(pReqWeb.Context.Request.InputStream).ReadToEnd()
+
+                If json = vbNullString Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                End If
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsCadastroTipoWeb().Salvar(json)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+
+    End Function
+
+    Private Function funRetornaPaginaCadastroTipo_PermiteExcluir(pReqWeb As clsReqWeb) As String
+        Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
+        Dim idTipo As Integer
+        Try
+
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+                idTipo = CInt(arr(0))
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsCadastroTipoWeb().PermiteExcluir(idTipo)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+    End Function
+
+    Private Function funRetornaPaginaCadastroTipo_CodigoSendoUsado(pReqWeb As clsReqWeb) As String
+        Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
+        Dim codigoTipo As Integer
+        Try
+
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+                codigoTipo = CInt(arr(0))
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsCadastroTipoWeb().CodigoSendoUsado(codigoTipo)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+    End Function
+
+    Private Function funRetornaPaginaCadastroTipo(pReqWeb As clsReqWeb) As String
+
+        Try
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+
+            End If
+
+            Return New clsCadastroTipoWeb().RetornaPagina()
+        Catch ex As Exception
+            pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+            Throw New Exception("Erro ao carregar a página Configurações.")
+        End Try
+
+    End Function
+
+    Private Function funRetornaPaginaConfiguracao_BackupBase(pReqWeb As clsReqWeb) As String
+        Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
+        Dim enviarEmail As Boolean = False
+        Try
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+                enviarEmail = CBool(arr(0))
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsConfiguracaoWeb().RetornaConfiguracaoBackupBase(enviarEmail)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+    End Function
+
+    Private Function funRetornaPaginaConfiguracao(pReqWeb As clsReqWeb) As String
+        Try
+
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                Dim arr = clsHTMLTools.RetornaPostEmArray(pReqWeb.Context)
+
+            End If
+
+            Return New clsConfiguracaoWeb().RetornaPagina()
+        Catch ex As Exception
+            pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+            Throw New Exception("Erro ao carregar a página Configurações.")
+        End Try
+    End Function
+
+    Private Function funRetornaPaginaConfiguracao_Salvar(pReqWeb As clsReqWeb) As String
+        Dim json As String = vbNullString
+        Dim retorno As New clsRetornoAjax
+
+        Try
+
+            If pReqWeb.Context.Request.HttpMethod = "POST" Then
+                json = New StreamReader(pReqWeb.Context.Request.InputStream).ReadToEnd()
+
+                If json = vbNullString Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Parâmetros da Pagina estão inválidos.")
+                End If
+            End If
+
+            Try
+                retorno.codigo = clsRetornoAjax.enuCodigosRet.SUCESSO
+                retorno.descricao = New clsConfiguracaoWeb().RetornaConfiguracaoSalvar(json)
+            Catch ex As Exception
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.InternalServerError
+                Throw
+            End Try
+
+
+        Catch ex As Exception
+            retorno.codigo = clsRetornoAjax.enuCodigosRet.ERRO
+            retorno.descricao = ex.Message
+        End Try
+
+        Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
+    End Function
+
 
     Private Function funRetornaControlePonto_Excluir(pReqWeb As clsReqWeb) As String
         Dim id As Long = 0
@@ -173,7 +371,7 @@ Public Class clsRequisicoesWeb
 
     Private Function funRetornaPaginaImpressao(pReqWeb As clsReqWeb) As String
 
-        Dim filtro As New clsAtividade
+        Dim filtro As New clsFiltroAtividades
         Dim post() As String
         Dim ParametrosIni = New clsIni().funCarregaIni()
 
@@ -201,12 +399,29 @@ Public Class clsRequisicoesWeb
                 filtro.Data = CDate(data)
             End If
 
-            Dim tipo = clsHTMLTools.RetornaValorPostGet(post(1))
+            Dim dataAte = clsHTMLTools.RetornaValorPostGet(post(1))
+            If dataAte <> vbNullString Then
+                If Not IsDate(dataAte) Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Data do POST inválida.")
+                End If
+                filtro.DataFinal = CDate(dataAte)
+            End If
+
+            Dim tipo = clsHTMLTools.RetornaValorPostGet(post(2))
             If tipo < 0 Then
                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
                 Throw New Exception("Tipo de Atividade do POST inválido.")
             End If
             filtro.ID_TIPO_ATIVIDADE = tipo
+
+
+            Dim ordenacao = clsHTMLTools.RetornaValorPostGet(post(3))
+            If ordenacao = "C" Then
+                filtro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Crescente
+            Else
+                filtro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Decrescente
+            End If
         End If
 
         Try
@@ -506,7 +721,16 @@ Public Class clsRequisicoesWeb
                 locParametros.Data = CDate(data)
             End If
 
-            Dim tipo = clsHTMLTools.RetornaValorPostGet(post(1))
+            Dim dataAte = clsHTMLTools.RetornaValorPostGet(post(1))
+            If dataAte <> vbNullString Then
+                If Not IsDate(dataAte) Then
+                    pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                    Throw New Exception("Data do POST inválida.")
+                End If
+                locParametros.DataAte = CDate(dataAte)
+            End If
+
+            Dim tipo = clsHTMLTools.RetornaValorPostGet(post(2))
             If tipo < 0 Then
                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
                 Throw New Exception("Tipo de Atividade do POST inválido.")
@@ -558,6 +782,25 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Function
+
+    Public Shared Sub ChamaPagina(pagina As String)
+        Process.Start(clsServidorHTTP.local & pagina)
+    End Sub
+
+    Public Shared Sub ChamaPaginaExterna(pagina As String)
+        Process.Start(pagina)
+    End Sub
+
 End Class
 
-
+Public Class clsPaginasWeb
+    Public Shared ReadOnly Property Home = "Home"
+    Public Shared ReadOnly Property CadastroAtividade = "CadastroAtividade"
+    Public Shared ReadOnly Property ControlePonto = "ControlePonto"
+    Public Shared ReadOnly Property Grafico = "Grafico"
+    Public Shared ReadOnly Property ImpressaoAtividade = "ImpressaoAtividade"
+    Public Shared ReadOnly Property ImpressaoPonto = "ImpressaoPonto"
+    Public Shared ReadOnly Property Versoes = "Versoes"
+    Public Shared ReadOnly Property Configuracao = "Configuracao"
+    Public Shared ReadOnly Property CadastroTipo = "CadastroTipo"
+End Class

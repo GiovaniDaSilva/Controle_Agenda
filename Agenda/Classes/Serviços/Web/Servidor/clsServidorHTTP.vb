@@ -6,6 +6,9 @@ Imports Newtonsoft.Json
 
 Public Class clsServidorHTTP
 
+
+    Public Shared ReadOnly Property local = "http://localhost:8484/"
+
     ' Configura o mumero maximo de requisições que 
     ' podem ser tratadas concorrentemente
     Private maxRequestHandlers As Integer = 50
@@ -31,7 +34,7 @@ Public Class clsServidorHTTP
 
         'Para acesso apartir de qualquer estação
         'listener.Prefixes.Add("http://*:8484/")
-        listener.Prefixes.Add("http://localhost:8484/")
+        listener.Prefixes.Add(local)
 
         listener.Start()
 
@@ -68,7 +71,8 @@ Public Class clsServidorHTTP
 
             Dim webPage() As Byte = Encoding.UTF8.GetBytes("")
 
-            If Not locReqWeb.RetornaIcone Then
+            If Not locReqWeb.RetornaIcone And
+                Not locReqWeb.RetornaEngrenagem Then
                 webPage = Encoding.UTF8.GetBytes(locReqWeb.HTML)
 
                 ' Configura a resposta
@@ -93,10 +97,13 @@ Public Class clsServidorHTTP
             Loop
 
             If canWrite Then
-                If Not locReqWeb.RetornaIcone Then
-                    outputStream.Write(webPage, 0, webPage.Length)
-                Else
+                If locReqWeb.RetornaIcone Then
                     My.Resources.Agenda.Save(outputStream)
+
+                ElseIf locReqWeb.RetornaEngrenagem Then
+                    My.Resources.Engrenagem.Save(outputStream, Imaging.ImageFormat.Gif)
+                Else
+                    outputStream.Write(webPage, 0, webPage.Length)
                 End If
 
                 outputStream.Flush()

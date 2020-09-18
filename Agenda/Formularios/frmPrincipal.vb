@@ -166,20 +166,19 @@ Public Class frmPrincipal
 
     Private Sub AbreSolPBI(index As Integer)
         If lista(index).ID_TIPO_ATIVIDADE = 1 Then
-            Process.Start("http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?" & lista(index).Codigo)
+            clsRequisicoesWeb.ChamaPaginaExterna("http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?" & lista(index).Codigo)
         ElseIf lista(index).ID_TIPO_ATIVIDADE = 2 Then
-            Process.Start("http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=" & lista(index).Codigo)
+            clsRequisicoesWeb.ChamaPaginaExterna("http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=" & lista(index).Codigo)
         End If
     End Sub
 
     Private Sub subAtualizaHorasAtividade(e As DataGridViewCellEventArgs)
-        If Val(lista(e.RowIndex).Codigo) <= 0 Then
-            pHorasAtividade.Visible = False
-            Exit Sub
-        End If
-
         pHorasAtividade.Visible = True
-        lblHorasAtividade.Text = controle.funRetornaTotalHorasAtividade(lista(e.RowIndex).Codigo)
+        If Val(lista(e.RowIndex).Codigo) <= 0 Then
+            lblHorasAtividade.Text = lista(e.RowIndex).Horas
+        Else
+            lblHorasAtividade.Text = controle.funRetornaTotalHorasAtividade(lista(e.RowIndex).Codigo)
+        End If
     End Sub
 
 
@@ -203,20 +202,53 @@ Public Class frmPrincipal
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
-        If Not clsEmail.LoginValido() Then
-            MsgBox("Login e Senha do Email Controle Agenda não informado.", vbCritical)
+        If Process.GetProcessesByName(Process.GetCurrentProcess.ProcessName).Length > 1 Then
+            MsgBox("Agenda já esta em execução. Verifique a bandeja do Windows.", vbExclamation)
             End
         End If
 
+
+        subVerificaSenhaEmail()
+
         subCarregaIni()
 
-        clsConexao.CaminhoBase = ParametrosIni.CaminhoBase
-        If Not clsConexao.ExisteBase Then
-            subChamaConfiguracoes()
+        subAjustaBaseZerada()
+
+        subAtualizaSistema()
+
+        glfServidorHTTP.InicializaServidor()
+
+        subConfiguraTela()
+
+        subAtualizaLista()
+
+        subVerificaNovaVersao()
+
+        AbreFormulario()
+
+    End Sub
+
+    Private Sub AbreFormulario()
+
+        If Not ParametrosIni.UtilizarVersaoWeb Then
+            Me.Show()
+            Return
         End If
 
+        subExibeFormulario(False)
+        clsRequisicoesWeb.ChamaPagina(clsPaginasWeb.Home)
 
+    End Sub
+
+    Private Shared Sub subVerificaNovaVersao()
+        Try
+            clsVersaoSistema.ExisteVersaoSuperiorDisponivel()
+        Catch ex As Exception
+            'Se der erro, não avisa nada sobre nova versao
+        End Try
+    End Sub
+
+    Private Sub subAtualizaSistema()
         Me.Cursor = Cursors.WaitCursor
         Try
             clsVersaoSistema.AtualizaSistema()
@@ -224,38 +256,46 @@ Public Class frmPrincipal
             clsTools.subTrataExcessao(ex)
         End Try
         Me.Cursor = Cursors.Default
+    End Sub
 
-        glfServidorHTTP.InicializaServidor()
+    Private Sub subAjustaBaseZerada()
+        clsConexao.CaminhoBase = ParametrosIni.CaminhoBase
+        If Not clsConexao.ExisteBase Then
+            subChamaConfiguracoes()
+        End If
+    End Sub
 
+    Private Shared Sub subVerificaSenhaEmail()
+        If Not clsEmail.LoginValido() Then
+            MsgBox("Login e Senha do Email Controle Agenda não informado.", vbCritical)
+            End
+        End If
+    End Sub
+
+    Private Sub subConfiguraTela()
         Me.Text = Me.Text & clsVersaoSistema.Versao
-
-
         subCarregaComboTipo(cbTipo)
 
-        If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
-            txtApartirDe.Text = Now
-        ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
-            txtApartirDe.Text = Now.AddDays(-7)
-        End If
+        CarregaDataApertirDe()
 
-        subAtualizaLista()
         controle.subConfiguraTimer(TimerNotificacao, ParametrosIni)
-        TimerNotificacao.Start()
 
         TimerControleGeral.Interval = 120 * 60000 '120 minutos x 1 minuto do timer
         TimerControleGeral.Start()
 
+    End Sub
 
-        Try
-            clsVersaoSistema.ExisteVersaoSuperiorDisponivel()
-        Catch ex As Exception
-            'Se der erro, não avisa nada sobre nova versao
-        End Try
-
-        Me.Show()
-        'subExibiFormulario(False)
-        'Process.Start("http://localhost:8484/Home")
-
+    Private Sub CarregaDataApertirDe()
+        If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
+            txtApartirDe.Value = Now
+            txtApartirDe.Checked = True
+        ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
+            txtApartirDe.Value = Now.AddDays(-7)
+            txtApartirDe.Checked = True
+        Else
+            txtApartirDe.Value = txtApartirDe.MinDate
+            txtApartirDe.Checked = False
+        End If
     End Sub
 
     Private Sub subCarregaIni()
@@ -267,9 +307,14 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub subLimpaFiltro()
-        txtApartirDe.Clear()
+
+        CarregaDataApertirDe()
         cbTipo.SelectedIndex = -1
         txtCodigo.Clear()
+        txtDescricaoFiltro.Clear()
+
+        txtDtAte.Checked = False
+        txtDtAte.ResetText()
     End Sub
 
 
@@ -307,6 +352,8 @@ Public Class frmPrincipal
         pFiltro.Visible = True
         locSobeDesce = True
         subMovimentaMenuFiltro()
+
+        txtApartirDe.Focus()
     End Sub
 
     Private Sub subCarregaComboTipo(pTipo As ComboBox)
@@ -318,19 +365,32 @@ Public Class frmPrincipal
         subLimpaFiltro()
     End Sub
 
-    Private Sub btnFiltrar_Click(sender As Object, e As EventArgs) Handles btnFiltrar.Click
+    Private Sub btnFiltrar_Click(sender As Object, e As EventArgs)
         subOcultaFiltro()
         subAtualizaLista()
     End Sub
 
     Private Function funMontaFiltro() As clsAtividade
-        Dim locAividade As New clsAtividade
+        Dim filtro As New clsFiltroAtividades
 
-        locAividade.Codigo = Val(txtCodigo.Text)
-        locAividade.Data = clsTools.funRetornaData(txtApartirDe)
-        locAividade.ID_TIPO_ATIVIDADE = cbTipo.SelectedValue()
+        filtro.Codigo = Val(txtCodigo.Text)
 
-        Return locAividade
+        If Not txtApartirDe.Checked Then
+            filtro.Data = txtApartirDe.MinDate
+        Else
+            filtro.Data = txtApartirDe.Value
+        End If
+
+        If Not txtDtAte.Checked Then
+            filtro.DataFinal = txtDtAte.MaxDate
+        Else
+            filtro.DataFinal = txtDtAte.Value
+        End If
+
+        filtro.ID_TIPO_ATIVIDADE = cbTipo.SelectedValue()
+        filtro.Descricao = txtDescricaoFiltro.Text
+
+        Return filtro
     End Function
 
     Private Sub subConfiguraDescricao(pTipo As String)
@@ -365,9 +425,10 @@ Public Class frmPrincipal
 
     Private Sub subChamaConfiguracoes()
         subRemoveSelecao()
-        controle.Configurar(ParametrosIni)
+        controle.Configurar()
         subCarregaIni()
-
+        subLimpaFiltro()
+        subAtualizaLista()
         controle.subConfiguraTimer(TimerNotificacao, ParametrosIni)
     End Sub
 
@@ -433,7 +494,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles btnApontarHoras.Click
-        Process.Start("http://sah.govbr.com.br/default.asp?dtsem=")
+        clsRequisicoesWeb.ChamaPaginaExterna("http://sah.govbr.com.br/default.asp?dtsem=")
     End Sub
 
     Private Sub Button3_Click_2(sender As Object, e As EventArgs) Handles btnVersao.Click
@@ -444,10 +505,11 @@ Public Class frmPrincipal
     Private Sub gridAtividades_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles gridAtividades.CellFormatting
 
         If gridAtividades.Rows.Count = 0 Then Exit Sub
+        If e.RowIndex > gridAtividades.Rows.Count Then Exit Sub
 
         If (e.ColumnIndex = enuIndexColunas.HORA) Then
             If Trim(e.Value) = ":" Then Exit Sub
-            If ParametrosIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo Then
+            If ParametrosIni.Horastrabalhadas = enuHorasTrabalhadas.Periodo And Not lista(e.RowIndex).Periodos Is Nothing Then
                 gridAtividades.Rows(e.RowIndex).Cells(enuIndexColunas.HORA).ToolTipText = "Períodos:" & vbNewLine & clsPrincipal.funRetornaToolTipoPeriodo(lista(e.RowIndex).Periodos)
             End If
         ElseIf (e.ColumnIndex = enuIndexColunas.CODIGO) Then
@@ -458,7 +520,7 @@ Public Class frmPrincipal
     End Sub
 
 
-    Private Sub subExibiFormulario(ByVal parValor As Boolean)
+    Public Sub subExibeFormulario(ByVal parValor As Boolean)
 
         If parValor Then
             Me.ShowIcon = True
@@ -476,15 +538,15 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub frmPrincipal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If ParametrosIni.TempoNotificacao <> enuTempoNotificacao.NaoUsar Then
+        If ParametrosIni.TempoNotificacao <> enuTempoNotificacao.NaoUsar Or ParametrosIni.UtilizarVersaoWeb Then
             e.Cancel = True
-            subExibiFormulario(False)
+            subExibeFormulario(False)
         End If
         'glfServidorHTTP.EncerraServidorHTTP 
     End Sub
 
     Private Sub AbrirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirToolStripMenuItem.Click
-        subExibiFormulario(True)
+        subExibeFormulario(True)
     End Sub
 
     Private Sub SairToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SairToolStripMenuItem.Click
@@ -504,19 +566,19 @@ Public Class frmPrincipal
 
 
         If lista Is Nothing Or Not gridAtividades.CurrentRow.Selected Then
-            Process.Start(caminho & Home)
+            clsRequisicoesWeb.ChamaPaginaExterna(caminho & Home)
         Else
             i = gridAtividades.CurrentCell.RowIndex
             If lista(i).ID_TIPO_ATIVIDADE = 1 Then
-                Process.Start(Edicao & lista(i).Codigo)
+                clsRequisicoesWeb.ChamaPaginaExterna(Edicao & lista(i).Codigo)
             Else
-                Process.Start(Home)
+                clsRequisicoesWeb.ChamaPaginaExterna(Home)
             End If
         End If
     End Sub
 
     Private Sub btnGraficoMensal_Click_1(sender As Object, e As EventArgs) Handles btnGraficoMensal.Click
-        Process.Start("http://localhost:8484/Grafico")
+        clsRequisicoesWeb.ChamaPagina(clsPaginasWeb.Grafico)
     End Sub
 
     Private Sub ImprimirPeriodosDoDiaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImprimirPeriodosDoDiaToolStripMenuItem.Click
@@ -573,7 +635,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub btnVersaoWeb_Click(sender As Object, e As EventArgs) Handles btnVersaoWeb.Click
-        Process.Start("http://localhost:8484/Home")
+        clsRequisicoesWeb.ChamaPagina(clsPaginasWeb.Home)
     End Sub
 
     Private Sub TimerControleGeral_Tick(sender As Object, e As EventArgs) Handles TimerControleGeral.Tick
@@ -590,6 +652,29 @@ Public Class frmPrincipal
 
         subChamaFormularioAdicionarEdicao(index, True)
     End Sub
+
+    Private Sub txtDescricaoFiltro_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDescricaoFiltro.KeyPress
+        Dim delete() As Char
+
+        delete = {"'", "%"}
+
+        If KeyPressContains(delete, e.KeyChar) Then
+            e.Handled = True
+        End If
+
+    End Sub
+
+
+    Private Function KeyPressContains(delete As Char(), keychar As Char) As Boolean
+
+        For i = 0 To delete.Count - 1
+            If delete(i).ToString.Contains(keychar) Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
 End Class
 
 

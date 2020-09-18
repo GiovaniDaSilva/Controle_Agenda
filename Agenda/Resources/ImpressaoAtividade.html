@@ -41,7 +41,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        label  {
+        label {
             line-height: 15px;
         }
     </style>
@@ -60,27 +60,46 @@
 
     <div class="container-fluid">
         <form method="post" id="form_Filtro" style="margin-top: 10px; margin-bottom: 10px">
-            <div class="input-group mb-3 input-group-sm">
+            <div class="input-group mb-6 input-group-sm">
                 <div class="input-group-prepend">
 
                     <span style="border:none" class="input-group-text Fundo labelSpan"><b>A partir de:</b></span>
                     <input type="date" class="form-control" id="data_ini" name="data_ini" form="form_Filtro">
                     &nbsp;
+                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Até:</b></span>
+                    <input type="date" class="form-control" id="data_ate" name="data_ate" form="form_Filtro">
+                    &nbsp;
                     <span style="border:none" class="input-group-text Fundo labelSpan"><b>Tipo de Atividade:</b></span>
                     <select class="custom-select" select id="cbTipo" name="tipoAtividade" form="form_Filtro">
                         {p_tipos_atividades_filtro}
                     </select>
+
+
+
                     &nbsp;
+                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Ordenação:</b></span>
+
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-outline-info">
+                            <input   type="radio" name="options" id="opDecrescente"  value="D" {p_Dec_checked}> Decrescente
+                        </label>
+                        <label class="btn btn-outline-info">
+                            <input   type="radio" name="options" id="opCrescente" value="C" {p_Cre_checked}> Crescente
+                        </label>
+                    </div>
+                    
+                    &nbsp;&nbsp;&nbsp;
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" form="form_Filtro">Aplicar</button>
+                        <button class="btn btn-secondary" type="submit" form="form_Filtro">Aplicar</button>
                     </div>
                 </div>
             </div>
+                        
         </form>
     </div>
 
     <div class="container-fluid">
-        
+
 
         <div class="row">
             <div class="col-md-7">

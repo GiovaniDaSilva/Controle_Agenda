@@ -12,9 +12,10 @@ Public Class clsHomeWeb
 
         Dim locAtividades As New List(Of clsConsultaAtividades)
         Dim DAO As New clsAdicionarDAO
-        Dim Filtro As New clsAtividade
+        Dim Filtro As New clsFiltroAtividades
 
         Filtro.Data = parametros.Data
+        Filtro.DataFinal = parametros.DataAte
         Filtro.ID_TIPO_ATIVIDADE = parametros.Tipo
 
         locAtividades = DAO.carregarAtividades(Filtro)
@@ -30,6 +31,7 @@ Public Class clsHomeWeb
         html = html.Replace("{p_linhas_tabela}", RetornaLinhasTabela(listaAtividades))
         html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(parametros))
         html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(parametros.Tipo))
+        html = html.Replace("[p_pagina]", clsPaginasWeb.Home)
 
         Return html
     End Function
@@ -38,7 +40,8 @@ Public Class clsHomeWeb
         Dim texto As New StringBuilder(vbNullString)
         texto.AppendFormat("
             document.getElementById('data_ini').value = ""{0}"";                  
-        ", clsTools.funAjustaDataSQL(parametros.Data))
+            document.getElementById('data_ate').value = ""{1}"";  
+        ", clsTools.funAjustaDataSQL(parametros.Data), If(parametros.DataAte = CDate("01/01/0001"), "", clsTools.funAjustaDataSQL(parametros.DataAte)))
         Return texto.ToString
 
     End Function

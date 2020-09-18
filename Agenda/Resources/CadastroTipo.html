@@ -1,0 +1,377 @@
+<html>
+<head>
+
+    {p_links_comum_pagina}
+
+
+    <!--Seleção da linha da tabela-->
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.bootstrap4.min.css" />
+
+    <!--Converte Tabela em Json-->
+    <script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js" integrity="sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=" crossorigin="anonymous"></script>
+
+
+    <style>
+        [p_style_comum_pagina]
+    </style>
+
+    {p_titulo_pagina}
+</head>
+
+
+<body class="Fundo">
+    <header>
+        {p_menu_pagina}
+
+        <h1 class="TituloPrincipal">Cadastro de Tipo de Atividade</h1>
+
+        <!--Sub Menu-->
+        <nav class="navbar navbar-light Fundo">
+            <div>
+                <button class="btn btn-success" type="submit" form="form_dados">Salvar</button>
+                <input onClick="window.location.reload()" id="btnLimpa" type="reset" value="Limpar" form="form_dados" class=" btn btn-warning" />
+            </div>
+        </nav>
+
+    </header>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-8">
+                <form method="post" id="form_dados" style="margin-top: 30px; margin-bottom: 40px">
+
+                    <!--Hora inicial - Final-->
+                    <div class="form-row">
+                        <!--Campo codigo-->
+                        <div class="form-group col-md-2">
+                            <label for="codigo" class="label">Código</label>
+                            <input type="number" class="form-control" id="codigo" name="codigo" form="form_dados">
+                        </div>
+                        &nbsp;
+
+                        <!--Campo Descricao-->
+                        <div class="form-group col-md-4">
+                            <label for="descricao" class="label">Descrição</label>
+                            <input type="text" class="form-control" id="descricao" name="descricao" form="form_dados">
+                        </div>
+
+                        <!--Botão Adicionar Periodo-->
+                        <div class="form-group col-md-1">
+                            <label for="btnAdicionarTipo" class="label">&nbsp; </label>
+                            <button style="vertical-align:5px" id="btnAdicionarTipo" class="btn btn-info" type="button" form="form_dados" onclick="AdicionaTipoGrid()">Adicionar</button>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <!--Grid de Tipos-->
+                        <div id="dadosTipo" class="col-md-8" style="margin-top: 5px; display: none ">
+
+                            <table id="dados" class="table table-sm nowrap" cellspacing="0" form="form_dados" name="tabelaTipos">
+                                <thead>
+                                    <tr>
+                                        <th width="50px">ID</th>
+                                        <th width="50px">Código</th>
+                                        <th>Descrição</th>
+                                        <th width="50px">Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {p_linhas_tabela_tipos}
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script>
+        var pagina = '[p_pagina]'
+        var novoTipo = true;
+        var idTipo = 0;
+
+        tb = $('#dados').DataTable({
+            "scrollCollapse": true,
+            paging: false,
+            searching: false,
+            info: false,
+            select: {
+                style: 'single' //permitir selecionar apenas uma linha
+            },
+
+            order: [[1, 'dec']], //ordem padrão: coluna codigo em ordem decrescente
+
+            oLanguage: { sUrl: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json' },
+
+            columnDefs: [
+                {//coluna ID
+                    targets: 0, searchable: false, orderable: false, visible: false, className: 'noVis'
+                }
+
+                , {//coluna excluir
+                    render: function (data, type, row) {
+                        //var id = row[0];
+                        return "<button type='button' class='btn btn-outline-danger' id='btnExcluirPeriodo' onclick='excluiTipo(true)' >Excluir</button>"
+                    },
+                    targets: 3,
+                    width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
+                }
+            ],
+
+
+            initComplete: function () {
+                //Exibir a diva somente após completar a carga
+                $('#dadosTipo').show();
+                tb.columns.adjust();
+            },
+
+        });
+
+
+        //Seleção da Atividade
+        tb.on('select.dt deselect.dt', function () {
+            var rows = $('tr.selected');
+            var rowData = tb.rows(rows).data();
+
+            $.each($(rowData), function (key, value) {
+                document.getElementById('codigo').value = value[1];
+                document.getElementById('descricao').value = value[2];
+                idTipo = value[0];
+                novoTipo = false;
+            });
+
+        });
+
+        //Evento de Seleção do Usuário - antes da seleção ter ocorrido
+        tb.on('user-select', function (e, dt, type, cell, originalEvent) {
+            var row = dt.row(cell.index().row).node();
+            if ($(row).hasClass('selected')) {
+                // deselect
+                //e.preventDefault(); //previnir tirar a seleção do item selecionado
+                document.getElementById('codigo').value = "";
+                document.getElementById('descricao').value = "";
+                idTipo = 0;
+                novoTipo = true;
+            }
+            else {
+                // select
+            };
+        });
+
+
+        //Remove a linha do periodo
+        function excluiTipo(verifica) {
+
+            if (verifica) {
+                if (!PermiteExcluir(idTipo)) {
+                    return
+                }
+            }
+
+            tb.row('.selected').remove().draw(false);
+
+            //Limpa os campos de horas
+            document.getElementById('codigo').value = "";
+            document.getElementById('descricao').value = "";
+            novoTipo = true;
+            idTipo = 0;
+        };
+
+        function AdicionaTipoGrid() {
+
+            var codigo = document.getElementById('codigo').value;
+            var descricao = document.getElementById('descricao').value;
+
+            if (codigo == '' || codigo <= 0) {
+                alert('Informe o código do tipo de atividade')
+                return
+            }
+
+            if (descricao == "") {
+                alert('Informe a descrição do tipo de atividade.')
+                return
+            }
+
+            if (novoTipo) {                
+                if (CodigoExisteNaGrid()) {
+                    alert('Código já informado.')
+                    return
+                }
+
+                if (CodigoSendoUtilizado(codigo)) {                    
+                    return
+                }
+            }
+            
+            excluiTipo(false)
+
+
+            tb.row.add([
+                0, //ID
+                codigo, //codigo
+                descricao, //descricao
+                ""
+            ]).draw(false);
+
+            novoTipo = true;
+            idTipo = 0;
+        }
+
+        function CodigoExisteNaGrid() {   
+            var data = tb.rows().data();
+            var codigo = document.getElementById('codigo').value + "";
+            var existe = false;
+            data.each(function (value, index) {    
+                var codigoGrid = value[1];
+
+                if (codigoGrid == codigo){
+                    existe = true;
+                }                
+            });
+
+            return existe;
+        };
+
+
+        function CodigoSendoUtilizado(codigo) {
+            var sendoUsado;
+            $.ajax({
+                cache: false,
+                url: pagina + '_CodigoSendoUsado',
+                async: false,
+                type: 'POST',
+                dataType: 'text',
+                data: codigo + "",
+
+                success: function (objectJson) {
+
+                    var object = JSON.parse(objectJson);
+
+                    //sucesso
+                    if (object.codigo == 100) {
+                        sendoUsado = false;
+                    }
+
+                    //ocorreu um erro
+                    else if (object.codigo == 200) {
+                        alert(object.descricao);
+                        sendoUsado = true;
+                    }
+                },
+
+                error: function (descricao) {
+                    alert("Ocorreu um erro: " + descricao);
+                }
+            });
+
+            return sendoUsado;
+        };
+
+
+        function PermiteExcluir(id) {
+            var permiteExcluir;
+            $.ajax({
+                cache: false,
+                url: pagina + '_PermiteExcluir',
+                async: false,
+                type: 'POST',
+                dataType: 'text',
+                data: id + "",
+
+                success: function (objectJson) {
+
+                    var object = JSON.parse(objectJson);
+
+                    //sucesso
+                    if (object.codigo == 100) {
+                        permiteExcluir = true;
+                    }
+
+                    //ocorreu um erro
+                    else if (object.codigo == 200) {
+                        alert(object.descricao);
+                        permiteExcluir = false;
+                    }
+                },
+
+                error: function (descricao) {
+                    alert("Ocorreu um erro: " + descricao);
+                }
+            });
+
+            return permiteExcluir;
+        };
+
+
+        //Evento de submit do formulario
+        $("#form_dados").submit(function (e) {
+            e.preventDefault();
+
+           
+            var json = ConvertFormToJSON("#form_dados");
+            
+            $.ajax({
+                cache: false,
+                url: pagina + '_salvar',
+                type: 'POST',
+                dataType: 'text',
+                data: json,
+
+                success: function (objectJson) {
+
+                    var object = JSON.parse(objectJson);
+
+                    //sucesso
+                    if (object.codigo == 100) {
+                        //alert("Gravado com sucesso!");
+                        window.location.href = "Home";
+                    }
+
+                    //ocorreu um erro
+                    else if (object.codigo == 200) {
+                        alert(object.descricao);
+                    }
+
+
+                },
+
+                error: function (descricao) {
+                    alert("Ocorreu um erro: " + descricao);
+                }
+
+            });
+
+        });
+
+        //Converte a tabela em json
+        //Tenho que ver como referenciar esse projeto no meu projeto do github
+        //https://github.com/lightswitch05/table-to-json
+
+        //Metodo para montar o json
+        function ConvertFormToJSON(form) {            
+            var json = {};
+            //Adicionado a tabela ao json
+            var table = $('#dados').tableToJSON();
+            json['Tipos'] = table;
+
+            return JSON.stringify(json);
+        };
+
+    </script>
+
+
+
+</body>
+
+
+</html>

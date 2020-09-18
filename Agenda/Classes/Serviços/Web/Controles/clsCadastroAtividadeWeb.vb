@@ -20,6 +20,7 @@ Public Class clsCadastroAtividadeWeb
         html = html.Replace("{p_retorna_botao_excluir_atividade}", RetornaBotaoExcluirAtividade(pAtividade))
         html = html.Replace("{p_linhas_tabela_periodo_dia}", clsHTMLComum.RetornaTabelaPeriodosDia(vbNullString))
         html = html.Replace("[p_duplicar_atividade]", If(glfDuplicarAtividade, "true", "false"))
+        html = html.Replace("[p_pagina]", clsPaginasWeb.CadastroAtividade)
 
         Return html
     End Function
@@ -53,10 +54,12 @@ Public Class clsCadastroAtividadeWeb
 
     Friend Function funRetornaCadastroAtividade_Detalhes(Detalhes As clsParametrosDetalhesAtividadeWeb) As String
         Dim locDetalhes As New clsDetalhesAtividadeWeb
+        Dim atividade As New clsAtividade(Detalhes.id)
+
 
         locDetalhes.Descricao = funRetornaDescricaoAtividade(Detalhes.id)
         locDetalhes.TotalHoraDia = New clsPrincipal().funRetornaTotalHorasDia(Detalhes.data)
-        locDetalhes.TotalHorasAtividade = IIf(Val(Detalhes.codigo) <= 0, "00:00", New clsPrincipal().funRetornaTotalHorasAtividade(Detalhes.codigo))
+        locDetalhes.TotalHorasAtividade = IIf(Val(Detalhes.codigo) <= 0, atividade.Horas, New clsPrincipal().funRetornaTotalHorasAtividade(Detalhes.codigo))
 
         Return Newtonsoft.Json.JsonConvert.SerializeObject(locDetalhes)
 
@@ -127,6 +130,8 @@ Public Class clsCadastroAtividadeWeb
 
         Return locAtividade
     End Function
+
+
 
     Private Function funValidaPeriodo(periodo As clsPeriodoWeb) As Boolean
         Try

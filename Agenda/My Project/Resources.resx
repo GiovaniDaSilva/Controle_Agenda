@@ -124,8 +124,17 @@
   <data name="CadastroAtividade" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CadastroAtividade.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="CadastroTipo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CadastroTipo.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Configuracao" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Configuracao.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="ControlePonto" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ControlePonto.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Engrenagem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Engrenagem.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GraficoAtividades" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GraficoAtividades.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

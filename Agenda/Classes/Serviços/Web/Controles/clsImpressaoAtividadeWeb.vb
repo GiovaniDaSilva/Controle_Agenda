@@ -12,36 +12,46 @@ Public Class clsImpressaoAtividadeWeb
 
     Private Property html As New StringBuilder
 
-    Public Function RetornaPagina(pFiltro As clsAtividade) As String
+    Public Function RetornaPagina(pFiltro As clsFiltroAtividades) As String
         Return RetornaHTML(pFiltro)
     End Function
 
-    Private Function RetornaHTML(pFiltro As clsAtividade) As String
+    Private Function RetornaHTML(pFiltro As clsFiltroAtividades) As String
 
         Dim html As String
         html = My.Resources.ImpressaoAtividade
 
         html = html.Replace("{p_dados_impresso}", funRetornaSolicitacos(pFiltro))
         html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(pFiltro.ID_TIPO_ATIVIDADE))
-        html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(pFiltro.Data))
+        html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(pFiltro.Data, pFiltro.DataFinal))
         html = html.Replace("{p_linhas_tabela_periodo_dia}", clsHTMLComum.RetornaTabelaPeriodosDia(Now))
         html = html.Replace("{data_atual}", clsTools.funFormataData(Now))
+        html = html.Replace("{p_Dec_checked}", checkDecrescente(pFiltro))
+        html = html.Replace("{p_Cre_checked}", If(pFiltro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Crescente, "Checked", ""))
 
 
 
         Return html
     End Function
 
-    Private Function RetornaInicializaCamposFiltro(pData As Date) As String
+    Private Shared Function checkDecrescente(pFiltro As clsFiltroAtividades) As String
+        Return If((pFiltro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Decrescente Or
+                    pFiltro.Ordenacao = 0), "Checked", "")
+    End Function
+
+    Private Function RetornaInicializaCamposFiltro(pData As Date, pDateAte As Date) As String
         Dim texto As New StringBuilder(vbNullString)
+
+
         texto.AppendFormat("
             document.getElementById('data_ini').value = ""{0}"";                  
-        ", clsTools.funAjustaDataSQL(pData))
+            document.getElementById('data_ate').value = ""{1}"";
+        ", clsTools.funAjustaDataSQL(pData), If(pDateAte = CDate("01/01/0001"), "", clsTools.funAjustaDataSQL(pDateAte)))
         Return texto.ToString
 
     End Function
 
-    Private Function funRetornaSolicitacos(pFiltro As clsAtividade) As String
+    Private Function funRetornaSolicitacos(pFiltro As clsFiltroAtividades) As String
         Dim listaAtividades As New List(Of clsConsultaAtividades)
 
         listaAtividades = New clsAdicionarDAO().carregarAtividades(pFiltro)

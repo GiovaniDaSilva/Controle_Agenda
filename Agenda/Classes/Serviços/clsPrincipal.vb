@@ -12,7 +12,7 @@ Public Class clsPrincipal
         locFormAdicionar.ChamaFormulario(parIni, parAtividade)
     End Sub
 
-    Public Function funCarregarAtividades(ByVal parFiltro As clsAtividade, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
+    Public Function funCarregarAtividades(ByVal parFiltro As clsFiltroAtividades, parParametrosIni As clsParametrosIni) As List(Of clsConsultaAtividades)
         Dim DAO As New clsAdicionarDAO
         Return DAO.carregarAtividades(parFiltro, parParametrosIni)
     End Function
@@ -73,16 +73,9 @@ Public Class clsPrincipal
         locAdicionar.CarregaComboTipo(pTipo)
     End Sub
 
-    Friend Sub Configurar(pParametros As clsParametrosIni)
+    Friend Sub Configurar()
         Dim locForm As New frmConfiguracoes
-        Dim locParametros = pParametros
-
-        pParametros = locForm.funChamaConfiguracao(pParametros)
-
-        If pParametros Is Nothing Then
-            pParametros = locParametros
-        End If
-
+        locForm.funChamaConfiguracao()
     End Sub
 
     Friend Function funCarregaArquivoIni() As clsParametrosIni
@@ -100,10 +93,16 @@ Public Class clsPrincipal
     Public Function funRetornaTotalHorasDia(atividades As List(Of clsConsultaAtividades), pData As Date) As String
         Dim locDia As New List(Of clsConsultaAtividades)
         Dim locTime As TimeSpan
+        Dim somaAusente As Boolean = funCarregaArquivoIni.ConsideraTipoAusenteTotal
 
         locDia = atividades.FindAll(Function(X) X.Data = pData)
 
         For Each item In locDia
+
+            If Not somaAusente And item.ID_TIPO_ATIVIDADE = enuTipoAtividades.AUSENTE Then
+                Continue For
+            End If
+
             If Trim(item.Horas) <> ":" AndAlso Trim(item.Horas) <> vbNullString Then
                 locTime = locTime.Add(TimeSpan.Parse(item.Horas))
             End If
@@ -136,12 +135,7 @@ Public Class clsPrincipal
     End Function
 
     Public Sub funChamaHTMLVersao()
-        'Dim locArquivo As String
-        'locArquivo = IO.Path.ChangeExtension(IO.Path.GetTempFileName(), ".html")
-        'IO.File.WriteAllText(locArquivo, My.Resources.Versoes)
-        'Process.Start(locArquivo)
-
-        Process.Start("http://localhost:8484/Versoes")
+        clsRequisicoesWeb.ChamaPagina(clsPaginasWeb.Versoes)
     End Sub
 
     Friend Sub subExibeNotificacao(notifyIcon1 As NotifyIcon)
@@ -156,6 +150,8 @@ Public Class clsPrincipal
             Case enuTempoNotificacao.Hora2 : pTimer.Interval = (120 * minutoTimer)
             Case enuTempoNotificacao.Hora3 : pTimer.Interval = (180 * minutoTimer)
             Case enuTempoNotificacao.Hora4 : pTimer.Interval = (240 * minutoTimer)
+            Case Else
+                Return
         End Select
         pTimer.Start()
     End Sub
