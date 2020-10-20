@@ -84,7 +84,7 @@
 
     <!--Sub Menu-->
 
-    <div class="form-row" style="margin-top: 10px; margin-left: 20px; margin-right: 20px">
+    <div class="form-row" style="margin-top: 10px; margin-left: 10px; margin-right: 20px">
         <div class="col-md-10">
             <a href="CadastroAtividade" id="btnCadastroAtivdade" class=" btn btn-success botaoSubMenu">Nova Atividade</a>
             <a href="http://sah.govbr.com.br/default.asp?dtsem=" target="_blank" id="btnApontamentoHoras" class=" btn btn-info botaoSubMenu">Apontamento de Horas</a>
@@ -137,7 +137,7 @@
                     <tr>
                         <th>ID</th>
                         <th width="120px">Data</th>
-                        <th width="1%">Tipo</th>
+                        <th width="7%">Tipo</th>
                         <th width="80px">Codigo</th>
                         <th width="80px">Horas</th>
                         <th>Descrição</th>
@@ -228,7 +228,7 @@
                         targets: 6,
                         render: function (data, type, row, meta) {
                             var id = row[0];
-                            var icone_edit = '<i class="material-icons">edit</i>'
+                            var icone_edit = '<i class="material-icons" >edit</i>'
                             var editar = '<a href="/CadastroAtividade?id=' + id + '">' + icone_edit + '</a>';
 
                             
