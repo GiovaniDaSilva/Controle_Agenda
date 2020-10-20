@@ -32,6 +32,8 @@ Public Class clsHomeWeb
         html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(parametros))
         html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(parametros.Tipo))
         html = html.Replace("[p_pagina]", clsPaginasWeb.Home)
+        html = html.Replace("{p_linhas_tabela_periodo_dia}", clsHTMLComum.RetornaTabelaPeriodosDia(Now))
+        html = html.Replace("{data_atual}", clsTools.funFormataData(Now))
 
         Return html
     End Function

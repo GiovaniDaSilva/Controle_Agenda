@@ -151,10 +151,21 @@
                 </tbody>
             </table>
         </div>
-        <div class="form-group" style="margin-top: 40px">
-            <label for="comment" class="label">Descrição:</label>
-            <textarea readonly class="form-control" rows="10" id="txtdescricao" name="info"></textarea>
+
+        <div class="row" style="margin-top: 40px">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="comment" class="label">Descrição:</label>
+                    <textarea readonly class="form-control" rows="10" id="txtdescricao" name="info"></textarea>
+                </div>
+            </div>
+            <div class="col-md-5" style="margin-top: 30px">
+                <label for="tablePeriodosDia" class="label">Períodos de hoje ({data_atual}) </label>
+                {p_linhas_tabela_periodo_dia}
+            </div>
         </div>
+
+       
     </div>
 
 
