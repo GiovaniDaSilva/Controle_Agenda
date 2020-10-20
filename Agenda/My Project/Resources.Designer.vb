@@ -96,31 +96,13 @@ Namespace My.Resources
         '''
         '''    {p_links_comum_pagina}
         '''
-        '''    &lt;style&gt;
-        '''        [p_style_comum_pagina]
-        '''    &lt;/style&gt;
         '''
-        '''    {p_titulo_pagina}
-        '''&lt;/head&gt;
+        '''    &lt;!--Seleção da linha da tabela--&gt;
+        '''    &lt;script src=&quot;https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js&quot;&gt;&lt;/script&gt;
+        '''    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.datatables.net/select/1.3.1/css/select.bootstrap4.min.css&quot; /&gt;
         '''
-        '''
-        '''&lt;body class=&quot;Fundo&quot;&gt;
-        '''    &lt;header&gt;
-        '''        {p_menu_pagina}        
-        '''    &lt;/header&gt;
-        '''
-        '''    &lt;h1 class=&quot;TituloPrincipal&quot;&gt;Atualizações&lt;/h1&gt;
-        '''
-        '''    &lt;div class=&quot;container-fluid&quot;&gt;
-        '''
-        '''       
-        '''
-        '''
-        '''    &lt;/div&gt;
-        '''&lt;/body&gt;
-        '''
-        '''
-        '''&lt;/html&gt;.
+        '''    &lt;!--Converte Tabela em Json--&gt;
+        '''    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js&quot; integrity=&quot;sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=&quot; crossorigin=&quot;anonym [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property CadastroTipo() As String
             Get
@@ -215,6 +197,16 @@ Namespace My.Resources
         Friend ReadOnly Property GraficoAtividades() As String
             Get
                 Return ResourceManager.GetString("GraficoAtividades", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Historicos() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Historicos", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         

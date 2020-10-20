@@ -288,6 +288,12 @@
   <ItemGroup>
     <None Include="Resources\CadastroTipo.html" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Timer.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Historicos.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

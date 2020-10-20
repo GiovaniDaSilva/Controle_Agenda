@@ -8,5 +8,6 @@ Public Class clsReqWeb
 
     Public Property RetornaIcone As Boolean
     Public Property RetornaEngrenagem As Boolean
+    Public Property RetornaHistorico As Boolean
 
 End Class
