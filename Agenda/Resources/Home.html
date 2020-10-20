@@ -137,6 +137,7 @@
                     <tr>
                         <th>ID</th>
                         <th width="120px">Data</th>
+                        <th width="1%"></th>
                         <th width="7%">Tipo</th>
                         <th width="80px">Codigo</th>
                         <th width="80px">Horas</th>
@@ -203,16 +204,25 @@
                     },
                     {//coluna Data
                         type: 'date-br',
-                        targets: 1
+                        targets: 1,
+                        width: "1%" 
+                    },
+                    {//coluna Data Semana                        
+                        targets: 2,
+                        orderable: false,
+                        width: "20px" 
+                    },
+                    {//coluna Tipo
+                        targets: 3
                     },
                     {//coluna Código
-                        targets: 3,
+                        targets: 4,
                         render: function (data, type, row, meta) {
-                            var codigo = row[3];
+                            var codigo = row[4];
                             //Alterar para o ID_TIPO
-                            if (row[2] == 'PBI') {
+                            if (row[3] == 'PBI') {
                                 return '<a target="_blank" href="http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=' + codigo + '">' + codigo + '</a>';
-                            } else if (row[2] == 'Solicitação') {
+                            } else if (row[4] == 'Solicitação') {
                                 return '<a target="_blank" href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + codigo + '">' + codigo + '</a>';
                             } else {
                                 return codigo
@@ -220,12 +230,17 @@
 
                         }
                     },
+                    {//coluna Hora
+                        targets: 5,
+                        orderable: false,
+                    },
                     {//coluna Descrição
-                        targets: 5
+                        targets: 6,
+                        orderable: false,
                     },
 
                     {//coluna botoes
-                        targets: 6,
+                        targets: 7,
                         render: function (data, type, row, meta) {
                             var id = row[0];
                             var icone_edit = '<i class="material-icons" >edit</i>'
@@ -237,16 +252,16 @@
                         className: 'details-options',
                         orderable: false,
                         data: null,                        
-                        width: "1%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
+                        width: "1%" //Ajusta o tamanho para 1% ou o tamanho minimo necessário
                     },
 
                     {//coluna expandir
-                        targets: 7,                        
+                        targets: 8,                        
                         className: 'details-control',
                         orderable: false,
                         data: null,
                         defaultContent: '<i class="material-icons">expand_more</i>',
-                        width: "1%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
+                        width: "1%" //Ajusta o tamanho para 1% ou o tamanho minimo necessário
                     },
 
                 ],
@@ -280,7 +295,7 @@
 
                 $.each($(rowData), function (key, value) {
                     id = value[0];
-                    dados = "id=" + value[0] + "&data=" + value[1] + "&codigo=" + value[3];
+                    dados = "id=" + value[0] + "&data=" + value[1] + "&codigo=" + value[4];
                 });
 
                 if (id > 0) {
@@ -341,8 +356,8 @@
 
             $.each($(d), function (key, value) {
                 id = value[0];
-                codigo = value[3];
-                tipo = value[2];
+                codigo = value[4];
+                tipo = value[3];
             });
 
             if (tipo == 'PBI' && codigo > 0) {

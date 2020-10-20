@@ -52,7 +52,8 @@ Public Class clsHomeWeb
         For Each atividade In listaAtividades
             Dim linha = New List(Of clsColunasTabela)
             linha.Add(New clsColunasTabela(atividade.ID))
-            linha.Add(New clsColunasTabela(funRetornaDataAtividade(atividade.Data)))
+            linha.Add(New clsColunasTabela(atividade.Data))
+            linha.Add(New clsColunasTabela(clsHTMLTools.pintaDadoColunaTable(clsTools.funRetornaDiaSemana(atividade.Data, True), Color.DarkGreen)))
             linha.Add(New clsColunasTabela(atividade.TIPO_DESCRICAO))
             linha.Add(New clsColunasTabela(atividade.funRetornaCodigoTratado, ))
             linha.Add(New clsColunasTabela(atividade.Horas))
@@ -67,13 +68,5 @@ Public Class clsHomeWeb
 
     End Function
 
-    Private Function funRetornaDataAtividade(data As Date) As String
-        Dim retorno As String
 
-        retorno = clsTools.funFormataData(data)
-        retorno &= "   "
-        retorno &= clsHTMLTools.pintaDadoColunaTable(clsTools.funRetornaDiaSemana(data, True), Color.Blue)
-
-        Return retorno
-    End Function
 End Class
