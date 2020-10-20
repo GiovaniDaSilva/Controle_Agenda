@@ -65,10 +65,10 @@
             border-color: lightblue;
         }
 
-            .dt-buttons:hover {
-                background-color: lightblue;
-                border-color: white;
-            }
+        .dt-buttons:hover {
+            background-color: lightblue;
+            border-color: white;
+        }
     </style>
 
     {p_titulo_pagina}
@@ -106,16 +106,17 @@
 
     <div class="container-fluid">
         <form method="post" id="form_Filtro" style="margin-top: 10px; margin-bottom: 10px">
+        <form method="post" id="form_Filtro" style="margin-top: 10px; margin-bottom: 10px">
             <div class="input-group mb-3 input-group-sm">
                 <div class="input-group-prepend">
 
-                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>A partir de:</b></span>
+                    <span style="border:none" class="input-group-text Fundo labelSpan">A partir de:</span>
                     <input type="date" class="form-control" id="data_ini" name="data_ini" form="form_Filtro">
                     &nbsp;
-                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Até:</b></span>
+                    <span style="border:none" class="input-group-text Fundo labelSpan">Até:</span>
                     <input type="date" class="form-control" id="data_ate" name="data_ate" form="form_Filtro">
                     &nbsp;
-                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Tipo de Atividade:</b></span>
+                    <span style="border:none" class="input-group-text Fundo labelSpan">Tipo de Atividade:</span>
                     <select class="custom-select" select id="cbTipo" name="tipoAtividade" form="form_Filtro">
                         {p_tipos_atividades_filtro}
                     </select>
@@ -136,7 +137,7 @@
                     <tr>
                         <th>ID</th>
                         <th width="120px">Data</th>
-                        <th width="200px">Tipo</thwidth="100px">
+                        <th width="1%">Tipo</th>
                         <th width="80px">Codigo</th>
                         <th width="80px">Horas</th>
                         <th>Descrição</th>
