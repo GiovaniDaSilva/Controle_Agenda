@@ -60,15 +60,15 @@
             cursor: pointer;
         }
 
-        .dt-buttons{
-            background-color: lightblue;   
+        .dt-buttons {
+            background-color: lightblue;
             border-color: lightblue;
         }
 
-        .dt-buttons:hover{
-            background-color: lightblue;                        
-            border-color: white;
-        }
+            .dt-buttons:hover {
+                background-color: lightblue;
+                border-color: white;
+            }
     </style>
 
     {p_titulo_pagina}
@@ -140,7 +140,8 @@
                         <th width="80px">Codigo</th>
                         <th width="80px">Horas</th>
                         <th>Descrição</th>
-                        <th>Opções</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -158,9 +159,7 @@
 
 
     <script>
-
-
-
+               
         //Clique da coluna Opções
         $('#Dados tbody').on('click', 'td.details-control', function () {
 
@@ -224,14 +223,31 @@
                         targets: 5
                     },
 
-                    {//coluna Extra
+                    {//coluna botoes
                         targets: 6,
+                        render: function (data, type, row, meta) {
+                            var id = row[0];
+                            var icone_edit = '<i class="material-icons">edit</i>'
+                            var editar = '<a href="/CadastroAtividade?id=' + id + '">' + icone_edit + '</a>';
+
+                            
+                            return editar;
+                        },
+                        className: 'details-options',
+                        orderable: false,
+                        data: null,                        
+                        width: "1%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
+                    },
+
+                    {//coluna expandir
+                        targets: 7,                        
                         className: 'details-control',
                         orderable: false,
                         data: null,
-                        defaultContent: '<button class="btn btn-warning btn-sm">Opções</button>',
-                        width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
+                        defaultContent: '<i class="material-icons">expand_more</i>',
+                        width: "1%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
                     },
+
                 ],
 
                 initComplete: function () {
@@ -374,7 +390,7 @@
             }
         });
 
-        
+
 
     </script>
 

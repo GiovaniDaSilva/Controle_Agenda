@@ -19,30 +19,13 @@ Public Class clsVersaoSistema
 
         If versaoBase < VersaoSistema() Then
 
-            If versaoBase < 20 Then
-                atualizaVersao20(versaoBase)
-            End If
+            If versaoBase < 20 Then atualizaVersao20(versaoBase)
 
-            If versaoBase < 21 Then
-                funMudaVersaoSistema(21, versaoBase)
-            End If
-
-            If versaoBase < 22 Then
-                funMudaVersaoSistema(22, versaoBase)
-            End If
-
-            If versaoBase < 23 Then
-                funMudaVersaoSistema(23, versaoBase)
-            End If
-
-            If versaoBase < 24 Then
-                funMudaVersaoSistema(24, versaoBase)
-            End If
-
-            If versaoBase < 25 Then
-                funMudaVersaoSistema(25, versaoBase)
-            End If
-
+            If versaoBase < 21 Then funMudaVersaoSistema(21, versaoBase)
+            If versaoBase < 22 Then funMudaVersaoSistema(22, versaoBase)
+            If versaoBase < 23 Then funMudaVersaoSistema(23, versaoBase)
+            If versaoBase < 24 Then funMudaVersaoSistema(24, versaoBase)
+            If versaoBase < 25 Then funMudaVersaoSistema(25, versaoBase)
         End If
 
     End Sub

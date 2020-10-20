@@ -58,6 +58,7 @@ Public Class clsHomeWeb
             linha.Add(New clsColunasTabela(atividade.Horas))
             linha.Add(New clsColunasTabela(atividade.funRetornaDescricaoTratada, "class=""descricao"""))
             linha.Add(New clsColunasTabela(""))
+            linha.Add(New clsColunasTabela(""))
 
             locRetorno &= clsHTMLTools.funLinhaTabela(linha)
         Next
