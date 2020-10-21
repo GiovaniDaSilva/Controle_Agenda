@@ -60,15 +60,15 @@
             cursor: pointer;
         }
 
-        .dt-buttons{
-            background-color: lightblue;   
+        .dt-buttons {
+            background-color: lightblue;
             border-color: lightblue;
         }
 
-        .dt-buttons:hover{
-            background-color: lightblue;                        
-            border-color: white;
-        }
+            .dt-buttons:hover {
+                background-color: lightblue;
+                border-color: white;
+            }
     </style>
 
     {p_titulo_pagina}
@@ -84,8 +84,8 @@
 
     <!--Sub Menu-->
 
-    <div class="form-row" style="margin-top: 10px; margin-left: 20px; margin-right: 20px">
-        <div class="col-md-10">
+    <div class="form-row" style="margin-top: 10px; margin-left: 10px; margin-right: 20px">
+        <div class="col-md-9">
             <a href="CadastroAtividade" id="btnCadastroAtivdade" class=" btn btn-success botaoSubMenu">Nova Atividade</a>
             <a href="http://sah.govbr.com.br/default.asp?dtsem=" target="_blank" id="btnApontamentoHoras" class=" btn btn-info botaoSubMenu">Apontamento de Horas</a>
             <a href="http://mtz-vconversor:8077/home" target="_blank" id="btnSolControl" class=" btn btn-info botaoSubMenu">Sol Control</a>
@@ -93,39 +93,50 @@
             <a href="http://mtz-vtfs3:8080/tfs/CETIL/Suprimentos" target="_blank" id="btnTfs" class=" btn btn-info botaoSubMenu">TFS</a>
         </div>
 
-        <div class="col-md-1 float-right">
-            <span class="Fundo labelTotais">Total do Dia:&nbsp;</span>
-            <span class="Fundo labelTotais corVerdeVivo" id="totalHorasDia">00:00</span>
-        </div>
-        <div class="col-md-1 float-right">
-            <span class="Fundo labelTotais">Da Atividade:</span>
-            <span class="Fundo labelTotais corVerdeVivo" id="totalHorasAtividade">00:00</span>
+
+        <div class="col-md-3 float-right">
+            <div class="form-row">
+                <div class="col-md-2 float-right">
+                    <a href="#periodo_dia" data-toggle="tooltip" data-placement="bottom" title="Períodos do Dia"><img src="Historico.png" width="40" height="40"></img></a>
+                </div>
+
+                <div class="col-md-5 float-right">
+                    <span class="Fundo labelTotais">Total do Dia:</span></br>
+                    <span class="Fundo labelTotais corVerdeVivo" id="totalHorasDia">00:00</span>
+                </div>
+
+                <div class="col-md-5 float-right">
+                    <span class="Fundo labelTotais">Da Atividade:</span>
+                    <span class="Fundo labelTotais corVerdeVivo" id="totalHorasAtividade">00:00</span>
+                </div>
+            </div>
         </div>
     </div>
 
 
     <div class="container-fluid">
         <form method="post" id="form_Filtro" style="margin-top: 10px; margin-bottom: 10px">
-            <div class="input-group mb-3 input-group-sm">
-                <div class="input-group-prepend">
+            <form method="post" id="form_Filtro" style="margin-top: 10px; margin-bottom: 10px">
+                <div class="input-group mb-3 input-group-sm">
+                    <div class="input-group-prepend">
 
-                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>A partir de:</b></span>
-                    <input type="date" class="form-control" id="data_ini" name="data_ini" form="form_Filtro">
-                    &nbsp;
-                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Até:</b></span>
-                    <input type="date" class="form-control" id="data_ate" name="data_ate" form="form_Filtro">
-                    &nbsp;
-                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Tipo de Atividade:</b></span>
-                    <select class="custom-select" select id="cbTipo" name="tipoAtividade" form="form_Filtro">
-                        {p_tipos_atividades_filtro}
-                    </select>
-                    &nbsp;
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" form="form_Filtro">Aplicar</button>
+                        <span style="border:none" class="input-group-text Fundo labelSpan">A partir de:</span>
+                        <input type="date" class="form-control" id="data_ini" name="data_ini" form="form_Filtro">
+                        &nbsp;
+                        <span style="border:none" class="input-group-text Fundo labelSpan">Até:</span>
+                        <input type="date" class="form-control" id="data_ate" name="data_ate" form="form_Filtro">
+                        &nbsp;
+                        <span style="border:none" class="input-group-text Fundo labelSpan">Tipo de Atividade:</span>
+                        <select class="custom-select" select id="cbTipo" name="tipoAtividade" form="form_Filtro">
+                            {p_tipos_atividades_filtro}
+                        </select>
+                        &nbsp;
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" form="form_Filtro">Aplicar</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
     </div>
 
     <!--Div como oculta, exibe apos a carga da grid para evitar piscar enquanto redimensiona-->
@@ -136,11 +147,13 @@
                     <tr>
                         <th>ID</th>
                         <th width="120px">Data</th>
-                        <th width="200px">Tipo</thwidth="100px">
+                        <th width="1%"></th>
+                        <th width="7%">Tipo</th>
                         <th width="80px">Codigo</th>
                         <th width="80px">Horas</th>
                         <th>Descrição</th>
-                        <th>Opções</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -148,18 +161,23 @@
                 </tbody>
             </table>
         </div>
-        <div class="form-group" style="margin-top: 40px">
-            <label for="comment" class="label">Descrição:</label>
-            <textarea readonly class="form-control" rows="10" id="txtdescricao" name="info"></textarea>
+
+        <div class="row" style="margin-top: 40px">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="comment" class="label">Descrição:</label>
+                    <textarea readonly class="form-control" rows="10" id="txtdescricao" name="info"></textarea>
+                </div>
+            </div>
+            <div id="periodo_dia" class="col-md-5" style="margin-top: 30px">
+                <label for="tablePeriodosDia" class="label">Períodos de hoje ({data_atual}) </label>
+                {p_linhas_tabela_periodo_dia}
+            </div>
         </div>
     </div>
 
 
-
-
     <script>
-
-
 
         //Clique da coluna Opções
         $('#Dados tbody').on('click', 'td.details-control', function () {
@@ -203,16 +221,25 @@
                     },
                     {//coluna Data
                         type: 'date-br',
-                        targets: 1
+                        targets: 1,
+                        width: "1%"
+                    },
+                    {//coluna Data Semana
+                        targets: 2,
+                        orderable: false,
+                        width: "20px"
+                    },
+                    {//coluna Tipo
+                        targets: 3
                     },
                     {//coluna Código
-                        targets: 3,
+                        targets: 4,
                         render: function (data, type, row, meta) {
-                            var codigo = row[3];
+                            var codigo = row[4];
                             //Alterar para o ID_TIPO
-                            if (row[2] == 'PBI') {
+                            if (row[3] == 'PBI') {
                                 return '<a target="_blank" href="http://tfs.cetil.com.br:8080/tfs/CETIL/Suprimentos/_workitems?_a=edit&id=' + codigo + '">' + codigo + '</a>';
-                            } else if (row[2] == 'Solicitação') {
+                            } else if (row[4] == 'Solicitação') {
                                 return '<a target="_blank" href="http://sg.govbr.com.br/sgcetil/servlet/br.com.cetil.sg.producao.hsodetso?' + codigo + '">' + codigo + '</a>';
                             } else {
                                 return codigo
@@ -220,18 +247,40 @@
 
                         }
                     },
+                    {//coluna Hora
+                        targets: 5,
+                        orderable: false,
+                    },
                     {//coluna Descrição
-                        targets: 5
+                        targets: 6,
+                        orderable: false,
                     },
 
-                    {//coluna Extra
-                        targets: 6,
+                    {//coluna botoes
+                        targets: 7,
+                        render: function (data, type, row, meta) {
+                            var id = row[0];
+                            var icone_edit = '<i class="material-icons" >edit</i>'
+                            var editar = '<a href="/CadastroAtividade?id=' + id + '">' + icone_edit + '</a>';
+
+
+                            return editar;
+                        },
+                        className: 'details-options',
+                        orderable: false,
+                        data: null,
+                        width: "1%" //Ajusta o tamanho para 1% ou o tamanho minimo necessário
+                    },
+
+                    {//coluna expandir
+                        targets: 8,
                         className: 'details-control',
                         orderable: false,
                         data: null,
-                        defaultContent: '<button class="btn btn-warning btn-sm">Opções</button>',
-                        width: "5%" //Ajusta o tamanho para 5% ou o tamanho minimo necessário
+                        defaultContent: '<i class="material-icons">expand_more</i>',
+                        width: "1%" //Ajusta o tamanho para 1% ou o tamanho minimo necessário
                     },
+
                 ],
 
                 initComplete: function () {
@@ -263,7 +312,7 @@
 
                 $.each($(rowData), function (key, value) {
                     id = value[0];
-                    dados = "id=" + value[0] + "&data=" + value[1] + "&codigo=" + value[3];
+                    dados = "id=" + value[0] + "&data=" + value[1] + "&codigo=" + value[4];
                 });
 
                 if (id > 0) {
@@ -324,8 +373,8 @@
 
             $.each($(d), function (key, value) {
                 id = value[0];
-                codigo = value[3];
-                tipo = value[2];
+                codigo = value[4];
+                tipo = value[3];
             });
 
             if (tipo == 'PBI' && codigo > 0) {
@@ -374,7 +423,9 @@
             }
         });
 
-        
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
 
     </script>
 

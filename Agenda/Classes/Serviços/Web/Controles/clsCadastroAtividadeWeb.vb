@@ -59,10 +59,25 @@ Public Class clsCadastroAtividadeWeb
 
         locDetalhes.Descricao = funRetornaDescricaoAtividade(Detalhes.id)
         locDetalhes.TotalHoraDia = New clsPrincipal().funRetornaTotalHorasDia(Detalhes.data)
-        locDetalhes.TotalHorasAtividade = IIf(Val(Detalhes.codigo) <= 0, atividade.Horas, New clsPrincipal().funRetornaTotalHorasAtividade(Detalhes.codigo))
+        locDetalhes.TotalHorasAtividade = RetornaTotalHorasAtividade(Detalhes, atividade)
 
         Return Newtonsoft.Json.JsonConvert.SerializeObject(locDetalhes)
 
+    End Function
+
+    Private Shared Function RetornaTotalHorasAtividade(Detalhes As clsParametrosDetalhesAtividadeWeb, atividade As clsAtividade) As String
+        Dim retorno As String
+
+        If (Val(Detalhes.codigo) <= 0) Then
+            retorno = atividade.Horas
+            If Trim(retorno) = ":" Then
+                retorno = "00:00"
+            End If
+        Else
+            retorno = New clsPrincipal().funRetornaTotalHorasAtividade(Detalhes.codigo)
+        End If
+
+        Return retorno
     End Function
 
     ''' <summary>

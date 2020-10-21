@@ -32,6 +32,8 @@ Public Class clsHomeWeb
         html = html.Replace("[p_inicializa_campos_filtro]", RetornaInicializaCamposFiltro(parametros))
         html = html.Replace("{p_tipos_atividades_filtro}", clsHTMLComum.RetornaTiposAtividadesFiltro(parametros.Tipo))
         html = html.Replace("[p_pagina]", clsPaginasWeb.Home)
+        html = html.Replace("{p_linhas_tabela_periodo_dia}", clsHTMLComum.RetornaTabelaPeriodosDia(Now))
+        html = html.Replace("{data_atual}", clsTools.funFormataData(Now))
 
         Return html
     End Function
@@ -53,10 +55,12 @@ Public Class clsHomeWeb
             Dim linha = New List(Of clsColunasTabela)
             linha.Add(New clsColunasTabela(atividade.ID))
             linha.Add(New clsColunasTabela(atividade.Data))
+            linha.Add(New clsColunasTabela(clsHTMLTools.pintaDadoColunaTable(clsTools.funRetornaDiaSemana(atividade.Data, True), Color.DarkGreen)))
             linha.Add(New clsColunasTabela(atividade.TIPO_DESCRICAO))
             linha.Add(New clsColunasTabela(atividade.funRetornaCodigoTratado, ))
             linha.Add(New clsColunasTabela(atividade.Horas))
             linha.Add(New clsColunasTabela(atividade.funRetornaDescricaoTratada, "class=""descricao"""))
+            linha.Add(New clsColunasTabela(""))
             linha.Add(New clsColunasTabela(""))
 
             locRetorno &= clsHTMLTools.funLinhaTabela(linha)

@@ -2,43 +2,42 @@
 Imports System.Text
 
 Public Class clsVersaoSistema
-    Public Shared Property Versao As String = "2.4"
+    Public Shared Property Versao As String = "2.5"
 
-    Public Shared Function VerificaVersao() As String
+    Public Shared Function RetornaVersaoBase() As String
         Return New clsVersaoSistemaDAO().RetornaVersao()
     End Function
 
-    Public Shared Function RetornaVersao() As Integer
+    Public Shared Function VersaoSistema() As Integer
         Return CInt(Versao.Replace(".", ""))
     End Function
 
 
     Public Shared Sub AtualizaSistema()
 
-        Dim versao As Integer = VerificaVersao()
+        Dim versaoBase As Integer = RetornaVersaoBase()
 
-        Do While versao < RetornaVersao()
+        If versaoBase < VersaoSistema() Then
 
-            If versao < 20 Then atualizaVersao20()
+            If versaoBase < 20 Then atualizaVersao20(versaoBase)
 
-            If versao < 21 Then funMudaVersaoSistema(21)
-            If versao < 22 Then funMudaVersaoSistema(22)
-            If versao < 23 Then funMudaVersaoSistema(23)
-            If versao < 24 Then funMudaVersaoSistema(24)
-
-            versao = VerificaVersao()
-        Loop
+            If versaoBase < 21 Then funMudaVersaoSistema(21, versaoBase)
+            If versaoBase < 22 Then funMudaVersaoSistema(22, versaoBase)
+            If versaoBase < 23 Then funMudaVersaoSistema(23, versaoBase)
+            If versaoBase < 24 Then funMudaVersaoSistema(24, versaoBase)
+            If versaoBase < 25 Then funMudaVersaoSistema(25, versaoBase)
+        End If
 
     End Sub
 
 
-
-    Private Shared Sub funMudaVersaoSistema(pVersao As Integer)
+    Private Shared Sub funMudaVersaoSistema(pVersao As Integer, Optional ByRef versaoBase As Integer = 0)
         clsSQL.ExecutaSQL(String.Format("INSERT INTO VERSAO_SISTEMA  (NUMERO_VERSAO, DATA_ATUALIZACAO) VALUES ({0},'{1}')", pVersao, clsTools.funAjustaDataSQL(Now)))
+        versaoBase = pVersao
     End Sub
 
 
-    Private Shared Sub atualizaVersao20()
+    Private Shared Sub atualizaVersao20(ByRef versaoBase As Integer)
         Dim locSQL As New StringBuilder(String.Empty)
 
 
@@ -68,8 +67,7 @@ Public Class clsVersaoSistema
                        FOREIGN KEY(""ID_PONTO"") REFERENCES PONTO(""ID""))")
         clsSQL.ExecutaSQL(locSQL.ToString)
 
-        clsSQL.ExecutaSQL(String.Format("INSERT INTO VERSAO_SISTEMA  (NUMERO_VERSAO, DATA_ATUALIZACAO) VALUES ({0},'{1}')", 20, clsTools.funAjustaDataSQL(Now)))
-
+        funMudaVersaoSistema(20, versaoBase)
     End Sub
 
     Friend Shared Sub ExisteVersaoSuperiorDisponivel()

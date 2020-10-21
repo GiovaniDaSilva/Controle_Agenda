@@ -62,6 +62,9 @@ Public Class clsRequisicoesWeb
                 Case "Engrenagem.gif"
                     pReqWeb.RetornaEngrenagem = True
                     Exit Sub
+                Case "Historico.png"
+                    pReqWeb.RetornaHistorico = True
+                    Exit Sub
             End Select
 
             clsHTMLComum.TrataParametrosComuns(locPagRetorno)

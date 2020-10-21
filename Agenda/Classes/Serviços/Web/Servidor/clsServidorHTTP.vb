@@ -72,7 +72,8 @@ Public Class clsServidorHTTP
             Dim webPage() As Byte = Encoding.UTF8.GetBytes("")
 
             If Not locReqWeb.RetornaIcone And
-                Not locReqWeb.RetornaEngrenagem Then
+                Not locReqWeb.RetornaEngrenagem And
+                Not locReqWeb.RetornaHistorico Then
                 webPage = Encoding.UTF8.GetBytes(locReqWeb.HTML)
 
                 ' Configura a resposta
@@ -102,6 +103,8 @@ Public Class clsServidorHTTP
 
                 ElseIf locReqWeb.RetornaEngrenagem Then
                     My.Resources.Engrenagem.Save(outputStream, Imaging.ImageFormat.Gif)
+                ElseIf locReqWeb.RetornaHistorico Then
+                    My.Resources.Historicos.Save(outputStream, Imaging.ImageFormat.Png)
                 Else
                     outputStream.Write(webPage, 0, webPage.Length)
                 End If
@@ -114,6 +117,10 @@ Public Class clsServidorHTTP
 
         Catch ex As ObjectDisposedException
             Console.WriteLine("{0}: HttpListener disposed--shutting down.", result.AsyncState)
+        Catch ex As HttpListenerException
+            Console.WriteLine(ex.Message)
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
         Finally
             ' Inicia outro manipulador a menos que o HttpListener esteja fechado
             If listener.IsListening Then
