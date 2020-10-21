@@ -117,6 +117,10 @@ Public Class clsServidorHTTP
 
         Catch ex As ObjectDisposedException
             Console.WriteLine("{0}: HttpListener disposed--shutting down.", result.AsyncState)
+        Catch ex As HttpListenerException
+            Console.WriteLine(ex.Message)
+        Catch ex As Exception
+            clsTools.subTrataExcessao(ex)
         Finally
             ' Inicia outro manipulador a menos que o HttpListener esteja fechado
             If listener.IsListening Then
