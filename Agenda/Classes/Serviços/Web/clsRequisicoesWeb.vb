@@ -700,11 +700,10 @@ Public Class clsRequisicoesWeb
         Dim ParametrosIni = New clsIni().funCarregaIni()
         Dim retorno As String = ""
 
-        'Por default pega do ini
-        If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
-            locParametros.Data = Now
-        ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
-            locParametros.Data = Now.AddDays(-7)
+        locParametros = clsFiltrosWebAplicados.Home
+
+        If locParametros.Data = Date.MinValue Then
+            CarregaDataIni(locParametros, ParametrosIni)
         End If
 
         If pReqWeb.Context.Request.HttpMethod = "POST" Then
@@ -722,6 +721,8 @@ Public Class clsRequisicoesWeb
                     Throw New Exception("Data do POST inválida.")
                 End If
                 locParametros.Data = CDate(data)
+            Else
+                locParametros.Data = Date.MinValue
             End If
 
             Dim dataAte = clsHTMLTools.RetornaValorPostGet(post(1))
@@ -731,6 +732,8 @@ Public Class clsRequisicoesWeb
                     Throw New Exception("Data do POST inválida.")
                 End If
                 locParametros.DataAte = CDate(dataAte)
+            Else
+                locParametros.DataAte = Date.MinValue
             End If
 
             Dim tipo = clsHTMLTools.RetornaValorPostGet(post(2))
@@ -739,6 +742,8 @@ Public Class clsRequisicoesWeb
                 Throw New Exception("Tipo de Atividade do POST inválido.")
             End If
             locParametros.Tipo = tipo
+
+            clsFiltrosWebAplicados.SetHome(locParametros)
         End If
 
         Try
@@ -749,6 +754,15 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Function
+
+    Private Shared Sub CarregaDataIni(ByRef locParametros As clsParametrosFiltroWeb, ParametrosIni As clsParametrosIni)
+        'Por default pega do ini
+        If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
+            locParametros.Data = Now
+        ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
+            locParametros.Data = Now.AddDays(-7)
+        End If
+    End Sub
 
     ''' <summary>
     ''' Chama a classe para tratar a pagina de grafico
