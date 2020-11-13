@@ -385,7 +385,8 @@
                 solControl = '<td> <a target="_blank" href="' + carminhoSolControl + 'set_demanda?id=' + codigo + '" class="btn btn-info btn-sm">Sol Control</a></td>';
             }
 
-            return '<table class="table-sm">' +
+            return '<div class="float-right">' +                
+                '<table class="table-sm ">' +
                 '<tr>' +
                 //Botao Editar
                 '<td> <a href="/CadastroAtividade?id=' + id + '" class="btn btn-success btn-sm">Editar</a></td>' +
@@ -399,7 +400,8 @@
                 '<td> <a href="/CadastroAtividade?id=' + id + '?duplicar=true" class="btn btn-success btn-sm">Duplicar Atividade</a></td>' +
 
                 '</tr>' +
-                '</table>';
+                '</table>' + 
+                '</div>';
 
 
         }
