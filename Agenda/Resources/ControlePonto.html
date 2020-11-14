@@ -536,7 +536,7 @@
         });
 
         function saidaAlmocoClique(campo) {
-            if (document.getElementById('horaSaida').value == '') {
+            if (document.getElementById('horaSaida').value == '' || document.getElementById('horaSaida').value == "00:00" ) {
                 document.getElementById('horaSaida').value = retornaHoraAtual();
             }            
         };

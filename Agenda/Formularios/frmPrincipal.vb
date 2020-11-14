@@ -244,7 +244,8 @@ Public Class frmPrincipal
         Try
             clsVersaoSistema.ExisteVersaoSuperiorDisponivel()
         Catch ex As Exception
-            'Se der erro, não avisa nada sobre nova versao
+            'Devido a problemas de rede da vpn, não vou apresentar erro se não encontrar a pasta F:, simplesmente não verifica nova versao e segue
+            'clsTools.subTrataExcessao(ex)
         End Try
     End Sub
 
