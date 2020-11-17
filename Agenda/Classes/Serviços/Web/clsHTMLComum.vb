@@ -123,7 +123,7 @@ Public Class clsHTMLComum
         }
 
         .Fundo {
-            background-color: lightblue;
+            background-color: #aecff2;
         }
         
 		.material-icons {
@@ -358,6 +358,7 @@ Public Class clsHTMLComum
 
     Public Shared Function RetornaTabelaPeriodosDia(pLinhas As String) As String
         Dim texto As New StringBuilder(vbNullString)
+        'display table nowrap table-hover table-info table-striped table-sm
         texto.AppendFormat("
                 <table id=""tablePeriodosDia"" class=""table table-bordered table-sm table-hover table-primary table-striped"" cellspacing=""0"" name=""tablePeriodosDia"">
                 <thead>
