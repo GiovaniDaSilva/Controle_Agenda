@@ -726,7 +726,6 @@ Public Class clsRequisicoesWeb
 
         Dim post() As String
         Dim locParametros As clsParametrosFiltroWeb
-        Dim retorno As String
 
         locParametros = clsFiltrosWebAplicados.Home
 
