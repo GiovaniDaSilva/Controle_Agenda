@@ -34,6 +34,7 @@ Public Class clsHomeWeb
         html = html.Replace("[p_pagina]", clsPaginasWeb.Home)
         html = html.Replace("{p_linhas_tabela_periodo_dia}", clsHTMLComum.RetornaTabelaPeriodosDia(Now))
         html = html.Replace("{data_atual}", clsTools.funFormataData(Now))
+        html = html.Replace("[p_funcoes_atalho_filtros]", clsHTMLComum.RetornaFuncoesAtalhoFiltros)
 
         Return html
     End Function

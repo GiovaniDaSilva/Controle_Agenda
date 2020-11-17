@@ -28,6 +28,7 @@ Public Class clsImpressaoAtividadeWeb
         html = html.Replace("{data_atual}", clsTools.funFormataData(Now))
         html = html.Replace("{p_Dec_checked}", checkDecrescente(pFiltro))
         html = html.Replace("{p_Cre_checked}", If(pFiltro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Crescente, "Checked", ""))
+        html = html.Replace("[p_funcoes_atalho_filtros]", clsHTMLComum.RetornaFuncoesAtalhoFiltros)
 
 
 

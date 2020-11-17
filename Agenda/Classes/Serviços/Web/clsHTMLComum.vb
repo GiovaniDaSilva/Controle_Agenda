@@ -54,6 +54,50 @@ Public Class clsHTMLComum
         Return locMenu.ToString
     End Function
 
+
+    Public Shared Function RetornaFuncoesAtalhoFiltros() As String
+        Dim texto As New StringBuilder()
+
+
+        texto.Append("
+        
+        function FiltroLimpar() {
+            AplicarFiltros(null, null, true)
+        }
+
+        function PeriodoMes(d) {
+            var primeiroDia = new Date(d.getFullYear(), d.getMonth(), 1);
+            var ultimoDia = new Date(d.getFullYear(), d.getMonth() + 1, 0);
+
+            AplicarFiltros(primeiroDia, ultimoDia, false);
+        }
+
+        function FiltroUltimosDias(n) {
+            var d = new Date();
+            d.setDate(d.getDate() - n);
+
+            AplicarFiltros(d, null, false);
+        }
+
+        function FiltroMesAtual() {
+            var d = new Date();
+            PeriodoMes(d);
+        }
+
+        function AplicarFiltros(ini, ate, limparTipo) {
+            document.getElementById(""data_ini"").valueAsDate = ini;
+            document.getElementById(""data_ate"").valueAsDate = ate;
+
+            if (limparTipo) {
+                document.getElementById(""cbTipo"").selectedIndex = 0;
+            }
+        }
+
+        ")
+
+        Return texto.ToString
+    End Function
+
     Public Shared Function RetornaStyleComumPagina() As String
         Dim locMenu As New StringBuilder()
 

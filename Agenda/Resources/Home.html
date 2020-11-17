@@ -134,6 +134,17 @@
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="submit" form="form_Filtro">Aplicar</button>
                         </div>
+                        &nbsp;
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="dropdown">...</button>
+                            <div class="dropdown-menu">
+                                <button type="button" class="dropdown-item" onclick="FiltroLimpar()">Limpar</button>
+                                <div class="dropdown-divider"></div>                                
+                                <button type="button" class="dropdown-item" onclick="FiltroMesAtual()">Mês atual</button>
+                                <button type="button" class="dropdown-item" onclick="FiltroUltimosDias(30)">Últimos 30 dias</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </form>
@@ -385,7 +396,7 @@
                 solControl = '<td> <a target="_blank" href="' + carminhoSolControl + 'set_demanda?id=' + codigo + '" class="btn btn-info btn-sm">Sol Control</a></td>';
             }
 
-            return '<div class="float-right">' +                
+            return '<div class="float-right">' +
                 '<table class="table-sm ">' +
                 '<tr>' +
                 //Botao Editar
@@ -400,11 +411,14 @@
                 '<td> <a href="/CadastroAtividade?id=' + id + '?duplicar=true" class="btn btn-success btn-sm">Duplicar Atividade</a></td>' +
 
                 '</tr>' +
-                '</table>' + 
+                '</table>' +
                 '</div>';
 
 
         }
+
+
+        [p_funcoes_atalho_filtros]
 
         //Ordenação da coluna data
         jQuery.extend(jQuery.fn.dataTableExt.oSort, {
