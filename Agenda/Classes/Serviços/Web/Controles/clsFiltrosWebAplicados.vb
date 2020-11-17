@@ -1,7 +1,7 @@
 ﻿Public Class clsFiltrosWebAplicados
     Private Shared Property _home As clsParametrosFiltroWeb
 
-    Private Shared _impressaoAtividades As clsFiltroAtividades
+    Private Shared Property _impressaoAtividades As clsFiltroAtividades
 
     Private Sub New()
     End Sub

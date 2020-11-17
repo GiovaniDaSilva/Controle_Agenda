@@ -427,6 +427,8 @@ Public Class clsRequisicoesWeb
                     Throw New Exception("Data do POST inválida.")
                 End If
                 filtro.Data = CDate(data)
+            Else
+                filtro.Data = Date.MinValue
             End If
 
             Dim dataAte = clsHTMLTools.RetornaValorPostGet(post(1))
@@ -436,6 +438,8 @@ Public Class clsRequisicoesWeb
                     Throw New Exception("Data do POST inválida.")
                 End If
                 filtro.DataFinal = CDate(dataAte)
+            Else
+                filtro.DataFinal = Date.MinValue
             End If
 
             Dim tipo = clsHTMLTools.RetornaValorPostGet(post(2))

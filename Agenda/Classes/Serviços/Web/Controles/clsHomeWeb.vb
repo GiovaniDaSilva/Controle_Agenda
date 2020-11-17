@@ -44,7 +44,7 @@ Public Class clsHomeWeb
         texto.AppendFormat("
             document.getElementById('data_ini').value = ""{0}"";                  
             document.getElementById('data_ate').value = ""{1}"";  
-        ", clsTools.funAjustaDataSQL(parametros.Data), If(parametros.DataAte = CDate("01/01/0001"), "", clsTools.funAjustaDataSQL(parametros.DataAte)))
+        ", If(parametros.Data = CDate("01/01/0001"), "", clsTools.funAjustaDataSQL(parametros.Data)), If(parametros.DataAte = CDate("01/01/0001"), "", clsTools.funAjustaDataSQL(parametros.DataAte)))
         Return texto.ToString
 
     End Function
