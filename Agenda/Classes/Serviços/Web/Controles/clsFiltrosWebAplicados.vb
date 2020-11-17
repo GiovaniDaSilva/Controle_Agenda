@@ -1,6 +1,8 @@
 ﻿Public Class clsFiltrosWebAplicados
     Private Shared Property _home As clsParametrosFiltroWeb
 
+    Private Shared _impressaoAtividades As clsFiltroAtividades
+
     Private Sub New()
     End Sub
 
@@ -14,6 +16,19 @@
 
     Public Shared Sub SetHome(filtros As clsParametrosFiltroWeb)
         _home = filtros
+    End Sub
+
+
+    Public Shared Function ImpressaoAtividades() As clsFiltroAtividades
+        If _impressaoAtividades Is Nothing Then
+            Return New clsFiltroAtividades
+        End If
+
+        Return _impressaoAtividades
+    End Function
+
+    Public Shared Sub SetImpressaoAtividades(filtros As clsFiltroAtividades)
+        _impressaoAtividades = filtros
     End Sub
 
 
