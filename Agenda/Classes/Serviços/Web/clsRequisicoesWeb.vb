@@ -14,10 +14,15 @@ Public Class clsRequisicoesWeb
         Try
             Dim path = pReqWeb.Context.Request.Url.AbsolutePath.Replace("/", "")
             Select Case path
+#Region "Home"
                 Case clsPaginasWeb.Home
                     locPagRetorno = funRetornaPaginaHome(pReqWeb)
                 Case clsPaginasWeb.Home & "_get_detalhes"
                     locPagRetorno = funRetornaDetalhesAtividade(pReqWeb)
+#End Region
+
+#Region "Cadastro de Atividade"
+
                 Case clsPaginasWeb.CadastroAtividade
                     locPagRetorno = funRetornaCadastroAtividade(pReqWeb)
                 Case clsPaginasWeb.CadastroAtividade & "_get_descricao"
@@ -27,27 +32,41 @@ Public Class clsRequisicoesWeb
                 Case clsPaginasWeb.CadastroAtividade & "_excluir"
                     locPagRetorno = funRetornaCadastroAtividade_Excluir(pReqWeb)
                 Case clsPaginasWeb.CadastroAtividade & "_get_periodos_dia"
-                    locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pReqWeb)
+                    locPagRetorno = funRetornaPeriodosDia(pReqWeb)
+#End Region
+
+#Region "Controle de Ponto"
+
                 Case clsPaginasWeb.ControlePonto
                     locPagRetorno = funRetornaControlePonto(pReqWeb)
                 Case clsPaginasWeb.ControlePonto & "_salvar"
                     locPagRetorno = funRetornaControlePonto_Salvar(pReqWeb)
                 Case clsPaginasWeb.ControlePonto & "_excluir"
                     locPagRetorno = funRetornaControlePonto_Excluir(pReqWeb)
+#End Region
+
+#Region "Impressões"
+
                 Case clsPaginasWeb.Grafico
                     locPagRetorno = funRetornaPaginaGrafico(pReqWeb)
                 Case clsPaginasWeb.ImpressaoAtividade
                     locPagRetorno = funRetornaPaginaImpressao(pReqWeb)
                 Case clsPaginasWeb.ImpressaoPonto
                     locPagRetorno = funRetornaPaginaImpressaoPonto(pReqWeb)
-                Case clsPaginasWeb.Versoes
-                    locPagRetorno = My.Resources.Versoes
+#End Region
+
+#Region "Configurações"
                 Case clsPaginasWeb.Configuracao
                     locPagRetorno = funRetornaPaginaConfiguracao(pReqWeb)
                 Case clsPaginasWeb.Configuracao & "_Salvar"
                     locPagRetorno = funRetornaPaginaConfiguracao_Salvar(pReqWeb)
                 Case clsPaginasWeb.Configuracao & "_backup"
                     locPagRetorno = funRetornaPaginaConfiguracao_BackupBase(pReqWeb)
+#End Region
+
+#Region "Cadastro de Tipo"
+
+
                 Case clsPaginasWeb.CadastroTipo
                     locPagRetorno = funRetornaPaginaCadastroTipo(pReqWeb)
                 Case clsPaginasWeb.CadastroTipo & "_CodigoSendoUsado"
@@ -56,6 +75,10 @@ Public Class clsRequisicoesWeb
                     locPagRetorno = funRetornaPaginaCadastroTipo_PermiteExcluir(pReqWeb)
                 Case clsPaginasWeb.CadastroTipo & "_salvar"
                     locPagRetorno = funRetornaPaginaCadastroTipo_Salvar(pReqWeb)
+#End Region
+
+#Region "Imagens"
+
                 Case "favicon.ico"
                     pReqWeb.RetornaIcone = True
                     Exit Sub
@@ -65,6 +88,12 @@ Public Class clsRequisicoesWeb
                 Case "Historico.png"
                     pReqWeb.RetornaHistorico = True
                     Exit Sub
+#End Region
+
+                Case clsPaginasWeb.Versoes
+                    locPagRetorno = My.Resources.Versoes
+
+
             End Select
 
             clsHTMLComum.TrataParametrosComuns(locPagRetorno)
@@ -374,15 +403,13 @@ Public Class clsRequisicoesWeb
 
     Private Function funRetornaPaginaImpressao(pReqWeb As clsReqWeb) As String
 
-        Dim filtro As New clsFiltroAtividades
+        Dim filtro As clsFiltroAtividades
         Dim post() As String
-        Dim ParametrosIni = New clsIni().funCarregaIni()
 
-        'Por default pega do ini
-        If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
-            filtro.Data = Now
-        ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
-            filtro.Data = Now.AddDays(-7)
+        filtro = clsFiltrosWebAplicados.ImpressaoAtividades
+
+        If filtro.Data = Date.MinValue Then
+            filtro.Data = RetornaDataIni()
         End If
 
         If pReqWeb.Context.Request.HttpMethod = "POST" Then
@@ -400,6 +427,8 @@ Public Class clsRequisicoesWeb
                     Throw New Exception("Data do POST inválida.")
                 End If
                 filtro.Data = CDate(data)
+            Else
+                filtro.Data = Date.MinValue
             End If
 
             Dim dataAte = clsHTMLTools.RetornaValorPostGet(post(1))
@@ -409,6 +438,8 @@ Public Class clsRequisicoesWeb
                     Throw New Exception("Data do POST inválida.")
                 End If
                 filtro.DataFinal = CDate(dataAte)
+            Else
+                filtro.DataFinal = Date.MinValue
             End If
 
             Dim tipo = clsHTMLTools.RetornaValorPostGet(post(2))
@@ -425,6 +456,8 @@ Public Class clsRequisicoesWeb
             Else
                 filtro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Decrescente
             End If
+
+            clsFiltrosWebAplicados.SetImpressaoAtividades(filtro)
         End If
 
         Try
@@ -490,6 +523,7 @@ Public Class clsRequisicoesWeb
             locDetalhes.id = Val(clsHTMLTools.RetornaValorPostGet(arr(0)))
             locDetalhes.data = CDate(clsHTMLTools.RetornaValorPostGet(arr(1)))
             locDetalhes.codigo = clsHTMLTools.RetornaValorPostGet(arr(2))
+
         End If
 
         Return New clsCadastroAtividadeWeb().funRetornaCadastroAtividade_Detalhes(locDetalhes)
@@ -537,7 +571,7 @@ Public Class clsRequisicoesWeb
         Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
     End Function
 
-    Private Function funRetornaCadastroAtividadePeriodosDia(pReqWeb As clsReqWeb) As String
+    Private Function funRetornaPeriodosDia(pReqWeb As clsReqWeb) As String
         Dim data As Date
         Dim retorno As New clsRetornoAjax
 
@@ -696,15 +730,12 @@ Public Class clsRequisicoesWeb
     Private Function funRetornaPaginaHome(pReqWeb As clsReqWeb) As String
 
         Dim post() As String
-        Dim locParametros As New clsParametrosFiltroWeb
-        Dim ParametrosIni = New clsIni().funCarregaIni()
-        Dim retorno As String = ""
+        Dim locParametros As clsParametrosFiltroWeb
 
-        'Por default pega do ini
-        If ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
-            locParametros.Data = Now
-        ElseIf ParametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
-            locParametros.Data = Now.AddDays(-7)
+        locParametros = clsFiltrosWebAplicados.Home
+
+        If locParametros.Data = Date.MinValue Then
+            locParametros.Data = RetornaDataIni()
         End If
 
         If pReqWeb.Context.Request.HttpMethod = "POST" Then
@@ -722,6 +753,8 @@ Public Class clsRequisicoesWeb
                     Throw New Exception("Data do POST inválida.")
                 End If
                 locParametros.Data = CDate(data)
+            Else
+                locParametros.Data = Date.MinValue
             End If
 
             Dim dataAte = clsHTMLTools.RetornaValorPostGet(post(1))
@@ -731,6 +764,8 @@ Public Class clsRequisicoesWeb
                     Throw New Exception("Data do POST inválida.")
                 End If
                 locParametros.DataAte = CDate(dataAte)
+            Else
+                locParametros.DataAte = Date.MinValue
             End If
 
             Dim tipo = clsHTMLTools.RetornaValorPostGet(post(2))
@@ -739,6 +774,8 @@ Public Class clsRequisicoesWeb
                 Throw New Exception("Tipo de Atividade do POST inválido.")
             End If
             locParametros.Tipo = tipo
+
+            clsFiltrosWebAplicados.SetHome(locParametros)
         End If
 
         Try
@@ -749,6 +786,18 @@ Public Class clsRequisicoesWeb
         End Try
 
     End Function
+
+    Private Shared Function RetornaDataIni()
+        Dim parametrosIni = New clsIni().funCarregaIni()
+
+        'Por default pega do ini
+        If parametrosIni.InicializarCampoApartirDe = enuApartirDe.Atual Then
+            Return Now
+        ElseIf parametrosIni.InicializarCampoApartirDe = enuApartirDe.Dias7 Then
+            Return Now.AddDays(-7)
+        End If
+    End Function
+
 
     ''' <summary>
     ''' Chama a classe para tratar a pagina de grafico

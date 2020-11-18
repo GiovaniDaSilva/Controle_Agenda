@@ -60,6 +60,7 @@ Public Class clsCadastroAtividadeWeb
         locDetalhes.Descricao = funRetornaDescricaoAtividade(Detalhes.id)
         locDetalhes.TotalHoraDia = New clsPrincipal().funRetornaTotalHorasDia(Detalhes.data)
         locDetalhes.TotalHorasAtividade = RetornaTotalHorasAtividade(Detalhes, atividade)
+        locDetalhes.periodosDia = clsHTMLComum.RetornaTabelaPeriodosDia(Detalhes.data)
 
         Return Newtonsoft.Json.JsonConvert.SerializeObject(locDetalhes)
 

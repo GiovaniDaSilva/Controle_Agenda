@@ -156,6 +156,7 @@
     <Compile Include="Classes\Serviços\Web\Controles\clsCadastroTipoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsConfiguracaoWeb.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsControlePontoWeb.vb" />
+    <Compile Include="Classes\Serviços\Web\Controles\clsFiltrosWebAplicados.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsHomeWeb.vb" />
     <Compile Include="Classes\Serviços\Web\clsHTMLComum.vb" />
     <Compile Include="Classes\Serviços\Web\Controles\clsImpressaoAtividadeWeb.vb" />

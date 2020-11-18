@@ -28,6 +28,7 @@ Public Class clsImpressaoAtividadeWeb
         html = html.Replace("{data_atual}", clsTools.funFormataData(Now))
         html = html.Replace("{p_Dec_checked}", checkDecrescente(pFiltro))
         html = html.Replace("{p_Cre_checked}", If(pFiltro.Ordenacao = clsFiltroAtividades.enuOrdenacao.Crescente, "Checked", ""))
+        html = html.Replace("[p_funcoes_atalho_filtros]", clsHTMLComum.RetornaFuncoesAtalhoFiltros)
 
 
 
@@ -39,14 +40,14 @@ Public Class clsImpressaoAtividadeWeb
                     pFiltro.Ordenacao = 0), "Checked", "")
     End Function
 
-    Private Function RetornaInicializaCamposFiltro(pData As Date, pDateAte As Date) As String
+    Private Function RetornaInicializaCamposFiltro(pData As Date, pDataAte As Date) As String
         Dim texto As New StringBuilder(vbNullString)
 
 
         texto.AppendFormat("
             document.getElementById('data_ini').value = ""{0}"";                  
             document.getElementById('data_ate').value = ""{1}"";
-        ", clsTools.funAjustaDataSQL(pData), If(pDateAte = CDate("01/01/0001"), "", clsTools.funAjustaDataSQL(pDateAte)))
+        ", If(pData = CDate("01/01/0001"), "", clsTools.funAjustaDataSQL(pData)), If(pDataAte = CDate("01/01/0001"), "", clsTools.funAjustaDataSQL(pDataAte)))
         Return texto.ToString
 
     End Function

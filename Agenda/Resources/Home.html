@@ -61,8 +61,8 @@
         }
 
         .dt-buttons {
-            background-color: lightblue;
-            border-color: lightblue;
+            background-color: #aecff2;
+            border-color: #aecff2;
         }
 
             .dt-buttons:hover {
@@ -134,6 +134,17 @@
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="submit" form="form_Filtro">Aplicar</button>
                         </div>
+                        &nbsp;
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="dropdown">...</button>
+                            <div class="dropdown-menu">
+                                <button type="button" class="dropdown-item" onclick="FiltroLimpar()">Limpar</button>
+                                <div class="dropdown-divider"></div>
+                                <button type="button" class="dropdown-item" onclick="FiltroMesAtual()">Mês atual</button>
+                                <button type="button" class="dropdown-item" onclick="FiltroUltimosDias(30)">Últimos 30 dias</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </form>
@@ -142,7 +153,7 @@
     <!--Div como oculta, exibe apos a carga da grid para evitar piscar enquanto redimensiona-->
     <div id="dadosHome" class="container-fluid" style="display: none">
         <div style="margin-top: 20px;" class="container-fluid">
-            <table id="Dados" class="display table nowrap table-hover table-info table-striped table-sm" cellspacing="0">
+            <table id="Dados" class="display table nowrap table-hover table-primary table-striped table-sm" cellspacing="0">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -170,7 +181,8 @@
                 </div>
             </div>
             <div id="periodo_dia" class="col-md-5" style="margin-top: 30px">
-                <label for="tablePeriodosDia" class="label">Períodos de hoje ({data_atual}) </label>
+                <label for="tablePeriodosDia" class="label">Períodos de </label> &nbsp;
+                <label for="tablePeriodosDia" class="label" id="lbDataPeriodos">({data_atual}) </label>
                 {p_linhas_tabela_periodo_dia}
             </div>
         </div>
@@ -179,23 +191,7 @@
 
     <script>
 
-        //Clique da coluna Opções
-        $('#Dados tbody').on('click', 'td.details-control', function () {
 
-            var tr = $(this).closest('tr');
-            var row = tb.row(tr);
-
-            if (row.child.isShown()) {
-                // This row is already open - close it
-                row.child.hide();
-                tr.removeClass('shown');
-            }
-            else {
-                // Open this row
-                row.child(format(row.data())).show();
-                tr.addClass('shown');
-            }
-        });
 
 
 
@@ -309,10 +305,12 @@
                 var rowData = tb.rows(rows).data();
                 var id = 0;
                 var dados;
+                var data;
 
                 $.each($(rowData), function (key, value) {
                     id = value[0];
                     dados = "id=" + value[0] + "&data=" + value[1] + "&codigo=" + value[4];
+                    data = value[1]
                 });
 
                 if (id > 0) {
@@ -329,12 +327,16 @@
                             document.getElementById("totalHorasDia").innerHTML = object.TotalHoraDia;
                             document.getElementById("totalHorasAtividade").innerHTML = object.TotalHorasAtividade;
 
+                            $("#tablePeriodosDia").html(object.periodosDia);
+                            document.getElementById("lbDataPeriodos").innerHTML = '(' + data + ')'
                         },
 
                         error: function (descricao) {
                             alert(descricao);
                         }
                     });
+
+                   
                 } else {
 
                     //limpa o campo descricao
@@ -344,7 +346,6 @@
 
                 }
             });
-
 
             //Evento de Seleção do Usuário - antes da seleção ter ocorrido
             tb.on('user-select', function (e, dt, type, cell, originalEvent) {
@@ -359,6 +360,26 @@
             });
 
 
+        });
+
+
+
+        //Clique da coluna Opções
+        $('#Dados tbody').on('click', 'td.details-control', function () {
+
+            var tr = $(this).closest('tr');
+            var row = tb.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
         });
 
         //Retorna a Linha com opções da atividade
@@ -385,7 +406,8 @@
                 solControl = '<td> <a target="_blank" href="' + carminhoSolControl + 'set_demanda?id=' + codigo + '" class="btn btn-info btn-sm">Sol Control</a></td>';
             }
 
-            return '<table class="table-sm">' +
+            return '<div class="float-right">' +
+                '<table class="table-sm ">' +
                 '<tr>' +
                 //Botao Editar
                 '<td> <a href="/CadastroAtividade?id=' + id + '" class="btn btn-success btn-sm">Editar</a></td>' +
@@ -399,10 +421,14 @@
                 '<td> <a href="/CadastroAtividade?id=' + id + '?duplicar=true" class="btn btn-success btn-sm">Duplicar Atividade</a></td>' +
 
                 '</tr>' +
-                '</table>';
+                '</table>' +
+                '</div>';
 
 
         }
+
+
+        [p_funcoes_atalho_filtros]
 
         //Ordenação da coluna data
         jQuery.extend(jQuery.fn.dataTableExt.oSort, {

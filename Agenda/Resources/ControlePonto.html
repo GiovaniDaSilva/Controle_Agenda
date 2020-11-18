@@ -45,8 +45,8 @@
         <!--Sub Menu-->
         <nav class="navbar navbar-light Fundo">
             <div>
-                <button class="btn btn-success" type="submit" form="form_dados">Salvar</button>
-                <input id="btnLimpa" type="reset" value="Limpar" form="form_dados" class=" btn btn-warning" />
+                <button class="btn btn-success" type="submit" form="form_dados">Salvar</button>                
+                <input onClick="window.location.reload()" id="btnLimpa" type="reset" value="Limpar" form="form_dados" class=" btn btn-warning" />
                 {p_retorna_botao_excluir_atividade}
             </div>
         </nav>
@@ -118,7 +118,7 @@
                         <div class="form-group col-md-4">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" value="" id="saidaAlmoco" name="saidaAlmoco">Saída para o Almoço
+                                    <input type="checkbox" class="form-check-input" value="" id="saidaAlmoco" name="saidaAlmoco" onclick='saidaAlmocoClique(this);'>Saída para o Almoço
                                 </label>
                             </div>
                         </div>
@@ -534,6 +534,13 @@
             });
 
         });
+
+        function saidaAlmocoClique(campo) {
+            if (document.getElementById('horaSaida').value == '' || document.getElementById('horaSaida').value == "00:00" ) {
+                document.getElementById('horaSaida').value = retornaHoraAtual();
+            }            
+        };
+        
 
         [p_funcao_retorna_hora_atual]
 

@@ -2,7 +2,7 @@
 Imports System.Text
 
 Public Class clsVersaoSistema
-    Public Shared Property Versao As String = "2.6"
+    Public Shared Property Versao As String = "2.7"
 
     Public Shared Function RetornaVersaoBase() As String
         Return New clsVersaoSistemaDAO().RetornaVersao()
@@ -27,6 +27,7 @@ Public Class clsVersaoSistema
             If versaoBase < 24 Then funMudaVersaoSistema(24, versaoBase)
             If versaoBase < 25 Then funMudaVersaoSistema(25, versaoBase)
             If versaoBase < 26 Then funMudaVersaoSistema(26, versaoBase)
+            If versaoBase < 27 Then funMudaVersaoSistema(27, versaoBase)
         End If
 
     End Sub
@@ -73,10 +74,10 @@ Public Class clsVersaoSistema
 
     Friend Shared Sub ExisteVersaoSuperiorDisponivel()
 
-        Dim locDiretorioExe As String = "\\GOVBR8484\Publico\Agenda"
+        Dim locDiretorioExe As String = "F:\Suprimentos\Agenda"
 
         If Not IO.Directory.Exists(locDiretorioExe) Then
-            Throw New Exception("Diretorio não existe ou sem permissão de acesso")
+            Throw New Exception("Não foi possível verificar nova versão." & vbNewLine & "Pasta pública não encontrada: F:\Suprimentos\Agenda")
         End If
 
         For Each foundFile As String In IO.Directory.GetFiles(locDiretorioExe)
