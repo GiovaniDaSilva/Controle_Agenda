@@ -32,7 +32,7 @@ Public Class clsRequisicoesWeb
                 Case clsPaginasWeb.CadastroAtividade & "_excluir"
                     locPagRetorno = funRetornaCadastroAtividade_Excluir(pReqWeb)
                 Case clsPaginasWeb.CadastroAtividade & "_get_periodos_dia"
-                    locPagRetorno = funRetornaCadastroAtividadePeriodosDia(pReqWeb)
+                    locPagRetorno = funRetornaPeriodosDia(pReqWeb)
 #End Region
 
 #Region "Controle de Ponto"
@@ -523,6 +523,7 @@ Public Class clsRequisicoesWeb
             locDetalhes.id = Val(clsHTMLTools.RetornaValorPostGet(arr(0)))
             locDetalhes.data = CDate(clsHTMLTools.RetornaValorPostGet(arr(1)))
             locDetalhes.codigo = clsHTMLTools.RetornaValorPostGet(arr(2))
+
         End If
 
         Return New clsCadastroAtividadeWeb().funRetornaCadastroAtividade_Detalhes(locDetalhes)
@@ -570,7 +571,7 @@ Public Class clsRequisicoesWeb
         Return Newtonsoft.Json.JsonConvert.SerializeObject(retorno)
     End Function
 
-    Private Function funRetornaCadastroAtividadePeriodosDia(pReqWeb As clsReqWeb) As String
+    Private Function funRetornaPeriodosDia(pReqWeb As clsReqWeb) As String
         Dim data As Date
         Dim retorno As New clsRetornoAjax
 
