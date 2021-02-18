@@ -60,3 +60,18 @@ Após informar uma vez, o sistema armazena as informações das solicitações c
 <img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Impress%C3%A3o.PNG">
 
 
+
+<h1>Versão Web</h1>
+<img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Inicial%20Web.PNG">
+
+<img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Cadastro%20Web.PNG">
+
+<img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Impressao%20Web.PNG">
+
+<img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Configura%C3%A7%C3%B5es%20Web.PNG">
+
+
+
+
+
+
