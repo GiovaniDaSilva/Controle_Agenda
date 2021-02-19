@@ -9,6 +9,12 @@ OBS: Imagens abaixo são da primeira versão...
 Nota: Atualmente, a aplicação possui um servidor HTTP interno, podendo ser executado tambem na WEB. Na web atualmente possui Pagina Home, Cadastro de Atividades, Grafico e Relatório de atualizações.
 
 
+<h1>Versão Web</h1>
+
+<img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Utiliza%C3%A7%C3%A3o%20Web.gif">
+
+<h1>Versão Desktop</h1>
+
 <h2>Tela Principal</h2>
 <img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Tela%20Principal.PNG">
 
@@ -59,18 +65,6 @@ Após informar uma vez, o sistema armazena as informações das solicitações c
 <h4>Impressão</h4>
 <img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Impress%C3%A3o.PNG">
 
-
-
-<h1>Versão Web</h1>
-<img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Inicial%20Web.PNG">
-
-<img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Cadastro%20Web.PNG">
-
-<img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Impressao%20Web.PNG">
-
-<img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Configura%C3%A7%C3%B5es%20Web.PNG">
-
-<img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Utiliza%C3%A7%C3%A3o%20Web.gif">
 
 
 
