@@ -70,6 +70,10 @@ Após informar uma vez, o sistema armazena as informações das solicitações c
 
 <img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Configura%C3%A7%C3%B5es%20Web.PNG">
 
+<img src="https://github.com/GiovaniDaSilva/Controle_Agenda/blob/master/Imagens/Utiliza%C3%A7%C3%A3o%20Web.gif">
+
+
+
 
 
 
