@@ -836,7 +836,7 @@ Public Class clsRequisicoesWeb
             End If
 
             locDataInicial = clsTools.RetornaPrimeiroDiaMes(mesGeracao, anoGeracao)
-            locDataFinal = clsTools.RetornaUltimoDiaMes(mesGeracao, mesGeracao)
+            locDataFinal = clsTools.RetornaUltimoDiaMes(mesGeracao, anoGeracao)
         End If
 
         Try
