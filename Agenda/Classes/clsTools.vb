@@ -184,30 +184,31 @@ Public Class clsTools
 
     End Function
 
-    Public Shared Function RetornaUltimoDiaMes(Optional ByVal mes As Integer = 0) As Date
+    Public Shared Function RetornaUltimoDiaMes(Optional ByVal pMes As Integer = 0, Optional ByVal pAno As Integer = 0) As Date
         Dim data As Date
 
-        If mes = 0 Then
-            data = DateAdd("m", 1, DateSerial(Year(Now), Month(Now), 1))
-            data = DateAdd("d", -1, data)
-            Return data
-        Else
-            data = DateAdd("m", 1, DateSerial(Year(Now), mes, 1))
-            data = DateAdd("d", -1, data)
-            Return data
-        End If
+        Dim mes As Integer = Month(Now)
+        Dim ano As Integer = Year(Now)
+
+        If pMes > 0 Then mes = pMes
+        If pAno > 0 Then ano = pAno
+
+        data = DateAdd("m", 1, DateSerial(ano, mes, 1))
+        data = DateAdd("d", -1, data)
+        Return data
 
     End Function
 
-    
-    Public Shared Function RetornaPrimeiroDiaMes(Optional ByVal mes As Integer = 0) As Date
 
-        If mes = 0 Then
-            Return CDate("01/" & Month(Now) & "/" & Year(Now))
-        Else
-            Return CDate("01/" & mes.ToString("00") & "/" & Year(Now))
-        End If
+    Public Shared Function RetornaPrimeiroDiaMes(Optional ByVal pMes As Integer = 0, Optional ByVal pAno As Integer = 0) As Date
 
+        Dim mes As Integer = Month(Now)
+        Dim ano As Integer = Year(Now)
+
+        If pMes > 0 Then mes = pMes
+        If pAno > 0 Then ano = pAno
+
+        Return CDate("01/" & mes.ToString("00") & "/" & ano.ToString("0000"))
     End Function
 
 
@@ -218,23 +219,23 @@ Public Class clsTools
     ''' <param name="parCampo"></param>
     ''' <param name="parWhere"></param>
     ''' <returns></returns>
-    Public shared Function RetornaCampoTabela(ByVal parTabela As String, ByVal parCampo As String, ByVal parWhere As String) As String
+    Public Shared Function RetornaCampoTabela(ByVal parTabela As String, ByVal parCampo As String, ByVal parWhere As String) As String
         Dim locSQL As New StringBuilder(String.Empty)
-        Dim locResultado As String = vbNullString 
+        Dim locResultado As String = vbNullString
 
         Using Comm As New System.Data.SQLite.SQLiteCommand(clsConexao.RetornaConexao)
 
-            locSQL.AppendFormat("SELECT {0} AS VALOR FROM {1} WHERE {2}",parCampo, parTabela , parWhere  )
+            locSQL.AppendFormat("SELECT {0} AS VALOR FROM {1} WHERE {2}", parCampo, parTabela, parWhere)
             Comm.CommandText = locSQL.ToString
 
             Using Reader = Comm.ExecuteReader()
-                if Reader.Read() then
+                If Reader.Read() Then
                     locResultado = Reader("VALOR")
-                End if
+                End If
             End Using
         End Using
 
-        Return locResultado 
+        Return locResultado
     End Function
 End Class
 

@@ -483,14 +483,20 @@ Public Class clsRequisicoesWeb
                 Throw New Exception("Parâmetros da Pagina estão inválidos.")
             End If
 
-            Dim mesGeracao = clsHTMLTools.RetornaValorPostGet(arr(1))
+            Dim anoGeracao = clsHTMLTools.RetornaValorPostGet(arr(1))
+            If anoGeracao <= 2000 Or anoGeracao >= 2099 Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("Mês informado não é válido.")
+            End If
+
+            Dim mesGeracao = clsHTMLTools.RetornaValorPostGet(arr(2))
             If mesGeracao = vbNullString Then
                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
                 Throw New Exception("Mês informado não é válido.")
             End If
 
-            locDataInicial = clsTools.RetornaPrimeiroDiaMes(mesGeracao)
-            locDataFinal = clsTools.RetornaUltimoDiaMes(mesGeracao)
+            locDataInicial = clsTools.RetornaPrimeiroDiaMes(mesGeracao, anoGeracao)
+            locDataFinal = clsTools.RetornaUltimoDiaMes(mesGeracao, anoGeracao)
         End If
 
         Try
@@ -816,14 +822,21 @@ Public Class clsRequisicoesWeb
                 Throw New Exception("Parâmetros da Pagina estão inválidos.")
             End If
 
-            Dim mesGeracao = clsHTMLTools.RetornaValorPostGet(arr(1))
+            Dim anoGeracao = clsHTMLTools.RetornaValorPostGet(arr(1))
+            If anoGeracao <= 2000 Or anoGeracao >= 2099 Then
+                pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
+                Throw New Exception("Ano informado não é válido.")
+            End If
+
+
+            Dim mesGeracao = clsHTMLTools.RetornaValorPostGet(arr(2))
             If mesGeracao = vbNullString Then
                 pReqWeb.Context.Response.StatusCode = HttpStatusCode.BadRequest
                 Throw New Exception("Mês informado não é válido.")
             End If
 
-            locDataInicial = clsTools.RetornaPrimeiroDiaMes(mesGeracao)
-            locDataFinal = clsTools.RetornaUltimoDiaMes(mesGeracao)
+            locDataInicial = clsTools.RetornaPrimeiroDiaMes(mesGeracao, anoGeracao)
+            locDataFinal = clsTools.RetornaUltimoDiaMes(mesGeracao, mesGeracao)
         End If
 
         Try

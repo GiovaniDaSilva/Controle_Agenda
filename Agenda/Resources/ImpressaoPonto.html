@@ -59,26 +59,32 @@
     <h1 class="TituloPrincipal">Impressão do Ponto</h1>
 
     <div class="container-fluid" style="margin-top:10px">
-        <div class="FormMes">
-            <div class="container-fluid ">
-                <div class=" row justify-content">
-                    <div class="col-6">
-                        <form method="get" id="form_mes">
-                            <div class="input-group">
-                                <select class="custom-select" select id="cbmes" name="meseslista" form="form_mes">
-                                    {p_meses_combo}
-                                </select>
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="submit" form="form_mes">Aplicar</button>
-                                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Período: {p_data_inicio} - {p_data_final}</b></span>
-                                </div>
-                            </div>
-                        </form>
+
+
+        <form method="get" id="form_mes">
+
+            <div class="input-group mb-6 input-group-sm">
+                <div class="input-group-prepend">
+
+                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Ano</b></span>
+                    <input type="number" min="2000" max="2099" maxlength="4" value="{p_ano}" class="form-control" id="dtAno" name="dtAno" form="form_mes">
+                    &nbsp;
+                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Mês:</b></span>
+                    <select class="custom-select" select id="cbmes" name="meseslista" form="form_mes">
+                        {p_meses_combo}
+                    </select>
+                    &nbsp;
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" form="form_mes">Aplicar</button>
                     </div>
-                    
+                    &nbsp;
+                    <span style="border:none" class="input-group-text Fundo labelSpan"><b>Período: {p_data_inicio} - {p_data_final}</b></span>
+
                 </div>
             </div>
-        </div>
+
+        </form>
+
 
 
         <div class="container-fluid">

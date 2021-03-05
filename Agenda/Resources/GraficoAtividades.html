@@ -33,10 +33,14 @@
     <div  class="container-fluid"  style="margin-top:10px">                        
         <div class="FormMes">
             <div class="container-fluid ">
-                <div class=" row justify-content-center">
-                    <div class="col-3">
+                <div class=" row justify-content-left">
+                    <div class="col-5">
                         <form method="get" id="form_mes">
                             <div class="input-group">
+                                <span style="border:none" class="input-group-text Fundo labelSpan"><b>Ano</b></span>
+                                <input type="number" min="2000" max="2099" maxlength="4" value="{p_ano}" class="form-control" id="dtAno" name="dtAno" form="form_mes">
+                                &nbsp;
+                                <span style="border:none" class="input-group-text Fundo labelSpan"><b>Mês:</b></span>
                                 <select class="custom-select" select id="cbmes" name="meseslista" form="form_mes">
                                     {p_meses_combo}
                                 </select>

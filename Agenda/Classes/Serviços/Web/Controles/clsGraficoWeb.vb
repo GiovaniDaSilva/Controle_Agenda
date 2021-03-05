@@ -41,6 +41,7 @@ Public Class clsGraficoWeb
         Dim html As String
         html = My.Resources.GraficoAtividades
 
+        html = html.Replace("{p_ano}", Year(pDataInicial))
         html = html.Replace("{p_atividades}", clsTools.RetornArrayLista(locTipoAtividades, True))
 
         html = html.Replace("{p_valores}", clsTools.RetornArrayLista(locValores))
