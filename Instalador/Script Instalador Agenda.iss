@@ -34,9 +34,9 @@ Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortugue
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Giovani\Diversos\Giovani\Agenda\Agenda\bin\Release\Agenda.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Giovani\Diversos\Giovani\Agenda\Agenda\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Giovani\Diversos\Giovani\Agenda\Base Zerada\BancoZerada.db"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\GIT\Controle_Agenda\Agenda\bin\Release\Agenda.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\GIT\Controle_Agenda\Agenda\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\GIT\Controle_Agenda\Base Zerada\BancoZerada.db"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
